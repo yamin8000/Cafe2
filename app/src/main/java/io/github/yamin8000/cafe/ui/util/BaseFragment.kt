@@ -1,4 +1,4 @@
-package io.github.yamin8000.cafe.ui
+package io.github.yamin8000.cafe.ui.util
 
 import android.os.Bundle
 import android.view.LayoutInflater

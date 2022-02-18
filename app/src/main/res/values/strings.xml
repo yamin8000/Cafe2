@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Cafe</string>
+    <string name="app_crashed">مشکلی در برنامه پیش آمده، برای خروج اینجا را لمس کنید.</string>
+    <string name="welcome">خوش آمدید!</string>
+    <string name="orders">سفارش‌ها</string>
+    <string name="new_order">سفارش‌جدید</string>
 </resources>

@@ -1,4 +1,4 @@
-package io.github.yamin8000.cafe.ui
+package io.github.yamin8000.cafe.ui.base
 
 import android.os.Bundle
 import android.os.Handler

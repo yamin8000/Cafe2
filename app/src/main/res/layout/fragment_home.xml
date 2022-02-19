@@ -23,7 +23,7 @@
             android:id="@+id/list_order_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/new_order"
+            android:text="@string/orders"
             tools:layout_editor_absoluteX="158dp"
             tools:layout_editor_absoluteY="27dp" />
 
@@ -31,7 +31,7 @@
             android:id="@+id/new_order_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/orders"
+            android:text="@string/new_order"
             tools:layout_editor_absoluteX="158dp"
             tools:layout_editor_absoluteY="34dp" />
 
@@ -43,7 +43,7 @@
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="32dp"
             android:orientation="vertical"
-            app:constraint_referenced_ids="welcome_text,list_order_button,new_order_button"
+            app:constraint_referenced_ids="welcome_text,new_order_button,list_order_button"
             app:flow_verticalGap="8dp"
             app:flow_verticalStyle="packed"
             app:flow_wrapMode="aligned"

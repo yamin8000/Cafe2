@@ -9,10 +9,17 @@
         android:id="@+id/homeFragment"
         android:name="io.github.yamin8000.cafe.ui.HomeFragment"
         android:label="HomeFragment"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_newOrderFragment"
+            app:destination="@id/newOrderFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_searchOrdersFragment"
+            app:destination="@id/searchOrdersFragment" />
+    </fragment>
     <fragment
         android:id="@+id/crashFragment"
-        android:name="io.github.yamin8000.cafe.ui.CrashFragment"
+        android:name="io.github.yamin8000.cafe.ui.base.CrashFragment"
         android:label="CrashFragment"
         tools:layout="@layout/fragment_crash">
         <argument
@@ -21,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/splashFragment"
-        android:name="io.github.yamin8000.cafe.ui.SplashFragment"
+        android:name="io.github.yamin8000.cafe.ui.base.SplashFragment"
         android:label="SplashFragment"
         tools:layout="@layout/fragment_splash">
         <action
@@ -30,4 +37,14 @@
             app:popUpTo="@id/splashFragment"
             app:popUpToInclusive="true" />
     </fragment>
+    <fragment
+        android:id="@+id/newOrderFragment"
+        android:name="io.github.yamin8000.cafe.ui.NewOrderFragment"
+        android:label="NewOrderFragment"
+        tools:layout="@layout/fragment_new_order" />
+    <fragment
+        android:id="@+id/searchOrdersFragment"
+        android:name="io.github.yamin8000.cafe.ui.SearchOrdersFragment"
+        android:label="SearchOrdersFragment"
+        tools:layout="@layout/fragment_search_orders" />
 </navigation>

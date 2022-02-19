@@ -1,5 +1,9 @@
 package io.github.yamin8000.cafe.util
 
+import android.view.View
+import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -21,5 +25,34 @@ object Utility {
         //navigate user to a special crash screen
         val bundle = bundleOf(STACKTRACE to stackTraceToString)
         this.findNavController().navigate(R.id.crashFragment, bundle)
+    }
+
+    /**
+     * Hide keyboard inside fragment
+     *
+     * since this is not my code and looks shady
+     *
+     * I don't know about any errors that can happen
+     *
+     * so it's wrapped inside try/catch
+     *
+     */
+    fun Fragment.hideKeyboard() {
+        try {
+            val activity = this.activity
+            if (activity != null) {
+                val imm =
+                    activity.getSystemService(AppCompatActivity.INPUT_METHOD_SERVICE) as InputMethodManager
+                var view = activity.currentFocus
+                if (view == null) view = View(activity)
+                imm.hideSoftInputFromWindow(view.windowToken, 0)
+            }
+        } catch (exception: Exception) {
+            handleCrash(exception)
+        }
+    }
+
+    fun Fragment.toast(message: String, duration: Int = Toast.LENGTH_SHORT) {
+        this.context?.let { Toast.makeText(it, message, duration).show() }
     }
 }

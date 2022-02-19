@@ -4,4 +4,5 @@
     <string name="welcome">خوش آمدید!</string>
     <string name="orders">سفارش‌ها</string>
     <string name="new_order">سفارش‌جدید</string>
+    <string name="db_null_error">خطای اتصال به پایگاه داده</string>
 </resources>

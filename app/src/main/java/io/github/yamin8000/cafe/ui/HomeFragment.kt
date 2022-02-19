@@ -16,6 +16,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>({ FragmentHomeBinding.inf
         try {
             binding.listOrderButton.setOnClickListener { findNavController().navigate(R.id.action_homeFragment_to_searchOrdersFragment) }
             binding.newOrderButton.setOnClickListener { findNavController().navigate(R.id.action_homeFragment_to_newOrderFragment) }
+            binding.productsButton.setOnClickListener { findNavController().navigate(R.id.action_homeFragment_to_productFragment) }
         } catch (e: Exception) {
             handleCrash(e)
         }

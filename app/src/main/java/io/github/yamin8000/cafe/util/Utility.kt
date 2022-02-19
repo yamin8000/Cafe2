@@ -52,7 +52,9 @@ object Utility {
         }
     }
 
-    fun Fragment.toast(message: String, duration: Int = Toast.LENGTH_SHORT) {
-        this.context?.let { Toast.makeText(it, message, duration).show() }
+    fun Fragment.toast(message: String, duration: Int = Toast.LENGTH_SHORT): Toast {
+        val toast = Toast.makeText(context, message, duration)
+        toast.show()
+        return toast
     }
 }

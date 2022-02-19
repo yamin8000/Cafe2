@@ -9,13 +9,16 @@
         android:id="@+id/homeFragment"
         android:name="io.github.yamin8000.cafe.ui.HomeFragment"
         android:label="HomeFragment"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_newOrderFragment"
             app:destination="@id/newOrderFragment" />
         <action
             android:id="@+id/action_homeFragment_to_searchOrdersFragment"
             app:destination="@id/searchOrdersFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_productFragment"
+            app:destination="@id/productFragment" />
     </fragment>
     <fragment
         android:id="@+id/crashFragment"
@@ -47,4 +50,9 @@
         android:name="io.github.yamin8000.cafe.ui.SearchOrdersFragment"
         android:label="SearchOrdersFragment"
         tools:layout="@layout/fragment_search_orders" />
+    <fragment
+        android:id="@+id/productFragment"
+        android:name="io.github.yamin8000.cafe.ui.ProductFragment"
+        android:label="ProductFragment"
+        tools:layout="@layout/fragment_product" />
 </navigation>

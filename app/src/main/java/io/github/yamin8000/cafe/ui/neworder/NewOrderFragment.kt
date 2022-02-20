@@ -57,24 +57,22 @@ class NewOrderFragment :
                 }
 
                 mainScope.launch {
-                    val (orderId, order) = createOrder(orderDetailIds)
-                    if (orderId != null) {
-                        toast(getString(R.string.order_created), Toast.LENGTH_LONG)
-                        listHandler()
-                        binding.lastOrderSummary.text = getString(
-                            R.string.last_order_summary,
-                            orderId.toString(),
-                            DateUtils.isoOfDateTime(order.date),
-                            order.status.toString()
-                        )
-                    } else toast(getString(R.string.error_creating_order))
+                    val (darOrderId, order) = createOrder(orderDetailIds)
+                    toast(getString(R.string.order_created), Toast.LENGTH_LONG)
+                    listHandler()
+                    binding.lastOrderSummary.text = getString(
+                        R.string.last_order_summary,
+                        darOrderId.toString(),
+                        DateUtils.isoOfDateTime(order.date),
+                        order.status.toString()
+                    )
                 }
 
             } else toast(getString(R.string.db_null_error))
         }
     }
 
-    private suspend fun createOrder(orderDetailIds: MutableList<Int>): Pair<Long?, Order> {
+    private suspend fun createOrder(orderDetailIds: MutableList<Int>): Pair<Int, Order> {
         val today = LocalDate.now(ZoneOffset.UTC)
 
         val lastOrderId = ioScope.async {
@@ -93,10 +91,8 @@ class NewOrderFragment :
         val order = Order(lastOrderId, LocalDateTime.now(ZoneOffset.UTC), orderDetailIds)
 
         val orderDao = db?.orderDao()
-        val orderId = withContext(ioScope.coroutineContext) {
-            orderDao?.insert(order)
-        }
-        return orderId to order
+        withContext(ioScope.coroutineContext) { orderDao?.insert(order) }
+        return lastOrderId to order
     }
 
     private suspend fun listHandler() {

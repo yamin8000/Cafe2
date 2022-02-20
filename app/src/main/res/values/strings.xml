@@ -17,7 +17,7 @@
     <string name="order_created">سفارش ایجاد شد</string>
     <string name="last_order_summary">
         سفارش ایجاد شد
-        \nشماره سفارش
+        \nشماره روزانه سفارش
         %s
         \nتاریخ سفارش
         %s

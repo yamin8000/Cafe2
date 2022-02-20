@@ -42,7 +42,7 @@
     </fragment>
     <fragment
         android:id="@+id/newOrderFragment"
-        android:name="io.github.yamin8000.cafe.ui.NewOrderFragment"
+        android:name="io.github.yamin8000.cafe.ui.neworder.NewOrderFragment"
         android:label="NewOrderFragment"
         tools:layout="@layout/fragment_new_order" />
     <fragment

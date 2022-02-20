@@ -43,9 +43,7 @@ class ProductFragment :
             val toast = toast(getString(R.string.please_wait))
             ioScope.launch {
                 db.productDao().insertAll(Product(productName))
-                withContext(mainScope.coroutineContext) {
-                    binding.productNameEdit.text?.clear()
-                }
+                withContext(mainScope.coroutineContext) { binding.productNameEdit.text?.clear() }
                 refreshProductsTextview(db)
             }
             toast.cancel()
@@ -56,10 +54,11 @@ class ProductFragment :
         val toast = withContext(mainScope.coroutineContext) {
             toast(getString(R.string.please_wait))
         }
-        val productDao = db.productDao()
-        val products = withContext(ioScope.coroutineContext) { productDao.getAll() }
+        val products = withContext(ioScope.coroutineContext) { db.productDao().getAll() }
         toast.cancel()
-        binding.productsText.text = products.joinToString { product -> product.name }
+        withContext(mainScope.coroutineContext) {
+            binding.productsText.text = products.joinToString { product -> product.name }
+        }
     }
 
     private fun handleNullDb() {

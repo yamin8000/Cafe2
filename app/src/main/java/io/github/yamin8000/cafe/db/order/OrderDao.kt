@@ -18,7 +18,10 @@ interface OrderDao {
     suspend fun getById(id: Int): Order
 
     @Insert
-    suspend fun insertAll(vararg orders: Order)
+    suspend fun insert(order: Order): Long
+
+    @Insert
+    suspend fun insertAll(vararg orders: Order): List<Long>
 
     @Delete
     suspend fun delete(order: Order)

@@ -1,18 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView"
+    <androidx.constraintlayout.helper.widget.Flow
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginHorizontal="32dp"
-        android:layout_marginVertical="32dp"
-        android:text="TextView"
+        android:layout_margin="16dp"
+        android:orientation="vertical"
+        app:constraint_referenced_ids="last_order_summary,save_order_button,order_detail_list"
+        app:flow_verticalBias="0"
+        app:flow_verticalGap="16dp"
+        app:flow_verticalStyle="packed"
+        app:flow_wrapMode="none"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/last_order_summary"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/create_new_order"
+        tools:layout_editor_absoluteX="174dp"
+        tools:layout_editor_absoluteY="823dp" />
+
+    <Button
+        android:id="@+id/save_order_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/save_order"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="32dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/order_detail_list"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:itemCount="5"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="80dp"
+        tools:listitem="@layout/new_order_detail_item" />
 </androidx.constraintlayout.widget.ConstraintLayout>

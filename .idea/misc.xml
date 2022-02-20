@@ -3,11 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/activity_main.xml" value="0.14279606669516887" />
         <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/fragment_crash.xml" value="0.2" />
-        <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/fragment_home.xml" value="0.25" />
+        <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/fragment_home.xml" value="0.33" />
         <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/fragment_new_order.xml" value="0.33" />
         <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/fragment_product.xml" value="0.33" />
         <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/fragment_splash.xml" value="0.17395833333333333" />
+        <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/order_detail_item.xml" value="0.67" />
       </map>
     </option>
   </component>

@@ -14,5 +14,7 @@
         <!-- Customize your theme here. -->
         <item name="fontFamily">@font/samimbold</item>
         <item name="android:fontFamily">@font/samimbold</item>
+        <item name="colorSurface">@color/secondaryLightColor2</item>
+        <item name="android:colorBackground">@color/themeBackground</item>
     </style>
 </resources>

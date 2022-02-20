@@ -10,4 +10,19 @@
     <string name="product_name">نام محصول</string>
     <string name="name_cannot_be_empty">نام نمیتواند خالی باشد</string>
     <string name="please_wait">لطفا منتظر بمانید</string>
+    <string name="plus">+</string>
+    <string name="minus">-</string>
+    <string name="save_order">ثبت سفارش</string>
+    <string name="error_creating_order">خطا در ایجاد سفارش</string>
+    <string name="order_created">سفارش ایجاد شد</string>
+    <string name="last_order_summary">
+        سفارش ایجاد شد
+        \nشماره سفارش
+        %s
+        \nتاریخ سفارش
+        %s
+        \nوضعیت سفارش
+        %s
+    </string>
+    <string name="create_new_order">سفارش جدیدی ایجاد کنید:</string>
 </resources>

@@ -14,26 +14,33 @@ class NewOrderDetailHolder(
 
     init {
         updateQuantity()
+        orderQuantityClickListeners()
+    }
 
-        binding.plusButton.setOnClickListener {
-            quantity++
-            itemChanged(orderDetails[adapterPosition].id to quantity)
-            updateQuantity()
-        }
-        binding.minusButton.setOnClickListener {
-            if (quantity != 0) {
-                quantity--
+    private fun orderQuantityClickListeners() {
+        binding.newOrderPlusButton.setOnClickListener {
+            if (adapterPosition != RecyclerView.NO_POSITION) {
+                quantity++
                 itemChanged(orderDetails[adapterPosition].id to quantity)
                 updateQuantity()
+            }
+        }
+        binding.newOrderMinusButton.setOnClickListener {
+            if (adapterPosition != RecyclerView.NO_POSITION) {
+                if (quantity != 0) {
+                    quantity--
+                    itemChanged(orderDetails[adapterPosition].id to quantity)
+                    updateQuantity()
+                }
             }
         }
     }
 
     private fun updateQuantity() {
-        binding.orderQuantity.text = quantity.toString()
+        binding.newOrderQuantity.text = quantity.toString()
     }
 
     fun setDetailText(value: String) {
-        binding.orderDetailText.text = value
+        binding.newOrderDetailText.text = value
     }
 }

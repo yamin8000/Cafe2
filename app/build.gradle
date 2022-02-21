@@ -61,4 +61,6 @@ dependencies {
     kapt "androidx.room:room-compiler:$roomVersion"
     implementation("androidx.room:room-ktx:$roomVersion")
     implementation("androidx.room:room-runtime:$roomVersion")
+    //
+    implementation 'com.github.yamin8000:PrettyPersianNumbers:1.0.5'
 }

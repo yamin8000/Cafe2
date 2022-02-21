@@ -105,8 +105,9 @@ class NewOrderFragment :
     private fun itemChanged(pair: Pair<Int, Int>) {
         //toast("${products.find { it.id == productId }?.name} == $quantity")
         val (productId, quantity) = pair
+        val productName = products.find { it.id == productId }?.name ?: ""
         val oldItem = orderDetails.find { it.productId == productId }
-        if (oldItem == null) orderDetails.add(OrderDetail(productId, quantity))
+        if (oldItem == null) orderDetails.add(OrderDetail(productId, quantity, productName))
         else oldItem.quantity = quantity
     }
 

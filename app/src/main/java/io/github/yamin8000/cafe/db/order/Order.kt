@@ -10,6 +10,6 @@ data class Order(
     val dayId: Int,
     val date: LocalDateTime,
     val detailIds: List<Int>,
-    val status: OrderStatus = OrderStatus.Registered,
+    var status: OrderStatus = OrderStatus.Registered,
     @PrimaryKey(autoGenerate = true) val id: Int = 0
 )

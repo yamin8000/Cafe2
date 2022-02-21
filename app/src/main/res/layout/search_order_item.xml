@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="8dp">
+
+        <Button
+            android:id="@+id/search_order_deliver_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/deliver"
+            tools:layout_editor_absoluteX="157dp"
+            tools:layout_editor_absoluteY="182dp" />
+
+        <TextView
+            android:id="@+id/search_order_details"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            tools:layout_editor_absoluteX="174dp"
+            tools:layout_editor_absoluteY="64dp"
+            tools:text="@tools:sample/lorem" />
+
+        <TextView
+            android:id="@+id/search_order_status"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            tools:layout_editor_absoluteX="174dp"
+            tools:layout_editor_absoluteY="103dp"
+            tools:text="@tools:sample/lorem" />
+
+        <TextView
+            android:id="@+id/search_order_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            tools:layout_editor_absoluteX="174dp"
+            tools:layout_editor_absoluteY="24dp"
+            tools:text="@tools:sample/date/ddmmyy" />
+
+        <TextView
+            android:id="@+id/search_order_day_id"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            tools:layout_editor_absoluteX="174dp"
+            tools:layout_editor_absoluteY="143dp"
+            tools:text="@tools:sample/us_zipcodes" />
+
+        <androidx.constraintlayout.helper.widget.Flow
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:orientation="vertical"
+            app:constraint_referenced_ids="search_order_day_id,search_order_date,search_order_details,search_order_status,search_order_deliver_button"
+            app:flow_verticalGap="16dp"
+            app:flow_verticalStyle="packed"
+            app:flow_wrapMode="none"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

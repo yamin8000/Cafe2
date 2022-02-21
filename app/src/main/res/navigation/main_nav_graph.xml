@@ -47,7 +47,7 @@
         tools:layout="@layout/fragment_new_order" />
     <fragment
         android:id="@+id/searchOrdersFragment"
-        android:name="io.github.yamin8000.cafe.ui.SearchOrdersFragment"
+        android:name="io.github.yamin8000.cafe.ui.searchorder.SearchOrdersFragment"
         android:label="SearchOrdersFragment"
         tools:layout="@layout/fragment_search_orders" />
     <fragment

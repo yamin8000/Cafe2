@@ -1,14 +1,11 @@
 package io.github.yamin8000.cafe.db.order
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 
 @Dao
 interface OrderDao {
 
-    @Query("select * from `order`")
+    @Query("select * from `order` order by id desc")
     suspend fun getAll(): List<Order>
 
     @Query("select * from `order` where id in (:ids)")
@@ -25,4 +22,7 @@ interface OrderDao {
 
     @Delete
     suspend fun delete(order: Order)
+
+    @Update
+    suspend fun update(order: Order)
 }

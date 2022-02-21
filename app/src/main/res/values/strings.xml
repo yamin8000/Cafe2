@@ -25,4 +25,16 @@
         %s
     </string>
     <string name="create_new_order">سفارش جدیدی ایجاد کنید:</string>
+    <string name="deliver">تحویل</string>
+    <string name="registered">ثبت شده</string>
+    <string name="delivered">تحویل داده شده</string>
+    <string name="no_order_registered">هیچ سفارشی ثبت نشده است.</string>
+    <string name="order_day_id">شماره روزانه: %s</string>
+    <string name="order_date">تاریخ: %s</string>
+    <string name="order_status">وضعیت: %s</string>
+    <string name="order_details">
+        جزییات:
+        \n%s
+    </string>
+    <string name="adad">عدد</string>
 </resources>

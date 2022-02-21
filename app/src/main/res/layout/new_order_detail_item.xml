@@ -12,7 +12,7 @@
         android:padding="8dp">
 
         <TextView
-            android:id="@+id/order_detail_text"
+            android:id="@+id/new_order_detail_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -28,17 +28,17 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:constraint_referenced_ids="minus_button,order_quantity,plus_button"
+            app:constraint_referenced_ids="new_order_minus_button,new_order_quantity,new_order_plus_button"
             app:flow_horizontalGap="8dp"
             app:flow_wrapMode="none"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/order_detail_text" />
+            app:layout_constraintTop_toBottomOf="@+id/new_order_detail_text" />
 
         <Button
-            android:id="@+id/plus_button"
+            android:id="@+id/new_order_plus_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="#43A047"
@@ -47,7 +47,7 @@
             tools:layout_editor_absoluteX="253dp" />
 
         <Button
-            android:id="@+id/minus_button"
+            android:id="@+id/new_order_minus_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="#E53935"
@@ -56,7 +56,7 @@
             tools:layout_editor_absoluteY="3dp" />
 
         <TextView
-            android:id="@+id/order_quantity"
+            android:id="@+id/new_order_quantity"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"

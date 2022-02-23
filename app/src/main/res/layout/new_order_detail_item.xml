@@ -16,52 +16,60 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            app:layout_constraintBottom_toTopOf="@+id/flow"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/new_order_quantity"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="@tools:sample/lorem" />
 
+        <TextView
+            android:id="@+id/new_order_quantity"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/flow"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/new_order_detail_text"
+            tools:text="@tools:sample/us_zipcodes" />
+
         <androidx.constraintlayout.helper.widget.Flow
             android:id="@+id/flow"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:constraint_referenced_ids="new_order_minus_button,new_order_quantity,new_order_plus_button"
+            app:constraint_referenced_ids="new_order_minus_button,new_order_plus_button"
             app:flow_horizontalGap="8dp"
             app:flow_wrapMode="none"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/new_order_detail_text" />
+            app:layout_constraintTop_toBottomOf="@+id/new_order_quantity" />
 
         <Button
             android:id="@+id/new_order_plus_button"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:backgroundTint="#43A047"
             android:text="@string/plus"
             android:textSize="20sp"
-            tools:layout_editor_absoluteX="253dp" />
+            tools:layout_editor_absoluteX="253dp"
+            tools:layout_editor_absoluteY="38dp" />
 
         <Button
             android:id="@+id/new_order_minus_button"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:backgroundTint="#E53935"
             android:text="@string/minus"
             android:textSize="20sp"
+            tools:layout_editor_absoluteX="8dp"
             tools:layout_editor_absoluteY="3dp" />
 
-        <TextView
-            android:id="@+id/new_order_quantity"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            tools:layout_editor_absoluteX="281dp"
-            tools:layout_editor_absoluteY="69dp"
-            tools:text="@tools:sample/us_zipcodes" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

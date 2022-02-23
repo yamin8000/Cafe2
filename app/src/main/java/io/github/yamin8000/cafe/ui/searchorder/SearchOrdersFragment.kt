@@ -40,7 +40,6 @@ class SearchOrdersFragment :
 
     private suspend fun getOrderDetails(detailIds: List<Int>): List<OrderDetail> {
         return withContext(ioScope.coroutineContext) {
-            val details = listOf<OrderDetail>()
             val detailDao = db?.orderDetailDao()
             return@withContext detailDao?.getAllByIds(*detailIds.toIntArray())
         } ?: listOf()

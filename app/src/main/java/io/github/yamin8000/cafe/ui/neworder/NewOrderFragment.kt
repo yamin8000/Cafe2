@@ -3,6 +3,9 @@ package io.github.yamin8000.cafe.ui.neworder
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.navigation.fragment.findNavController
 import io.github.yamin8000.cafe.R
 import io.github.yamin8000.cafe.databinding.FragmentNewOrderBinding
 import io.github.yamin8000.cafe.db.order.Day
@@ -11,7 +14,7 @@ import io.github.yamin8000.cafe.db.order.OrderDetail
 import io.github.yamin8000.cafe.db.product.Product
 import io.github.yamin8000.cafe.ui.util.BaseFragment
 import io.github.yamin8000.cafe.util.Constants.db
-import io.github.yamin8000.cafe.util.DateUtils
+import io.github.yamin8000.cafe.util.DateTimeUtils.toIso
 import io.github.yamin8000.cafe.util.Utility.handleCrash
 import io.github.yamin8000.cafe.util.Utility.toast
 import kotlinx.coroutines.*
@@ -44,32 +47,56 @@ class NewOrderFragment :
 
     private suspend fun saveOrderHandler() {
         binding.saveOrderButton.setOnClickListener {
-            if (products.isNotEmpty() && orderDetails.isNotEmpty() && db != null) {
-                val orderDetailIds = mutableListOf<Int>()
-                val orderDetailDao = db?.orderDetailDao()
-                orderDetails.forEach {
-                    ioScope.launch {
-                        val detailId = withContext(ioScope.coroutineContext) {
-                            orderDetailDao?.insert(it)
+            findNavController().navigate(R.id.action_newOrderFragment_to_singleNewOrderModal)
+            modalObserver {
+                if (it) {
+                    if (products.isNotEmpty() && orderDetails.isNotEmpty() && db != null) {
+                        val orderDetailIds = mutableListOf<Int>()
+                        val orderDetailDao = db?.orderDetailDao()
+                        orderDetails.forEach {
+                            ioScope.launch {
+                                val detailId = withContext(ioScope.coroutineContext) {
+                                    orderDetailDao?.insert(it)
+                                }
+                                if (detailId != null) orderDetailIds.add(detailId.toInt())
+                            }
                         }
-                        if (detailId != null) orderDetailIds.add(detailId.toInt())
-                    }
-                }
 
-                mainScope.launch {
-                    val (darOrderId, order) = createOrder(orderDetailIds)
-                    toast(getString(R.string.order_created), Toast.LENGTH_LONG)
-                    listHandler()
-                    binding.lastOrderSummary.text = getString(
-                        R.string.last_order_summary,
-                        darOrderId.toString(),
-                        DateUtils.isoOfDateTime(order.date),
-                        order.status.toString()
-                    )
-                }
+                        mainScope.launch {
+                            val (darOrderId, order) = createOrder(orderDetailIds)
+                            toast(getString(R.string.order_created), Toast.LENGTH_LONG)
+                            listHandler()
+                            binding.lastOrderSummary.text = getString(
+                                R.string.last_order_summary,
+                                darOrderId.toString(),
+                                order.date.toIso(),
+                                order.status.toString()
+                            )
+                        }
 
-            } else toast(getString(R.string.db_null_error))
+                    } else toast(getString(R.string.db_null_error))
+                }
+            }
         }
+    }
+
+    private fun modalObserver(callback: (Boolean) -> Unit) {
+        val navBackStackEntry = findNavController().getBackStackEntry(R.id.singleNewOrderModal)
+        val observer = LifecycleEventObserver { _, event ->
+            if (event == Lifecycle.Event.ON_DESTROY) {
+                if (navBackStackEntry.savedStateHandle.contains("prompt")) {
+                    val result = navBackStackEntry.savedStateHandle.get<Boolean>("prompt") ?: false
+                    callback(result)
+                }
+            }
+        }
+        navBackStackEntry.lifecycle.addObserver(observer)
+
+        viewLifecycleOwner.lifecycle.addObserver(LifecycleEventObserver { _, event ->
+            if (event == Lifecycle.Event.ON_DESTROY) {
+                navBackStackEntry.lifecycle.removeObserver(observer)
+            }
+        })
     }
 
     private suspend fun createOrder(orderDetailIds: MutableList<Int>): Pair<Int, Order> {

@@ -6,7 +6,7 @@ import io.github.yamin8000.cafe.databinding.SearchOrderItemBinding
 import io.github.yamin8000.cafe.db.order.Order
 import io.github.yamin8000.cafe.db.order.OrderDetail
 import io.github.yamin8000.cafe.model.OrderStatus
-import io.github.yamin8000.cafe.util.DateUtils
+import io.github.yamin8000.cafe.util.DateTimeUtils.toIso
 import ir.yamin.digits.Digits.Companion.spell
 import java.time.LocalDateTime
 
@@ -46,7 +46,7 @@ class SearchOrderHolder(
     fun setOrderDate(dateTime: LocalDateTime) {
         binding.searchOrderDate.text = context.getString(
             R.string.order_date,
-            DateUtils.isoOfDateTime(dateTime)
+            dateTime.toIso()
         )
     }
 

@@ -37,4 +37,6 @@
         \n%s
     </string>
     <string name="adad">عدد</string>
+    <string name="cancel">لغو</string>
+    <string name="accept">تایید</string>
 </resources>

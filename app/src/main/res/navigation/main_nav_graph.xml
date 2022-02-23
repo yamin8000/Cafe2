@@ -44,7 +44,11 @@
         android:id="@+id/newOrderFragment"
         android:name="io.github.yamin8000.cafe.ui.neworder.NewOrderFragment"
         android:label="NewOrderFragment"
-        tools:layout="@layout/fragment_new_order" />
+        tools:layout="@layout/fragment_new_order">
+        <action
+            android:id="@+id/action_newOrderFragment_to_singleNewOrderModal"
+            app:destination="@id/singleNewOrderModal" />
+    </fragment>
     <fragment
         android:id="@+id/searchOrdersFragment"
         android:name="io.github.yamin8000.cafe.ui.searchorder.SearchOrdersFragment"
@@ -55,4 +59,13 @@
         android:name="io.github.yamin8000.cafe.ui.ProductFragment"
         android:label="ProductFragment"
         tools:layout="@layout/fragment_product" />
+    <dialog
+        android:id="@+id/singleNewOrderModal"
+        android:name="io.github.yamin8000.cafe.ui.neworder.SingleNewOrderModal"
+        android:label="SingleNewOrderModal"
+        tools:layout="@layout/single_new_order_modal" >
+        <action
+            android:id="@+id/action_singleNewOrderModal_to_newOrderFragment"
+            app:destination="@id/newOrderFragment" />
+    </dialog>
 </navigation>

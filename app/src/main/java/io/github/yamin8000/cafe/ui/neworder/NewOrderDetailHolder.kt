@@ -3,6 +3,7 @@ package io.github.yamin8000.cafe.ui.neworder
 import androidx.recyclerview.widget.RecyclerView
 import io.github.yamin8000.cafe.databinding.NewOrderDetailItemBinding
 import io.github.yamin8000.cafe.db.product.Product
+import ir.yamin.digits.Digits.Companion.spell
 
 class NewOrderDetailHolder(
     private val binding: NewOrderDetailItemBinding,
@@ -37,7 +38,8 @@ class NewOrderDetailHolder(
     }
 
     private fun updateQuantity() {
-        binding.newOrderQuantity.text = quantity.toString()
+        val quantityString = quantity.toString()
+        binding.newOrderQuantity.text = "$quantity\n${quantityString.spell()}"
     }
 
     fun setDetailText(value: String) {

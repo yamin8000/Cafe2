@@ -26,6 +26,7 @@ class SingleNewOrderModal : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         try {
+            binding.singleNewOrderText.text = getDetails()
             binding.newOrderPromptAccept.setOnClickListener { setPrompt(true) }
             binding.newOrderPromptDecline.setOnClickListener { setPrompt(false) }
         } catch (e: Exception) {
@@ -33,12 +34,13 @@ class SingleNewOrderModal : BottomSheetDialogFragment() {
         }
     }
 
+    private fun getDetails() = arguments?.getString("details", "") ?: ""
+
     private fun setPrompt(value: Boolean) {
         val backStackEntry = findNavController().currentBackStackEntry
         if (backStackEntry != null) {
             backStackEntry.savedStateHandle.set("prompt", value)
-            Logger.d(value)
+            findNavController().popBackStack()
         } else Logger.d("empty backstack")
-        this.dismiss()
     }
 }

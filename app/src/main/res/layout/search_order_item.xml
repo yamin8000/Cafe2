@@ -21,32 +21,40 @@
 
         <TextView
             android:id="@+id/search_order_details"
+            style="@style/ClickableTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            app:drawableRightCompat="@drawable/ic_beverage"
             tools:layout_editor_absoluteX="174dp"
             tools:layout_editor_absoluteY="64dp"
             tools:text="@tools:sample/lorem" />
 
         <TextView
             android:id="@+id/search_order_status"
+            style="@style/ClickableTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            app:drawableRightCompat="@drawable/ic_coffee_maker"
             tools:layout_editor_absoluteX="174dp"
             tools:layout_editor_absoluteY="103dp"
             tools:text="@tools:sample/lorem" />
 
         <TextView
             android:id="@+id/search_order_date"
+            style="@style/ClickableTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            app:drawableRightCompat="@drawable/ic_date"
             tools:layout_editor_absoluteX="174dp"
             tools:layout_editor_absoluteY="24dp"
             tools:text="@tools:sample/date/ddmmyy" />
 
         <TextView
             android:id="@+id/search_order_day_id"
+            style="@style/ClickableTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            app:drawableRightCompat="@drawable/ic_day"
             tools:layout_editor_absoluteX="174dp"
             tools:layout_editor_absoluteY="143dp"
             tools:text="@tools:sample/us_zipcodes" />

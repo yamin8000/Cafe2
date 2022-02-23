@@ -5,6 +5,7 @@ import android.view.View
 import io.github.yamin8000.cafe.R
 import io.github.yamin8000.cafe.databinding.FragmentProductBinding
 import io.github.yamin8000.cafe.db.AppDatabase
+import io.github.yamin8000.cafe.db.helpers.DbHelpers.fetchProducts
 import io.github.yamin8000.cafe.db.product.Product
 import io.github.yamin8000.cafe.ui.util.BaseFragment
 import io.github.yamin8000.cafe.util.Constants.db
@@ -29,10 +30,10 @@ class ProductFragment :
 
     private suspend fun handleOkDb(db: AppDatabase?) {
         db?.let { database ->
-            refreshProductsTextview(database)
+            refreshProductsTextview()
             binding.addProductButton.setOnClickListener { addProductClickListener(database) }
             binding.productsText.setOnClickListener {
-                mainScope.launch { refreshProductsTextview(database) }
+                mainScope.launch { refreshProductsTextview() }
             }
         }
     }
@@ -44,17 +45,17 @@ class ProductFragment :
             ioScope.launch {
                 db.productDao().insertAll(Product(productName))
                 withContext(mainScope.coroutineContext) { binding.productNameEdit.text?.clear() }
-                refreshProductsTextview(db)
+                refreshProductsTextview()
             }
             toast.cancel()
         } else toast(getString(R.string.name_cannot_be_empty))
     }
 
-    private suspend fun refreshProductsTextview(db: AppDatabase) {
+    private suspend fun refreshProductsTextview() {
         val toast = withContext(mainScope.coroutineContext) {
             toast(getString(R.string.please_wait))
         }
-        val products = withContext(ioScope.coroutineContext) { db.productDao().getAll() }
+        val products = ioScope.coroutineContext.fetchProducts()
         toast.cancel()
         withContext(mainScope.coroutineContext) {
             binding.productsText.text = products.joinToString { product -> product.name }

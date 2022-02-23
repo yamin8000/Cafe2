@@ -39,4 +39,6 @@
     <string name="adad">عدد</string>
     <string name="cancel">لغو</string>
     <string name="accept">تایید</string>
+    <string name="order_is_empty">محصولی به سفارش اضافه نشده است.</string>
+    <string name="order_saving_cancel">سفارش لغو شد.</string>
 </resources>

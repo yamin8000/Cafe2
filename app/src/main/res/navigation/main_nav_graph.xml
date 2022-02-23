@@ -67,5 +67,8 @@
         <action
             android:id="@+id/action_singleNewOrderModal_to_newOrderFragment"
             app:destination="@id/newOrderFragment" />
+        <argument
+            android:name="details"
+            app:argType="string" />
     </dialog>
 </navigation>

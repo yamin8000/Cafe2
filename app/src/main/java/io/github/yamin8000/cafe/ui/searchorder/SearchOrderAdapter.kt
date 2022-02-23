@@ -31,5 +31,6 @@ class SearchOrderAdapter(
     override fun getItemCount() = orders.size
 
     override fun getItemId(position: Int) = position.toLong()
+
     override fun getItemViewType(position: Int) = position
 }

@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.View
 import io.github.yamin8000.cafe.R
 import io.github.yamin8000.cafe.databinding.FragmentSearchOrdersBinding
+import io.github.yamin8000.cafe.db.helpers.DbHelpers.fetchOrderDetails
+import io.github.yamin8000.cafe.db.helpers.DbHelpers.fetchOrders
 import io.github.yamin8000.cafe.db.order.Order
 import io.github.yamin8000.cafe.db.order.OrderDetail
 import io.github.yamin8000.cafe.model.OrderStatus
@@ -14,7 +16,6 @@ import io.github.yamin8000.cafe.util.Utility.toast
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class SearchOrdersFragment :
     BaseFragment<FragmentSearchOrdersBinding>({ FragmentSearchOrdersBinding.inflate(it) }) {
@@ -27,22 +28,15 @@ class SearchOrdersFragment :
 
         try {
             mainScope.launch {
-                val orders = fetchOrders()
+                val orders = ioScope.coroutineContext.fetchOrders()
                 val detailIds = orders.flatMap { it.detailIds }
-                val orderDetails = getOrderDetails(detailIds)
+                val orderDetails = ioScope.coroutineContext.fetchOrderDetails(detailIds)
                 if (orders.isNotEmpty()) fillList(orders, orderDetails)
                 else handleEmptyOrders()
             }
         } catch (e: Exception) {
             handleCrash(e)
         }
-    }
-
-    private suspend fun getOrderDetails(detailIds: List<Int>): List<OrderDetail> {
-        return withContext(ioScope.coroutineContext) {
-            val detailDao = db?.orderDetailDao()
-            return@withContext detailDao?.getAllByIds(*detailIds.toIntArray())
-        } ?: listOf()
     }
 
     private fun fillList(orders: List<Order>, orderDetails: List<OrderDetail>) {
@@ -63,11 +57,5 @@ class SearchOrdersFragment :
     private fun handleEmptyOrders() {
         toast(getString(R.string.no_order_registered))
         //binding.textview = ???
-    }
-
-    private suspend fun fetchOrders(): List<Order> {
-        return withContext(ioScope.coroutineContext) {
-            db?.orderDao()?.getAll()
-        } ?: listOf()
     }
 }

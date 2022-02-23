@@ -48,6 +48,9 @@
         <action
             android:id="@+id/action_newOrderFragment_to_singleNewOrderModal"
             app:destination="@id/singleNewOrderModal" />
+        <action
+            android:id="@+id/action_newOrderFragment_to_searchOrdersFragment"
+            app:destination="@id/searchOrdersFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchOrdersFragment"

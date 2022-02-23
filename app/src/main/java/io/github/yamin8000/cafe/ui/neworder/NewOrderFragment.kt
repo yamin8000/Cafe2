@@ -17,7 +17,6 @@ import io.github.yamin8000.cafe.db.order.OrderDetail
 import io.github.yamin8000.cafe.db.product.Product
 import io.github.yamin8000.cafe.ui.util.BaseFragment
 import io.github.yamin8000.cafe.util.Constants.db
-import io.github.yamin8000.cafe.util.DateTimeUtils.toIso
 import io.github.yamin8000.cafe.util.Utility.handleCrash
 import io.github.yamin8000.cafe.util.Utility.toast
 import ir.yamin.digits.Digits.Companion.spell
@@ -84,16 +83,9 @@ class NewOrderFragment :
             }
 
             mainScope.launch {
-                val (darOrderId, order) = createOrder(orderDetailIds)
+                createOrder(orderDetailIds)
                 toast(getString(R.string.order_created), Toast.LENGTH_LONG)
-                listHandler()
-                orderDetails.clear()
-                binding.lastOrderSummary.text = getString(
-                    R.string.last_order_summary,
-                    darOrderId.toString(),
-                    order.date.toIso(),
-                    order.status.toString()
-                )
+                findNavController().navigate(R.id.action_newOrderFragment_to_searchOrdersFragment)
             }
         } else toast(getString(R.string.order_is_empty), Toast.LENGTH_LONG)
     }

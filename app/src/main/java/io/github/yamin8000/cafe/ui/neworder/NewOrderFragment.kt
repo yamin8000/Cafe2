@@ -7,7 +7,6 @@ import androidx.core.os.bundleOf
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.navigation.fragment.findNavController
-import com.orhanobut.logger.Logger
 import io.github.yamin8000.cafe.R
 import io.github.yamin8000.cafe.databinding.FragmentNewOrderBinding
 import io.github.yamin8000.cafe.db.helpers.DbHelpers.fetchProducts
@@ -74,11 +73,13 @@ class NewOrderFragment :
         val orderDetailDao = db?.orderDetailDao()
         if (orderDetails.isNotEmpty()) {
             orderDetails.forEach {
-                ioScope.launch {
-                    val detailId = withContext(ioScope.coroutineContext) {
-                        orderDetailDao?.insert(it)
+                if (it.quantity > 0) {
+                    ioScope.launch {
+                        val detailId = withContext(ioScope.coroutineContext) {
+                            orderDetailDao?.insert(it)
+                        }
+                        if (detailId != null) orderDetailIds.add(detailId.toInt())
                     }
-                    if (detailId != null) orderDetailIds.add(detailId.toInt())
                 }
             }
 
@@ -136,6 +137,8 @@ class NewOrderFragment :
 
         val orderDao = db?.orderDao()
         withContext(ioScope.coroutineContext) { orderDao?.insert(order) }
+        orderDetailIds.clear()
+        orderDetails.clear()
         return lastOrderId to order
     }
 
@@ -151,7 +154,10 @@ class NewOrderFragment :
         val productName = products.find { it.id == productId }?.name ?: ""
         val oldItem = orderDetails.find { it.productId == productId }
         if (oldItem == null) orderDetails.add(OrderDetail(productId, quantity, productName))
-        else oldItem.quantity = quantity
+        else {
+            if (quantity == 0) orderDetails.remove(oldItem)
+            else oldItem.quantity = quantity
+        }
     }
 
     private fun getOrderDetails(): String {

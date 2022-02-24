@@ -98,7 +98,6 @@ class NewOrderFragment :
                     if (navBackStackEntry.savedStateHandle.contains("prompt")) {
                         val isSaving =
                             navBackStackEntry.savedStateHandle.get<Boolean>("prompt") ?: false
-                        Logger.d(isSaving)
                         if (isSaving)
                             success()
                         else fail()
@@ -155,7 +154,7 @@ class NewOrderFragment :
         else oldItem.quantity = quantity
     }
 
-    fun getOrderDetails(): String {
+    private fun getOrderDetails(): String {
         val unit = getString(R.string.adad)
         val detail = buildString {
             orderDetails.forEach { this.append("${it.name} ==> ${it.quantity.spell()} $unit\n") }

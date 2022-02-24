@@ -59,9 +59,9 @@
         tools:layout="@layout/fragment_search_orders" />
     <fragment
         android:id="@+id/productFragment"
-        android:name="io.github.yamin8000.cafe.ui.ProductFragment"
+        android:name="io.github.yamin8000.cafe.ui.product.ProductsFragment"
         android:label="ProductFragment"
-        tools:layout="@layout/fragment_product" />
+        tools:layout="@layout/fragment_products" />
     <dialog
         android:id="@+id/singleNewOrderModal"
         android:name="io.github.yamin8000.cafe.ui.neworder.SingleNewOrderModal"

@@ -1,9 +1,9 @@
-package io.github.yamin8000.cafe.ui
+package io.github.yamin8000.cafe.ui.product
 
 import android.os.Bundle
 import android.view.View
 import io.github.yamin8000.cafe.R
-import io.github.yamin8000.cafe.databinding.FragmentProductBinding
+import io.github.yamin8000.cafe.databinding.FragmentProductsBinding
 import io.github.yamin8000.cafe.db.AppDatabase
 import io.github.yamin8000.cafe.db.helpers.DbHelpers.fetchProducts
 import io.github.yamin8000.cafe.db.product.Product
@@ -15,8 +15,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class ProductFragment :
-    BaseFragment<FragmentProductBinding>({ FragmentProductBinding.inflate(it) }) {
+class ProductsFragment :
+    BaseFragment<FragmentProductsBinding>({ FragmentProductsBinding.inflate(it) }) {
 
     private val ioScope by lazy(LazyThreadSafetyMode.NONE) { CoroutineScope(Dispatchers.IO) }
     private val mainScope by lazy(LazyThreadSafetyMode.NONE) { CoroutineScope(Dispatchers.Main) }
@@ -26,16 +26,25 @@ class ProductFragment :
 
         if (db != null) mainScope.launch { handleOkDb(db) }
         else handleNullDb()
+
+        mainScope.launch { fillProductsList() }
     }
 
-    private suspend fun handleOkDb(db: AppDatabase?) {
+    private fun handleOkDb(db: AppDatabase?) {
         db?.let { database ->
-            refreshProductsTextview()
             binding.addProductButton.setOnClickListener { addProductClickListener(database) }
-            binding.productsText.setOnClickListener {
-                mainScope.launch { refreshProductsTextview() }
-            }
         }
+    }
+
+    private suspend fun fillProductsList() {
+        val toast = toast(getString(R.string.please_wait))
+        val products = ioScope.coroutineContext.fetchProducts().toMutableList()
+        toast.cancel()
+        val adapter = ProductsAdapter(products) { product ->
+            ioScope.launch { db?.productDao()?.delete(product) }
+        }
+        binding.productsList.adapter = adapter
+        adapter.notifyDataSetChanged()
     }
 
     private fun addProductClickListener(db: AppDatabase) {
@@ -44,22 +53,13 @@ class ProductFragment :
             val toast = toast(getString(R.string.please_wait))
             ioScope.launch {
                 db.productDao().insertAll(Product(productName))
-                withContext(mainScope.coroutineContext) { binding.productNameEdit.text?.clear() }
-                refreshProductsTextview()
+                withContext(mainScope.coroutineContext) {
+                    binding.productNameEdit.text?.clear()
+                    fillProductsList()
+                }
             }
             toast.cancel()
         } else toast(getString(R.string.name_cannot_be_empty))
-    }
-
-    private suspend fun refreshProductsTextview() {
-        val toast = withContext(mainScope.coroutineContext) {
-            toast(getString(R.string.please_wait))
-        }
-        val products = ioScope.coroutineContext.fetchProducts()
-        toast.cancel()
-        withContext(mainScope.coroutineContext) {
-            binding.productsText.text = products.joinToString { product -> product.name }
-        }
     }
 
     private fun handleNullDb() {

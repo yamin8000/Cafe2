@@ -10,8 +10,6 @@ import androidx.navigation.fragment.findNavController
 import com.orhanobut.logger.Logger
 import io.github.yamin8000.cafe.R
 import io.github.yamin8000.cafe.util.Constants.STACKTRACE
-import kotlin.reflect.KType
-import kotlin.reflect.typeOf
 
 object Utility {
 
@@ -58,16 +56,5 @@ object Utility {
         val toast = Toast.makeText(context, message, duration)
         toast.show()
         return toast
-    }
-
-    infix fun <A, B> A.anon(that: B): KType {
-        val test = fun(_: A): B {
-            return that
-        }
-        val x = typeOf<(A) -> B>()
-        return x
-//        return fun(_: A): B {
-//            return that
-//        }
     }
 }

@@ -57,7 +57,7 @@ dependencies {
     //log/crash library
     implementation 'com.orhanobut:logger:2.2.0'
     //room/db
-    def roomVersion = "2.4.1"
+    def roomVersion = "2.4.2"
     kapt "androidx.room:room-compiler:$roomVersion"
     implementation("androidx.room:room-ktx:$roomVersion")
     implementation("androidx.room:room-runtime:$roomVersion")

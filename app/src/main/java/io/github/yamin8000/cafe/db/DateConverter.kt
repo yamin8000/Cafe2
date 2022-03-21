@@ -9,14 +9,14 @@ import java.time.ZoneOffset
 class DateConverter {
 
     @TypeConverter
-    fun epochToDatetime(epoch: Long) = epoch.toDateTime()
+    fun epochToDatetime(epoch: Long): LocalDateTime = epoch.toDateTime()
 
     @TypeConverter
-    fun datetimeToEpoch(dateTime: LocalDateTime) = dateTime.toEpochSecond(ZoneOffset.UTC)
+    fun datetimeToEpoch(dateTime: LocalDateTime): Long = dateTime.toEpochSecond(ZoneOffset.UTC)
 
     @TypeConverter
-    fun epochToDate(epoch: Long) = LocalDate.ofEpochDay(epoch)
+    fun epochToDate(epoch: Long): LocalDate = LocalDate.ofEpochDay(epoch)
 
     @TypeConverter
-    fun dateToEpoch(date: LocalDate) = date.toEpochDay()
+    fun dateToEpoch(date: LocalDate): Long = date.toEpochDay()
 }

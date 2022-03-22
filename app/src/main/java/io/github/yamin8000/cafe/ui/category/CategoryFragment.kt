@@ -6,7 +6,8 @@ import androidx.fragment.app.setFragmentResultListener
 import io.github.yamin8000.cafe.R
 import io.github.yamin8000.cafe.databinding.FragmentCategoryBinding
 import io.github.yamin8000.cafe.ui.util.BaseFragment
-import io.github.yamin8000.cafe.util.Constants.CATEGORY
+import io.github.yamin8000.cafe.util.Constants.CATEGORY_IMAGE_ID
+import io.github.yamin8000.cafe.util.Constants.CATEGORY_NAME
 import io.github.yamin8000.cafe.util.Utility.handleCrash
 import io.github.yamin8000.cafe.util.Utility.navigate
 import io.github.yamin8000.cafe.util.Utility.toast
@@ -31,9 +32,10 @@ class CategoryFragment :
 
     private fun addCategoryHandler() {
         navigate(R.id.action_categoryFragment_to_addCategoryModal)
-        setFragmentResultListener(CATEGORY) { _, bundle ->
-            val categoty = bundle.getString(CATEGORY) ?: "nothing observed"
-            toast(categoty)
+        setFragmentResultListener(CATEGORY_NAME) { _, bundle ->
+            val categoryName = bundle.getString(CATEGORY_NAME) ?: "nothing observed"
+            val categoryImageId = bundle.getInt(CATEGORY_IMAGE_ID)
+            toast(categoryName)
         }
     }
 }

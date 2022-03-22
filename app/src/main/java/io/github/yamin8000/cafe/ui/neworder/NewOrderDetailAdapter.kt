@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import io.github.yamin8000.cafe.databinding.NewOrderDetailItemBinding
-import io.github.yamin8000.cafe.db.product.Product
+import io.github.yamin8000.cafe.db.entities.product.Product
 
 class NewOrderDetailAdapter(
     private val orderDetails: List<Product>,

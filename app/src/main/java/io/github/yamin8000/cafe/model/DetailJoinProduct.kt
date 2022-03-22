@@ -1,6 +1,6 @@
 package io.github.yamin8000.cafe.model
 
-import io.github.yamin8000.cafe.db.product.Product
+import io.github.yamin8000.cafe.db.entities.product.Product
 
 data class DetailJoinProduct(
     val product: Product,

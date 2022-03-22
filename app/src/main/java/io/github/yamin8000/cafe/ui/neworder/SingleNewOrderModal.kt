@@ -12,7 +12,7 @@ import io.github.yamin8000.cafe.util.Utility.handleCrash
 
 class SingleNewOrderModal : BottomSheetDialogFragment() {
 
-    private val binding: SingleNewOrderModalBinding by lazy(LazyThreadSafetyMode.NONE) {
+    private val binding by lazy(LazyThreadSafetyMode.NONE) {
         SingleNewOrderModalBinding.inflate(layoutInflater)
     }
 

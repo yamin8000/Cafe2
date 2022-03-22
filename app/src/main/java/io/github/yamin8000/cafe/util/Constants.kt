@@ -8,4 +8,7 @@ object Constants {
     const val STACKTRACE = "stacktrace"
     const val SPLASH_DELAY = 1500L
     var db: AppDatabase? = null
+
+    //arguments
+    const val CATEGORY = "category"
 }

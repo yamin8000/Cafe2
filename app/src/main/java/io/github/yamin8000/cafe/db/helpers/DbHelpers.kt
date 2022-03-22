@@ -1,8 +1,8 @@
 package io.github.yamin8000.cafe.db.helpers
 
-import io.github.yamin8000.cafe.db.order.Order
-import io.github.yamin8000.cafe.db.order.OrderDetail
-import io.github.yamin8000.cafe.db.product.Product
+import io.github.yamin8000.cafe.db.entities.order.Order
+import io.github.yamin8000.cafe.db.entities.order.OrderDetail
+import io.github.yamin8000.cafe.db.entities.product.Product
 import io.github.yamin8000.cafe.util.Constants
 import kotlinx.coroutines.withContext
 import kotlin.coroutines.CoroutineContext

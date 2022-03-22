@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import io.github.yamin8000.cafe.databinding.SearchOrderItemBinding
-import io.github.yamin8000.cafe.db.order.Order
-import io.github.yamin8000.cafe.db.order.OrderDetail
+import io.github.yamin8000.cafe.db.entities.order.Order
+import io.github.yamin8000.cafe.db.entities.order.OrderDetail
 
 class SearchOrderAdapter(
     private val orders: List<Order>,

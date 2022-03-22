@@ -10,10 +10,10 @@ import androidx.navigation.fragment.findNavController
 import io.github.yamin8000.cafe.R
 import io.github.yamin8000.cafe.databinding.FragmentNewOrderBinding
 import io.github.yamin8000.cafe.db.helpers.DbHelpers.fetchProducts
-import io.github.yamin8000.cafe.db.order.Day
-import io.github.yamin8000.cafe.db.order.Order
-import io.github.yamin8000.cafe.db.order.OrderDetail
-import io.github.yamin8000.cafe.db.product.Product
+import io.github.yamin8000.cafe.db.entities.day.Day
+import io.github.yamin8000.cafe.db.entities.order.Order
+import io.github.yamin8000.cafe.db.entities.order.OrderDetail
+import io.github.yamin8000.cafe.db.entities.product.Product
 import io.github.yamin8000.cafe.ui.util.BaseFragment
 import io.github.yamin8000.cafe.util.Constants.db
 import io.github.yamin8000.cafe.util.Utility.handleCrash

@@ -14,10 +14,14 @@
             android:id="@+id/welcome_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
             android:gravity="center"
             android:text="@string/welcome"
-            tools:layout_editor_absoluteX="177dp"
-            tools:layout_editor_absoluteY="14dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/products_button"
@@ -43,23 +47,33 @@
             tools:layout_editor_absoluteX="158dp"
             tools:layout_editor_absoluteY="34dp" />
 
+        <Button
+            android:id="@+id/categories_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/categories"
+            tools:layout_editor_absoluteX="281dp"
+            tools:layout_editor_absoluteY="152dp" />
+
         <androidx.constraintlayout.helper.widget.Flow
+            android:id="@+id/buttons_flow"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="32dp"
-            android:orientation="vertical"
-            app:constraint_referenced_ids="welcome_text,new_order_button,list_order_button,products_button"
-            app:flow_verticalGap="8dp"
+            android:orientation="horizontal"
+            app:constraint_referenced_ids="new_order_button,list_order_button,products_button,categories_button"
+            app:flow_horizontalGap="16dp"
+            app:flow_maxElementsWrap="2"
+            app:flow_verticalGap="16dp"
             app:flow_verticalStyle="packed"
             app:flow_wrapMode="aligned"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintTop_toBottomOf="@+id/welcome_text" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>

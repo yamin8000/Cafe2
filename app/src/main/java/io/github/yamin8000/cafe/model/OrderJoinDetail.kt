@@ -1,6 +1,6 @@
 package io.github.yamin8000.cafe.model
 
-import io.github.yamin8000.cafe.db.order.OrderDetail
+import io.github.yamin8000.cafe.db.entities.order.OrderDetail
 import java.time.LocalDateTime
 
 data class OrderJoinDetail(

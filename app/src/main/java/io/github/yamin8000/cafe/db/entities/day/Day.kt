@@ -1,4 +1,4 @@
-package io.github.yamin8000.cafe.db.order
+package io.github.yamin8000.cafe.db.entities.day
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

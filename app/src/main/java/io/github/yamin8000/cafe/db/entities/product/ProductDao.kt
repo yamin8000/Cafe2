@@ -1,4 +1,4 @@
-package io.github.yamin8000.cafe.db.product
+package io.github.yamin8000.cafe.db.entities.product
 
 import androidx.room.Dao
 import androidx.room.Delete
@@ -13,6 +13,9 @@ interface ProductDao {
 
     @Query("select * from `product` where id in (:ids)")
     suspend fun getAllByIds(vararg ids: Int): List<Product>
+
+    @Query("select * from product where categoryId in (:categoryIds)")
+    suspend fun getAllByCategoryIds(vararg categoryIds: Int): List<Product>
 
     @Query("select * from `product` where id = (:id)")
     suspend fun getById(id: Int): Product

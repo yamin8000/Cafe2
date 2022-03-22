@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_homeFragment_to_productFragment"
             app:destination="@id/productFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_categoryFragment"
+            app:destination="@id/categoryFragment" />
     </fragment>
     <fragment
         android:id="@+id/crashFragment"
@@ -61,12 +64,16 @@
         android:id="@+id/productFragment"
         android:name="io.github.yamin8000.cafe.ui.product.ProductsFragment"
         android:label="ProductFragment"
-        tools:layout="@layout/fragment_products" />
+        tools:layout="@layout/fragment_products">
+        <action
+            android:id="@+id/action_productFragment_to_newProductModal"
+            app:destination="@id/newProductModal" />
+    </fragment>
     <dialog
         android:id="@+id/singleNewOrderModal"
         android:name="io.github.yamin8000.cafe.ui.neworder.SingleNewOrderModal"
         android:label="SingleNewOrderModal"
-        tools:layout="@layout/single_new_order_modal" >
+        tools:layout="@layout/single_new_order_modal">
         <action
             android:id="@+id/action_singleNewOrderModal_to_newOrderFragment"
             app:destination="@id/newOrderFragment" />
@@ -74,4 +81,23 @@
             android:name="details"
             app:argType="string" />
     </dialog>
+    <dialog
+        android:id="@+id/newProductModal"
+        android:name="io.github.yamin8000.cafe.ui.product.NewProductModal"
+        android:label="NewProductModal"
+        tools:layout="@layout/new_product_modal" />
+    <dialog
+        android:id="@+id/addCategoryModal"
+        android:name="io.github.yamin8000.cafe.ui.category.AddCategoryModal"
+        android:label="AddCategoryModal"
+        tools:layout="@layout/add_category_modal" />
+    <fragment
+        android:id="@+id/categoryFragment"
+        android:name="io.github.yamin8000.cafe.ui.category.CategoryFragment"
+        android:label="CategoryFragment"
+        tools:layout="@layout/fragment_category">
+        <action
+            android:id="@+id/action_categoryFragment_to_addCategoryModal"
+            app:destination="@id/addCategoryModal" />
+    </fragment>
 </navigation>

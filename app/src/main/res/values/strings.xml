@@ -41,4 +41,11 @@
     <string name="accept">تایید</string>
     <string name="order_is_empty">محصولی به سفارش اضافه نشده است.</string>
     <string name="order_saving_cancel">سفارش لغو شد.</string>
+    <string name="categories">دسته‌ها</string>
+    <string name="category">دسته</string>
+    <string name="remove">حذف</string>
+    <string name="product_category">دسته محصول</string>
+    <string name="product_price">قیمت محصول</string>
+    <string name="confirm">تایید</string>
+    <string name="add_category">اضافه کردن دسته</string>
 </resources>

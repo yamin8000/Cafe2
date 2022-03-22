@@ -2,13 +2,15 @@ package io.github.yamin8000.cafe.ui.product
 
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.fragment.findNavController
 import io.github.yamin8000.cafe.R
 import io.github.yamin8000.cafe.databinding.FragmentProductsBinding
 import io.github.yamin8000.cafe.db.AppDatabase
+import io.github.yamin8000.cafe.db.entities.product.Product
 import io.github.yamin8000.cafe.db.helpers.DbHelpers.fetchProducts
-import io.github.yamin8000.cafe.db.product.Product
 import io.github.yamin8000.cafe.ui.util.BaseFragment
 import io.github.yamin8000.cafe.util.Constants.db
+import io.github.yamin8000.cafe.util.Utility.handleCrash
 import io.github.yamin8000.cafe.util.Utility.toast
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -24,10 +26,14 @@ class ProductsFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (db != null) mainScope.launch { handleOkDb(db) }
-        else handleNullDb()
+        try {
+            if (db != null) mainScope.launch { handleOkDb(db) }
+            else handleNullDb()
 
-        mainScope.launch { fillProductsList() }
+            mainScope.launch { fillProductsList() }
+        } catch (e: Exception) {
+            handleCrash(e)
+        }
     }
 
     private fun handleOkDb(db: AppDatabase?) {
@@ -48,18 +54,7 @@ class ProductsFragment :
     }
 
     private fun addProductClickListener(db: AppDatabase) {
-        val productName = binding.productNameEdit.text.toString()
-        if (productName.isNotBlank()) {
-            val toast = toast(getString(R.string.please_wait))
-            ioScope.launch {
-                db.productDao().insertAll(Product(productName))
-                withContext(mainScope.coroutineContext) {
-                    binding.productNameEdit.text?.clear()
-                    fillProductsList()
-                }
-            }
-            toast.cancel()
-        } else toast(getString(R.string.name_cannot_be_empty))
+        findNavController().navigate(R.id.action_productFragment_to_newProductModal)
     }
 
     private fun handleNullDb() {

@@ -1,5 +1,6 @@
 package io.github.yamin8000.cafe.util
 
+import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
@@ -56,5 +57,9 @@ object Utility {
         val toast = Toast.makeText(context, message, duration)
         toast.show()
         return toast
+    }
+
+    fun Fragment.navigate(destination: Int, args: Bundle? = null) {
+        this.findNavController().navigate(destination, args)
     }
 }

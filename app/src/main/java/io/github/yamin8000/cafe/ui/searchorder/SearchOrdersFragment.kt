@@ -6,8 +6,8 @@ import io.github.yamin8000.cafe.R
 import io.github.yamin8000.cafe.databinding.FragmentSearchOrdersBinding
 import io.github.yamin8000.cafe.db.helpers.DbHelpers.fetchOrderDetails
 import io.github.yamin8000.cafe.db.helpers.DbHelpers.fetchOrders
-import io.github.yamin8000.cafe.db.order.Order
-import io.github.yamin8000.cafe.db.order.OrderDetail
+import io.github.yamin8000.cafe.db.entities.order.Order
+import io.github.yamin8000.cafe.db.entities.order.OrderDetail
 import io.github.yamin8000.cafe.model.OrderStatus
 import io.github.yamin8000.cafe.ui.util.BaseFragment
 import io.github.yamin8000.cafe.util.Constants.db

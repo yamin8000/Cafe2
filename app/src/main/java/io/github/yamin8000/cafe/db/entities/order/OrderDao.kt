@@ -1,4 +1,4 @@
-package io.github.yamin8000.cafe.db.order
+package io.github.yamin8000.cafe.db.entities.order
 
 import androidx.room.*
 

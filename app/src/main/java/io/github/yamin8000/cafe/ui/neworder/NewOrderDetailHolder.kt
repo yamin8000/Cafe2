@@ -2,7 +2,7 @@ package io.github.yamin8000.cafe.ui.neworder
 
 import androidx.recyclerview.widget.RecyclerView
 import io.github.yamin8000.cafe.databinding.NewOrderDetailItemBinding
-import io.github.yamin8000.cafe.db.product.Product
+import io.github.yamin8000.cafe.db.entities.product.Product
 import ir.yamin.digits.Digits.Companion.spell
 
 class NewOrderDetailHolder(

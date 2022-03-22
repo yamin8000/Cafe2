@@ -7,12 +7,79 @@
     android:layout_gravity="center"
     android:layout_margin="4dp">
 
-
-    <TextView
-        android:id="@+id/product_item_text"
-        style="@style/ClickableTextView"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        tools:text="@tools:sample/lorem" />
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/remove_product_item_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/design_default_color_error"
+            android:gravity="center"
+            android:text="@string/remove"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/product_item_detail_flow"
+            app:layout_constraintHeight_percent=".5"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.helper.widget.Flow
+            android:id="@+id/product_item_detail_flow"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:constraint_referenced_ids="product_item_category,product_item_name,product_item_price"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/product_item_image"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/remove_product_item_button"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/product_item_name"
+            style="@style/ClickableTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="18sp"
+            tools:layout_editor_absoluteX="50dp"
+            tools:layout_editor_absoluteY="55dp"
+            tools:text="@tools:sample/lorem" />
+
+        <TextView
+            android:id="@+id/product_item_category"
+            style="@style/ClickableTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="14sp"
+            tools:layout_editor_absoluteX="50dp"
+            tools:text="@tools:sample/lorem" />
+
+        <TextView
+            android:id="@+id/product_item_price"
+            style="@style/ClickableTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            tools:layout_editor_absoluteX="50dp"
+            tools:layout_editor_absoluteY="117dp"
+            tools:text="@tools:sample/us_zipcodes" />
+
+        <ImageView
+            android:id="@+id/product_item_image"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/product_item_detail_flow"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent=".33"
+            tools:srcCompat="@tools:sample/avatars" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </com.google.android.material.card.MaterialCardView>

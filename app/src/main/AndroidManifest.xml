@@ -11,7 +11,7 @@
         android:supportsRtl="false"
         android:theme="@style/Theme.Cafe">
         <activity
-            android:name=".ui.base.MainActivity"
+            android:name="io.github.yamin8000.cafe.base.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

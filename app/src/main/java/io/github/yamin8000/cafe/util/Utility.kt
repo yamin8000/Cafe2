@@ -62,4 +62,20 @@ object Utility {
     fun Fragment.navigate(destination: Int, args: Bundle? = null) {
         this.findNavController().navigate(destination, args)
     }
+
+    fun Fragment.showNullDbError() {
+        toast(getString(R.string.db_null_error))
+    }
+
+    fun View.visible() {
+        this.visibility = View.VISIBLE
+    }
+
+    fun View.gone() {
+        this.visibility = View.GONE
+    }
+
+    fun View.invisible() {
+        this.visibility = View.INVISIBLE
+    }
 }

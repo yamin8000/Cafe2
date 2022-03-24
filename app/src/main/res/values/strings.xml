@@ -51,4 +51,10 @@
     <string name="category_icon">نماد دسته</string>
     <string name="choose_category_icon">انتخاب عکس/اختیاری</string>
     <string name="please_enter_category">لطفا نام دسته را وارد کنید</string>
+    <string name="data_empty">متاسفانه داده ای یافت نشد</string>
+    <string name="category_cannot_be_empty">متن دسته نمیتواند خالی باشد.</string>
+    <string name="yes">بله</string>
+    <string name="no">خیر</string>
+    <string name="exit_prompt">آیا واقعا قصد خروج از برنامه را دارید؟</string>
+    <string name="prompt_default">آیا از انجام این کار مطمئن هستید؟</string>
 </resources>

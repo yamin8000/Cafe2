@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="io.github.yamin8000.cafe.ui.HomeFragment"
+        android:name="io.github.yamin8000.cafe.base.HomeFragment"
         android:label="HomeFragment"
         tools:layout="@layout/fragment_home">
         <action
@@ -25,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/crashFragment"
-        android:name="io.github.yamin8000.cafe.ui.base.CrashFragment"
+        android:name="io.github.yamin8000.cafe.base.CrashFragment"
         android:label="CrashFragment"
         tools:layout="@layout/fragment_crash">
         <argument
@@ -34,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/splashFragment"
-        android:name="io.github.yamin8000.cafe.ui.base.SplashFragment"
+        android:name="io.github.yamin8000.cafe.base.SplashFragment"
         android:label="SplashFragment"
         tools:layout="@layout/fragment_splash">
         <action
@@ -45,7 +45,7 @@
     </fragment>
     <fragment
         android:id="@+id/newOrderFragment"
-        android:name="io.github.yamin8000.cafe.ui.neworder.NewOrderFragment"
+        android:name="io.github.yamin8000.cafe.neworder.NewOrderFragment"
         android:label="NewOrderFragment"
         tools:layout="@layout/fragment_new_order">
         <action
@@ -57,12 +57,12 @@
     </fragment>
     <fragment
         android:id="@+id/searchOrdersFragment"
-        android:name="io.github.yamin8000.cafe.ui.searchorder.SearchOrdersFragment"
+        android:name="io.github.yamin8000.cafe.searchorder.SearchOrdersFragment"
         android:label="SearchOrdersFragment"
         tools:layout="@layout/fragment_search_orders" />
     <fragment
         android:id="@+id/productFragment"
-        android:name="io.github.yamin8000.cafe.ui.product.ProductsFragment"
+        android:name="io.github.yamin8000.cafe.product.ProductsFragment"
         android:label="ProductFragment"
         tools:layout="@layout/fragment_products">
         <action
@@ -71,7 +71,7 @@
     </fragment>
     <dialog
         android:id="@+id/singleNewOrderModal"
-        android:name="io.github.yamin8000.cafe.ui.neworder.SingleNewOrderModal"
+        android:name="io.github.yamin8000.cafe.neworder.SingleNewOrderModal"
         android:label="SingleNewOrderModal"
         tools:layout="@layout/single_new_order_modal">
         <action
@@ -83,21 +83,30 @@
     </dialog>
     <dialog
         android:id="@+id/newProductModal"
-        android:name="io.github.yamin8000.cafe.ui.product.NewProductModal"
+        android:name="io.github.yamin8000.cafe.product.NewProductModal"
         android:label="NewProductModal"
         tools:layout="@layout/new_product_modal" />
     <dialog
         android:id="@+id/addCategoryModal"
-        android:name="io.github.yamin8000.cafe.ui.category.AddCategoryModal"
+        android:name="io.github.yamin8000.cafe.category.AddCategoryModal"
         android:label="AddCategoryModal"
         tools:layout="@layout/add_category_modal" />
     <fragment
         android:id="@+id/categoryFragment"
-        android:name="io.github.yamin8000.cafe.ui.category.CategoryFragment"
+        android:name="io.github.yamin8000.cafe.category.CategoryFragment"
         android:label="CategoryFragment"
         tools:layout="@layout/fragment_category">
         <action
             android:id="@+id/action_categoryFragment_to_addCategoryModal"
             app:destination="@id/addCategoryModal" />
     </fragment>
+    <dialog
+        android:id="@+id/promptModal"
+        android:name="io.github.yamin8000.cafe.ui.PromptModal"
+        android:label="PromptModal"
+        tools:layout="@layout/prompt_modal" >
+        <argument
+            android:name="prompt_text"
+            app:argType="string" />
+    </dialog>
 </navigation>

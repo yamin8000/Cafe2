@@ -1,5 +1,6 @@
 package io.github.yamin8000.cafe.db.helpers
 
+import io.github.yamin8000.cafe.db.entities.category.Category
 import io.github.yamin8000.cafe.db.entities.order.Order
 import io.github.yamin8000.cafe.db.entities.order.OrderDetail
 import io.github.yamin8000.cafe.db.entities.product.Product
@@ -25,6 +26,24 @@ object DbHelpers {
     suspend fun CoroutineContext.fetchProducts(): List<Product> {
         return withContext(this) {
             Constants.db?.productDao()?.getAll() ?: listOf()
+        }
+    }
+
+    suspend fun CoroutineContext.fetchCategories(): List<Category> {
+        return withContext(this) {
+            Constants.db?.categoryDao()?.getAll() ?: listOf()
+        }
+    }
+
+    suspend fun CoroutineContext.newCategory(category: Category): Long {
+        return withContext(this) {
+            Constants.db?.categoryDao()?.insert(category) ?: -1
+        }
+    }
+
+    suspend fun CoroutineContext.deleteCategories(vararg category: Category) {
+        withContext(this) {
+            category.forEach { Constants.db?.categoryDao()?.delete(it) }
         }
     }
 }

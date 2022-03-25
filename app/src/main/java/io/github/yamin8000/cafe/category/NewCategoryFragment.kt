@@ -9,14 +9,14 @@ import io.github.yamin8000.cafe.databinding.FragmentNewCategoryBinding
 import io.github.yamin8000.cafe.db.entities.category.Category
 import io.github.yamin8000.cafe.db.helpers.DbHelpers.newCategory
 import io.github.yamin8000.cafe.ui.util.BaseFragment
-import io.github.yamin8000.cafe.util.Constants.CATEGORY
 import io.github.yamin8000.cafe.util.Constants.ICON_PICKER
 import io.github.yamin8000.cafe.util.Constants.ICON_PICKER_RESULT
-import io.github.yamin8000.cafe.util.Constants.IS_EDIT_MODE
 import io.github.yamin8000.cafe.util.Constants.NO_ID
 import io.github.yamin8000.cafe.util.Constants.db
 import io.github.yamin8000.cafe.util.Utility.Alerts.showNullDbError
 import io.github.yamin8000.cafe.util.Utility.Alerts.snack
+import io.github.yamin8000.cafe.util.Utility.Bundles.data
+import io.github.yamin8000.cafe.util.Utility.Bundles.isEditMode
 import io.github.yamin8000.cafe.util.Utility.handleCrash
 import io.github.yamin8000.cafe.util.Utility.hideKeyboard
 import io.github.yamin8000.cafe.util.Utility.navigate
@@ -41,8 +41,8 @@ class NewCategoryFragment :
         super.onViewCreated(view, savedInstanceState)
 
         try {
-            isEditMode = arguments?.getBoolean(IS_EDIT_MODE) ?: false
-            editedCategory = arguments?.getParcelable(CATEGORY)
+            isEditMode = arguments.isEditMode()
+            editedCategory = arguments.data()
             if (isEditMode) initEditMode(editedCategory)
             binding.categoryImageButton.setOnClickListener { showIconPicker() }
             binding.addCategoryConfirm.setOnClickListener { handleCategoryDataConfirmation() }
@@ -52,6 +52,7 @@ class NewCategoryFragment :
     }
 
     private fun initEditMode(category: Category?) {
+        binding.addCategoryConfirm.text = getString(R.string.edit)
         if (category != null) {
             binding.categoryNameEdit.setText(category.name)
             binding.categoryImage.setImageDrawable(

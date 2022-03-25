@@ -9,9 +9,9 @@ import io.github.yamin8000.cafe.databinding.FragmentCategoryBinding
 import io.github.yamin8000.cafe.db.entities.category.Category
 import io.github.yamin8000.cafe.db.helpers.DbHelpers.deleteCategories
 import io.github.yamin8000.cafe.db.helpers.DbHelpers.getCategories
-import io.github.yamin8000.cafe.ui.recyclerview.adapters.EmptyAdapter
+import io.github.yamin8000.cafe.ui.recyclerview.EmptyAdapter
 import io.github.yamin8000.cafe.ui.util.BaseFragment
-import io.github.yamin8000.cafe.util.Constants.CATEGORY
+import io.github.yamin8000.cafe.util.Constants.DATA
 import io.github.yamin8000.cafe.util.Constants.IS_EDIT_MODE
 import io.github.yamin8000.cafe.util.Constants.PROMPT
 import io.github.yamin8000.cafe.util.Constants.PROMPT_RESULT
@@ -98,7 +98,7 @@ class CategoryFragment :
         navigate(
             R.id.action_categoryFragment_to_newCategoryFragment,
             bundleOf(
-                CATEGORY to category,
+                DATA to category,
                 IS_EDIT_MODE to true
             )
         )

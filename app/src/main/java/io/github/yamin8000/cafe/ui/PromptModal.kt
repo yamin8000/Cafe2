@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.orhanobut.logger.Logger
 import io.github.yamin8000.cafe.R
 import io.github.yamin8000.cafe.databinding.PromptModalBinding
 import io.github.yamin8000.cafe.util.Constants.PROMPT

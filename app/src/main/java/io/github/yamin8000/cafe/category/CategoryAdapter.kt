@@ -5,16 +5,17 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import io.github.yamin8000.cafe.databinding.CategoryItemBinding
 import io.github.yamin8000.cafe.db.entities.category.Category
-import io.github.yamin8000.cafe.ui.AsyncDifferHelper
+import io.github.yamin8000.cafe.ui.AsyncDifferHelper.getAsyncDiffer
 
 class CategoryAdapter(
     private val updateCallback: (Category) -> Unit,
     private val deleteCallback: (Category, Boolean) -> Unit
 ) : RecyclerView.Adapter<CategoryHolder>() {
 
-    val asyncList = AsyncDifferHelper.getAsyncDiffer<Category, CategoryHolder>(this,
+    val asyncList = this.getAsyncDiffer<Category, CategoryHolder>(
         { old, new -> old.id == new.id },
-        { old, new -> old == new })
+        { old, new -> old == new }
+    )
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryHolder {
         val inflater = LayoutInflater.from(parent.context)

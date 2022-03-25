@@ -5,26 +5,29 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import io.github.yamin8000.cafe.databinding.ProductItemBinding
 import io.github.yamin8000.cafe.db.entities.relatives.ProductAndCategory
+import io.github.yamin8000.cafe.ui.AsyncDifferHelper.getAsyncDiffer
 
 class ProductsAdapter(
-    private val products: MutableList<ProductAndCategory>,
-    private val deleteListener: (ProductAndCategory) -> Unit
-) :
-    RecyclerView.Adapter<ProductsHolder>() {
+    private val updateCallback: (ProductAndCategory) -> Unit,
+    private val deleteCallback: (ProductAndCategory, Boolean) -> Unit
+) : RecyclerView.Adapter<ProductsHolder>() {
+
+    val asyncList = this.getAsyncDiffer<ProductAndCategory, ProductsHolder>(
+        { old, new -> old.product.id == new.product.id },
+        { old, new -> old == new }
+    )
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductsHolder {
         val inflater = LayoutInflater.from(parent.context)
         val itemBinding = ProductItemBinding.inflate(inflater, parent, false)
-        return ProductsHolder(products, itemBinding, deleteListener) {
-            notifyItemRemoved(it)
-        }
+        return ProductsHolder(asyncList, itemBinding, updateCallback, deleteCallback)
     }
 
     override fun onBindViewHolder(holder: ProductsHolder, position: Int) {
-        holder.bindView(products[position])
+        holder.bindView(asyncList.currentList[position])
     }
 
-    override fun getItemCount() = products.size
+    override fun getItemCount() = asyncList.currentList.size
 
     override fun getItemId(position: Int) = position.toLong()
 

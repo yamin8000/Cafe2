@@ -7,6 +7,7 @@ import androidx.navigation.fragment.findNavController
 import io.github.yamin8000.cafe.R
 import io.github.yamin8000.cafe.databinding.FragmentProductsBinding
 import io.github.yamin8000.cafe.db.AppDatabase
+import io.github.yamin8000.cafe.db.entities.relatives.ProductAndCategory
 import io.github.yamin8000.cafe.ui.util.BaseFragment
 import io.github.yamin8000.cafe.util.Constants.PRODUCT
 import io.github.yamin8000.cafe.util.Constants.db
@@ -46,11 +47,20 @@ class ProductsFragment :
         val toast = toast(getString(R.string.please_wait))
         val products = getProducts()
         toast.cancel()
-        val adapter = ProductsAdapter(products.toMutableList()) { product ->
-            ioScope.launch { db?.productDao()?.delete(product.product) }
-        }
+        val adapter = ProductsAdapter(this::updateCallback, this::deleteCallback)
+//        val adapter = ProductsAdapter(products.toMutableList()) { product ->
+//            ioScope.launch { db?.productDao()?.delete(product.product) }
+//        }
         binding.productsList.adapter = adapter
-        adapter.notifyDataSetChanged()
+        adapter.asyncList.submitList(products)
+    }
+
+    private fun updateCallback(productAndCategory: ProductAndCategory) {
+        //TODO("Not yet implemented")
+    }
+
+    private fun deleteCallback(productAndCategory: ProductAndCategory, isChecked: Boolean) {
+        //TODO("Not yet implemented")
     }
 
     private suspend fun getProducts() = withContext(ioScope.coroutineContext) {

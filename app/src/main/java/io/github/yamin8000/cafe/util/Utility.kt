@@ -1,6 +1,7 @@
 package io.github.yamin8000.cafe.util
 
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
@@ -11,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.orhanobut.logger.Logger
 import io.github.yamin8000.cafe.R
+import io.github.yamin8000.cafe.util.Constants.IS_EDIT_MODE
 import io.github.yamin8000.cafe.util.Constants.STACKTRACE
 
 object Utility {
@@ -102,5 +104,12 @@ object Utility {
             snack.show()
             return snack
         }
+    }
+
+    object Bundles {
+
+        fun Bundle?.isEditMode() = this?.getBoolean(IS_EDIT_MODE) ?: false
+
+        fun <T : Parcelable> Bundle?.data(): T? = this?.getParcelable(Constants.DATA)
     }
 }

@@ -1,4 +1,4 @@
-package io.github.yamin8000.cafe.ui.recyclerview.adapters
+package io.github.yamin8000.cafe.ui.recyclerview
 
 import android.view.LayoutInflater
 import android.view.View

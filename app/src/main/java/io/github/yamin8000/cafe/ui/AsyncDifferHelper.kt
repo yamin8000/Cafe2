@@ -6,12 +6,11 @@ import androidx.recyclerview.widget.RecyclerView
 
 object AsyncDifferHelper {
 
-    fun <T, VH : RecyclerView.ViewHolder> getAsyncDiffer(
-        adapter: RecyclerView.Adapter<VH>,
+    fun <T, VH : RecyclerView.ViewHolder> RecyclerView.Adapter<VH>.getAsyncDiffer(
         areItemTheSame: (oldItem: T, newItem: T) -> Boolean,
         areContentsTheSame: (oldItem: T, newItem: T) -> Boolean
     ): AsyncListDiffer<T> {
-        return AsyncListDiffer(adapter, getDiffCallback(areItemTheSame, areContentsTheSame))
+        return AsyncListDiffer(this, getDiffCallback(areItemTheSame, areContentsTheSame))
     }
 
     private fun <T> getDiffCallback(

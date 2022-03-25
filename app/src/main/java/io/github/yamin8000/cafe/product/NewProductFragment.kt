@@ -10,7 +10,11 @@ import io.github.yamin8000.cafe.db.entities.product.Product
 import io.github.yamin8000.cafe.db.helpers.DbHelpers.getCategories
 import io.github.yamin8000.cafe.ui.util.BaseFragment
 import io.github.yamin8000.cafe.util.Constants.db
+import io.github.yamin8000.cafe.util.Utility.Alerts.snack
 import io.github.yamin8000.cafe.util.Utility.Alerts.toast
+import io.github.yamin8000.cafe.util.Utility.Bundles.data
+import io.github.yamin8000.cafe.util.Utility.Bundles.isEditMode
+import io.github.yamin8000.cafe.util.Utility.handleCrash
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -27,23 +31,33 @@ class NewProductFragment :
     private var productCategory = -1
     private var productImage: Int? = null
 
+    private var editedProduct: Product? = null
+    private var isEditMode = false
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         try {
+            isEditMode = arguments.isEditMode()
+            editedProduct = arguments.data()
             mainScope.launch { handleCategoriesAutoComplete() }
             binding.addProductConfirm.setOnClickListener { confirmClickListener() }
         } catch (e: Exception) {
-
+            handleCrash(e)
         }
     }
 
     private fun confirmClickListener() {
         productName = binding.productNameEdit.text.toString()
-        productPrice = binding.productPriceEdit.text.toString().toInt()
+        productPrice = getPrice()
         if (isParamsValid(productName, productPrice, productCategory))
             addNewProductToDb(Product(productName, productPrice, productCategory, productImage))
-        else toast(getString(R.string.product_name_price_mandatory))
+        else snack(getString(R.string.enter_all_fields))
+    }
+
+    private fun getPrice(): Int {
+        val text = binding.productPriceEdit.text.toString()
+        return if (text.isNotBlank()) text.toInt() else -1
     }
 
     private suspend fun handleCategoriesAutoComplete() {

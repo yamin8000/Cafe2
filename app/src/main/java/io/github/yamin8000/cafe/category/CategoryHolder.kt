@@ -10,11 +10,13 @@ class CategoryHolder(
     binding: CategoryItemBinding,
     updateCallback: (Category) -> Unit,
     deleteCallback: (Category, Boolean) -> Unit
-) : CrudHolder<Category, CategoryItemBinding>(asyncList, binding, updateCallback, deleteCallback) {
-
-    fun initItem(category: Category) {
+) : CrudHolder<Category, CategoryItemBinding>(
+    asyncList,
+    binding,
+    updateCallback,
+    deleteCallback,
+    { category ->
         binding.categoryItemText.text = category.name
         val drawableId = category.imageId
         binding.categoryItemImage.setImageResource(drawableId)
-    }
-}
+    })

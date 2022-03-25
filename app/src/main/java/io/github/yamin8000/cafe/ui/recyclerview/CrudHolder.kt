@@ -9,7 +9,8 @@ open class CrudHolder<T, VB : ViewBinding>(
     private val asyncList: AsyncListDiffer<T>,
     protected val binding: VB,
     protected val updateCallback: (T) -> Unit,
-    protected val deleteCallback: (T, Boolean) -> Unit
+    protected val deleteCallback: (T, Boolean) -> Unit,
+    private val bindView: (T) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
 
     private val card = binding.root as MaterialCardView
@@ -27,5 +28,9 @@ open class CrudHolder<T, VB : ViewBinding>(
             }
             true
         }
+    }
+
+    fun bind(item: T) {
+        bindView(item)
     }
 }

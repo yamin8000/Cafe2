@@ -15,6 +15,9 @@
             android:id="@+id/product_item_detail_flow"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
             android:orientation="vertical"
             app:constraint_referenced_ids="product_item_category,product_item_name,product_item_price"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -24,7 +27,6 @@
 
         <TextView
             android:id="@+id/product_item_name"
-            style="@style/ClickableTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -35,7 +37,6 @@
 
         <TextView
             android:id="@+id/product_item_category"
-            style="@style/ClickableTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -45,7 +46,6 @@
 
         <TextView
             android:id="@+id/product_item_price"
-            style="@style/ClickableTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"

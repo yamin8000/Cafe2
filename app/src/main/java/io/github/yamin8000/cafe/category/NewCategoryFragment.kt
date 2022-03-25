@@ -9,9 +9,12 @@ import io.github.yamin8000.cafe.databinding.FragmentNewCategoryBinding
 import io.github.yamin8000.cafe.db.entities.category.Category
 import io.github.yamin8000.cafe.db.helpers.DbHelpers.newCategory
 import io.github.yamin8000.cafe.ui.util.BaseFragment
+import io.github.yamin8000.cafe.util.Constants.CATEGORY
 import io.github.yamin8000.cafe.util.Constants.ICON_PICKER
 import io.github.yamin8000.cafe.util.Constants.ICON_PICKER_RESULT
+import io.github.yamin8000.cafe.util.Constants.IS_EDIT_MODE
 import io.github.yamin8000.cafe.util.Constants.NO_ID
+import io.github.yamin8000.cafe.util.Constants.db
 import io.github.yamin8000.cafe.util.Utility.Alerts.showNullDbError
 import io.github.yamin8000.cafe.util.Utility.Alerts.snack
 import io.github.yamin8000.cafe.util.Utility.handleCrash
@@ -20,6 +23,7 @@ import io.github.yamin8000.cafe.util.Utility.navigate
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class NewCategoryFragment :
     BaseFragment<FragmentNewCategoryBinding>({ FragmentNewCategoryBinding.inflate(it) }) {
@@ -29,14 +33,34 @@ class NewCategoryFragment :
 
     private var categoryImageId = NO_ID
 
+    private var isEditMode = false
+
+    private var editedCategory: Category? = null
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         try {
+            isEditMode = arguments?.getBoolean(IS_EDIT_MODE) ?: false
+            editedCategory = arguments?.getParcelable(CATEGORY)
+            if (isEditMode) initEditMode(editedCategory)
             binding.categoryImageButton.setOnClickListener { showIconPicker() }
             binding.addCategoryConfirm.setOnClickListener { handleCategoryDataConfirmation() }
         } catch (e: Exception) {
             handleCrash(e)
+        }
+    }
+
+    private fun initEditMode(category: Category?) {
+        if (category != null) {
+            binding.categoryNameEdit.setText(category.name)
+            binding.categoryImage.setImageDrawable(
+                ResourcesCompat.getDrawable(
+                    resources,
+                    category.imageId,
+                    null
+                )
+            )
         }
     }
 
@@ -49,7 +73,10 @@ class NewCategoryFragment :
     private fun confirmCategoryData(categoryName: String) {
         if (categoryImageId == NO_ID) categoryImageId = R.drawable.pack_top_view_coffee
         if (categoryName.isNotBlank()) {
-            mainScope.launch { addNewCategory(Category(categoryName, categoryImageId)) }
+            mainScope.launch {
+                if (isEditMode) editCategory(editedCategory)
+                else addNewCategory(Category(categoryName, categoryImageId))
+            }
         } else snack(getString(R.string.category_cannot_be_empty))
     }
 
@@ -87,5 +114,17 @@ class NewCategoryFragment :
         binding.categoryImage.setImageDrawable(null)
         binding.categoryNameEdit.text?.clear()
         categoryImageId = NO_ID
+    }
+
+    private suspend fun editCategory(category: Category?) {
+        if (category != null) {
+            category.name = binding.categoryNameEdit.text.toString()
+            category.imageId = categoryImageId
+            withContext(ioScope.coroutineContext) {
+                db?.categoryDao()?.update(category)
+            }
+            snack(getString(R.string.category_edit_success))
+            hideKeyboard()
+        }
     }
 }

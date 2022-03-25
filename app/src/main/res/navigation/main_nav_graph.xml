@@ -121,5 +121,9 @@
         <action
             android:id="@+id/action_newCategoryFragment_to_iconPickerModal"
             app:destination="@id/iconPickerModal" />
+        <argument
+            android:name="IS_EDIT_MODE"
+            app:argType="boolean" />
+        <argument android:name="CATEGORY" />
     </fragment>
 </navigation>

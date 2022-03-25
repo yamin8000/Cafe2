@@ -8,20 +8,26 @@ import io.github.yamin8000.cafe.db.entities.category.Category
 class CategoryHolder(
     private val asyncList: AsyncListDiffer<Category>,
     private val binding: CategoryItemBinding,
-    private val deleteClickListener: (Category, Boolean) -> Unit
+    private val updateCallback: (Category) -> Unit,
+    private val deleteCallback: (Category, Boolean) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
 
     init {
         binding.root.isChecked = false
+        binding.root.setOnClickListener {
+            if (adapterPosition != RecyclerView.NO_POSITION)
+                updateCallback(asyncList.currentList[adapterPosition])
+        }
         binding.root.setOnLongClickListener {
-            if (adapterPosition != RecyclerView.NO_POSITION) checkCard()
+            if (adapterPosition != RecyclerView.NO_POSITION)
+                checkCard()
             true
         }
     }
 
     private fun checkCard() {
         binding.root.isChecked = !binding.root.isChecked
-        deleteClickListener(asyncList.currentList[adapterPosition], binding.root.isChecked)
+        deleteCallback(asyncList.currentList[adapterPosition], binding.root.isChecked)
     }
 
     fun initItem(category: Category) {

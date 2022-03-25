@@ -2,6 +2,7 @@ package io.github.yamin8000.cafe.category
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResultListener
 import io.github.yamin8000.cafe.R
 import io.github.yamin8000.cafe.databinding.FragmentCategoryBinding
@@ -10,6 +11,8 @@ import io.github.yamin8000.cafe.db.helpers.DbHelpers.deleteCategories
 import io.github.yamin8000.cafe.db.helpers.DbHelpers.getCategories
 import io.github.yamin8000.cafe.ui.recyclerview.adapters.EmptyAdapter
 import io.github.yamin8000.cafe.ui.util.BaseFragment
+import io.github.yamin8000.cafe.util.Constants.CATEGORY
+import io.github.yamin8000.cafe.util.Constants.IS_EDIT_MODE
 import io.github.yamin8000.cafe.util.Constants.PROMPT
 import io.github.yamin8000.cafe.util.Constants.PROMPT_RESULT
 import io.github.yamin8000.cafe.util.Constants.db
@@ -30,7 +33,12 @@ class CategoryFragment :
 
     private var categories = listOf<Category>()
 
-    private val listAdapter by lazy(LazyThreadSafetyMode.NONE) { CategoryAdapter(this::deleteClickListener) }
+    private val listAdapter by lazy(LazyThreadSafetyMode.NONE) {
+        CategoryAdapter(
+            this::updateCallback,
+            this::deleteCallback
+        )
+    }
 
     private val emptyAdapter by lazy(LazyThreadSafetyMode.NONE) { EmptyAdapter() }
 
@@ -79,10 +87,20 @@ class CategoryFragment :
         listAdapter.asyncList.submitList(categories)
     }
 
-    private fun deleteClickListener(category: Category, isChecked: Boolean) {
+    private fun deleteCallback(category: Category, isChecked: Boolean) {
         binding.deleteFab.visible()
         if (isChecked) deleteCandidates.add(category)
         else deleteCandidates.remove(category)
         if (deleteCandidates.isEmpty()) binding.deleteFab.gone()
+    }
+
+    private fun updateCallback(category: Category) {
+        navigate(
+            R.id.action_categoryFragment_to_newCategoryFragment,
+            bundleOf(
+                CATEGORY to category,
+                IS_EDIT_MODE to true
+            )
+        )
     }
 }

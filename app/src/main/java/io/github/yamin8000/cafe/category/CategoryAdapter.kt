@@ -8,9 +8,9 @@ import io.github.yamin8000.cafe.db.entities.category.Category
 import io.github.yamin8000.cafe.ui.AsyncDifferHelper
 
 class CategoryAdapter(
-    private val deleteClickListener: (Category, Boolean) -> Unit
+    private val updateCallback: (Category) -> Unit,
+    private val deleteCallback: (Category, Boolean) -> Unit
 ) : RecyclerView.Adapter<CategoryHolder>() {
-
 
     val asyncList = AsyncDifferHelper.getAsyncDiffer<Category, CategoryHolder>(this,
         { old, new -> old.id == new.id },
@@ -19,7 +19,7 @@ class CategoryAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryHolder {
         val inflater = LayoutInflater.from(parent.context)
         val itemBinding = CategoryItemBinding.inflate(inflater, parent, false)
-        return CategoryHolder(asyncList, itemBinding, deleteClickListener)
+        return CategoryHolder(asyncList, itemBinding, updateCallback, deleteCallback)
     }
 
     override fun onBindViewHolder(holder: CategoryHolder, position: Int) {

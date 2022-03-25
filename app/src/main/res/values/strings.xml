@@ -60,4 +60,5 @@
     <string name="product_name_price_mandatory">وارد کردن نام محصول و قیمت محصول اجباری است.</string>
     <string name="not_categories_should_add_category">دسته ای وجود ندارد، بهتر است پیش از این دسته ای اضافه کنید.</string>
     <string name="category_add_success">دسته با موفقیت اضافه شد.</string>
+    <string name="category_edit_success">دسته با موفقیت ویرایش شد.</string>
 </resources>

@@ -12,6 +12,7 @@ object Constants {
     const val NO_ID = 1
 
     //arguments
+    const val IS_EDIT_MODE = "is_edit_mode"
 
     //prompt
     const val PROMPT = "prompt"
@@ -19,6 +20,9 @@ object Constants {
     const val PROMPT_POSITIVE = "prompt_positive"
     const val PROMPT_NEGATIVE = "prompt_negative"
     const val PROMPT_RESULT = "prompt_result"
+
+    //category
+    const val CATEGORY = "category"
 
     //product
     const val PRODUCT = "product"

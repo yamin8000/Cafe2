@@ -15,6 +15,7 @@ import io.github.yamin8000.cafe.util.Constants.NO_ID
 import io.github.yamin8000.cafe.util.Utility.Alerts.showNullDbError
 import io.github.yamin8000.cafe.util.Utility.Alerts.snack
 import io.github.yamin8000.cafe.util.Utility.handleCrash
+import io.github.yamin8000.cafe.util.Utility.hideKeyboard
 import io.github.yamin8000.cafe.util.Utility.navigate
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -78,6 +79,11 @@ class NewCategoryFragment :
 
     private fun categoryAddSuccess() {
         snack(getString(R.string.category_add_success))
+        clear()
+    }
+
+    private fun clear() {
+        hideKeyboard()
         binding.categoryImage.setImageDrawable(null)
         binding.categoryNameEdit.text?.clear()
         categoryImageId = NO_ID

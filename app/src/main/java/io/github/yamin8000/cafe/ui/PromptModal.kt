@@ -58,7 +58,6 @@ class PromptModal : BottomSheetDialogFragment() {
     }
 
     private fun setTextsFromArguments() {
-        Logger.d(arguments)
         arguments?.let {
             binding.noticeText.text =
                 it.getString(PROMPT_TEXT) ?: getString(R.string.prompt_default)

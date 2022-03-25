@@ -11,6 +11,7 @@ import io.github.yamin8000.cafe.db.helpers.DbHelpers.getCategories
 import io.github.yamin8000.cafe.ui.recyclerview.adapters.EmptyAdapter
 import io.github.yamin8000.cafe.ui.util.BaseFragment
 import io.github.yamin8000.cafe.util.Constants.PROMPT
+import io.github.yamin8000.cafe.util.Constants.PROMPT_RESULT
 import io.github.yamin8000.cafe.util.Constants.db
 import io.github.yamin8000.cafe.util.Utility.Alerts.showNullDbError
 import io.github.yamin8000.cafe.util.Utility.Views.gone
@@ -55,9 +56,9 @@ class CategoryFragment :
     private fun deleteFabClickListener() {
         navigate(R.id.promptModal)
         setFragmentResultListener(PROMPT) { _, bundle ->
-
+            if (bundle.getBoolean(PROMPT_RESULT))
+                mainScope.launch { categoriesDeleterHandler() }
         }
-        mainScope.launch { categoriesDeleterHandler() }
     }
 
     private suspend fun refreshCategoriesList() {

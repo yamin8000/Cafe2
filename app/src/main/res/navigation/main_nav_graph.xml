@@ -66,8 +66,8 @@
         android:label="ProductFragment"
         tools:layout="@layout/fragment_products">
         <action
-            android:id="@+id/action_productFragment_to_newProductModal"
-            app:destination="@id/newProductModal" />
+            android:id="@+id/action_productFragment_to_newProductFragment"
+            app:destination="@id/newProductFragment" />
     </fragment>
     <dialog
         android:id="@+id/singleNewOrderModal"
@@ -81,32 +81,45 @@
             android:name="details"
             app:argType="string" />
     </dialog>
-    <dialog
-        android:id="@+id/newProductModal"
-        android:name="io.github.yamin8000.cafe.product.NewProductModal"
-        android:label="NewProductModal"
-        tools:layout="@layout/new_product_modal" />
-    <dialog
-        android:id="@+id/addCategoryModal"
-        android:name="io.github.yamin8000.cafe.category.AddCategoryModal"
-        android:label="AddCategoryModal"
-        tools:layout="@layout/add_category_modal" />
     <fragment
         android:id="@+id/categoryFragment"
         android:name="io.github.yamin8000.cafe.category.CategoryFragment"
         android:label="CategoryFragment"
         tools:layout="@layout/fragment_category">
         <action
-            android:id="@+id/action_categoryFragment_to_addCategoryModal"
-            app:destination="@id/addCategoryModal" />
+            android:id="@+id/action_categoryFragment_to_newCategoryFragment"
+            app:destination="@id/newCategoryFragment" />
     </fragment>
     <dialog
         android:id="@+id/promptModal"
         android:name="io.github.yamin8000.cafe.ui.PromptModal"
         android:label="PromptModal"
-        tools:layout="@layout/prompt_modal" >
+        tools:layout="@layout/prompt_modal">
         <argument
             android:name="prompt_text"
             app:argType="string" />
     </dialog>
+    <dialog
+        android:id="@+id/iconPickerModal"
+        android:name="io.github.yamin8000.cafe.ui.iconpicker.IconPickerModal"
+        android:label="IconPickerModal"
+        tools:layout="@layout/icon_picker_modal" />
+    <fragment
+        android:id="@+id/newProductFragment"
+        android:name="io.github.yamin8000.cafe.product.NewProductFragment"
+        android:label="NewProductFragment"
+        tools:layout="@layout/fragment_new_product" >
+        <action
+            android:id="@+id/action_newProductFragment_to_iconPickerModal"
+            app:destination="@id/iconPickerModal" />
+    </fragment>
+    <fragment
+        android:id="@+id/newCategoryFragment"
+        tools:layout="@layout/fragment_new_category"
+        android:name="io.github.yamin8000.cafe.category.NewCategoryFragment"
+        android:label="NewCategoryFragment" >
+        <action
+            android:id="@+id/action_newCategoryFragment_to_iconPickerModal"
+            app:destination="@id/iconPickerModal" />
+    </fragment>
 </navigation>

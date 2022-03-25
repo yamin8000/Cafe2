@@ -7,19 +7,16 @@ import io.github.yamin8000.cafe.R
 import io.github.yamin8000.cafe.databinding.FragmentCategoryBinding
 import io.github.yamin8000.cafe.db.entities.category.Category
 import io.github.yamin8000.cafe.db.helpers.DbHelpers.deleteCategories
-import io.github.yamin8000.cafe.db.helpers.DbHelpers.fetchCategories
-import io.github.yamin8000.cafe.db.helpers.DbHelpers.newCategory
+import io.github.yamin8000.cafe.db.helpers.DbHelpers.getCategories
 import io.github.yamin8000.cafe.ui.recyclerview.adapters.EmptyAdapter
 import io.github.yamin8000.cafe.ui.util.BaseFragment
-import io.github.yamin8000.cafe.util.Constants.CATEGORY_IMAGE_ID
-import io.github.yamin8000.cafe.util.Constants.CATEGORY_NAME
+import io.github.yamin8000.cafe.util.Constants.PROMPT
 import io.github.yamin8000.cafe.util.Constants.db
-import io.github.yamin8000.cafe.util.Utility.gone
+import io.github.yamin8000.cafe.util.Utility.Alerts.showNullDbError
+import io.github.yamin8000.cafe.util.Utility.Views.gone
+import io.github.yamin8000.cafe.util.Utility.Views.visible
 import io.github.yamin8000.cafe.util.Utility.handleCrash
 import io.github.yamin8000.cafe.util.Utility.navigate
-import io.github.yamin8000.cafe.util.Utility.showNullDbError
-import io.github.yamin8000.cafe.util.Utility.toast
-import io.github.yamin8000.cafe.util.Utility.visible
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -51,12 +48,20 @@ class CategoryFragment :
 
     private fun prepareUi() {
         mainScope.launch { refreshCategoriesList() }
-        binding.addCategoryButton.setOnClickListener { addCategoryHandler() }
-        binding.deleteFab.setOnClickListener { mainScope.launch { categoriesDeleterHandler() } }
+        binding.addCategoryButton.setOnClickListener { navigate(R.id.action_categoryFragment_to_newCategoryFragment) }
+        binding.deleteFab.setOnClickListener { deleteFabClickListener() }
+    }
+
+    private fun deleteFabClickListener() {
+        navigate(R.id.promptModal)
+        setFragmentResultListener(PROMPT) { _, bundle ->
+
+        }
+        mainScope.launch { categoriesDeleterHandler() }
     }
 
     private suspend fun refreshCategoriesList() {
-        categories = ioScope.coroutineContext.fetchCategories()
+        categories = ioScope.coroutineContext.getCategories()
         if (categories.isEmpty()) binding.categoriesList.adapter = emptyAdapter
         else populateList()
     }
@@ -78,23 +83,5 @@ class CategoryFragment :
         if (isChecked) deleteCandidates.add(category)
         else deleteCandidates.remove(category)
         if (deleteCandidates.isEmpty()) binding.deleteFab.gone()
-    }
-
-    private fun addCategoryHandler() {
-        navigate(R.id.action_categoryFragment_to_addCategoryModal)
-        setFragmentResultListener(CATEGORY_NAME) { _, bundle ->
-            val categoryName = bundle.getString(CATEGORY_NAME) ?: ""
-            var categoryImageId = bundle.getInt(CATEGORY_IMAGE_ID)
-            if (categoryImageId == 0) categoryImageId = R.drawable.pack_top_view_coffee
-            if (categoryName.isNotBlank()) {
-                mainScope.launch { addNewCategory(Category(categoryName, categoryImageId)) }
-            } else toast(getString(R.string.category_cannot_be_empty))
-        }
-    }
-
-    private suspend fun addNewCategory(category: Category) {
-        val id = ioScope.coroutineContext.newCategory(category)
-        if (id != -1L) refreshCategoriesList()
-        else showNullDbError()
     }
 }

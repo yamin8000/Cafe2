@@ -3,9 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="?android:attr/colorBackground"
-    android:theme="@style/Theme.Cafe">
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -15,11 +13,11 @@
             android:id="@+id/product_item_input_flow"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="32dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
             android:orientation="horizontal"
-            app:constraint_referenced_ids="product_name_input,product_price_input,product_category_input"
+            app:constraint_referenced_ids="product_name_input,product_price_input,product_category_input,product_image_button,product_image"
             app:flow_maxElementsWrap="1"
             app:flow_verticalGap="16dp"
             app:flow_wrapMode="aligned"
@@ -75,23 +73,38 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/product_price"
+                android:inputType="numberSigned"
                 android:singleLine="true" />
         </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/product_image_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/choose_image_optional"
+            tools:layout_editor_absoluteX="157dp"
+            tools:layout_editor_absoluteY="261dp" />
 
         <Button
             android:id="@+id/add_product_confirm"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
             android:layout_marginTop="32dp"
-            android:layout_marginBottom="32dp"
             android:text="@string/confirm"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/product_item_input_flow"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/product_item_input_flow"
             app:layout_constraintTop_toBottomOf="@+id/product_item_input_flow"
             app:layout_constraintWidth_percent=".5" />
+
+        <ImageView
+            android:id="@+id/product_image"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            tools:layout_editor_absoluteX="174dp"
+            tools:layout_editor_absoluteY="309dp"
+            tools:srcCompat="@drawable/pack_coffee_beans" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

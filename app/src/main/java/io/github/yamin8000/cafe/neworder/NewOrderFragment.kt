@@ -9,15 +9,15 @@ import androidx.lifecycle.LifecycleEventObserver
 import androidx.navigation.fragment.findNavController
 import io.github.yamin8000.cafe.R
 import io.github.yamin8000.cafe.databinding.FragmentNewOrderBinding
-import io.github.yamin8000.cafe.db.helpers.DbHelpers.fetchProducts
 import io.github.yamin8000.cafe.db.entities.day.Day
 import io.github.yamin8000.cafe.db.entities.order.Order
 import io.github.yamin8000.cafe.db.entities.order.OrderDetail
 import io.github.yamin8000.cafe.db.entities.product.Product
+import io.github.yamin8000.cafe.db.helpers.DbHelpers.getProducts
 import io.github.yamin8000.cafe.ui.util.BaseFragment
 import io.github.yamin8000.cafe.util.Constants.db
+import io.github.yamin8000.cafe.util.Utility.Alerts.toast
 import io.github.yamin8000.cafe.util.Utility.handleCrash
-import io.github.yamin8000.cafe.util.Utility.toast
 import ir.yamin.digits.Digits.Companion.spell
 import kotlinx.coroutines.*
 import java.time.LocalDate
@@ -143,7 +143,7 @@ class NewOrderFragment :
     }
 
     private suspend fun listHandler() {
-        products = ioScope.coroutineContext.fetchProducts()
+        products = ioScope.coroutineContext.getProducts()
         val adapter = NewOrderDetailAdapter(products, this::itemChanged)
         binding.orderDetailList.adapter = adapter
         adapter.notifyDataSetChanged()

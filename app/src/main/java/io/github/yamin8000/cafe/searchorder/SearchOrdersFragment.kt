@@ -4,15 +4,15 @@ import android.os.Bundle
 import android.view.View
 import io.github.yamin8000.cafe.R
 import io.github.yamin8000.cafe.databinding.FragmentSearchOrdersBinding
-import io.github.yamin8000.cafe.db.helpers.DbHelpers.fetchOrderDetails
-import io.github.yamin8000.cafe.db.helpers.DbHelpers.fetchOrders
 import io.github.yamin8000.cafe.db.entities.order.Order
 import io.github.yamin8000.cafe.db.entities.order.OrderDetail
+import io.github.yamin8000.cafe.db.helpers.DbHelpers.getOrderDetails
+import io.github.yamin8000.cafe.db.helpers.DbHelpers.getOrders
 import io.github.yamin8000.cafe.model.OrderStatus
 import io.github.yamin8000.cafe.ui.util.BaseFragment
 import io.github.yamin8000.cafe.util.Constants.db
+import io.github.yamin8000.cafe.util.Utility.Alerts.toast
 import io.github.yamin8000.cafe.util.Utility.handleCrash
-import io.github.yamin8000.cafe.util.Utility.toast
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -28,9 +28,9 @@ class SearchOrdersFragment :
 
         try {
             mainScope.launch {
-                val orders = ioScope.coroutineContext.fetchOrders()
+                val orders = ioScope.coroutineContext.getOrders()
                 val detailIds = orders.flatMap { it.detailIds }
-                val orderDetails = ioScope.coroutineContext.fetchOrderDetails(detailIds)
+                val orderDetails = ioScope.coroutineContext.getOrderDetails(detailIds)
                 if (orders.isNotEmpty()) fillList(orders, orderDetails)
                 else handleEmptyOrders()
             }

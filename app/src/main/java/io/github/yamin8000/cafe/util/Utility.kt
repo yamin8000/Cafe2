@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.orhanobut.logger.Logger
 import io.github.yamin8000.cafe.R
 import io.github.yamin8000.cafe.util.Constants.STACKTRACE
@@ -53,29 +54,53 @@ object Utility {
         }
     }
 
-    fun Fragment.toast(message: String, duration: Int = Toast.LENGTH_SHORT): Toast {
-        val toast = Toast.makeText(context, message, duration)
-        toast.show()
-        return toast
-    }
-
     fun Fragment.navigate(destination: Int, args: Bundle? = null) {
         this.findNavController().navigate(destination, args)
     }
 
-    fun Fragment.showNullDbError() {
-        toast(getString(R.string.db_null_error))
+    object Views {
+
+        fun View.visible() {
+            this.visibility = View.VISIBLE
+        }
+
+        fun View.gone() {
+            this.visibility = View.GONE
+        }
+
+        fun View.invisible() {
+            this.visibility = View.INVISIBLE
+        }
     }
 
-    fun View.visible() {
-        this.visibility = View.VISIBLE
-    }
+    object Alerts {
 
-    fun View.gone() {
-        this.visibility = View.GONE
-    }
+        fun Fragment.toast(message: String, duration: Int = Toast.LENGTH_SHORT): Toast {
+            val toast = Toast.makeText(context, message, duration)
+            toast.show()
+            return toast
+        }
 
-    fun View.invisible() {
-        this.visibility = View.INVISIBLE
+        fun Fragment.showNullDbError() {
+            toast(getString(R.string.db_null_error))
+        }
+
+        fun Fragment.snack(
+            message: String,
+            length: Int = Snackbar.LENGTH_LONG
+        ): Snackbar? {
+            val root = this.view
+            return if (root != null) createSnack(root, message, length) else null
+        }
+
+        private fun createSnack(
+            root: View,
+            message: String,
+            length: Int = Snackbar.LENGTH_LONG
+        ): Snackbar {
+            val snack = Snackbar.make(root, message, length)
+            snack.show()
+            return snack
+        }
     }
 }

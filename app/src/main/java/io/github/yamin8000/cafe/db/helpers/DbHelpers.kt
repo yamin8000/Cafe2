@@ -4,32 +4,33 @@ import io.github.yamin8000.cafe.db.entities.category.Category
 import io.github.yamin8000.cafe.db.entities.order.Order
 import io.github.yamin8000.cafe.db.entities.order.OrderDetail
 import io.github.yamin8000.cafe.db.entities.product.Product
+import io.github.yamin8000.cafe.db.entities.relatives.ProductAndCategory
 import io.github.yamin8000.cafe.util.Constants
 import kotlinx.coroutines.withContext
 import kotlin.coroutines.CoroutineContext
 
 object DbHelpers {
 
-    suspend fun CoroutineContext.fetchOrderDetails(detailIds: List<Int>): List<OrderDetail> {
+    suspend fun CoroutineContext.getOrderDetails(detailIds: List<Int>): List<OrderDetail> {
         return withContext(this) {
             val detailDao = Constants.db?.orderDetailDao()
             return@withContext detailDao?.getAllByIds(*detailIds.toIntArray())
         } ?: listOf()
     }
 
-    suspend fun CoroutineContext.fetchOrders(): List<Order> {
+    suspend fun CoroutineContext.getOrders(): List<Order> {
         return withContext(this) {
             Constants.db?.orderDao()?.getAll()
         } ?: listOf()
     }
 
-    suspend fun CoroutineContext.fetchProducts(): List<Product> {
+    suspend fun CoroutineContext.getProducts(): List<Product> {
         return withContext(this) {
-            Constants.db?.productDao()?.getAll() ?: listOf()
+            Constants.db?.productDao()?.all() ?: listOf()
         }
     }
 
-    suspend fun CoroutineContext.fetchCategories(): List<Category> {
+    suspend fun CoroutineContext.getCategories(): List<Category> {
         return withContext(this) {
             Constants.db?.categoryDao()?.getAll() ?: listOf()
         }

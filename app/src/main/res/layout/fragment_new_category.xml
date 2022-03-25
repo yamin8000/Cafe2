@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="?android:attr/colorBackground"
-    android:theme="@style/Theme.Cafe">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="32dp">
+        android:padding="16dp">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/category_name_input"
@@ -31,22 +28,14 @@
             android:id="@+id/category_image_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/choose_category_icon" />
+            android:text="@string/choose_image_optional" />
 
         <ImageView
             android:id="@+id/category_image"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:srcCompat="@tools:sample/avatars" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/drawables_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
-            app:spanCount="3"
-            tools:itemCount="4"
-            tools:listitem="@layout/drawable_item" />
+            android:contentDescription="@string/category"
+            tools:srcCompat="@drawable/pack_coffee_beans" />
 
         <Button
             android:id="@+id/add_category_confirm"

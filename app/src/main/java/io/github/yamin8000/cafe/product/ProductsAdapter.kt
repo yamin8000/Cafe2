@@ -4,11 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import io.github.yamin8000.cafe.databinding.ProductItemBinding
-import io.github.yamin8000.cafe.db.entities.product.Product
+import io.github.yamin8000.cafe.db.entities.relatives.ProductAndCategory
 
 class ProductsAdapter(
-    private val products: MutableList<Product>,
-    private val deleteListener: (Product) -> Unit
+    private val products: MutableList<ProductAndCategory>,
+    private val deleteListener: (ProductAndCategory) -> Unit
 ) :
     RecyclerView.Adapter<ProductsHolder>() {
 
@@ -21,7 +21,7 @@ class ProductsAdapter(
     }
 
     override fun onBindViewHolder(holder: ProductsHolder, position: Int) {
-        holder.setProductText(products[position].name)
+        holder.bindView(products[position])
     }
 
     override fun getItemCount() = products.size

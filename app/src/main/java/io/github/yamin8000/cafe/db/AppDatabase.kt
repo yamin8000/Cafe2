@@ -10,6 +10,7 @@ import io.github.yamin8000.cafe.db.entities.day.DayDao
 import io.github.yamin8000.cafe.db.entities.order.*
 import io.github.yamin8000.cafe.db.entities.product.Product
 import io.github.yamin8000.cafe.db.entities.product.ProductDao
+import io.github.yamin8000.cafe.db.entities.relatives.RelativeDao
 
 @Database(
     entities = [
@@ -28,4 +29,5 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun dayDao(): DayDao
     abstract fun productDao(): ProductDao
     abstract fun categoryDao(): CategoryDao
+    abstract fun relativeDao(): RelativeDao
 }

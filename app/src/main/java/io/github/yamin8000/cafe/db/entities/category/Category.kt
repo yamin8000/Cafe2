@@ -9,4 +9,7 @@ data class Category(
     val imageId: Int = 0,
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0
-)
+) {
+    //this method is overridden for using this class in auto complete view
+    override fun toString() = this.name
+}

@@ -2,18 +2,20 @@ package io.github.yamin8000.cafe.product
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.fragment.findNavController
 import io.github.yamin8000.cafe.R
 import io.github.yamin8000.cafe.databinding.FragmentProductsBinding
 import io.github.yamin8000.cafe.db.AppDatabase
-import io.github.yamin8000.cafe.db.helpers.DbHelpers.fetchProducts
 import io.github.yamin8000.cafe.ui.util.BaseFragment
+import io.github.yamin8000.cafe.util.Constants.PRODUCT
 import io.github.yamin8000.cafe.util.Constants.db
+import io.github.yamin8000.cafe.util.Utility.Alerts.toast
 import io.github.yamin8000.cafe.util.Utility.handleCrash
-import io.github.yamin8000.cafe.util.Utility.toast
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class ProductsFragment :
     BaseFragment<FragmentProductsBinding>({ FragmentProductsBinding.inflate(it) }) {
@@ -36,23 +38,30 @@ class ProductsFragment :
 
     private fun handleOkDb(db: AppDatabase?) {
         db?.let { database ->
-            binding.addProductButton.setOnClickListener { addProductClickListener(database) }
+            binding.addProductButton.setOnClickListener { addProductClickListener() }
         }
     }
 
     private suspend fun fillProductsList() {
         val toast = toast(getString(R.string.please_wait))
-        val products = ioScope.coroutineContext.fetchProducts().toMutableList()
+        val products = getProducts()
         toast.cancel()
-        val adapter = ProductsAdapter(products) { product ->
-            ioScope.launch { db?.productDao()?.delete(product) }
+        val adapter = ProductsAdapter(products.toMutableList()) { product ->
+            ioScope.launch { db?.productDao()?.delete(product.product) }
         }
         binding.productsList.adapter = adapter
         adapter.notifyDataSetChanged()
     }
 
-    private fun addProductClickListener(db: AppDatabase) {
-        findNavController().navigate(R.id.action_productFragment_to_newProductModal)
+    private suspend fun getProducts() = withContext(ioScope.coroutineContext) {
+        db?.relativeDao()?.allProductsAndCategories() ?: listOf()
+    }
+
+    private fun addProductClickListener() {
+        findNavController().navigate(R.id.action_productFragment_to_newProductFragment)
+        setFragmentResultListener(PRODUCT) { _, bundle ->
+
+        }
     }
 
     private fun handleNullDb() {

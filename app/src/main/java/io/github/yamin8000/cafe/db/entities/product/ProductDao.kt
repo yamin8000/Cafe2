@@ -9,16 +9,16 @@ import androidx.room.Query
 interface ProductDao {
 
     @Query("select * from `product`")
-    suspend fun getAll(): List<Product>
+    suspend fun all(): List<Product>
 
     @Query("select * from `product` where id in (:ids)")
-    suspend fun getAllByIds(vararg ids: Int): List<Product>
+    suspend fun allByIds(vararg ids: Int): List<Product>
 
     @Query("select * from product where categoryId in (:categoryIds)")
-    suspend fun getAllByCategoryIds(vararg categoryIds: Int): List<Product>
+    suspend fun allByCategoryIds(vararg categoryIds: Int): List<Product>
 
     @Query("select * from `product` where id = (:id)")
-    suspend fun getById(id: Int): Product
+    suspend fun byId(id: Int): Product
 
     @Insert
     suspend fun insertAll(vararg products: Product)

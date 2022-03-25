@@ -2,12 +2,12 @@ package io.github.yamin8000.cafe.product
 
 import androidx.recyclerview.widget.RecyclerView
 import io.github.yamin8000.cafe.databinding.ProductItemBinding
-import io.github.yamin8000.cafe.db.entities.product.Product
+import io.github.yamin8000.cafe.db.entities.relatives.ProductAndCategory
 
 class ProductsHolder(
-    private val products: MutableList<Product>,
+    private val productsWithCategory: MutableList<ProductAndCategory>,
     private val binding: ProductItemBinding,
-    private val deleteListener: (Product) -> Unit,
+    private val deleteListener: (ProductAndCategory) -> Unit,
     private val deleteNotifier: (Int) -> Unit
 ) :
     RecyclerView.ViewHolder(binding.root) {
@@ -15,15 +15,17 @@ class ProductsHolder(
     init {
         binding.productItemName.setOnLongClickListener {
             if (adapterPosition != RecyclerView.NO_POSITION) {
-                deleteListener(products[adapterPosition])
-                products.remove(products[adapterPosition])
+                deleteListener(productsWithCategory[adapterPosition])
+                productsWithCategory.remove(productsWithCategory[adapterPosition])
                 deleteNotifier(adapterPosition)
             }
             return@setOnLongClickListener true
         }
     }
 
-    fun setProductText(productText: String) {
-        binding.productItemName.text = productText
+    fun bindView(productAndCategory: ProductAndCategory) {
+        binding.productItemName.text = productAndCategory.product.name
+        binding.productItemCategory.text = productAndCategory.category.name
+        binding.productItemPrice.text = productAndCategory.product.price.toString()
     }
 }

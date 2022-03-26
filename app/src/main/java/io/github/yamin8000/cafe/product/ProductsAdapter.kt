@@ -8,9 +8,9 @@ import io.github.yamin8000.cafe.ui.recyclerview.CrudAdapter
 class ProductsAdapter(
     private val updateCallback: (ProductAndCategory) -> Unit,
     private val deleteCallback: (ProductAndCategory, Boolean) -> Unit
-) : CrudAdapter<ProductsHolder>() {
+) : CrudAdapter<ProductAndCategory, ProductsHolder>() {
 
-    val asyncList = this.getAsyncDiffer<ProductAndCategory, ProductsHolder>(
+    override var asyncList = this.getAsyncDiffer<ProductAndCategory, ProductsHolder>(
         { old, new -> old.product.id == new.product.id },
         { old, new -> old == new }
     )

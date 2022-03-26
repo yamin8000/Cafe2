@@ -20,10 +20,10 @@ object Utility {
     /**
      * Handle soft crashes, that are suppressed using try-catch
      *
-     * @param exception exception that caught
+     * @param throwable exception that caught
      */
-    fun Fragment.handleCrash(exception: Exception) {
-        val stackTraceToString = exception.stackTraceToString()
+    fun Fragment.handleCrash(throwable: Throwable) {
+        val stackTraceToString = throwable.stackTraceToString()
         //log it to logcat
         Logger.d(stackTraceToString)
         //navigate user to a special crash screen
@@ -84,7 +84,7 @@ object Utility {
         }
 
         fun Fragment.showNullDbError() {
-            toast(getString(R.string.db_null_error))
+            snack(getString(R.string.db_null_error))
         }
 
         fun Fragment.snack(

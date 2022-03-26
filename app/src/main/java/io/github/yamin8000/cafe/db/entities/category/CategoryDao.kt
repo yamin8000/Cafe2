@@ -1,5 +1,6 @@
 package io.github.yamin8000.cafe.db.entities.category
 
+import android.database.sqlite.SQLiteConstraintException
 import androidx.room.*
 
 @Dao

@@ -62,4 +62,11 @@
     <string name="category_edit_success">دسته با موفقیت ویرایش شد.</string>
     <string name="edit">ویرایش</string>
     <string name="enter_all_fields">لطفا همه موارد را تکمیل کنید.</string>
+    <string name="add">اضافه کردن</string>
+    <string name="db_update_error">خطا در بروزرسانی پایکاه داده</string>
+    <string name="db_query_restricted">خطای منطقی در تغییر ساختار داده، این عمل قابل انجام نیست.</string>
+    <string name="item_add_success">%s با موفقیت اضافه شد.</string>
+    <string name="item_edit_success">%s با موفقیت ویرایش شد.</string>
+    <string name="item_delete_success">%s با موفقیت حذف شد.</string>
+    <string name="product">محصول</string>
 </resources>

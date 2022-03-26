@@ -16,18 +16,32 @@ open class CrudHolder<T, VB : ViewBinding>(
     private val card = binding.root as MaterialCardView
 
     init {
-        binding.root.setOnClickListener {
-            if (adapterPosition != RecyclerView.NO_POSITION) {
-                updateCallback(asyncList.currentList[adapterPosition])
-            }
+        requireCheckable()
+        setClickListeners()
+    }
+
+    private fun setClickListeners() {
+        binding.root.setOnClickListener { shortClickListener() }
+        binding.root.setOnLongClickListener { longClickListener() }
+    }
+
+    private fun shortClickListener() {
+        if (adapterPosition != RecyclerView.NO_POSITION && !card.isChecked) {
+            updateCallback(asyncList.currentList[adapterPosition])
         }
-        binding.root.setOnLongClickListener {
-            if (adapterPosition != RecyclerView.NO_POSITION) {
-                card.isChecked = !card.isChecked
-                deleteCallback(asyncList.currentList[adapterPosition], card.isChecked)
-            }
-            true
+    }
+
+    private fun longClickListener(): Boolean {
+        if (adapterPosition != RecyclerView.NO_POSITION) {
+            card.isChecked = !card.isChecked
+            deleteCallback(asyncList.currentList[adapterPosition], card.isChecked)
         }
+        return true
+    }
+
+    private fun requireCheckable() {
+        if (!card.isCheckable)
+            card.isCheckable = true
     }
 
     fun bind(item: T) {

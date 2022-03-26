@@ -5,35 +5,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/categories_fragment_root"
+    <LinearLayout
+        android:id="@+id/crud_fragment_root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         android:padding="16dp">
 
-        <LinearLayout
+        <Button
+            android:id="@+id/crud_list_add_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/add" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/crud_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_marginTop="16dp" />
 
-            <Button
-                android:id="@+id/add_category_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/add_category" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/categories_list"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                app:spanCount="2"
-                tools:listitem="@layout/category_item" />
-        </LinearLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/delete_fab"
+        android:id="@+id/crud_list_delete_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="32dp"
@@ -43,7 +37,7 @@
         android:text="@string/remove"
         android:visibility="gone"
         app:icon="@drawable/ic_delete"
-        app:layout_anchor="@id/categories_fragment_root"
+        app:layout_anchor="@id/crud_fragment_root"
         app:layout_anchorGravity="bottom|start"
         tools:visibility="visible" />
 

@@ -7,6 +7,7 @@ import io.github.yamin8000.cafe.R
 import io.github.yamin8000.cafe.databinding.FragmentNewProductBinding
 import io.github.yamin8000.cafe.db.entities.category.Category
 import io.github.yamin8000.cafe.db.entities.product.Product
+import io.github.yamin8000.cafe.db.entities.relatives.ProductAndCategory
 import io.github.yamin8000.cafe.db.helpers.DbHelpers.getCategories
 import io.github.yamin8000.cafe.ui.util.BaseFragment
 import io.github.yamin8000.cafe.util.Constants.db
@@ -31,7 +32,7 @@ class NewProductFragment :
     private var productCategory = -1
     private var productImage: Int? = null
 
-    private var editedProduct: Product? = null
+    private var editedProduct: ProductAndCategory? = null
     private var isEditMode = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

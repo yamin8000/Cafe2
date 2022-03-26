@@ -5,8 +5,8 @@ import androidx.room.TypeConverter
 class OrderDetailConverter {
 
     @TypeConverter
-    fun listToString(list: List<Int>) = list.joinToString(",")
+    fun listToString(list: List<Long>) = list.joinToString(",")
 
     @TypeConverter
-    fun stringToList(value: String) = value.splitToSequence(",").map { it.toInt() }.toList()
+    fun stringToList(value: String) = value.splitToSequence(",").map { it.toLong() }.toList()
 }

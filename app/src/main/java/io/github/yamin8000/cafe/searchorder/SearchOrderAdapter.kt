@@ -10,7 +10,7 @@ import io.github.yamin8000.cafe.db.entities.order.OrderDetail
 class SearchOrderAdapter(
     private val orders: List<Order>,
     private val orderDetails: List<OrderDetail>,
-    private val deliverListener: (Int) -> Unit
+    private val deliverListener: (Long) -> Unit
 ) : RecyclerView.Adapter<SearchOrderHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchOrderHolder {

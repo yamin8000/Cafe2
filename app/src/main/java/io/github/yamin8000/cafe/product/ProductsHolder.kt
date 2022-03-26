@@ -3,7 +3,7 @@ package io.github.yamin8000.cafe.product
 import androidx.recyclerview.widget.AsyncListDiffer
 import io.github.yamin8000.cafe.databinding.ProductItemBinding
 import io.github.yamin8000.cafe.db.entities.relatives.ProductAndCategory
-import io.github.yamin8000.cafe.ui.recyclerview.CrudHolder
+import io.github.yamin8000.cafe.ui.crud.CrudHolder
 
 class ProductsHolder(
     asyncList: AsyncListDiffer<ProductAndCategory>,
@@ -16,8 +16,10 @@ class ProductsHolder(
     updateCallback,
     deleteCallback,
     { productAndCategory ->
-        binding.productItemName.text = productAndCategory.product.name
-        binding.productItemCategory.text = productAndCategory.category.name
-        binding.productItemPrice.text = productAndCategory.product.price.toString()
+        productAndCategory.product?.let {
+            binding.productItemName.text = it.name
+            binding.productItemCategory.text = productAndCategory.category.name
+            binding.productItemPrice.text = it.price.toString()
+        }
     }
 )

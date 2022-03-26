@@ -4,17 +4,16 @@ import io.github.yamin8000.cafe.db.entities.category.Category
 import io.github.yamin8000.cafe.db.entities.order.Order
 import io.github.yamin8000.cafe.db.entities.order.OrderDetail
 import io.github.yamin8000.cafe.db.entities.product.Product
-import io.github.yamin8000.cafe.db.entities.relatives.ProductAndCategory
 import io.github.yamin8000.cafe.util.Constants
 import kotlinx.coroutines.withContext
 import kotlin.coroutines.CoroutineContext
 
 object DbHelpers {
 
-    suspend fun CoroutineContext.getOrderDetails(detailIds: List<Int>): List<OrderDetail> {
+    suspend fun CoroutineContext.getOrderDetails(detailIds: List<Long>): List<OrderDetail> {
         return withContext(this) {
             val detailDao = Constants.db?.orderDetailDao()
-            return@withContext detailDao?.getAllByIds(*detailIds.toIntArray())
+            return@withContext detailDao?.getAllByIds(*detailIds.toLongArray())
         } ?: listOf()
     }
 

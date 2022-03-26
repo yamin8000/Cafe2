@@ -8,7 +8,7 @@ import ir.yamin.digits.Digits.Companion.spell
 class NewOrderDetailHolder(
     private val binding: NewOrderDetailItemBinding,
     private val orderDetails: List<Product>,
-    private val itemChanged: (Pair<Int, Int>) -> Unit
+    private val itemChanged: (Pair<Long, Int>) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
 
     private var quantity = 0

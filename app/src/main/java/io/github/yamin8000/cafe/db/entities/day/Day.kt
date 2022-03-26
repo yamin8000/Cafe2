@@ -8,5 +8,5 @@ import java.time.LocalDate
 data class Day(
     val date: LocalDate,
     var lastOrderId: Int = 1,
-    @PrimaryKey(autoGenerate = true) val id: Int = 0
+    @PrimaryKey(autoGenerate = true) val id: Long = 0
 )

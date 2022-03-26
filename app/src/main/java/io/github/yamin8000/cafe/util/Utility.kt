@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.os.Parcelable
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -61,6 +63,16 @@ object Utility {
     }
 
     object Views {
+
+        fun ImageView.setImageFromResourceId(resourceId: Int) {
+            this.setImageDrawable(
+                ResourcesCompat.getDrawable(
+                    resources,
+                    resourceId,
+                    null
+                )
+            )
+        }
 
         fun View.visible() {
             this.visibility = View.VISIBLE

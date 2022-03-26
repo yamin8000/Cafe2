@@ -9,7 +9,7 @@ object Constants {
     const val SPLASH_DELAY = 1500L
     var db: AppDatabase? = null
     const val PACK = "pack_"
-    const val NO_ID = 1
+    const val NO_ID = -1
 
     //arguments
     const val IS_EDIT_MODE = "is_edit_mode"

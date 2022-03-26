@@ -1,4 +1,4 @@
-package io.github.yamin8000.cafe.ui.recyclerview
+package io.github.yamin8000.cafe.ui.crud
 
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.RecyclerView

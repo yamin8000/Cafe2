@@ -3,7 +3,7 @@ package io.github.yamin8000.cafe.product
 import io.github.yamin8000.cafe.databinding.ProductItemBinding
 import io.github.yamin8000.cafe.db.entities.relatives.ProductAndCategory
 import io.github.yamin8000.cafe.ui.AsyncDifferHelper.getAsyncDiffer
-import io.github.yamin8000.cafe.ui.recyclerview.CrudAdapter
+import io.github.yamin8000.cafe.ui.crud.CrudAdapter
 
 class ProductsAdapter(
     private val updateCallback: (ProductAndCategory) -> Unit,
@@ -11,7 +11,7 @@ class ProductsAdapter(
 ) : CrudAdapter<ProductAndCategory, ProductsHolder>() {
 
     override var asyncList = this.getAsyncDiffer<ProductAndCategory, ProductsHolder>(
-        { old, new -> old.product.id == new.product.id },
+        { old, new -> old.product?.id == new.product?.id },
         { old, new -> old == new }
     )
 

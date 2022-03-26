@@ -5,7 +5,7 @@ import io.github.yamin8000.cafe.R
 import io.github.yamin8000.cafe.db.entities.category.Category
 import io.github.yamin8000.cafe.db.helpers.DbHelpers.deleteCategories
 import io.github.yamin8000.cafe.db.helpers.DbHelpers.getCategories
-import io.github.yamin8000.cafe.ui.CrudFragment
+import io.github.yamin8000.cafe.ui.crud.CrudFragment
 import io.github.yamin8000.cafe.util.Utility.Alerts.snack
 
 class CategoryFragment : CrudFragment<Category, CategoryHolder>(R.id.newCategoryFragment) {

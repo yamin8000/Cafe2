@@ -8,14 +8,14 @@ import androidx.room.Transaction
 interface RelativeDao {
 
     @Transaction
-    @Query("select * from product join category on product.categoryId == category.id")
+    @Query("select * from product")
     suspend fun allProductsAndCategories(): List<ProductAndCategory>
 
-    @Transaction
-    @Query("select * from product  join category on product.categoryId == category.id where product.id = :id")
-    suspend fun allProductAndCategoryById(id: Int): ProductAndCategory
+    /*@Transaction
+    @Query("select * from category where product.id = :id")
+    suspend fun allProductAndCategoryById(id: Int): CategoryWithProducts
 
     @Transaction
     @Query("select * from product  join category on product.categoryId == category.id where product.id in (:ids)")
-    suspend fun allProductsAndCategoriesByIds(vararg ids: Int): List<ProductAndCategory>
+    suspend fun allProductsAndCategoriesByIds(vararg ids: Int): List<CategoryWithProducts>*/
 }

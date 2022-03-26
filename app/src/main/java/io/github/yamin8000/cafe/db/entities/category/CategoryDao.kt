@@ -15,7 +15,7 @@ interface CategoryDao {
     @Query("select * from category where id = (:id)")
     suspend fun getById(id: Int): Category
 
-    @Query("select * from category where name = (:name)")
+    @Query("select * from category where categoryName = (:name)")
     suspend fun getByName(name: String): Category
 
     @Insert

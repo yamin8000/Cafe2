@@ -69,7 +69,7 @@ class NewOrderFragment :
     }
 
     private fun saveOrder() {
-        val orderDetailIds = mutableListOf<Int>()
+        val orderDetailIds = mutableListOf<Long>()
         val orderDetailDao = db?.orderDetailDao()
         if (orderDetails.isNotEmpty()) {
             orderDetails.forEach {
@@ -78,7 +78,7 @@ class NewOrderFragment :
                         val detailId = withContext(ioScope.coroutineContext) {
                             orderDetailDao?.insert(it)
                         }
-                        if (detailId != null) orderDetailIds.add(detailId.toInt())
+                        if (detailId != null) orderDetailIds.add(detailId.toLong())
                     }
                 }
             }
@@ -117,7 +117,7 @@ class NewOrderFragment :
         })
     }
 
-    private suspend fun createOrder(orderDetailIds: MutableList<Int>): Pair<Int, Order> {
+    private suspend fun createOrder(orderDetailIds: MutableList<Long>): Pair<Int, Order> {
         val today = LocalDate.now(ZoneOffset.UTC)
 
         val lastOrderId = ioScope.async {
@@ -149,7 +149,7 @@ class NewOrderFragment :
         adapter.notifyDataSetChanged()
     }
 
-    private fun itemChanged(pair: Pair<Int, Int>) {
+    private fun itemChanged(pair: Pair<Long, Int>) {
         val (productId, quantity) = pair
         val productName = products.find { it.id == productId }?.name ?: ""
         val oldItem = orderDetails.find { it.productId == productId }

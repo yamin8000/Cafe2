@@ -12,10 +12,10 @@ interface OrderDetailDao {
     suspend fun getAll(): List<OrderDetail>
 
     @Query("select * from `orderdetail` where id in (:ids)")
-    suspend fun getAllByIds(vararg ids: Int): List<OrderDetail>
+    suspend fun getAllByIds(vararg ids: Long): List<OrderDetail>
 
     @Query("select * from `orderdetail` where id = (:id)")
-    suspend fun getById(id: Int): OrderDetail
+    suspend fun getById(id: Long): OrderDetail
 
     @Insert
     suspend fun insert(orderDetail: OrderDetail): Long

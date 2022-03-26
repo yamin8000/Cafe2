@@ -9,10 +9,10 @@ interface OrderDao {
     suspend fun getAll(): List<Order>
 
     @Query("select * from `order` where id in (:ids)")
-    suspend fun getAllByIds(vararg ids: Int): List<Order>
+    suspend fun getAllByIds(vararg ids: Long): List<Order>
 
     @Query("select * from `order` where id = (:id)")
-    suspend fun getById(id: Int): Order
+    suspend fun getById(id: Long): Order
 
     @Insert
     suspend fun insert(order: Order): Long

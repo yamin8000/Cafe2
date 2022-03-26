@@ -12,13 +12,13 @@ interface ProductDao {
     suspend fun all(): List<Product>
 
     @Query("select * from `product` where id in (:ids)")
-    suspend fun allByIds(vararg ids: Int): List<Product>
+    suspend fun allByIds(vararg ids: Long): List<Product>
 
     @Query("select * from product where categoryId in (:categoryIds)")
-    suspend fun allByCategoryIds(vararg categoryIds: Int): List<Product>
+    suspend fun allByCategoryIds(vararg categoryIds: Long): List<Product>
 
     @Query("select * from `product` where id = (:id)")
-    suspend fun byId(id: Int): Product
+    suspend fun byId(id: Long): Product
 
     @Insert
     suspend fun insertAll(vararg products: Product)
@@ -27,5 +27,5 @@ interface ProductDao {
     suspend fun delete(product: Product)
 
     @Query("delete from `product` where id = (:id)")
-    suspend fun deleteById(id: Int)
+    suspend fun deleteById(id: Long)
 }

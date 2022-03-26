@@ -3,7 +3,7 @@ package io.github.yamin8000.cafe.category
 import io.github.yamin8000.cafe.databinding.CategoryItemBinding
 import io.github.yamin8000.cafe.db.entities.category.Category
 import io.github.yamin8000.cafe.ui.AsyncDifferHelper.getAsyncDiffer
-import io.github.yamin8000.cafe.ui.recyclerview.CrudAdapter
+import io.github.yamin8000.cafe.ui.crud.CrudAdapter
 
 class CategoryAdapter(
     private val updateCallback: (Category) -> Unit,

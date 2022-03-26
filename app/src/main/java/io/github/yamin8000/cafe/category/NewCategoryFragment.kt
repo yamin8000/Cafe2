@@ -2,7 +2,6 @@ package io.github.yamin8000.cafe.category
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.setFragmentResultListener
 import io.github.yamin8000.cafe.R
 import io.github.yamin8000.cafe.databinding.FragmentNewCategoryBinding
@@ -17,6 +16,7 @@ import io.github.yamin8000.cafe.util.Utility.Alerts.showNullDbError
 import io.github.yamin8000.cafe.util.Utility.Alerts.snack
 import io.github.yamin8000.cafe.util.Utility.Bundles.data
 import io.github.yamin8000.cafe.util.Utility.Bundles.isEditMode
+import io.github.yamin8000.cafe.util.Utility.Views.setImageFromResourceId
 import io.github.yamin8000.cafe.util.Utility.handleCrash
 import io.github.yamin8000.cafe.util.Utility.hideKeyboard
 import io.github.yamin8000.cafe.util.Utility.navigate
@@ -55,13 +55,7 @@ class NewCategoryFragment :
         binding.addCategoryConfirm.text = getString(R.string.edit)
         if (category != null) {
             binding.categoryNameEdit.setText(category.name)
-            binding.categoryImage.setImageDrawable(
-                ResourcesCompat.getDrawable(
-                    resources,
-                    category.imageId,
-                    null
-                )
-            )
+            binding.categoryImage.setImageFromResourceId(category.imageId)
         }
     }
 
@@ -85,18 +79,8 @@ class NewCategoryFragment :
         navigate(R.id.action_newCategoryFragment_to_iconPickerModal)
         setFragmentResultListener(ICON_PICKER) { _, bundle ->
             categoryImageId = bundle.getInt(ICON_PICKER_RESULT)
-            setIcon()
+            binding.categoryImage.setImageFromResourceId(categoryImageId)
         }
-    }
-
-    private fun setIcon() {
-        binding.categoryImage.setImageDrawable(
-            ResourcesCompat.getDrawable(
-                resources,
-                categoryImageId,
-                null
-            )
-        )
     }
 
     private suspend fun addNewCategory(category: Category) {

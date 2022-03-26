@@ -8,7 +8,7 @@ import io.github.yamin8000.cafe.db.entities.product.Product
 
 class NewOrderDetailAdapter(
     private val orderDetails: List<Product>,
-    private val itemChanged: (Pair<Int, Int>) -> Unit
+    private val itemChanged: (Pair<Long, Int>) -> Unit
 ) : RecyclerView.Adapter<NewOrderDetailHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewOrderDetailHolder {

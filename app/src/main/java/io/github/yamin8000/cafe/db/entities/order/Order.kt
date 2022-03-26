@@ -9,7 +9,7 @@ import java.time.LocalDateTime
 data class Order(
     val dayId: Int,
     val date: LocalDateTime,
-    val detailIds: List<Int>,
+    val detailIds: List<Long>,
     var status: OrderStatus = OrderStatus.Registered,
-    @PrimaryKey(autoGenerate = true) val id: Int = 0
+    @PrimaryKey(autoGenerate = true) val id: Long = 0
 )

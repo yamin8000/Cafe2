@@ -1,6 +1,7 @@
 package io.github.yamin8000.cafe.db.entities.product
 
 import android.os.Parcelable
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
@@ -17,10 +18,12 @@ import kotlinx.parcelize.Parcelize
     )]
 )
 data class Product(
+    @ColumnInfo(name = "productName")
     var name: String,
-    var price: Int,
-    var categoryId: Int,
+    var price: Long,
+    @ColumnInfo(name = "categoryId", index = true)
+    var categoryId: Long,
     var imageId: Int? = null,
     @PrimaryKey(autoGenerate = true)
-    val id: Int = 0,
+    val id: Long = 0,
 ) : Parcelable

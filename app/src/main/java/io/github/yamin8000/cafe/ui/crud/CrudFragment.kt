@@ -1,4 +1,4 @@
-package io.github.yamin8000.cafe.ui
+package io.github.yamin8000.cafe.ui.crud
 
 import android.database.sqlite.SQLiteConstraintException
 import android.os.Bundle
@@ -34,7 +34,7 @@ abstract class CrudFragment<T, VH : RecyclerView.ViewHolder>(
     protected val ioScope by lazy(LazyThreadSafetyMode.NONE) { CoroutineScope(Dispatchers.IO) }
     private val mainScope by lazy(LazyThreadSafetyMode.NONE) { CoroutineScope(Dispatchers.Main) }
 
-    private val emptyAdapter by lazy(LazyThreadSafetyMode.NONE) { EmptyAdapter() }
+    protected val emptyAdapter by lazy(LazyThreadSafetyMode.NONE) { EmptyAdapter() }
 
     protected var items = listOf<T>()
 

@@ -14,7 +14,7 @@ class SearchOrderHolder(
     private val binding: SearchOrderItemBinding,
     private val orders: List<Order>,
     private val orderDetails: List<OrderDetail>,
-    private val deliverListener: (Int) -> Unit
+    private val deliverListener: (Long) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
 
     private val context = binding.root.context
@@ -65,7 +65,7 @@ class SearchOrderHolder(
         binding.searchOrderStatus.text = context.getString(R.string.order_status, statusText)
     }
 
-    fun setOrderDetails(orderDetailIds: List<Int>) {
+    fun setOrderDetails(orderDetailIds: List<Long>) {
         val unit = context.getString(R.string.adad)
         val candidDetails = orderDetails.filter { it.id in orderDetailIds }
         val detail = buildString {

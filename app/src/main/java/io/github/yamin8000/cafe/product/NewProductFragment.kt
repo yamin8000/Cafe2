@@ -48,7 +48,7 @@ class NewProductFragment :
     override suspend fun createItem() {
         item.product?.let { product ->
             ioScope.launch {
-                db?.productDao()?.insertAll(product)
+                db?.productDao()?.insert(product)
                 withContext(mainScope.coroutineContext) {
                     snack(getString(R.string.item_add_success, getString(R.string.product)))
                     clearProductValues()

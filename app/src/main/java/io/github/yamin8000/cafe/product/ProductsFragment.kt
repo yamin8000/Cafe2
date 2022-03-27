@@ -2,6 +2,7 @@ package io.github.yamin8000.cafe.product
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.github.yamin8000.cafe.R
+import io.github.yamin8000.cafe.db.entities.product.Product
 import io.github.yamin8000.cafe.db.entities.relatives.ProductAndCategory
 import io.github.yamin8000.cafe.ui.crud.CrudFragment
 import io.github.yamin8000.cafe.util.Constants.db
@@ -15,14 +16,14 @@ class ProductsFragment : CrudFragment<ProductAndCategory, ProductsHolder>(R.id.n
 
     override suspend fun dbDeleteAction() {
         deleteCandidates.forEach {
-            val productId = it.product?.id
-            if (productId != null) deleteProduct(productId)
+            val product = it.product
+            if (product != null) deleteProduct(product)
         }
         snack(getString(R.string.item_delete_success, getString(R.string.product)))
     }
 
-    private suspend fun deleteProduct(productId: Long) {
-        db?.productDao()?.deleteById(productId)
+    private suspend fun deleteProduct(product: Product) {
+        db?.productDao()?.delete(product)
     }
 
     override fun fillList() {

@@ -1,32 +1,19 @@
 package io.github.yamin8000.cafe.db.entities.day
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.RawQuery
+import androidx.sqlite.db.SimpleSQLiteQuery
+import androidx.sqlite.db.SupportSQLiteQuery
+import io.github.yamin8000.cafe.db.entities.BaseDao
 import java.time.LocalDate
 
 @Dao
-interface DayDao {
+abstract class DayDao : BaseDao<Day>("Day") {
 
-    @Query("select * from `day`")
-    suspend fun getAll(): List<Day>
+    @RawQuery
+    protected abstract suspend fun getDay(query: SupportSQLiteQuery): Day
 
-    @Query("select * from `day` where id in (:ids)")
-    suspend fun getAllByIds(vararg ids: Int): List<Day>
-
-    @Query("select * from `day` where id = (:id)")
-    suspend fun getById(id: Int): Day
-
-    @Query("select * from 'day' where date= (:date)")
-    suspend fun getByDate(date: LocalDate): Day
-
-    @Insert
-    suspend fun insert(day: Day): Long
-
-    @Insert
-    suspend fun insertAll(vararg days: Day): List<Long>
-
-    @Delete
-    suspend fun delete(day: Day)
-
-    @Update
-    suspend fun update(day: Day)
+    suspend fun getByDate(date: LocalDate): Day {
+        return getDay(SimpleSQLiteQuery("select * from day where date = $date"))
+    }
 }

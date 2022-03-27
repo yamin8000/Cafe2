@@ -11,9 +11,10 @@ import kotlin.coroutines.CoroutineContext
 object DbHelpers {
 
     suspend fun CoroutineContext.getOrderDetails(detailIds: List<Long>): List<OrderDetail> {
-        return withContext(this) {
+        if (detailIds.isEmpty()) return emptyList()
+        else return withContext(this) {
             val detailDao = Constants.db?.orderDetailDao()
-            return@withContext detailDao?.getAllByIds(*detailIds.toLongArray())
+            return@withContext detailDao?.getAllByIds(detailIds)
         } ?: listOf()
     }
 
@@ -25,7 +26,7 @@ object DbHelpers {
 
     suspend fun CoroutineContext.getProducts(): List<Product> {
         return withContext(this) {
-            Constants.db?.productDao()?.all() ?: listOf()
+            Constants.db?.productDao()?.getAll() ?: listOf()
         }
     }
 

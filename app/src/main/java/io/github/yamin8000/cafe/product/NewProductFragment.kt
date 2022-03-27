@@ -21,7 +21,7 @@ import kotlinx.coroutines.withContext
 
 class NewProductFragment :
     CreateUpdateFragment<ProductAndCategory, FragmentNewProductBinding>(
-        ProductAndCategory(Product("", 0L, -1L, null), Category("", -1)),
+        ProductAndCategory(Product(), Category()),
         { FragmentNewProductBinding.inflate(it) }
     ) {
 
@@ -74,7 +74,7 @@ class NewProductFragment :
     override fun validator(): Boolean {
         val isNameNotBlank = item.product?.name?.isNotBlank() ?: false
         val isPriceSet = item.product?.price != -1L
-        val isCategorySet = item.category.id != -1L
+        val isCategorySet = item.category.id != NO_ID_LONG
         return isNameNotBlank && isPriceSet && isCategorySet
     }
 

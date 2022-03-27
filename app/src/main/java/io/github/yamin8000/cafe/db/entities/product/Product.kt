@@ -26,4 +26,6 @@ data class Product(
     var imageId: Int? = null,
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0,
-) : Parcelable
+) : Parcelable {
+    constructor() : this("", 0, -1, null)
+}

@@ -10,6 +10,7 @@ object Constants {
     var db: AppDatabase? = null
     const val PACK = "pack_"
     const val NO_ID = -1
+    const val NO_ID_LONG = 0L
 
     //arguments
     const val IS_EDIT_MODE = "is_edit_mode"

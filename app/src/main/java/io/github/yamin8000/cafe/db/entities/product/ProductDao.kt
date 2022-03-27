@@ -1,9 +1,6 @@
 package io.github.yamin8000.cafe.db.entities.product
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 
 @Dao
 interface ProductDao {
@@ -28,4 +25,7 @@ interface ProductDao {
 
     @Query("delete from `product` where id = (:id)")
     suspend fun deleteById(id: Long)
+
+    @Update
+    suspend fun update(product: Product)
 }

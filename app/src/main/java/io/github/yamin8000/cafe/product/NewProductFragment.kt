@@ -1,77 +1,100 @@
 package io.github.yamin8000.cafe.product
 
-import android.os.Bundle
-import android.view.View
 import android.widget.ArrayAdapter
+import androidx.fragment.app.setFragmentResultListener
 import io.github.yamin8000.cafe.R
 import io.github.yamin8000.cafe.databinding.FragmentNewProductBinding
 import io.github.yamin8000.cafe.db.entities.category.Category
 import io.github.yamin8000.cafe.db.entities.product.Product
 import io.github.yamin8000.cafe.db.entities.relatives.ProductAndCategory
 import io.github.yamin8000.cafe.db.helpers.DbHelpers.getCategories
-import io.github.yamin8000.cafe.ui.util.BaseFragment
+import io.github.yamin8000.cafe.ui.crud.CreateUpdateFragment
+import io.github.yamin8000.cafe.util.Constants.ICON_PICKER
+import io.github.yamin8000.cafe.util.Constants.ICON_PICKER_RESULT
+import io.github.yamin8000.cafe.util.Constants.NO_ID_LONG
 import io.github.yamin8000.cafe.util.Constants.db
 import io.github.yamin8000.cafe.util.Utility.Alerts.snack
-import io.github.yamin8000.cafe.util.Utility.Alerts.toast
-import io.github.yamin8000.cafe.util.Utility.Bundles.data
-import io.github.yamin8000.cafe.util.Utility.Bundles.isEditMode
 import io.github.yamin8000.cafe.util.Utility.Views.setImageFromResourceId
-import io.github.yamin8000.cafe.util.Utility.handleCrash
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
+import io.github.yamin8000.cafe.util.Utility.navigate
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class NewProductFragment :
-    BaseFragment<FragmentNewProductBinding>({ FragmentNewProductBinding.inflate(it) }) {
+    CreateUpdateFragment<ProductAndCategory, FragmentNewProductBinding>(
+        ProductAndCategory(Product("", 0L, -1L, null), Category("", -1)),
+        { FragmentNewProductBinding.inflate(it) }
+    ) {
 
-    private val ioScope by lazy(LazyThreadSafetyMode.NONE) { CoroutineScope(Dispatchers.IO) }
-    private val mainScope by lazy(LazyThreadSafetyMode.NONE) { CoroutineScope(Dispatchers.Main) }
+    override fun init() {
+        mainScope.launch { handleCategoriesAutoComplete() }
+        binding.productImageButton.setOnClickListener { showIconPicker() }
+    }
 
-    private var productName = ""
-    private var productPrice = -1L
-    private var productCategory = -1L
-    private var productImage: Int? = null
+    override fun initViewForCreateMode() {
+        //ignored
+    }
 
-    private var editedProduct: ProductAndCategory? = null
-    private var isEditMode = false
+    override fun initViewForEditMode() {
+        binding.addProductConfirm.text = getString(R.string.edit)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        try {
-            isEditMode = arguments.isEditMode()
-            editedProduct = arguments.data()
-            if (isEditMode) initEditMode()
-            mainScope.launch { handleCategoriesAutoComplete() }
-            binding.addProductConfirm.setOnClickListener { confirmClickListener() }
-        } catch (e: Exception) {
-            handleCrash(e)
+        binding.productNameEdit.setText(item.product?.name)
+        binding.productPriceEdit.setText(item.product?.price.toString())
+        binding.productCategoryEdit.setText(item.category.name)
+        item.product?.imageId?.let { imageId ->
+            binding.productImage.setImageFromResourceId(imageId)
         }
     }
 
-    private fun initEditMode() {
-        editedProduct?.product?.let {
-            productName = it.name
-            productPrice = it.price
-            productCategory = it.id
-            productImage = it.imageId
-
-            binding.productNameEdit.setText(it.name)
-            binding.productPriceEdit.setText(it.price.toString())
-            binding.productCategoryEdit.setText(editedProduct?.category?.name)
-            it.imageId?.let { imageId ->
-                binding.productImage.setImageFromResourceId(imageId)
+    override suspend fun createItem() {
+        item.product?.let { product ->
+            ioScope.launch {
+                db?.productDao()?.insertAll(product)
+                withContext(mainScope.coroutineContext) {
+                    snack(getString(R.string.item_add_success, getString(R.string.product)))
+                    clearProductValues()
+                    clearViews()
+                }
             }
         }
     }
 
-    private fun confirmClickListener() {
-        productName = binding.productNameEdit.text.toString()
-        productPrice = getPrice()
-        if (isParamsValid(productName, productPrice, productCategory))
-            addNewProductToDb(Product(productName, productPrice, productCategory, productImage))
-        else snack(getString(R.string.enter_all_fields))
+    override suspend fun editItem() {
+        item.product?.let { product ->
+            if (item.product?.id != NO_ID_LONG) {
+                ioScope.launch {
+                    db?.productDao()?.update(product)
+                    withContext(mainScope.coroutineContext) {
+                        snack(getString(R.string.item_edit_success, getString(R.string.product)))
+                    }
+                }
+            }
+        }
+    }
+
+    override fun validator(): Boolean {
+        val isNameNotBlank = item.product?.name?.isNotBlank() ?: false
+        val isPriceSet = item.product?.price != -1L
+        val isCategorySet = item.category.id != -1L
+        return isNameNotBlank && isPriceSet && isCategorySet
+    }
+
+    override fun confirm() {
+        binding.addProductConfirm.setOnClickListener {
+            item.product?.name = binding.productNameEdit.text.toString()
+            item.product?.price = getPrice()
+            //item.categoryId, already set using auto complete click listener
+            //item.imageId, already set using image picker click listener
+            confirmListener(this::validator)
+        }
+    }
+
+
+    private fun showIconPicker() {
+        navigate(R.id.action_newProductFragment_to_iconPickerModal)
+        setFragmentResultListener(ICON_PICKER) { _, bundle ->
+            item.product?.imageId = bundle.getInt(ICON_PICKER_RESULT)
+            item.product?.imageId?.let { binding.productImage.setImageFromResourceId(it) }
+        }
     }
 
     private fun getPrice(): Long {
@@ -83,7 +106,7 @@ class NewProductFragment :
         val categories = ioScope.coroutineContext.getCategories()
         if (categories.isNotEmpty())
             fillCategoriesAutoComplete(categories)
-        else toast(getString(R.string.not_categories_should_add_category))
+        else snack(getString(R.string.not_categories_should_add_category))
     }
 
     private fun fillCategoriesAutoComplete(categories: List<Category>) {
@@ -92,19 +115,9 @@ class NewProductFragment :
             binding.productCategoryEdit.setAdapter(adapter)
             binding.productCategoryEdit.setOnItemClickListener { adapterView, _, position, _ ->
                 val category = adapterView.getItemAtPosition(position) as Category
-                productCategory = category.id
-            }
-
-        }
-    }
-
-    private fun addNewProductToDb(product: Product) {
-        ioScope.launch {
-            db?.productDao()?.insertAll(product)
-            withContext(mainScope.coroutineContext) {
-                snack(getString(R.string.item_add_success, getString(R.string.product)))
-                clearProductValues()
-                clearViews()
+                item.category.id = category.id
+                item.product?.categoryId = category.id
+                item.category.name = category.name
             }
         }
     }
@@ -117,17 +130,10 @@ class NewProductFragment :
     }
 
     private fun clearProductValues() {
-        productName = ""
-        productPrice = -1
-        productCategory = -1
-        productImage = null
-    }
-
-    private fun isParamsValid(
-        productName: String,
-        productPrice: Long,
-        productCategory: Long
-    ): Boolean {
-        return productName.isNotBlank() && productPrice != -1L && productCategory != -1L
+        item.product?.name = ""
+        item.product?.price = -1
+        item.category.id = -1
+        item.product?.imageId = null
+        item.product?.id = NO_ID_LONG
     }
 }

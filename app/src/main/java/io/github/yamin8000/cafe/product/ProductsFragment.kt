@@ -10,8 +10,7 @@ import io.github.yamin8000.cafe.util.Utility.Alerts.snack
 class ProductsFragment : CrudFragment<ProductAndCategory, ProductsHolder>(R.id.newProductFragment) {
 
     override suspend fun getItems(): List<ProductAndCategory> {
-        val list = db?.relativeDao()?.allProductsAndCategories() ?: listOf()
-        return list
+        return db?.relativeDao()?.allProductsAndCategories() ?: listOf()
     }
 
     override suspend fun dbDeleteAction() {

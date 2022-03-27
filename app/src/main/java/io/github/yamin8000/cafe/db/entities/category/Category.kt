@@ -13,7 +13,7 @@ data class Category(
     var name: String,
     var imageId: Int = 0,
     @PrimaryKey(autoGenerate = true)
-    val id: Long = 0
+    var id: Long = 0
 ) : Parcelable {
     //this method is overridden for using this class in auto complete view
     override fun toString() = this.name

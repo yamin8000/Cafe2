@@ -13,4 +13,6 @@ data class Subscriber(
     var address: String,
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0
-) : Parcelable
+) : Parcelable {
+    constructor() : this("", "", "")
+}

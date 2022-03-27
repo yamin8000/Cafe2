@@ -18,10 +18,13 @@
             app:destination="@id/searchOrdersFragment" />
         <action
             android:id="@+id/action_homeFragment_to_productFragment"
-            app:destination="@id/productFragment" />
+            app:destination="@id/product_graph" />
         <action
             android:id="@+id/action_homeFragment_to_categoryFragment"
-            app:destination="@id/categoryFragment" />
+            app:destination="@id/category_graph" />
+        <action
+            android:id="@+id/action_homeFragment_to_subscriber_graph"
+            app:destination="@id/subscriber_graph" />
     </fragment>
     <fragment
         android:id="@+id/crashFragment"
@@ -60,15 +63,6 @@
         android:name="io.github.yamin8000.cafe.searchorder.SearchOrdersFragment"
         android:label="SearchOrdersFragment"
         tools:layout="@layout/fragment_search_orders" />
-    <fragment
-        android:id="@+id/productFragment"
-        android:name="io.github.yamin8000.cafe.product.ProductsFragment"
-        android:label="ProductFragment"
-        tools:layout="@layout/fragment_crud">
-        <action
-            android:id="@+id/action_productFragment_to_newProductFragment"
-            app:destination="@id/newProductFragment" />
-    </fragment>
     <dialog
         android:id="@+id/singleNewOrderModal"
         android:name="io.github.yamin8000.cafe.neworder.SingleNewOrderModal"
@@ -81,15 +75,6 @@
             android:name="details"
             app:argType="string" />
     </dialog>
-    <fragment
-        android:id="@+id/categoryFragment"
-        android:name="io.github.yamin8000.cafe.category.CategoryFragment"
-        android:label="CategoryFragment"
-        tools:layout="@layout/fragment_crud">
-        <action
-            android:id="@+id/action_categoryFragment_to_newCategoryFragment"
-            app:destination="@id/newCategoryFragment" />
-    </fragment>
     <dialog
         android:id="@+id/promptModal"
         android:name="io.github.yamin8000.cafe.ui.PromptModal"
@@ -104,34 +89,72 @@
         android:name="io.github.yamin8000.cafe.ui.iconpicker.IconPickerModal"
         android:label="IconPickerModal"
         tools:layout="@layout/icon_picker_modal" />
-    <fragment
-        android:id="@+id/newProductFragment"
-        android:name="io.github.yamin8000.cafe.product.NewProductFragment"
-        android:label="NewProductFragment"
-        tools:layout="@layout/fragment_new_product">
-        <argument
-            android:name="is_edit_mode"
-            app:argType="boolean" />
-        <action
-            android:id="@+id/action_newProductFragment_to_iconPickerModal"
-            app:destination="@id/iconPickerModal" />
-        <argument
-            android:name="data"
-            app:argType="io.github.yamin8000.cafe.db.entities.relatives.ProductAndCategory" />
-    </fragment>
-    <fragment
-        android:id="@+id/newCategoryFragment"
-        android:name="io.github.yamin8000.cafe.category.NewCategoryFragment"
-        android:label="NewCategoryFragment"
-        tools:layout="@layout/fragment_new_category">
-        <action
-            android:id="@+id/action_newCategoryFragment_to_iconPickerModal"
-            app:destination="@id/iconPickerModal" />
-        <argument
-            android:name="IS_EDIT_MODE"
-            app:argType="boolean" />
-        <argument
-            android:name="data"
-            app:argType="io.github.yamin8000.cafe.db.entities.category.Category" />
-    </fragment>
+    <navigation
+        android:id="@+id/category_graph"
+        app:startDestination="@id/categoryFragment">
+        <fragment
+            android:id="@+id/categoryFragment"
+            android:name="io.github.yamin8000.cafe.category.CategoryFragment"
+            android:label="CategoryFragment"
+            tools:layout="@layout/fragment_crud">
+            <action
+                android:id="@+id/action_categoryFragment_to_newCategoryFragment"
+                app:destination="@id/newCategoryFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/newCategoryFragment"
+            android:name="io.github.yamin8000.cafe.category.NewCategoryFragment"
+            android:label="NewCategoryFragment"
+            tools:layout="@layout/fragment_new_category">
+            <action
+                android:id="@+id/action_newCategoryFragment_to_iconPickerModal"
+                app:destination="@id/iconPickerModal" />
+            <argument
+                android:name="IS_EDIT_MODE"
+                app:argType="boolean" />
+            <argument
+                android:name="data"
+                app:argType="io.github.yamin8000.cafe.db.entities.category.Category" />
+        </fragment>
+    </navigation>
+    <navigation
+        android:id="@+id/product_graph"
+        app:startDestination="@id/productFragment">
+        <fragment
+            android:id="@+id/newProductFragment"
+            android:name="io.github.yamin8000.cafe.product.NewProductFragment"
+            android:label="NewProductFragment"
+            tools:layout="@layout/fragment_new_product">
+            <argument
+                android:name="is_edit_mode"
+                app:argType="boolean" />
+            <action
+                android:id="@+id/action_newProductFragment_to_iconPickerModal"
+                app:destination="@id/iconPickerModal" />
+            <argument
+                android:name="data"
+                app:argType="io.github.yamin8000.cafe.db.entities.relatives.ProductAndCategory" />
+        </fragment>
+        <fragment
+            android:id="@+id/productFragment"
+            android:name="io.github.yamin8000.cafe.product.ProductsFragment"
+            android:label="ProductFragment"
+            tools:layout="@layout/fragment_crud">
+            <action
+                android:id="@+id/action_productFragment_to_newProductFragment"
+                app:destination="@id/newProductFragment" />
+        </fragment>
+    </navigation>
+    <navigation
+        android:id="@+id/subscriber_graph"
+        app:startDestination="@id/subscriberFragment">
+        <fragment
+            android:id="@+id/newSubscriberFragment"
+            android:name="io.github.yamin8000.cafe.subscriber.NewSubscriberFragment"
+            android:label="NewSubscriberFragment" />
+        <fragment
+            android:id="@+id/subscriberFragment"
+            android:name="io.github.yamin8000.cafe.subscriber.SubscriberFragment"
+            android:label="SubscriberFragment" />
+    </navigation>
 </navigation>

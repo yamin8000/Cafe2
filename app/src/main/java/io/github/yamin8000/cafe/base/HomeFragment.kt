@@ -24,6 +24,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>({ FragmentHomeBinding.inf
             binding.newOrderButton.setOnClickListener { navigate(R.id.action_homeFragment_to_newOrderFragment) }
             binding.productsButton.setOnClickListener { navigate(R.id.action_homeFragment_to_productFragment) }
             binding.categoriesButton.setOnClickListener { navigate(R.id.action_homeFragment_to_categoryFragment) }
+            binding.subscriberButton.setOnClickListener { navigate(R.id.action_homeFragment_to_subscriber_graph) }
             backPressHandler()
         } catch (e: Exception) {
             handleCrash(e)

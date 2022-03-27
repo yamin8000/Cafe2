@@ -20,7 +20,7 @@ import kotlinx.coroutines.withContext
 
 class NewCategoryFragment :
     CreateUpdateFragment<Category, FragmentNewCategoryBinding>(
-        Category("", 0),
+        Category(),
         { FragmentNewCategoryBinding.inflate(it) }
     ) {
 

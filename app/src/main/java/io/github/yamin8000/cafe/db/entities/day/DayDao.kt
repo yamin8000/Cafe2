@@ -11,9 +11,9 @@ import java.time.LocalDate
 abstract class DayDao : BaseDao<Day>("Day") {
 
     @RawQuery
-    protected abstract suspend fun getDay(query: SupportSQLiteQuery): Day
+    protected abstract suspend fun getDayByDate(query: SupportSQLiteQuery): Day
 
     suspend fun getByDate(date: LocalDate): Day {
-        return getDay(SimpleSQLiteQuery("select * from day where date = $date"))
+        return getDayByDate(SimpleSQLiteQuery("select * from day where date = $date"))
     }
 }

@@ -9,7 +9,7 @@ import androidx.sqlite.db.SupportSQLiteQuery
 
 abstract class BaseDao<T>(private val tableName: String) {
 
-    val baseQuery = "select * from $tableName"
+    private val baseQuery = "select * from `$tableName`"
 
     @Insert
     abstract suspend fun insert(entity: T): Long
@@ -23,6 +23,9 @@ abstract class BaseDao<T>(private val tableName: String) {
     @Delete
     abstract suspend fun delete(entity: T): Int
 
+    @Delete
+    abstract suspend fun deleteAll(entities: List<T>): Int
+
     @RawQuery
     protected abstract suspend fun getById(query: SupportSQLiteQuery): T?
 
@@ -34,21 +37,21 @@ abstract class BaseDao<T>(private val tableName: String) {
     protected abstract suspend fun getAll(query: SupportSQLiteQuery): List<T>
 
     suspend fun getAll(): List<T> {
-        return getAll(SimpleSQLiteQuery("$baseQuery $tableName"))
+        return getAll(SimpleSQLiteQuery(baseQuery))
     }
 
     @RawQuery
     protected abstract suspend fun getAllByIds(query: SupportSQLiteQuery): List<T>
 
     suspend fun getAllByIds(ids: List<Long>): List<T> {
-        val params = "(${ids.joinToString("")})"
-        return getAllByIds(SimpleSQLiteQuery("$baseQuery where id in $params"))
+        val params = ids.joinToString("")
+        return getAllByIds(SimpleSQLiteQuery("$baseQuery where id in ($params)"))
     }
 
     @RawQuery
     protected abstract suspend fun getByParam(query: SupportSQLiteQuery): List<T>
 
     suspend fun <P> getByParam(param: String, value: P): List<T> {
-        return getByParam(SimpleSQLiteQuery("select * from $tableName where $param == $value"))
+        return getByParam(SimpleSQLiteQuery("select * from $tableName where $param = $value"))
     }
 }

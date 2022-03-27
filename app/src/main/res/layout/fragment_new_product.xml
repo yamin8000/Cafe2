@@ -102,6 +102,7 @@
             android:id="@+id/product_image"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/product_image"
             tools:layout_editor_absoluteX="174dp"
             tools:layout_editor_absoluteY="309dp"
             tools:srcCompat="@drawable/pack_coffee_beans" />

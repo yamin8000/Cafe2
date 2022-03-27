@@ -69,4 +69,9 @@
     <string name="item_edit_success">%s با موفقیت ویرایش شد.</string>
     <string name="item_delete_success">%s با موفقیت حذف شد.</string>
     <string name="product">محصول</string>
+    <string name="product_image">عکس محصول</string>
+    <string name="phone_number">شماره تماس</string>
+    <string name="address">نشانی</string>
+    <string name="subscribers">اشتراک ها</string>
+    <string name="subscriber">اشتراک</string>
 </resources>

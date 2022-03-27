@@ -11,7 +11,7 @@ import io.github.yamin8000.cafe.db.helpers.DbHelpers.getOrders
 import io.github.yamin8000.cafe.model.OrderStatus
 import io.github.yamin8000.cafe.ui.util.BaseFragment
 import io.github.yamin8000.cafe.util.Constants.db
-import io.github.yamin8000.cafe.util.Utility.Alerts.toast
+import io.github.yamin8000.cafe.util.Utility.Alerts.snack
 import io.github.yamin8000.cafe.util.Utility.handleCrash
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -32,7 +32,7 @@ class SearchOrdersFragment :
                 val detailIds = orders.flatMap { it.detailIds }
                 val orderDetails = ioScope.coroutineContext.getOrderDetails(detailIds)
                 if (orders.isNotEmpty()) fillList(orders, orderDetails)
-                else handleEmptyOrders()
+                else snack(getString(R.string.no_order_registered))
             }
         } catch (e: Exception) {
             handleCrash(e)
@@ -52,10 +52,5 @@ class SearchOrdersFragment :
         }
         binding.searchOrderList.adapter = adapter
         adapter.notifyDataSetChanged()
-    }
-
-    private fun handleEmptyOrders() {
-        toast(getString(R.string.no_order_registered))
-        //binding.textview = ???
     }
 }

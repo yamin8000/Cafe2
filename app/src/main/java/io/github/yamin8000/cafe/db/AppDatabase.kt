@@ -11,6 +11,8 @@ import io.github.yamin8000.cafe.db.entities.order.*
 import io.github.yamin8000.cafe.db.entities.product.Product
 import io.github.yamin8000.cafe.db.entities.product.ProductDao
 import io.github.yamin8000.cafe.db.entities.relatives.RelativeDao
+import io.github.yamin8000.cafe.db.entities.subscriber.Subscriber
+import io.github.yamin8000.cafe.db.entities.subscriber.SubscriberDao
 
 @Database(
     entities = [
@@ -18,7 +20,8 @@ import io.github.yamin8000.cafe.db.entities.relatives.RelativeDao
         OrderDetail::class,
         Product::class,
         Day::class,
-        Category::class
+        Category::class,
+        Subscriber::class
     ],
     version = 1
 )
@@ -30,4 +33,5 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun productDao(): ProductDao
     abstract fun categoryDao(): CategoryDao
     abstract fun relativeDao(): RelativeDao
+    abstract fun subscriberDao(): SubscriberDao
 }

@@ -15,6 +15,8 @@ data class Category(
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0
 ) : Parcelable {
+    constructor() : this("")
+
     //this method is overridden for using this class in auto complete view
     override fun toString() = this.name
 }

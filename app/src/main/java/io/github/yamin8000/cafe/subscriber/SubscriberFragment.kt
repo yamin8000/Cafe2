@@ -1,0 +1,25 @@
+package io.github.yamin8000.cafe.subscriber
+
+import androidx.recyclerview.widget.GridLayoutManager
+import io.github.yamin8000.cafe.R
+import io.github.yamin8000.cafe.db.entities.subscriber.Subscriber
+import io.github.yamin8000.cafe.ui.crud.CrudFragment
+import io.github.yamin8000.cafe.util.Constants.db
+
+class SubscriberFragment : CrudFragment<Subscriber, SubscriberHolder>(R.id.newSubscriberFragment) {
+
+    override suspend fun getItems(): List<Subscriber> {
+        return db?.subscriberDao()?.getAll() ?: emptyList()
+    }
+
+    override suspend fun dbDeleteAction() {
+        db?.subscriberDao()?.deleteAll(deleteCandidates)
+    }
+
+    override fun fillList() {
+        val adapter = SubscriberAdapter(this::updateCallback, this::deleteCallback)
+        binding.crudList.adapter = adapter
+        binding.crudList.layoutManager = GridLayoutManager(context, 2)
+        adapter.asyncList.submitList(items)
+    }
+}

@@ -59,7 +59,11 @@ object Utility {
     }
 
     fun Fragment.navigate(destination: Int, args: Bundle? = null) {
-        this.findNavController().navigate(destination, args)
+        try {
+            this.findNavController().navigate(destination, args)
+        } catch (exception: Exception) {
+            handleCrash(exception)
+        }
     }
 
     object Views {

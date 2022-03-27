@@ -3,9 +3,9 @@ package io.github.yamin8000.cafe.category
 import androidx.recyclerview.widget.GridLayoutManager
 import io.github.yamin8000.cafe.R
 import io.github.yamin8000.cafe.db.entities.category.Category
-import io.github.yamin8000.cafe.db.helpers.DbHelpers.deleteCategories
 import io.github.yamin8000.cafe.db.helpers.DbHelpers.getCategories
 import io.github.yamin8000.cafe.ui.crud.CrudFragment
+import io.github.yamin8000.cafe.util.Constants.db
 import io.github.yamin8000.cafe.util.Utility.Alerts.snack
 
 class CategoryFragment : CrudFragment<Category, CategoryHolder>(R.id.newCategoryFragment) {
@@ -15,7 +15,7 @@ class CategoryFragment : CrudFragment<Category, CategoryHolder>(R.id.newCategory
     }
 
     override suspend fun dbDeleteAction() {
-        ioScope.coroutineContext.deleteCategories(*deleteCandidates.toTypedArray())
+        db?.categoryDao()?.deleteAll(deleteCandidates)
         snack(getString(R.string.item_delete_success, getString(R.string.category)))
     }
 

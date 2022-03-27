@@ -7,6 +7,7 @@ import androidx.core.os.bundleOf
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.navigation.fragment.findNavController
+import com.orhanobut.logger.Logger
 import io.github.yamin8000.cafe.R
 import io.github.yamin8000.cafe.databinding.FragmentNewOrderBinding
 import io.github.yamin8000.cafe.db.entities.day.Day
@@ -21,8 +22,8 @@ import io.github.yamin8000.cafe.util.Utility.handleCrash
 import ir.yamin.digits.Digits.Companion.spell
 import kotlinx.coroutines.*
 import java.time.LocalDate
-import java.time.LocalDateTime
-import java.time.ZoneOffset
+import java.time.ZoneId
+import java.time.ZonedDateTime
 
 class NewOrderFragment :
     BaseFragment<FragmentNewOrderBinding>({ FragmentNewOrderBinding.inflate(it) }) {
@@ -118,11 +119,11 @@ class NewOrderFragment :
     }
 
     private suspend fun createOrder(orderDetailIds: MutableList<Long>): Pair<Int, Order> {
-        val today = LocalDate.now(ZoneOffset.UTC)
+        val today = LocalDate.now(ZoneId.systemDefault())
 
         val lastOrderId = ioScope.async {
             val dayDao = db?.dayDao()
-            val day = dayDao?.getByDate(today)
+            val day = dayDao?.getByParam("date", today.toEpochDay())?.firstOrNull()
             if (day != null) {
                 day.lastOrderId++
                 dayDao.update(day)
@@ -133,7 +134,7 @@ class NewOrderFragment :
             }
         }.await()
 
-        val order = Order(lastOrderId, LocalDateTime.now(ZoneOffset.UTC), orderDetailIds)
+        val order = Order(lastOrderId, ZonedDateTime.now(), orderDetailIds)
 
         val orderDao = db?.orderDao()
         withContext(ioScope.coroutineContext) { orderDao?.insert(order) }

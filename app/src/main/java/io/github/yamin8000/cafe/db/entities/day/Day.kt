@@ -6,7 +6,7 @@ import java.time.LocalDate
 
 @Entity
 data class Day(
+    @PrimaryKey
     val date: LocalDate,
     var lastOrderId: Int = 1,
-    @PrimaryKey(autoGenerate = true) val id: Long = 0
 )

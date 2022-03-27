@@ -68,4 +68,6 @@ dependencies {
     implementation 'com.airbnb.android:lottie:4.2.2'
     //shimmer
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
+    //jalali
+    implementation 'org.bardframework:jalali-date:0.5.1'
 }

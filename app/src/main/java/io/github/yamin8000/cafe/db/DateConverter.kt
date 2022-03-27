@@ -1,18 +1,23 @@
 package io.github.yamin8000.cafe.db
 
 import androidx.room.TypeConverter
-import io.github.yamin8000.cafe.util.DateTimeUtils.toDateTime
+import java.time.Instant
 import java.time.LocalDate
-import java.time.LocalDateTime
-import java.time.ZoneOffset
+import java.time.ZoneId
+import java.time.ZonedDateTime
 
 class DateConverter {
 
     @TypeConverter
-    fun epochToDatetime(epoch: Long): LocalDateTime = epoch.toDateTime()
+    fun epochToDatetime(epoch: Long): ZonedDateTime {
+        val instant = getInstant(epoch)
+        return ZonedDateTime.ofInstant(instant, ZoneId.systemDefault())
+    }
 
     @TypeConverter
-    fun datetimeToEpoch(dateTime: LocalDateTime): Long = dateTime.toEpochSecond(ZoneOffset.UTC)
+    fun datetimeToEpoch(dateTime: ZonedDateTime): Long = dateTime.toEpochSecond()
+
+    private fun getInstant(epoch: Long) = Instant.ofEpochSecond(epoch)
 
     @TypeConverter
     fun epochToDate(epoch: Long): LocalDate = LocalDate.ofEpochDay(epoch)

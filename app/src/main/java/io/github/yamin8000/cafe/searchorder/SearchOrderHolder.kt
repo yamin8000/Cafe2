@@ -6,9 +6,9 @@ import io.github.yamin8000.cafe.databinding.SearchOrderItemBinding
 import io.github.yamin8000.cafe.db.entities.order.Order
 import io.github.yamin8000.cafe.db.entities.order.OrderDetail
 import io.github.yamin8000.cafe.model.OrderStatus
-import io.github.yamin8000.cafe.util.DateTimeUtils.toIso
+import io.github.yamin8000.cafe.util.DateTimeUtils.toJalaliIso
 import ir.yamin.digits.Digits.Companion.spell
-import java.time.LocalDateTime
+import java.time.ZonedDateTime
 
 class SearchOrderHolder(
     private val binding: SearchOrderItemBinding,
@@ -43,10 +43,10 @@ class SearchOrderHolder(
         binding.searchOrderDayId.text = context.getString(R.string.order_day_id, dayId.toString())
     }
 
-    fun setOrderDate(dateTime: LocalDateTime) {
+    fun setOrderDate(dateTime: ZonedDateTime) {
         binding.searchOrderDate.text = context.getString(
             R.string.order_date,
-            dateTime.toIso()
+            dateTime.toJalaliIso()
         )
     }
 

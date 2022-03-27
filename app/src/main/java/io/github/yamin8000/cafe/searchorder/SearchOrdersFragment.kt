@@ -28,7 +28,7 @@ class SearchOrdersFragment :
 
         try {
             mainScope.launch {
-                val orders = ioScope.coroutineContext.getOrders()
+                val orders = ioScope.coroutineContext.getOrders().reversed()
                 val detailIds = orders.flatMap { it.detailIds }
                 val orderDetails = ioScope.coroutineContext.getOrderDetails(detailIds)
                 if (orders.isNotEmpty()) fillList(orders, orderDetails)

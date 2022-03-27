@@ -4,10 +4,7 @@ import android.os.Bundle
 import android.view.View
 import io.github.yamin8000.cafe.R
 import io.github.yamin8000.cafe.databinding.FragmentSearchOrdersBinding
-import io.github.yamin8000.cafe.db.entities.order.Order
-import io.github.yamin8000.cafe.db.entities.order.OrderDetail
-import io.github.yamin8000.cafe.db.helpers.DbHelpers.getOrderDetails
-import io.github.yamin8000.cafe.db.helpers.DbHelpers.getOrders
+import io.github.yamin8000.cafe.db.entities.relatives.OrderWithDetails
 import io.github.yamin8000.cafe.model.OrderStatus
 import io.github.yamin8000.cafe.ui.util.BaseFragment
 import io.github.yamin8000.cafe.util.Constants.db
@@ -28,10 +25,8 @@ class SearchOrdersFragment :
 
         try {
             mainScope.launch {
-                val orders = ioScope.coroutineContext.getOrders().reversed()
-                val detailIds = orders.flatMap { it.detailIds }
-                val orderDetails = ioScope.coroutineContext.getOrderDetails(detailIds)
-                if (orders.isNotEmpty()) fillList(orders, orderDetails)
+                val orders = db?.relativeDao()?.getOrderWithDetails() ?: emptyList()
+                if (orders.isNotEmpty()) fillList(orders)
                 else snack(getString(R.string.no_order_registered))
             }
         } catch (e: Exception) {
@@ -39,8 +34,8 @@ class SearchOrdersFragment :
         }
     }
 
-    private fun fillList(orders: List<Order>, orderDetails: List<OrderDetail>) {
-        val adapter = SearchOrderAdapter(orders, orderDetails) { orderId ->
+    private fun fillList(orders: List<OrderWithDetails>) {
+        val adapter = SearchOrderAdapter(orders) { orderId ->
             ioScope.launch {
                 val orderDao = db?.orderDao()
                 val order = orderDao?.getById(orderId)

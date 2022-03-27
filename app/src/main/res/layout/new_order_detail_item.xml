@@ -13,7 +13,7 @@
 
         <TextView
             android:id="@+id/new_order_detail_text"
-            style="@style/ClickableTextView"
+            style="@style/WideTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -27,7 +27,7 @@
 
         <TextView
             android:id="@+id/new_order_quantity"
-            style="@style/ClickableTextView"
+            style="@style/WideTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"

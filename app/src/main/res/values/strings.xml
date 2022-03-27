@@ -76,4 +76,6 @@
     <string name="subscriber">اشتراک</string>
     <string name="name_family">نام و نام خانوادگی</string>
     <string name="category_image">تصویر دسته</string>
+    <string name="description">توضیحات</string>
+    <string name="select_subscriber">انتخاب اشتراک</string>
 </resources>

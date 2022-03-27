@@ -3,17 +3,15 @@ package io.github.yamin8000.cafe.searchorder
 import androidx.recyclerview.widget.RecyclerView
 import io.github.yamin8000.cafe.R
 import io.github.yamin8000.cafe.databinding.SearchOrderItemBinding
-import io.github.yamin8000.cafe.db.entities.order.Order
 import io.github.yamin8000.cafe.db.entities.order.OrderDetail
+import io.github.yamin8000.cafe.db.entities.relatives.OrderWithDetails
 import io.github.yamin8000.cafe.model.OrderStatus
 import io.github.yamin8000.cafe.util.DateTimeUtils.toJalaliIso
-import ir.yamin.digits.Digits.Companion.spell
 import java.time.ZonedDateTime
 
 class SearchOrderHolder(
     private val binding: SearchOrderItemBinding,
-    private val orders: List<Order>,
-    private val orderDetails: List<OrderDetail>,
+    private val orders: List<OrderWithDetails>,
     private val deliverListener: (Long) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
 
@@ -21,7 +19,7 @@ class SearchOrderHolder(
 
     init {
         if (adapterPosition != RecyclerView.NO_POSITION) {
-            when (orders[adapterPosition].status) {
+            when (orders[adapterPosition].order.status) {
                 OrderStatus.Registered -> binding.searchOrderDeliverButton.isEnabled = true
                 OrderStatus.Delivered -> binding.searchOrderDeliverButton.isEnabled = false
             }
@@ -32,8 +30,8 @@ class SearchOrderHolder(
     private fun deliverClickListener() {
         binding.searchOrderDeliverButton.setOnClickListener {
             if (adapterPosition != RecyclerView.NO_POSITION) {
-                deliverListener(orders[adapterPosition].id)
-                orders[adapterPosition].status = OrderStatus.Delivered
+                deliverListener(orders[adapterPosition].order.id)
+                orders[adapterPosition].order.status = OrderStatus.Delivered
                 setOrderStatus(OrderStatus.Delivered)
             }
         }
@@ -65,11 +63,14 @@ class SearchOrderHolder(
         binding.searchOrderStatus.text = context.getString(R.string.order_status, statusText)
     }
 
-    fun setOrderDetails(orderDetailIds: List<Long>) {
-        val unit = context.getString(R.string.adad)
+    fun setOrderDetails(orderDetailIds: List<OrderDetail>) {
+        /*val unit = context.getString(R.string.adad)
         val candidDetails = orderDetails.filter { it.id in orderDetailIds }
         val detail = buildString {
             candidDetails.forEach { this.append("${it.name} ==> ${it.quantity.spell()} $unit\n") }
+        }*/
+        val detail = buildString {
+            orderDetailIds.forEach { this.append("${it.summary}\n") }
         }
         binding.searchOrderDetails.text = context.getString(R.string.order_details, detail)
     }

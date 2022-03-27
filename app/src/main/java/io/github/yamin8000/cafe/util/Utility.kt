@@ -30,7 +30,7 @@ object Utility {
         Logger.d(stackTraceToString)
         //navigate user to a special crash screen
         val bundle = bundleOf(STACKTRACE to stackTraceToString)
-        this.findNavController().navigate(R.id.crashFragment, bundle)
+        this.navigate(R.id.crashFragment, bundle)
     }
 
     /**
@@ -93,10 +93,15 @@ object Utility {
 
     object Alerts {
 
-        fun Fragment.toast(message: String, duration: Int = Toast.LENGTH_SHORT): Toast {
-            val toast = Toast.makeText(context, message, duration)
-            toast.show()
-            return toast
+        fun Fragment.toast(message: String, duration: Int = Toast.LENGTH_SHORT): Toast? {
+            return try {
+                val toast = Toast.makeText(context, message, duration)
+                toast.show()
+                toast
+            } catch (e: Exception) {
+                handleCrash(e)
+                null
+            }
         }
 
         fun Fragment.showNullDbError() {
@@ -107,8 +112,13 @@ object Utility {
             message: String,
             length: Int = Snackbar.LENGTH_LONG
         ): Snackbar? {
-            val root = this.view
-            return if (root != null) createSnack(root, message, length) else null
+            return try {
+                val root = this.view
+                if (root != null) createSnack(root, message, length) else null
+            } catch (e: Exception) {
+                toast(message)
+                null
+            }
         }
 
         private fun createSnack(

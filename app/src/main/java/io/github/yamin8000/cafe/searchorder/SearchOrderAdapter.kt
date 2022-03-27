@@ -4,28 +4,26 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import io.github.yamin8000.cafe.databinding.SearchOrderItemBinding
-import io.github.yamin8000.cafe.db.entities.order.Order
-import io.github.yamin8000.cafe.db.entities.order.OrderDetail
+import io.github.yamin8000.cafe.db.entities.relatives.OrderWithDetails
 
 class SearchOrderAdapter(
-    private val orders: List<Order>,
-    private val orderDetails: List<OrderDetail>,
+    private val orders: List<OrderWithDetails>,
     private val deliverListener: (Long) -> Unit
 ) : RecyclerView.Adapter<SearchOrderHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchOrderHolder {
         val inflater = LayoutInflater.from(parent.context)
         val itemBinding = SearchOrderItemBinding.inflate(inflater, parent, false)
-        return SearchOrderHolder(itemBinding, orders, orderDetails, deliverListener)
+        return SearchOrderHolder(itemBinding, orders, deliverListener)
     }
 
     override fun onBindViewHolder(holder: SearchOrderHolder, position: Int) {
         val model = orders[position]
 
-        holder.setOrderDate(model.date)
-        holder.setOrderDayId(model.dayId)
-        holder.setOrderStatus(model.status)
-        holder.setOrderDetails(model.detailIds)
+        holder.setOrderDate(model.order.date)
+        holder.setOrderDayId(model.order.dayId)
+        holder.setOrderStatus(model.order.status)
+        holder.setOrderDetails(model.orderDetails)
     }
 
     override fun getItemCount() = orders.size

@@ -35,12 +35,10 @@
         <item name="materialCardViewStyle">@style/Widget.App.CardView</item>
     </style>
 
-    <style name="ClickableTextView" parent="Widget.MaterialComponents.TextView">
-        <item name="android:clickable">true</item>
+    <style name="WideTextView" parent="Widget.MaterialComponents.TextView">
         <item name="android:textSize">16sp</item>
         <item name="android:padding">16dp</item>
-        <item name="android:drawablePadding">8dp</item>
-        <item name="android:background">@drawable/ripple_back</item>
+        <item name="android:drawablePadding">4dp</item>
     </style>
 
 

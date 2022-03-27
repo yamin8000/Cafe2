@@ -9,7 +9,11 @@ interface RelativeDao {
 
     @Transaction
     @Query("select * from product")
-    suspend fun allProductsAndCategories(): List<ProductAndCategory>
+    suspend fun getProductsAndCategories(): List<ProductAndCategory>
+
+    @Transaction
+    @Query("select * from `order`")
+    suspend fun getOrderWithDetails(): List<OrderWithDetails>
 
     /*@Transaction
     @Query("select * from category where product.id = :id")

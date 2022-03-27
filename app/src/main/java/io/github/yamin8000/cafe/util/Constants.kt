@@ -23,13 +23,6 @@ object Constants {
     const val PROMPT_NEGATIVE = "prompt_negative"
     const val PROMPT_RESULT = "prompt_result"
 
-    //product
-    const val PRODUCT = "product"
-    const val PRODUCT_NAME = "product_name"
-    const val PRODUCT_IMAGE_ID = "product_image_id"
-    const val PRODUCT_PRICE = "product_price"
-    const val PRODUCT_CATEGORY_ID = "product_category_id"
-
     //icon picker
     const val ICON_PICKER = "icon_picker"
     const val ICON_PICKER_RESULT = "icon_picker_result"

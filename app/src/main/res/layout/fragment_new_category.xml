@@ -34,7 +34,7 @@
             android:id="@+id/category_image"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/category"
+            android:contentDescription="@string/category_image"
             tools:srcCompat="@drawable/pack_coffee_beans" />
 
         <Button

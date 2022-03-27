@@ -45,7 +45,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/product_category_input"
-            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:startIconDrawable="@drawable/ic_category"

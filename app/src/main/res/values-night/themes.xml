@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Cafe" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.Cafe" parent="Theme.Material3.DayNight">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/secondaryColor</item>
         <item name="colorPrimaryVariant">@color/secondaryLightColor</item>
@@ -14,7 +14,11 @@
         <!-- Customize your theme here. -->
         <item name="fontFamily">@font/samimbold</item>
         <item name="android:fontFamily">@font/samimbold</item>
-        <item name="colorSurface">@color/primaryColor</item>
         <item name="android:textColor">@color/primaryTextColor</item>
+        <!--        Material 3  -->
+        <item name="colorSurface">@color/primaryColor</item>
+        <item name="colorOnBackground">@color/primaryColor</item>
+        <item name="colorOnPrimaryContainer">?colorOnPrimary</item>
+        <item name="colorPrimaryContainer">@color/secondaryLightColor</item>
     </style>
 </resources>

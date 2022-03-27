@@ -74,4 +74,6 @@
     <string name="address">نشانی</string>
     <string name="subscribers">اشتراک ها</string>
     <string name="subscriber">اشتراک</string>
+    <string name="name_family">نام و نام خانوادگی</string>
+    <string name="category_image">تصویر دسته</string>
 </resources>

@@ -1,20 +1,35 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Cafe" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.Cafe" parent="Theme.Material3.DayNight">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/primaryColor</item>
         <item name="colorPrimaryVariant">@color/primaryLightColor</item>
         <item name="colorOnPrimary">@color/primaryTextColor</item>
+        <item name="colorPrimaryContainer">@color/secondaryLightColor</item>
+        <item name="colorOnPrimaryContainer">?colorOnSecondary</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/secondaryColor</item>
         <item name="colorSecondaryVariant">@color/secondaryLightColor</item>
         <item name="colorOnSecondary">@color/secondaryTextColor</item>
+        <item name="colorSecondaryContainer">@color/primaryLightColor</item>
+        <item name="colorOnSecondaryContainer">?colorOnPrimary</item>
+        <!-- Tertiary color. -->
+        <!-- Inverse color. -->
+        <item name="colorSurfaceInverse">?colorPrimaryDark</item>
+        <item name="colorOnSurfaceInverse">?colorOnPrimary</item>
+        <item name="colorPrimaryInverse">?colorSecondary</item>
+        <!-- Neutral color. -->
+        <item name="colorSurface">@color/secondaryLightColor2</item>
+        <item name="colorSurfaceVariant">@color/secondaryLightColor2</item>
+        <item name="colorOnSurfaceVariant">?colorPrimaryDark</item>
+        <item name="colorOutline">?colorPrimaryVariant</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!--        Material 3  -->
+        <item name="colorOnBackground">@color/primaryColor</item>
         <!-- Customize your theme here. -->
         <item name="fontFamily">@font/samimbold</item>
         <item name="android:fontFamily">@font/samimbold</item>
-        <item name="colorSurface">@color/secondaryLightColor2</item>
         <item name="android:colorBackground">@color/themeBackground</item>
         <item name="android:textColor">@color/secondaryTextColor</item>
         <item name="materialCardViewStyle">@style/Widget.App.CardView</item>

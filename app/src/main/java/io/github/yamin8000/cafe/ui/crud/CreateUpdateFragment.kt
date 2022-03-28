@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 abstract class CreateUpdateFragment<T : Parcelable, VB : ViewBinding>(
     private val defaultValue: T,
     inflater: Inflater<VB>
-) : BaseFragment<VB>(inflater) {
+) : BaseFragment<VB>(inflater), Crud {
 
     protected val ioScope by lazy(LazyThreadSafetyMode.NONE) { CoroutineScope(Dispatchers.IO) }
     protected val mainScope by lazy(LazyThreadSafetyMode.NONE) { CoroutineScope(Dispatchers.Main) }

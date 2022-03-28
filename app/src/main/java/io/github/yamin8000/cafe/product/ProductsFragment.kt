@@ -4,11 +4,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import io.github.yamin8000.cafe.R
 import io.github.yamin8000.cafe.db.entities.product.Product
 import io.github.yamin8000.cafe.db.entities.relatives.ProductAndCategory
-import io.github.yamin8000.cafe.ui.crud.CrudFragment
+import io.github.yamin8000.cafe.ui.crud.ReadDeleteFragment
 import io.github.yamin8000.cafe.util.Constants.db
 import io.github.yamin8000.cafe.util.Utility.Alerts.snack
 
-class ProductsFragment : CrudFragment<ProductAndCategory, ProductsHolder>(R.id.newProductFragment) {
+class ProductsFragment : ReadDeleteFragment<ProductAndCategory, ProductsHolder>(R.id.newProductFragment) {
 
     override suspend fun getItems(): List<ProductAndCategory> {
         return db?.relativeDao()?.getProductsAndCategories() ?: listOf()

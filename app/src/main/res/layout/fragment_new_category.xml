@@ -1,24 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.helper.widget.Flow
+            android:id="@+id/new_category_flow"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:orientation="vertical"
+            app:constraint_referenced_ids="category_name_input,category_image_button,category_image"
+            app:flow_maxElementsWrap="1"
+            app:flow_verticalGap="8dp"
+            app:flow_wrapMode="none"
+            app:layout_constraintBottom_toTopOf="@+id/add_category_confirm"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/category_name_input"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            tools:layout_editor_absoluteX="32dp"
+            tools:layout_editor_absoluteY="16dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/category_name_edit"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:hint="@string/category"
                 android:singleLine="true" />
 
@@ -26,23 +46,32 @@
 
         <Button
             android:id="@+id/category_image_button"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/choose_image_optional" />
+            android:text="@string/choose_image_optional"
+            tools:layout_editor_absoluteX="32dp"
+            tools:layout_editor_absoluteY="82dp" />
 
         <ImageView
             android:id="@+id/category_image"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:contentDescription="@string/category_image"
+            tools:layout_editor_absoluteX="32dp"
+            tools:layout_editor_absoluteY="130dp"
             tools:srcCompat="@drawable/pack_coffee_beans" />
 
         <Button
             android:id="@+id/add_category_confirm"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:text="@string/confirm" />
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/confirm"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/new_category_flow"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/new_category_flow"
+            app:layout_constraintTop_toBottomOf="@+id/new_category_flow"
+            app:layout_constraintWidth_percent=".33" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

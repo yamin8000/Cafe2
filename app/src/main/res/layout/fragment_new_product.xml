@@ -64,6 +64,7 @@
             android:id="@+id/product_price_input"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            app:prefixText="@string/rial"
             app:startIconDrawable="@drawable/ic_money"
             tools:layout_editor_absoluteX="171dp"
             tools:layout_editor_absoluteY="108dp">

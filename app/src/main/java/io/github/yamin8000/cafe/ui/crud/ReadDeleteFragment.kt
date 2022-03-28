@@ -27,9 +27,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-abstract class CrudFragment<T, VH : RecyclerView.ViewHolder>(
+abstract class ReadDeleteFragment<T, VH : RecyclerView.ViewHolder>(
     private val addEditDestination: Int,
-) : BaseFragment<FragmentCrudBinding>({ FragmentCrudBinding.inflate(it) }) {
+) : BaseFragment<FragmentCrudBinding>({ FragmentCrudBinding.inflate(it) }), Crud {
 
     protected val ioScope by lazy(LazyThreadSafetyMode.NONE) { CoroutineScope(Dispatchers.IO) }
     private val mainScope by lazy(LazyThreadSafetyMode.NONE) { CoroutineScope(Dispatchers.Main) }

@@ -77,7 +77,7 @@ class NewOrderFragment :
     private suspend fun orderAddSuccess(orderId: Long) {
         insertOrderDetails(orderId)
         orderDetails.clear()
-        snack(getString(R.string.order_created))
+        snack(getString(R.string.item_add_success, getString(R.string.order)))
         findNavController().navigate(R.id.action_newOrderFragment_to_searchOrdersFragment)
     }
 
@@ -124,7 +124,6 @@ class NewOrderFragment :
 
     private fun itemChanged(pair: Pair<Long, Int>) {
         val (productId, quantity) = pair
-        val productName = products.find { it.id == productId }?.name ?: ""
         val oldItem = orderDetails.find { it.productId == productId }
         if (oldItem == null) orderDetails.add(createOrderDetail(productId, quantity))
         else updateOrderDetail(quantity, oldItem)
@@ -151,13 +150,12 @@ class NewOrderFragment :
     }
 
     private fun getOrderDetails(): String {
-        val detail = buildString {
+        return buildString {
             orderDetails.forEach {
                 append(createDetailSummary(it.productId, it.quantity))
                 append("\n")
             }
         }
-        return getString(R.string.order_details, detail)
     }
 
     private fun createDetailSummary(
@@ -167,7 +165,7 @@ class NewOrderFragment :
         val unit = getString(R.string.adad)
         return buildString {
             append(products.find { it.id == productId }?.name)
-            append(" ==> ")
+            append(" ")
             append("${quantity.spell()} $unit")
         }
     }

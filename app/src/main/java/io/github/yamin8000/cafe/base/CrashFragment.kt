@@ -12,9 +12,15 @@ class CrashFragment : BaseFragment<FragmentCrashBinding>({ FragmentCrashBinding.
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.crashText.setOnClickListener { activity?.finish() }
+        var toggle = true
+
+        binding.crashText.setOnClickListener {
+            if (toggle)
+                activity?.finish()
+        }
         binding.crashImage.setOnClickListener { activity?.finish() }
         binding.crashText.setOnLongClickListener {
+            toggle = false
             binding.crashText.text =
                 arguments?.getString(STACKTRACE) ?: getString(R.string.app_crashed)
             true

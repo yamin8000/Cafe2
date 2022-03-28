@@ -3,10 +3,10 @@ package io.github.yamin8000.cafe.subscriber
 import androidx.recyclerview.widget.GridLayoutManager
 import io.github.yamin8000.cafe.R
 import io.github.yamin8000.cafe.db.entities.subscriber.Subscriber
-import io.github.yamin8000.cafe.ui.crud.CrudFragment
+import io.github.yamin8000.cafe.ui.crud.ReadDeleteFragment
 import io.github.yamin8000.cafe.util.Constants.db
 
-class SubscriberFragment : CrudFragment<Subscriber, SubscriberHolder>(R.id.newSubscriberFragment) {
+class SubscriberFragment : ReadDeleteFragment<Subscriber, SubscriberHolder>(R.id.newSubscriberFragment) {
 
     override suspend fun getItems(): List<Subscriber> {
         return db?.subscriberDao()?.getAll() ?: emptyList()

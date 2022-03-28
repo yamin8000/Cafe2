@@ -16,6 +16,7 @@ import com.orhanobut.logger.Logger
 import io.github.yamin8000.cafe.R
 import io.github.yamin8000.cafe.util.Constants.IS_EDIT_MODE
 import io.github.yamin8000.cafe.util.Constants.STACKTRACE
+import java.math.BigInteger
 
 object Utility {
 
@@ -63,6 +64,21 @@ object Utility {
             this.findNavController().navigate(destination, args)
         } catch (exception: Exception) {
             handleCrash(exception)
+        }
+    }
+
+    /**
+     * Format string number
+     *
+     * @return number in form of 1,000,000
+     */
+    fun String?.numFormat(): String {
+        if (this == null) return "0"
+        return try {
+            val number = BigInteger(this)
+            String.format("%,d", number)
+        } catch (e: Exception) {
+            this
         }
     }
 

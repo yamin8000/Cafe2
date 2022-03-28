@@ -5,8 +5,11 @@ import io.github.yamin8000.cafe.R
 import io.github.yamin8000.cafe.databinding.SearchOrderItemBinding
 import io.github.yamin8000.cafe.db.entities.order.OrderDetail
 import io.github.yamin8000.cafe.db.entities.relatives.OrderWithDetails
+import io.github.yamin8000.cafe.db.entities.subscriber.Subscriber
 import io.github.yamin8000.cafe.model.OrderStatus
 import io.github.yamin8000.cafe.util.DateTimeUtils.toJalaliIso
+import io.github.yamin8000.cafe.util.Utility.Views.gone
+import io.github.yamin8000.cafe.util.Utility.Views.visible
 import java.time.ZonedDateTime
 
 class SearchOrderHolder(
@@ -18,34 +21,35 @@ class SearchOrderHolder(
     private val context = binding.root.context
 
     init {
+        deliverClickEnablerHandler()
+        deliverClickListener()
+    }
+
+    private fun deliverClickEnablerHandler() {
         if (adapterPosition != RecyclerView.NO_POSITION) {
-            when (orders[adapterPosition].order.status) {
+            when (orders[adapterPosition].orderAndSubscriber.order.status) {
                 OrderStatus.Registered -> binding.searchOrderDeliverButton.isEnabled = true
                 OrderStatus.Delivered -> binding.searchOrderDeliverButton.isEnabled = false
             }
         }
-        deliverClickListener()
     }
 
     private fun deliverClickListener() {
         binding.searchOrderDeliverButton.setOnClickListener {
             if (adapterPosition != RecyclerView.NO_POSITION) {
-                deliverListener(orders[adapterPosition].order.id)
-                orders[adapterPosition].order.status = OrderStatus.Delivered
+                deliverListener(orders[adapterPosition].orderAndSubscriber.order.id)
+                orders[adapterPosition].orderAndSubscriber.order.status = OrderStatus.Delivered
                 setOrderStatus(OrderStatus.Delivered)
             }
         }
     }
 
     fun setOrderDayId(dayId: Int) {
-        binding.searchOrderDayId.text = context.getString(R.string.order_day_id, dayId.toString())
+        binding.searchOrderDayId.text = dayId.toString()
     }
 
     fun setOrderDate(dateTime: ZonedDateTime) {
-        binding.searchOrderDate.text = context.getString(
-            R.string.order_date,
-            dateTime.toJalaliIso()
-        )
+        binding.searchOrderDate.text = dateTime.toJalaliIso()
     }
 
     fun setOrderStatus(orderStatus: OrderStatus) {
@@ -60,18 +64,41 @@ class SearchOrderHolder(
                 binding.searchOrderDeliverButton.isEnabled = true
             }
         }
-        binding.searchOrderStatus.text = context.getString(R.string.order_status, statusText)
+        binding.searchOrderStatus.text = statusText
     }
 
     fun setOrderDetails(orderDetailIds: List<OrderDetail>) {
-        /*val unit = context.getString(R.string.adad)
-        val candidDetails = orderDetails.filter { it.id in orderDetailIds }
-        val detail = buildString {
-            candidDetails.forEach { this.append("${it.name} ==> ${it.quantity.spell()} $unit\n") }
-        }*/
-        val detail = buildString {
-            orderDetailIds.forEach { this.append("${it.summary}\n") }
-        }
-        binding.searchOrderDetails.text = context.getString(R.string.order_details, detail)
+        val detail = buildString { orderDetailIds.forEach { this.append("${it.summary}\n") } }
+        binding.searchOrderDetails.text = detail
+    }
+
+    fun setDescription(description: String?) {
+        if (description == null) hideDescription()
+        else showDescription(description)
+    }
+
+    private fun showDescription(description: String) {
+        binding.searchOrderDescription.text = description
+        binding.searchOrderDescriptionHolder.visible()
+        binding.searchOrderDescription.visible()
+    }
+
+    private fun hideDescription() {
+        binding.searchOrderDescription.gone()
+        binding.searchOrderDescriptionHolder.gone()
+    }
+
+    fun setSubscriber(subscriber: Subscriber?) {
+        if (subscriber == null) hideSubscriber()
+        else showSubscriber(subscriber)
+    }
+
+    private fun showSubscriber(subscriber: Subscriber) {
+
+    }
+
+    private fun hideSubscriber() {
+        binding.searchOrderSubscriber.gone()
+        binding.searchOrderSubscriberHolder.gone()
     }
 }

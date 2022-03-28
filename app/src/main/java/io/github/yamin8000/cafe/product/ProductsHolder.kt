@@ -5,6 +5,7 @@ import io.github.yamin8000.cafe.databinding.ProductItemBinding
 import io.github.yamin8000.cafe.db.entities.relatives.ProductAndCategory
 import io.github.yamin8000.cafe.ui.crud.CrudHolder
 import io.github.yamin8000.cafe.util.Utility.Views.setImageFromResourceId
+import io.github.yamin8000.cafe.util.Utility.numFormat
 
 class ProductsHolder(
     asyncList: AsyncListDiffer<ProductAndCategory>,
@@ -20,7 +21,7 @@ class ProductsHolder(
         productAndCategory.product?.let { product ->
             binding.productItemName.text = product.name
             binding.productItemCategory.text = productAndCategory.category.name
-            binding.productItemPrice.text = product.price.toString()
+            binding.productItemPrice.text = product.price.toString().numFormat()
             product.imageId?.let { imageId ->
                 binding.productItemImage.setImageFromResourceId(imageId)
             }

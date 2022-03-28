@@ -20,10 +20,12 @@ class SearchOrderAdapter(
     override fun onBindViewHolder(holder: SearchOrderHolder, position: Int) {
         val model = orders[position]
 
-        holder.setOrderDate(model.order.date)
-        holder.setOrderDayId(model.order.dayId)
-        holder.setOrderStatus(model.order.status)
+        holder.setOrderDate(model.orderAndSubscriber.order.date)
+        holder.setOrderDayId(model.orderAndSubscriber.order.dayId)
+        holder.setOrderStatus(model.orderAndSubscriber.order.status)
         holder.setOrderDetails(model.orderDetails)
+        holder.setDescription(model.orderAndSubscriber.order.description)
+        holder.setSubscriber(model.orderAndSubscriber.subscriber)
     }
 
     override fun getItemCount() = orders.size

@@ -15,9 +15,84 @@
             android:id="@+id/search_order_deliver_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/deliver"
-            tools:layout_editor_absoluteX="157dp"
-            tools:layout_editor_absoluteY="182dp" />
+            android:text="@string/deliver" />
+
+        <TextView
+            android:id="@+id/search_order_description_holder"
+            style="@style/WideTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/description"
+            app:layout_constraintWidth_percent=".3"
+            tools:layout_editor_absoluteX="279dp"
+            tools:layout_editor_absoluteY="273dp" />
+
+        <TextView
+            android:id="@+id/search_order_day_id_holder"
+            style="@style/WideTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/order_day_id"
+            app:layout_constraintWidth_percent=".3"
+            tools:layout_editor_absoluteX="279dp"
+            tools:layout_editor_absoluteY="8dp" />
+
+        <TextView
+            android:id="@+id/search_order_date_holder"
+            style="@style/WideTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/order_date"
+            app:layout_constraintWidth_percent=".3"
+            tools:layout_editor_absoluteX="279dp"
+            tools:layout_editor_absoluteY="74dp" />
+
+        <TextView
+            android:id="@+id/search_order_status_holder"
+            style="@style/WideTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/order_status"
+            app:layout_constraintWidth_percent=".3"
+            tools:layout_editor_absoluteX="279dp"
+            tools:layout_editor_absoluteY="207dp" />
+
+        <TextView
+            android:id="@+id/search_order_details_holder"
+            style="@style/WideTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/order_details"
+            app:layout_constraintWidth_percent=".3"
+            tools:layout_editor_absoluteX="279dp"
+            tools:layout_editor_absoluteY="140dp" />
+
+        <TextView
+            android:id="@+id/search_order_subscriber_holder"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/subscriber"
+            tools:layout_editor_absoluteX="306dp"
+            tools:layout_editor_absoluteY="339dp" />
+
+        <TextView
+            android:id="@+id/search_order_subscriber"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            tools:layout_editor_absoluteX="110dp"
+            tools:layout_editor_absoluteY="339dp"
+            tools:text="@tools:sample/full_names" />
+
+        <TextView
+            android:id="@+id/search_order_description"
+            style="@style/WideTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="273dp"
+            tools:text="@tools:sample/lorem" />
 
         <TextView
             android:id="@+id/search_order_details"
@@ -25,9 +100,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            app:drawableRightCompat="@drawable/ic_beverage"
-            tools:layout_editor_absoluteX="174dp"
-            tools:layout_editor_absoluteY="64dp"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="140dp"
             tools:text="@tools:sample/lorem" />
 
         <TextView
@@ -36,9 +110,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            app:drawableRightCompat="@drawable/ic_coffee_maker"
-            tools:layout_editor_absoluteX="174dp"
-            tools:layout_editor_absoluteY="103dp"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="207dp"
             tools:text="@tools:sample/lorem" />
 
         <TextView
@@ -47,9 +120,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            app:drawableRightCompat="@drawable/ic_date"
-            tools:layout_editor_absoluteX="174dp"
-            tools:layout_editor_absoluteY="24dp"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="74dp"
             tools:text="@tools:sample/date/ddmmyy" />
 
         <TextView
@@ -58,21 +130,19 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            app:drawableRightCompat="@drawable/ic_day"
-            tools:layout_editor_absoluteX="174dp"
-            tools:layout_editor_absoluteY="143dp"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="8dp"
             tools:text="@tools:sample/us_zipcodes" />
 
         <androidx.constraintlayout.helper.widget.Flow
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp"
-            android:orientation="vertical"
-            app:constraint_referenced_ids="search_order_day_id,search_order_date,search_order_details,search_order_status,search_order_deliver_button"
-            app:flow_verticalGap="16dp"
-            app:flow_verticalStyle="packed"
-            app:flow_wrapMode="none"
+            android:orientation="horizontal"
+            app:constraint_referenced_ids="search_order_day_id,search_order_day_id_holder,search_order_date,search_order_date_holder,search_order_details,search_order_details_holder,search_order_status,search_order_status_holder,search_order_description,search_order_description_holder,search_order_subscriber,search_order_subscriber_holder,search_order_deliver_button"
+            app:flow_horizontalGap="4dp"
+            app:flow_maxElementsWrap="2"
+            app:flow_verticalGap="8dp"
+            app:flow_wrapMode="aligned"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.fragment.findNavController
+import com.github.yamin8000.ppn.Digits.Companion.spell
 import io.github.yamin8000.cafe.R
 import io.github.yamin8000.cafe.databinding.FragmentNewOrderBinding
 import io.github.yamin8000.cafe.db.entities.day.Day
@@ -22,7 +23,6 @@ import io.github.yamin8000.cafe.util.Utility.Alerts.snack
 import io.github.yamin8000.cafe.util.Utility.Alerts.toast
 import io.github.yamin8000.cafe.util.Utility.handleCrash
 import io.github.yamin8000.cafe.util.Utility.navigate
-import ir.yamin.digits.Digits.Companion.spell
 import kotlinx.coroutines.*
 import java.time.LocalDate
 import java.time.ZoneId

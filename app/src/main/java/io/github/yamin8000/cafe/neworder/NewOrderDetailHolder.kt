@@ -1,9 +1,9 @@
 package io.github.yamin8000.cafe.neworder
 
 import androidx.recyclerview.widget.RecyclerView
+import com.github.yamin8000.ppn.Digits.Companion.spell
 import io.github.yamin8000.cafe.databinding.NewOrderDetailItemBinding
 import io.github.yamin8000.cafe.db.entities.product.Product
-import ir.yamin.digits.Digits.Companion.spell
 
 class NewOrderDetailHolder(
     private val binding: NewOrderDetailItemBinding,

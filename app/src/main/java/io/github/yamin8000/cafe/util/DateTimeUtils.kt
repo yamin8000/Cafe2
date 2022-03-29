@@ -12,6 +12,8 @@ object DateTimeUtils {
 
     fun now(): String = LocalDateTime.now().toIso()
 
+    fun zonedNow() = ZonedDateTime.now()
+
     fun String.toDateTime() = LocalDateTime.parse(this)
 
     fun LocalDateTime.toIso(): String = DateTimeFormatter.ISO_DATE_TIME.format(this)

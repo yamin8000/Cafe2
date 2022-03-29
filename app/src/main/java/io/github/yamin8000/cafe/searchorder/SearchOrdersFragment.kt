@@ -33,7 +33,7 @@ class SearchOrdersFragment :
 
     private fun handleOrdersList() = mainScope.launch {
         val orders = db?.relativeDao()?.getOrderWithDetails() ?: emptyList()
-        if (orders.isNotEmpty()) showOrders(orders)
+        if (orders.isNotEmpty()) showOrders(orders.asReversed())
         else showEmptyAdapter()
     }
 

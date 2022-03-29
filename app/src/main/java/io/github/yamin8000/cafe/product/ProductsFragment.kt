@@ -1,6 +1,6 @@
 package io.github.yamin8000.cafe.product
 
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import io.github.yamin8000.cafe.R
 import io.github.yamin8000.cafe.db.entities.product.Product
 import io.github.yamin8000.cafe.db.entities.relatives.ProductAndCategory
@@ -8,7 +8,8 @@ import io.github.yamin8000.cafe.ui.crud.ReadDeleteFragment
 import io.github.yamin8000.cafe.util.Constants.db
 import io.github.yamin8000.cafe.util.Utility.Alerts.snack
 
-class ProductsFragment : ReadDeleteFragment<ProductAndCategory, ProductsHolder>(R.id.newProductFragment) {
+class ProductsFragment :
+    ReadDeleteFragment<ProductAndCategory, ProductsHolder>(R.id.newProductFragment) {
 
     override suspend fun getItems(): List<ProductAndCategory> {
         return db?.relativeDao()?.getProductsAndCategories() ?: listOf()
@@ -28,7 +29,7 @@ class ProductsFragment : ReadDeleteFragment<ProductAndCategory, ProductsHolder>(
 
     override fun fillList() {
         val hasProducts = items.isNotEmpty() && items.all { it.product != null }
-        binding.crudList.layoutManager = LinearLayoutManager(context)
+        context?.let { binding.crudList.layoutManager = GridLayoutManager(it, 2) }
         if (hasProducts) prepareList()
         else binding.crudList.adapter = emptyAdapter
     }

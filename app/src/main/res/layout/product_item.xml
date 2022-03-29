@@ -16,13 +16,16 @@
             android:id="@+id/product_item_detail_flow"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:orientation="vertical"
+            android:padding="8dp"
             app:constraint_referenced_ids="product_item_category,product_item_name,product_item_price"
+            app:flow_verticalGap="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/product_item_image"
+            app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -43,6 +46,7 @@
             android:gravity="center"
             android:textSize="14sp"
             tools:layout_editor_absoluteX="50dp"
+            tools:layout_editor_absoluteY="24dp"
             tools:text="@tools:sample/lorem" />
 
         <TextView
@@ -56,7 +60,7 @@
 
         <ImageView
             android:id="@+id/product_item_image"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="0dp"
             android:scaleType="fitCenter"
             app:layout_constraintBottom_toBottomOf="parent"

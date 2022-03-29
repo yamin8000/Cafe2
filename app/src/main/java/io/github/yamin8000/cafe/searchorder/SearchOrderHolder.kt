@@ -96,7 +96,7 @@ class SearchOrderHolder(
     }
 
     private fun showSubscriber(subscriber: Subscriber) {
-        binding.searchOrderSubscriber.text = subscriber.name
+        binding.searchOrderSubscriber.text = subscriber.toString()
         binding.searchOrderSubscriber.visible()
         binding.searchOrderSubscriberHolder.visible()
     }

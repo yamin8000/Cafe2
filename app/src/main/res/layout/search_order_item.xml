@@ -69,14 +69,17 @@
 
         <TextView
             android:id="@+id/search_order_subscriber_holder"
+            style="@style/WideTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/subscriber"
+            app:layout_constraintWidth_percent=".3"
             tools:layout_editor_absoluteX="306dp"
             tools:layout_editor_absoluteY="339dp" />
 
         <TextView
             android:id="@+id/search_order_subscriber"
+            style="@style/WideTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -142,7 +145,7 @@
             app:flow_horizontalGap="4dp"
             app:flow_maxElementsWrap="2"
             app:flow_verticalGap="8dp"
-            app:flow_wrapMode="aligned"
+            app:flow_wrapMode="chain"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

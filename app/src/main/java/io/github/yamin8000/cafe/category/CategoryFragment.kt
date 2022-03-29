@@ -22,7 +22,7 @@ class CategoryFragment : ReadDeleteFragment<Category, CategoryHolder>(R.id.newCa
     override fun fillList() {
         val adapter = CategoryAdapter(this::updateCallback, this::deleteCallback)
         binding.crudList.adapter = adapter
-        binding.crudList.layoutManager = GridLayoutManager(context, 2)
+        context.let { binding.crudList.layoutManager = GridLayoutManager(it, 2) }
         adapter.asyncList.submitList(items)
     }
 }

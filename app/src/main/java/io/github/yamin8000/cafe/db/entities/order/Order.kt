@@ -19,6 +19,7 @@ import java.time.ZonedDateTime
 data class Order(
     val dayId: Int,
     val date: ZonedDateTime,
+    var totalPrice: Long = 0,
     @ColumnInfo(name = "subscriberId", index = true)
     val subscriberId: Long? = null,
     val description: String? = null,

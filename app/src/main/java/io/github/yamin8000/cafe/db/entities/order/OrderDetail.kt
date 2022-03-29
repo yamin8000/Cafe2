@@ -29,7 +29,7 @@ data class OrderDetail(
     @ColumnInfo(name = "productId", index = true)
     val productId: Long,
     var quantity: Int,
-    var summary: String,
+    var summary: String = "",
     @ColumnInfo(name = "orderId", index = true)
     var orderId: Long? = null,
     val description: String? = null,

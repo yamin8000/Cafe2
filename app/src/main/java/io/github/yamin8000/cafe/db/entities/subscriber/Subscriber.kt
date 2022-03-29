@@ -15,4 +15,14 @@ data class Subscriber(
     var id: Long = 0
 ) : Parcelable {
     constructor() : this("", "", "")
+
+    //this method is overridden for using this class in auto complete view
+    override fun toString() = buildString {
+        append("#")
+        append(id)
+        append(" ")
+        append(name)
+        append(" ")
+        append(phone)
+    }
 }

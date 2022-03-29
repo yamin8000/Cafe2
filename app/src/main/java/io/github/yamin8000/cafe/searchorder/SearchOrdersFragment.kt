@@ -2,13 +2,14 @@ package io.github.yamin8000.cafe.searchorder
 
 import android.os.Bundle
 import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
 import io.github.yamin8000.cafe.R
 import io.github.yamin8000.cafe.databinding.FragmentSearchOrdersBinding
 import io.github.yamin8000.cafe.db.entities.relatives.OrderWithDetails
 import io.github.yamin8000.cafe.model.OrderStatus
+import io.github.yamin8000.cafe.ui.recyclerview.EmptyAdapter
 import io.github.yamin8000.cafe.ui.util.BaseFragment
 import io.github.yamin8000.cafe.util.Constants.db
-import io.github.yamin8000.cafe.util.Utility.Alerts.snack
 import io.github.yamin8000.cafe.util.Utility.handleCrash
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -24,28 +25,34 @@ class SearchOrdersFragment :
         super.onViewCreated(view, savedInstanceState)
 
         try {
-            mainScope.launch {
-                val orders = db?.relativeDao()?.getOrderWithDetails() ?: emptyList()
-                if (orders.isNotEmpty()) fillList(orders)
-                else snack(getString(R.string.no_order_registered))
-            }
+            handleOrdersList()
         } catch (e: Exception) {
             handleCrash(e)
         }
     }
 
-    private fun fillList(orders: List<OrderWithDetails>) {
-        val adapter = SearchOrderAdapter(orders) { orderId ->
-            ioScope.launch {
-                val orderDao = db?.orderDao()
-                val order = orderDao?.getById(orderId)
-                order?.let {
-                    it.status = OrderStatus.Delivered
-                    orderDao.update(it)
-                }
-            }
-        }
+    private fun handleOrdersList() = mainScope.launch {
+        val orders = db?.relativeDao()?.getOrderWithDetails() ?: emptyList()
+        if (orders.isNotEmpty()) showOrders(orders)
+        else showEmptyAdapter()
+    }
+
+    private fun showEmptyAdapter() {
+        val adapter = EmptyAdapter(getString(R.string.no_order_registered))
+        binding.searchOrderList.layoutManager = LinearLayoutManager(context)
         binding.searchOrderList.adapter = adapter
-        adapter.notifyDataSetChanged()
+    }
+
+    private fun showOrders(orders: List<OrderWithDetails>) {
+        val adapter = SearchOrderAdapter(this::deliverOrder)
+        binding.searchOrderList.adapter = adapter
+        adapter.asyncList.submitList(orders)
+    }
+
+    private fun deliverOrder(orderId: Long) = ioScope.launch {
+        db?.orderDao()?.getById(orderId)?.let { order ->
+            order.status = OrderStatus.Delivered
+            db?.orderDao()?.update(order)
+        }
     }
 }

@@ -1,5 +1,6 @@
 package io.github.yamin8000.cafe.searchorder
 
+import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.RecyclerView
 import io.github.yamin8000.cafe.R
 import io.github.yamin8000.cafe.databinding.SearchOrderItemBinding
@@ -14,7 +15,7 @@ import java.time.ZonedDateTime
 
 class SearchOrderHolder(
     private val binding: SearchOrderItemBinding,
-    private val orders: List<OrderWithDetails>,
+    private val asyncList: AsyncListDiffer<OrderWithDetails>,
     private val deliverListener: (Long) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
 
@@ -27,7 +28,7 @@ class SearchOrderHolder(
 
     private fun deliverClickEnablerHandler() {
         if (adapterPosition != RecyclerView.NO_POSITION) {
-            when (orders[adapterPosition].orderAndSubscriber.order.status) {
+            when (asyncList.currentList[adapterPosition].orderAndSubscriber.order.status) {
                 OrderStatus.Registered -> binding.searchOrderDeliverButton.isEnabled = true
                 OrderStatus.Delivered -> binding.searchOrderDeliverButton.isEnabled = false
             }
@@ -37,8 +38,9 @@ class SearchOrderHolder(
     private fun deliverClickListener() {
         binding.searchOrderDeliverButton.setOnClickListener {
             if (adapterPosition != RecyclerView.NO_POSITION) {
-                deliverListener(orders[adapterPosition].orderAndSubscriber.order.id)
-                orders[adapterPosition].orderAndSubscriber.order.status = OrderStatus.Delivered
+                deliverListener(asyncList.currentList[adapterPosition].orderAndSubscriber.order.id)
+                asyncList.currentList[adapterPosition].orderAndSubscriber.order.status =
+                    OrderStatus.Delivered
                 setOrderStatus(OrderStatus.Delivered)
             }
         }
@@ -94,7 +96,9 @@ class SearchOrderHolder(
     }
 
     private fun showSubscriber(subscriber: Subscriber) {
-
+        binding.searchOrderSubscriber.text = subscriber.name
+        binding.searchOrderSubscriber.visible()
+        binding.searchOrderSubscriberHolder.visible()
     }
 
     private fun hideSubscriber() {

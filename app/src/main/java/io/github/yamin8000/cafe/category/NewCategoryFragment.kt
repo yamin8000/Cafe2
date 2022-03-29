@@ -51,7 +51,7 @@ class NewCategoryFragment :
             withContext(ioScope.coroutineContext) {
                 db?.categoryDao()?.update(item)
             }
-            snack(getString(R.string.category_edit_success))
+            snack(getString(R.string.item_edit_success, getString(R.string.category)))
             hideKeyboard()
         }
     }
@@ -79,7 +79,7 @@ class NewCategoryFragment :
     }
 
     private fun categoryAddSuccess() {
-        snack(getString(R.string.category_add_success))
+        snack(getString(R.string.item_add_success, getString(R.string.category)))
         clear()
     }
 

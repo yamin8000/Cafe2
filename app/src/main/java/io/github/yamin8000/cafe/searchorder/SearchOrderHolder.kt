@@ -7,7 +7,7 @@ import io.github.yamin8000.cafe.databinding.SearchOrderItemBinding
 import io.github.yamin8000.cafe.db.entities.order.OrderDetail
 import io.github.yamin8000.cafe.db.entities.relatives.OrderWithDetails
 import io.github.yamin8000.cafe.db.entities.subscriber.Subscriber
-import io.github.yamin8000.cafe.model.OrderStatus
+import io.github.yamin8000.cafe.db.entities.order.OrderStatus
 import io.github.yamin8000.cafe.util.DateTimeUtils.toJalaliIso
 import io.github.yamin8000.cafe.util.Utility.Views.gone
 import io.github.yamin8000.cafe.util.Utility.Views.visible

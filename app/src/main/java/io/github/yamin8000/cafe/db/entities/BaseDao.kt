@@ -7,9 +7,11 @@ import androidx.room.Update
 import androidx.sqlite.db.SimpleSQLiteQuery
 import androidx.sqlite.db.SupportSQLiteQuery
 
-abstract class BaseDao<T>(private val tableName: String) {
+abstract class BaseDao<T>(tableName: String) {
 
     private val baseQuery = "select * from `$tableName`"
+
+    private val baseWhereQuery = "$baseQuery where"
 
     @Insert
     abstract suspend fun insert(entity: T): Long
@@ -45,13 +47,23 @@ abstract class BaseDao<T>(private val tableName: String) {
 
     suspend fun getAllByIds(ids: List<Long>): List<T> {
         val params = ids.joinToString("")
-        return getAllByIds(SimpleSQLiteQuery("$baseQuery where id in ($params)"))
+        return getAllByIds(SimpleSQLiteQuery("$baseWhereQuery id in ($params)"))
     }
 
     @RawQuery
     protected abstract suspend fun getByParam(query: SupportSQLiteQuery): List<T>
 
     suspend fun <P> getByParam(param: String, value: P): List<T> {
-        return getByParam(SimpleSQLiteQuery("select * from $tableName where $param = $value"))
+        return getByParam(SimpleSQLiteQuery("$baseWhereQuery $param = $value"))
+    }
+
+    suspend fun getByParams(vararg paramPairs: Pair<String, *>): List<T> {
+        val condition = buildString {
+            paramPairs.forEachIndexed { index, pair ->
+                append("${pair.first} = '${pair.second}'")
+                if (index == paramPairs.lastIndex && paramPairs.size != 1) append(" and ")
+            }
+        }
+        return getByParam(SimpleSQLiteQuery("$baseWhereQuery $condition"))
     }
 }

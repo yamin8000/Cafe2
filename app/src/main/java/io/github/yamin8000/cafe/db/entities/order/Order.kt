@@ -5,7 +5,6 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import io.github.yamin8000.cafe.db.entities.subscriber.Subscriber
-import io.github.yamin8000.cafe.model.OrderStatus
 import java.time.ZonedDateTime
 
 @Entity(

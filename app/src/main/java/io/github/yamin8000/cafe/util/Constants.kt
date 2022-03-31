@@ -15,6 +15,11 @@ object Constants {
     //arguments
     const val IS_EDIT_MODE = "is_edit_mode"
     const val DATA = "data"
+    const val USERNAME = "username"
+    const val CURRENT_ACCOUNT_ID = "current_account_id"
+    const val CURRENT_ACCOUNT_TYPE = "current_account_type"
+    const val LOGIN = "login"
+    const val ACCOUNT = "account"
 
     //prompt
     const val PROMPT = "prompt"

@@ -10,6 +10,9 @@
         <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/drawable/pack_top_view_coffee.xml" value="0.1825" />
         <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/drawable/ripple_back.xml" value="0.14" />
         <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/drawable/text_background.xml" value="0.1375" />
+        <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/account_item.xml" value="0.22" />
+        <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/account_login.xml" value="0.25" />
+        <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/account_login_modal.xml" value="0.22" />
         <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/activity_main.xml" value="0.14279606669516887" />
         <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/add_category_modal.xml" value="0.33" />
         <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/add_product_modal.xml" value="0.22" />
@@ -20,9 +23,10 @@
         <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/fragment_category.xml" value="0.1" />
         <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/fragment_crash.xml" value="0.2" />
         <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/fragment_crud.xml" value="0.25" />
-        <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/fragment_home.xml" value="0.33" />
+        <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/fragment_home.xml" value="0.22" />
+        <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/fragment_new_account.xml" value="0.14279606669516887" />
         <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/fragment_new_category.xml" value="0.22" />
-        <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/fragment_new_order.xml" value="0.30614115490375804" />
+        <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/fragment_new_order.xml" value="0.240981240981241" />
         <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/fragment_new_product.xml" value="0.25" />
         <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/fragment_new_subscriber.xml" value="0.33" />
         <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/fragment_product.xml" value="0.22" />
@@ -30,6 +34,7 @@
         <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/fragment_search_orders.xml" value="0.25" />
         <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/fragment_splash.xml" value="0.17395833333333333" />
         <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/icon_picker_modal.xml" value="0.21" />
+        <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/new_account_fragment.xml" value="0.25" />
         <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/new_order_detail_item.xml" value="0.25" />
         <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/new_product_modal.xml" value="0.25" />
         <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/notice_modal.xml" value="0.25" />

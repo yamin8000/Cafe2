@@ -25,15 +25,12 @@
         <action
             android:id="@+id/action_homeFragment_to_subscriber_graph"
             app:destination="@id/subscriber_graph" />
-    </fragment>
-    <fragment
-        android:id="@+id/crashFragment"
-        android:name="io.github.yamin8000.cafe.base.CrashFragment"
-        android:label="CrashFragment"
-        tools:layout="@layout/fragment_crash">
-        <argument
-            android:name="stacktrace"
-            app:argType="string" />
+        <action
+            android:id="@+id/action_homeFragment_to_accountLoginModal"
+            app:destination="@id/accountLoginModal" />
+        <action
+            android:id="@+id/action_homeFragment_to_account_graph"
+            app:destination="@id/account_graph" />
     </fragment>
     <fragment
         android:id="@+id/splashFragment"
@@ -60,15 +57,6 @@
         android:name="io.github.yamin8000.cafe.searchorder.SearchOrdersFragment"
         android:label="SearchOrdersFragment"
         tools:layout="@layout/fragment_search_orders" />
-    <dialog
-        android:id="@+id/promptModal"
-        android:name="io.github.yamin8000.cafe.ui.PromptModal"
-        android:label="PromptModal"
-        tools:layout="@layout/prompt_modal">
-        <argument
-            android:name="prompt_text"
-            app:argType="string" />
-    </dialog>
     <dialog
         android:id="@+id/iconPickerModal"
         android:name="io.github.yamin8000.cafe.ui.iconpicker.IconPickerModal"
@@ -136,10 +124,49 @@
         <fragment
             android:id="@+id/newSubscriberFragment"
             android:name="io.github.yamin8000.cafe.subscriber.NewSubscriberFragment"
-            android:label="NewSubscriberFragment" />
+            android:label="NewSubscriberFragment"
+            tools:layout="@layout/fragment_new_subscriber" />
         <fragment
             android:id="@+id/subscriberFragment"
             android:name="io.github.yamin8000.cafe.subscriber.SubscriberFragment"
-            android:label="SubscriberFragment" />
+            android:label="SubscriberFragment"
+            tools:layout="@layout/fragment_crud" />
+    </navigation>
+    <dialog
+        android:id="@+id/accountLoginModal"
+        android:name="io.github.yamin8000.cafe.account.AccountLoginModal"
+        android:label="AccountLoginModal"
+        tools:layout="@layout/account_login" />
+    <dialog
+        android:id="@+id/promptModal"
+        android:name="io.github.yamin8000.cafe.ui.PromptModal"
+        android:label="PromptModal"
+        tools:layout="@layout/prompt_modal">
+        <argument
+            android:name="prompt_text"
+            app:argType="string" />
+    </dialog>
+    <fragment
+        android:id="@+id/crashFragment"
+        android:name="io.github.yamin8000.cafe.base.CrashFragment"
+        android:label="CrashFragment"
+        tools:layout="@layout/fragment_crash">
+        <argument
+            android:name="stacktrace"
+            app:argType="string" />
+    </fragment>
+    <navigation
+        android:id="@+id/account_graph"
+        app:startDestination="@id/accountFragment">
+        <fragment
+            android:id="@+id/newAccountFragment"
+            android:name="io.github.yamin8000.cafe.account.NewAccountFragment"
+            android:label="NewAccountFragment"
+            tools:layout="@layout/new_account_fragment" />
+        <fragment
+            android:id="@+id/accountFragment"
+            android:name="io.github.yamin8000.cafe.account.AccountFragment"
+            android:label="AccountFragment"
+            tools:layout="@layout/fragment_crud" />
     </navigation>
 </navigation>

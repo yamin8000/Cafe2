@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import io.github.yamin8000.cafe.R
 import io.github.yamin8000.cafe.databinding.FragmentSearchOrdersBinding
 import io.github.yamin8000.cafe.db.entities.relatives.OrderWithDetails
-import io.github.yamin8000.cafe.model.OrderStatus
+import io.github.yamin8000.cafe.db.entities.order.OrderStatus
 import io.github.yamin8000.cafe.ui.recyclerview.EmptyAdapter
 import io.github.yamin8000.cafe.ui.util.BaseFragment
 import io.github.yamin8000.cafe.util.Constants.db

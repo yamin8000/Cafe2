@@ -3,6 +3,8 @@ package io.github.yamin8000.cafe.db
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import io.github.yamin8000.cafe.db.entities.account.Account
+import io.github.yamin8000.cafe.db.entities.account.AccountDao
 import io.github.yamin8000.cafe.db.entities.category.Category
 import io.github.yamin8000.cafe.db.entities.category.CategoryDao
 import io.github.yamin8000.cafe.db.entities.day.Day
@@ -21,7 +23,8 @@ import io.github.yamin8000.cafe.db.entities.subscriber.SubscriberDao
         Product::class,
         Day::class,
         Category::class,
-        Subscriber::class
+        Subscriber::class,
+        Account::class,
     ],
     version = 1
 )
@@ -34,4 +37,5 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun categoryDao(): CategoryDao
     abstract fun relativeDao(): RelativeDao
     abstract fun subscriberDao(): SubscriberDao
+    abstract fun accountDao(): AccountDao
 }

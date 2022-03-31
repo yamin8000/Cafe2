@@ -63,6 +63,30 @@
             tools:layout_editor_absoluteX="66dp"
             tools:layout_editor_absoluteY="216dp" />
 
+        <Button
+            android:id="@+id/account_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/accounts"
+            tools:layout_editor_absoluteX="248dp"
+            tools:layout_editor_absoluteY="216dp" />
+
+        <Button
+            android:id="@+id/account_login_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/login_account"
+            tools:layout_editor_absoluteX="32dp"
+            tools:layout_editor_absoluteY="280dp" />
+
+        <Button
+            android:id="@+id/reports_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/reports"
+            tools:layout_editor_absoluteX="214dp"
+            tools:layout_editor_absoluteY="280dp" />
+
         <androidx.constraintlayout.helper.widget.Flow
             android:id="@+id/buttons_flow"
             android:layout_width="0dp"
@@ -72,7 +96,7 @@
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="32dp"
             android:orientation="horizontal"
-            app:constraint_referenced_ids="new_order_button,list_order_button,products_button,categories_button,subscriber_button"
+            app:constraint_referenced_ids="new_order_button,list_order_button,products_button,categories_button,subscriber_button,account_button,account_login_button,reports_button"
             app:flow_horizontalGap="16dp"
             app:flow_maxElementsWrap="2"
             app:flow_verticalGap="16dp"

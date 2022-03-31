@@ -11,6 +11,7 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import at.favre.lib.crypto.bcrypt.BCrypt
 import com.google.android.material.snackbar.Snackbar
 import com.orhanobut.logger.Logger
 import io.github.yamin8000.cafe.R
@@ -153,5 +154,16 @@ object Utility {
         fun Bundle?.isEditMode() = this?.getBoolean(IS_EDIT_MODE) ?: false
 
         fun <T : Parcelable> Bundle?.data(): T? = this?.getParcelable(Constants.DATA)
+    }
+
+    object Hashes {
+
+        fun String.bCrypt(): String {
+            return BCrypt.withDefaults().hashToString(12, this.toCharArray())
+        }
+
+        infix fun String.isBCryptOf(password: String): Boolean {
+            return BCrypt.verifyer().verify(password.toCharArray(), this).verified
+        }
     }
 }

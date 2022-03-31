@@ -2,7 +2,7 @@ package io.github.yamin8000.cafe.subscriber
 
 import io.github.yamin8000.cafe.databinding.SubscriberItemBinding
 import io.github.yamin8000.cafe.db.entities.subscriber.Subscriber
-import io.github.yamin8000.cafe.ui.AsyncDifferHelper.getAsyncDiffer
+import io.github.yamin8000.cafe.ui.recyclerview.AsyncDifferHelper.getAsyncDiffer
 import io.github.yamin8000.cafe.ui.crud.CrudAdapter
 
 class SubscriberAdapter(

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResultListener
+import androidx.lifecycle.coroutineScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
@@ -32,7 +33,7 @@ abstract class ReadDeleteFragment<T, VH : RecyclerView.ViewHolder>(
 ) : BaseFragment<FragmentCrudBinding>({ FragmentCrudBinding.inflate(it) }), Crud {
 
     protected val ioScope by lazy(LazyThreadSafetyMode.NONE) { CoroutineScope(Dispatchers.IO) }
-    private val mainScope by lazy(LazyThreadSafetyMode.NONE) { CoroutineScope(Dispatchers.Main) }
+    private val lifecycleScope by lazy(LazyThreadSafetyMode.NONE) { lifecycle.coroutineScope }
 
     protected val emptyAdapter by lazy(LazyThreadSafetyMode.NONE) { EmptyAdapter() }
 
@@ -52,7 +53,7 @@ abstract class ReadDeleteFragment<T, VH : RecyclerView.ViewHolder>(
     }
 
     private fun prepareUi() {
-        mainScope.launch { refreshList() }
+        lifecycleScope.launch { refreshList() }
         binding.crudListDeleteFab.setOnClickListener { deleteFabClickListener() }
         binding.crudListAddButton.setOnClickListener { navigate(addEditDestination) }
     }
@@ -70,7 +71,7 @@ abstract class ReadDeleteFragment<T, VH : RecyclerView.ViewHolder>(
         navigate(R.id.promptModal)
         setFragmentResultListener(Constants.PROMPT) { _, bundle ->
             if (bundle.getBoolean(Constants.PROMPT_RESULT))
-                mainScope.launch { itemsDeleteHandler() }
+                lifecycleScope.launch { itemsDeleteHandler() }
         }
     }
 

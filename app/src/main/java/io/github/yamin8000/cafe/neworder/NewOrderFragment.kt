@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.ArrayAdapter
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResultListener
+import androidx.lifecycle.coroutineScope
 import androidx.navigation.fragment.findNavController
 import com.github.yamin8000.ppn.Digits.Companion.spell
 import io.github.yamin8000.cafe.R
@@ -32,7 +33,7 @@ class NewOrderFragment :
     BaseFragment<FragmentNewOrderBinding>({ FragmentNewOrderBinding.inflate(it) }) {
 
     private val ioScope by lazy(LazyThreadSafetyMode.NONE) { CoroutineScope(Dispatchers.IO) }
-    private val mainScope by lazy(LazyThreadSafetyMode.NONE) { CoroutineScope(Dispatchers.Main) }
+    private val lifecycleScope by lazy(LazyThreadSafetyMode.NONE) { lifecycle.coroutineScope }
 
     private var products = listOf<Product>()
 
@@ -48,7 +49,7 @@ class NewOrderFragment :
         super.onViewCreated(view, savedInstanceState)
 
         try {
-            mainScope.launch {
+            lifecycleScope.launch {
                 listHandler()
                 loadSubscribers()
             }
@@ -61,6 +62,7 @@ class NewOrderFragment :
     private suspend fun loadSubscribers() {
         val subscribers = db?.subscriberDao()?.getAll() ?: listOf()
         if (subscribers.isNotEmpty()) fillAutoComplete(subscribers)
+        else binding.subscriberInput.isEnabled = false
     }
 
     private fun fillAutoComplete(subscribers: List<Subscriber>) {
@@ -86,7 +88,7 @@ class NewOrderFragment :
                     val bundle = bundleOf(PROMPT_TEXT to getOrderDetails())
                     navigate(R.id.promptModal, bundle)
                     setFragmentResultListener(PROMPT) { _, args ->
-                        if (args.getBoolean(PROMPT_RESULT)) mainScope.launch { beginInsertingOrder() }
+                        if (args.getBoolean(PROMPT_RESULT)) lifecycleScope.launch { beginInsertingOrder() }
                         else snack(getString(R.string.order_saving_cancel))
                     }
                 } else snack(getString(R.string.please_wait))
@@ -110,6 +112,7 @@ class NewOrderFragment :
                 }
                 summaries.putIfAbsent(detail, singleSummary)
                 price += orderDetailPrice
+                detail.summary = singleSummary
             }
         }
         return summaries to price
@@ -125,21 +128,18 @@ class NewOrderFragment :
 
     private suspend fun orderAddSuccess(orderId: Long) {
         insertOrderDetails(orderId)
-        orderDetails.clear()
         snack(getString(R.string.item_add_success, getString(R.string.order)))
         findNavController().navigate(R.id.action_newOrderFragment_to_searchOrdersFragment)
     }
 
-    private suspend fun insertOrderDetails(orderId: Long): List<Long> {
+    private suspend fun insertOrderDetails(orderId: Long) = withContext(ioScope.coroutineContext) {
         val iterator = orderDetails.iterator()
         while (iterator.hasNext()) {
             val orderDetail = iterator.next()
             if (orderDetail.quantity == 0) iterator.remove()
             else orderDetail.orderId = orderId
         }
-        return withContext(ioScope.coroutineContext) {
-            db?.orderDetailDao()?.insertAll(orderDetails) ?: listOf()
-        }
+        return@withContext db?.orderDetailDao()?.insertAll(orderDetails) ?: listOf()
     }
 
     private suspend fun createOrder(): Long? {

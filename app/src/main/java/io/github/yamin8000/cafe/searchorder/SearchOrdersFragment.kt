@@ -2,6 +2,7 @@ package io.github.yamin8000.cafe.searchorder
 
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.coroutineScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.github.yamin8000.cafe.R
 import io.github.yamin8000.cafe.databinding.FragmentSearchOrdersBinding
@@ -19,7 +20,7 @@ class SearchOrdersFragment :
     BaseFragment<FragmentSearchOrdersBinding>({ FragmentSearchOrdersBinding.inflate(it) }) {
 
     private val ioScope by lazy(LazyThreadSafetyMode.NONE) { CoroutineScope(Dispatchers.IO) }
-    private val mainScope by lazy(LazyThreadSafetyMode.NONE) { CoroutineScope(Dispatchers.Main) }
+    private val lifecycleScope by lazy(LazyThreadSafetyMode.NONE) { lifecycle.coroutineScope }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -31,7 +32,7 @@ class SearchOrdersFragment :
         }
     }
 
-    private fun handleOrdersList() = mainScope.launch {
+    private fun handleOrdersList() = lifecycleScope.launch {
         val orders = db?.relativeDao()?.getOrderWithDetails() ?: emptyList()
         if (orders.isNotEmpty()) showOrders(orders.asReversed())
         else showEmptyAdapter()

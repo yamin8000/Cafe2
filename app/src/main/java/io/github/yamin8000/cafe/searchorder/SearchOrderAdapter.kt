@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import io.github.yamin8000.cafe.databinding.SearchOrderItemBinding
 import io.github.yamin8000.cafe.db.entities.relatives.OrderWithDetails
-import io.github.yamin8000.cafe.ui.AsyncDifferHelper.getAsyncDiffer
+import io.github.yamin8000.cafe.ui.recyclerview.AsyncDifferHelper.getAsyncDiffer
 
 class SearchOrderAdapter(
     private val deliverListener: (Long) -> Unit
@@ -31,6 +31,7 @@ class SearchOrderAdapter(
         holder.setOrderDetails(model.orderDetails)
         holder.setDescription(model.orderAndSubscriber.order.description)
         holder.setSubscriber(model.orderAndSubscriber.subscriber)
+        holder.setTotalPrice(model.orderAndSubscriber.order.totalPrice)
     }
 
     override fun getItemCount() = asyncList.currentList.size

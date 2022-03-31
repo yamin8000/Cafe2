@@ -2,7 +2,7 @@ package io.github.yamin8000.cafe.product
 
 import io.github.yamin8000.cafe.databinding.ProductItemBinding
 import io.github.yamin8000.cafe.db.entities.relatives.ProductAndCategory
-import io.github.yamin8000.cafe.ui.AsyncDifferHelper.getAsyncDiffer
+import io.github.yamin8000.cafe.ui.recyclerview.AsyncDifferHelper.getAsyncDiffer
 import io.github.yamin8000.cafe.ui.crud.CrudAdapter
 
 class ProductsAdapter(

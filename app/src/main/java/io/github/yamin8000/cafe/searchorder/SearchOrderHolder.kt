@@ -11,6 +11,7 @@ import io.github.yamin8000.cafe.model.OrderStatus
 import io.github.yamin8000.cafe.util.DateTimeUtils.toJalaliIso
 import io.github.yamin8000.cafe.util.Utility.Views.gone
 import io.github.yamin8000.cafe.util.Utility.Views.visible
+import io.github.yamin8000.cafe.util.Utility.numFormat
 import java.time.ZonedDateTime
 
 class SearchOrderHolder(
@@ -70,8 +71,16 @@ class SearchOrderHolder(
     }
 
     fun setOrderDetails(orderDetailIds: List<OrderDetail>) {
-        val detail = buildString { orderDetailIds.forEach { this.append("${it.summary}\n") } }
-        binding.searchOrderDetails.text = detail
+        val detail = createSummaries(orderDetailIds)
+        binding.searchOrderDetails.text = detail.trim()
+    }
+
+    private fun createSummaries(orderDetailIds: List<OrderDetail>): String {
+        return buildString {
+            orderDetailIds.forEach {
+                this.append("${it.summary}\n")
+            }
+        }.trim()
     }
 
     fun setDescription(description: String?) {
@@ -104,5 +113,12 @@ class SearchOrderHolder(
     private fun hideSubscriber() {
         binding.searchOrderSubscriber.gone()
         binding.searchOrderSubscriberHolder.gone()
+    }
+
+    fun setTotalPrice(totalPrice: Long) {
+        binding.searchOrderPrice.text = context.getString(
+            R.string.rial_template,
+            totalPrice.toString().numFormat()
+        )
     }
 }

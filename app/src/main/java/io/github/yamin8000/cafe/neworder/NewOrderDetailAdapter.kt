@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import io.github.yamin8000.cafe.databinding.NewOrderDetailItemBinding
 import io.github.yamin8000.cafe.db.entities.product.Product
-import io.github.yamin8000.cafe.ui.AsyncDifferHelper.getAsyncDiffer
+import io.github.yamin8000.cafe.ui.recyclerview.AsyncDifferHelper.getAsyncDiffer
 
 class NewOrderDetailAdapter(
     private val itemChanged: (Pair<Product, Int>) -> Unit

@@ -3,6 +3,7 @@ package io.github.yamin8000.cafe.ui.crud
 import android.os.Bundle
 import android.os.Parcelable
 import android.view.View
+import androidx.lifecycle.coroutineScope
 import androidx.viewbinding.ViewBinding
 import io.github.yamin8000.cafe.R
 import io.github.yamin8000.cafe.ui.util.BaseFragment
@@ -21,7 +22,7 @@ abstract class CreateUpdateFragment<T : Parcelable, VB : ViewBinding>(
 ) : BaseFragment<VB>(inflater), Crud {
 
     protected val ioScope by lazy(LazyThreadSafetyMode.NONE) { CoroutineScope(Dispatchers.IO) }
-    protected val mainScope by lazy(LazyThreadSafetyMode.NONE) { CoroutineScope(Dispatchers.Main) }
+    protected val lifecycleScope by lazy(LazyThreadSafetyMode.NONE) { lifecycle.coroutineScope }
 
     private var isEditMode = false
     protected lateinit var item: T
@@ -57,7 +58,7 @@ abstract class CreateUpdateFragment<T : Parcelable, VB : ViewBinding>(
 
     fun confirmListener(validate: () -> Boolean) {
         if (validate()) {
-            mainScope.launch {
+            lifecycleScope.launch {
                 if (isEditMode) editItem()
                 else createItem()
             }

@@ -35,8 +35,6 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textSize="18sp"
-            tools:layout_editor_absoluteX="50dp"
-            tools:layout_editor_absoluteY="55dp"
             tools:text="@tools:sample/lorem" />
 
         <TextView
@@ -45,8 +43,6 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textSize="14sp"
-            tools:layout_editor_absoluteX="50dp"
-            tools:layout_editor_absoluteY="24dp"
             tools:text="@tools:sample/lorem" />
 
         <TextView
@@ -54,14 +50,13 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            tools:layout_editor_absoluteX="50dp"
-            tools:layout_editor_absoluteY="117dp"
             tools:text="@tools:sample/us_zipcodes" />
 
         <ImageView
             android:id="@+id/product_item_image"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:contentDescription="@string/product_image"
             android:scaleType="fitCenter"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

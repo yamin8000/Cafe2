@@ -65,4 +65,5 @@
     <string name="quantity">تعداد</string>
     <string name="order_detail_summary">%s، %s عدد، برابر،%d</string>
     <string name="total_price_template">مجموع قیمت: %s</string>
+    <string name="total_price">مجموع قیمت</string>
 </resources>

@@ -26,7 +26,7 @@ class NewProductFragment :
     ) {
 
     override fun init() {
-        mainScope.launch { handleCategoriesAutoComplete() }
+        lifecycleScope.launch { handleCategoriesAutoComplete() }
         binding.productImageButton.setOnClickListener { showIconPicker() }
     }
 
@@ -49,7 +49,7 @@ class NewProductFragment :
         item.product?.let { product ->
             ioScope.launch {
                 db?.productDao()?.insert(product)
-                withContext(mainScope.coroutineContext) {
+                withContext(lifecycleScope.coroutineContext) {
                     snack(getString(R.string.item_add_success, getString(R.string.product)))
                     clearProductValues()
                     clearViews()
@@ -63,7 +63,7 @@ class NewProductFragment :
             if (item.product?.id != NO_ID_LONG) {
                 ioScope.launch {
                     db?.productDao()?.update(product)
-                    withContext(mainScope.coroutineContext) {
+                    withContext(lifecycleScope.coroutineContext) {
                         snack(getString(R.string.item_edit_success, getString(R.string.product)))
                     }
                 }

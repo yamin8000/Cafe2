@@ -1,4 +1,4 @@
-package io.github.yamin8000.cafe.neworder
+package io.github.yamin8000.cafe.order.neworder
 
 import android.os.Bundle
 import android.view.View

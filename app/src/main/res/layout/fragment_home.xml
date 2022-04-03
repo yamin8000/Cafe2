@@ -19,6 +19,7 @@
             android:layout_marginEnd="32dp"
             android:gravity="center"
             android:text="@string/welcome"
+            android:textIsSelectable="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -87,6 +88,14 @@
             tools:layout_editor_absoluteX="214dp"
             tools:layout_editor_absoluteY="280dp" />
 
+        <Button
+            android:id="@+id/workers_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/workers"
+            tools:layout_editor_absoluteX="66dp"
+            tools:layout_editor_absoluteY="344dp" />
+
         <androidx.constraintlayout.helper.widget.Flow
             android:id="@+id/buttons_flow"
             android:layout_width="0dp"
@@ -96,7 +105,7 @@
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="32dp"
             android:orientation="horizontal"
-            app:constraint_referenced_ids="new_order_button,list_order_button,products_button,categories_button,subscriber_button,account_button,account_login_button,reports_button"
+            app:constraint_referenced_ids="new_order_button,list_order_button,products_button,categories_button,subscriber_button,account_button,account_login_button,reports_button,workers_button"
             app:flow_horizontalGap="16dp"
             app:flow_maxElementsWrap="2"
             app:flow_verticalGap="16dp"

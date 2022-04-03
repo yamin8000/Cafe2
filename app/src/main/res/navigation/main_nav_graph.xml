@@ -31,6 +31,9 @@
         <action
             android:id="@+id/action_homeFragment_to_account_graph"
             app:destination="@id/account_graph" />
+        <action
+            android:id="@+id/action_homeFragment_to_worker_graph"
+            app:destination="@id/worker_graph" />
     </fragment>
     <fragment
         android:id="@+id/splashFragment"
@@ -45,7 +48,7 @@
     </fragment>
     <fragment
         android:id="@+id/newOrderFragment"
-        android:name="io.github.yamin8000.cafe.neworder.NewOrderFragment"
+        android:name="io.github.yamin8000.cafe.order.neworder.NewOrderFragment"
         android:label="NewOrderFragment"
         tools:layout="@layout/fragment_new_order">
         <action
@@ -54,7 +57,7 @@
     </fragment>
     <fragment
         android:id="@+id/searchOrdersFragment"
-        android:name="io.github.yamin8000.cafe.searchorder.SearchOrdersFragment"
+        android:name="io.github.yamin8000.cafe.order.searchorder.SearchOrdersFragment"
         android:label="SearchOrdersFragment"
         tools:layout="@layout/fragment_search_orders" />
     <dialog
@@ -168,5 +171,18 @@
             android:name="io.github.yamin8000.cafe.account.AccountFragment"
             android:label="AccountFragment"
             tools:layout="@layout/fragment_crud" />
+    </navigation>
+    <navigation
+        android:id="@+id/worker_graph"
+        app:startDestination="@id/workerFragment">
+        <fragment
+            android:id="@+id/workerFragment"
+            android:name="io.github.yamin8000.cafe.worker.WorkerFragment"
+            android:label="WorkerFragment" />
+        <fragment
+            android:id="@+id/newWorkerFragment"
+            android:name="io.github.yamin8000.cafe.worker.NewWorkerFragment"
+            android:label="NewWorkerFragment"
+            tools:layout="new_worker_fragment" />
     </navigation>
 </navigation>

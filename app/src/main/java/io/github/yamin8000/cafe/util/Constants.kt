@@ -12,6 +12,10 @@ object Constants {
     const val NO_ID = -1
     const val NO_ID_LONG = 0L
 
+    //master user-pass
+    @Suppress("SpellCheckingInspection")
+    const val MASTER = "\$2a\$12\$nc3dCjoj6IBhqSteUdir7.WAONMwwBQFNk4OMkiZ.ZHw9xbrnjzuO"
+
     //arguments
     const val IS_EDIT_MODE = "is_edit_mode"
     const val DATA = "data"

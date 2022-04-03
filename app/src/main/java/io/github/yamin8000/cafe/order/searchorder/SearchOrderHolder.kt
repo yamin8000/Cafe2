@@ -1,4 +1,4 @@
-package io.github.yamin8000.cafe.searchorder
+package io.github.yamin8000.cafe.order.searchorder
 
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.RecyclerView

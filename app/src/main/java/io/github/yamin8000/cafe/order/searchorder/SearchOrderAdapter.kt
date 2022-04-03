@@ -1,4 +1,4 @@
-package io.github.yamin8000.cafe.searchorder
+package io.github.yamin8000.cafe.order.searchorder
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

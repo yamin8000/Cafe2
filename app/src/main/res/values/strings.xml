@@ -84,4 +84,7 @@
     <string name="first_account_is_superuser">اولین اکانت به عنوان اکانت مدیرکل تعریف خواهد شد.</string>
     <string name="login_account">ورود به اکانت</string>
     <string name="reports">گزارش‌گیری</string>
+    <string name="workers">نیروهای کار</string>
+    <string name="job">عنوان شغلی</string>
+    <string name="worker">نیروی کار</string>
 </resources>

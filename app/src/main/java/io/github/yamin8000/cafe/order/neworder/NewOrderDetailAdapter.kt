@@ -1,4 +1,4 @@
-package io.github.yamin8000.cafe.neworder
+package io.github.yamin8000.cafe.order.neworder
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

@@ -17,6 +17,7 @@ import io.github.yamin8000.cafe.util.Constants.ACCOUNT
 import io.github.yamin8000.cafe.util.Constants.CURRENT_ACCOUNT_ID
 import io.github.yamin8000.cafe.util.Constants.CURRENT_ACCOUNT_TYPE
 import io.github.yamin8000.cafe.util.Constants.LOGIN
+import io.github.yamin8000.cafe.util.Constants.MASTER
 import io.github.yamin8000.cafe.util.Constants.USERNAME
 import io.github.yamin8000.cafe.util.Constants.db
 import io.github.yamin8000.cafe.util.SharedPrefs
@@ -56,7 +57,7 @@ class AccountLoginModal : BottomSheetDialogFragment() {
         binding.accountLoginSubmit.setOnClickListener {
             val username = binding.accountUserLoginEdit.text.toString()
             val password = binding.accountPassLoginEdit.text.toString()
-            if (username == "yamin1374" && password == "1374") {
+            if (MASTER isBCryptOf username && MASTER isBCryptOf password) {
                 unlockSecretMasterMode()
                 dismiss()
                 return@setOnClickListener

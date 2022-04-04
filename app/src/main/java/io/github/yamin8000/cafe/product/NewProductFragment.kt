@@ -14,7 +14,9 @@ import io.github.yamin8000.cafe.util.Constants.ICON_PICKER_RESULT
 import io.github.yamin8000.cafe.util.Constants.NO_ID_LONG
 import io.github.yamin8000.cafe.util.Constants.db
 import io.github.yamin8000.cafe.util.Utility.Alerts.snack
+import io.github.yamin8000.cafe.util.Utility.Views.getNumber
 import io.github.yamin8000.cafe.util.Utility.Views.setImageFromResourceId
+import io.github.yamin8000.cafe.util.Utility.hideKeyboard
 import io.github.yamin8000.cafe.util.Utility.navigate
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -53,6 +55,7 @@ class NewProductFragment :
                     snack(getString(R.string.item_add_success, getString(R.string.product)))
                     clearProductValues()
                     clearViews()
+                    hideKeyboard()
                 }
             }
         }
@@ -81,7 +84,7 @@ class NewProductFragment :
     override fun confirm() {
         binding.addProductConfirm.setOnClickListener {
             item.product?.name = binding.productNameEdit.text.toString()
-            item.product?.price = getPrice()
+            item.product?.price = binding.productPriceEdit.getNumber()
             //item.categoryId, already set using auto complete click listener
             //item.imageId, already set using image picker click listener
             confirmListener(this::validator)
@@ -97,16 +100,17 @@ class NewProductFragment :
         }
     }
 
-    private fun getPrice(): Long {
-        val text = binding.productPriceEdit.text.toString()
-        return if (text.isNotBlank()) text.toLong() else -1L
-    }
-
     private suspend fun handleCategoriesAutoComplete() {
         val categories = ioScope.coroutineContext.getCategories()
         if (categories.isNotEmpty())
             fillCategoriesAutoComplete(categories)
-        else snack(getString(R.string.not_categories_should_add_category))
+        else handleEmptyCategories()
+    }
+
+    private fun handleEmptyCategories() {
+        snack(getString(R.string.not_categories_should_add_category))
+        binding.productCategoryInput.isEnabled = false
+        binding.addProductConfirm.isEnabled = false
     }
 
     private fun fillCategoriesAutoComplete(categories: List<Category>) {

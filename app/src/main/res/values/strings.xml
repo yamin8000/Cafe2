@@ -87,4 +87,8 @@
     <string name="workers">نیروهای کار</string>
     <string name="job">عنوان شغلی</string>
     <string name="worker">نیروی کار</string>
+    <string name="payments">پرداختی ها</string>
+    <string name="payment_value">مقدار پرداختی</string>
+    <string name="no_worker_to_pay">نیروی کاری اضافه نشده که پرداختی ایجاد شود.</string>
+    <string name="payment">پرداختی</string>
 </resources>

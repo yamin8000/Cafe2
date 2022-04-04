@@ -15,7 +15,7 @@ class WorkerHolder(
     binding,
     updateCallback,
     deleteCallback,
-    { worker ->
+    { worker, _ ->
         binding.workerName.text = worker.name
         binding.workerPhone.text = worker.phone
         binding.workerJob.text = worker.job

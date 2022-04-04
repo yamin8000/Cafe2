@@ -19,7 +19,7 @@ class ProductsHolder(
     binding,
     updateCallback,
     deleteCallback,
-    { productAndCategory ->
+    { productAndCategory, _ ->
         productAndCategory.product?.let { product ->
             binding.productItemName.text = product.name
             binding.productItemCategory.text = productAndCategory.category.name

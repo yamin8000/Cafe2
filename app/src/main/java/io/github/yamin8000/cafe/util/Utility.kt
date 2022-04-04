@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import at.favre.lib.crypto.bcrypt.BCrypt
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.textfield.TextInputEditText
 import com.orhanobut.logger.Logger
 import io.github.yamin8000.cafe.R
 import io.github.yamin8000.cafe.util.Constants.IS_EDIT_MODE
@@ -84,6 +85,15 @@ object Utility {
     }
 
     object Views {
+
+        fun TextInputEditText.getNumber(): Long {
+            return try {
+                if (this.text.isNullOrBlank()) -1L
+                else this.text.toString().toLong()
+            } catch (numberFormatException: NumberFormatException) {
+                -1L
+            }
+        }
 
         fun ImageView.setImageFromResourceId(resourceId: Int) {
             this.setImageDrawable(

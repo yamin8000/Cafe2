@@ -87,6 +87,6 @@ class NewCategoryFragment :
         hideKeyboard()
         binding.categoryImage.setImageDrawable(null)
         binding.categoryNameEdit.text?.clear()
-        item.id = NO_ID_LONG
+        item = Category()
     }
 }

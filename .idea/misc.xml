@@ -27,6 +27,7 @@
         <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/fragment_new_account.xml" value="0.14279606669516887" />
         <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/fragment_new_category.xml" value="0.18" />
         <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/fragment_new_order.xml" value="0.240981240981241" />
+        <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/fragment_new_payment.xml" value="0.25" />
         <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/fragment_new_product.xml" value="0.25" />
         <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/fragment_new_subscriber.xml" value="0.33" />
         <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/fragment_new_worker.xml" value="0.33" />
@@ -44,7 +45,9 @@
         <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/search_order_item.xml" value="0.25" />
         <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/single_new_order_modal.xml" value="0.25" />
         <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/subscriber_item.xml" value="0.33" />
+        <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/test_item.xml" value="0.25" />
         <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/worker_item.xml" value="0.25" />
+        <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/worker_payment_item.xml" value="0.22" />
         <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1825" />
       </map>
     </option>

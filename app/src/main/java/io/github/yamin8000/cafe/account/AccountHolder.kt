@@ -14,7 +14,7 @@ class AccountHolder(
     asyncList,
     binding,
     updateCallback,
-    deleteCallback, { account ->
+    deleteCallback, { account, _ ->
         binding.accountUsername.text = account.username
         binding.accountPermission.text = account.permission.defineToString(binding.root.context)
     }

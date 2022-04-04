@@ -22,7 +22,6 @@ import io.github.yamin8000.cafe.util.Constants.PROMPT_TEXT
 import io.github.yamin8000.cafe.util.Constants.db
 import io.github.yamin8000.cafe.util.SharedPrefs
 import io.github.yamin8000.cafe.util.Utility.Alerts.snack
-import io.github.yamin8000.cafe.util.Utility.Hashes.bCrypt
 import io.github.yamin8000.cafe.util.Utility.handleCrash
 import io.github.yamin8000.cafe.util.Utility.navigate
 import kotlinx.coroutines.CoroutineScope
@@ -45,6 +44,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>({ FragmentHomeBinding.inf
             binding.subscriberButton.setOnClickListener { navigate(R.id.action_homeFragment_to_subscriber_graph) }
             binding.accountLoginButton.setOnClickListener { loginHandler() }
             binding.workersButton.setOnClickListener { navigate(R.id.action_homeFragment_to_worker_graph) }
+            binding.paymentsButton.setOnClickListener { navigate(R.id.action_homeFragment_to_payment_graph) }
             accountButtonHandler()
             reportsButtonHandler()
             backPressHandler()

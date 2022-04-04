@@ -16,4 +16,6 @@ data class Worker(
     var id: Long = 0
 ) : Parcelable {
     constructor() : this("", "", "", "")
+
+    override fun toString() = this.name
 }

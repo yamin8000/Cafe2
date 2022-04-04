@@ -1,5 +1,6 @@
 package io.github.yamin8000.cafe.ui.crud
 
+import android.content.Context
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
@@ -10,7 +11,7 @@ open class CrudHolder<T, VB : ViewBinding>(
     protected val binding: VB,
     protected val updateCallback: (T) -> Unit,
     protected val deleteCallback: (T, Boolean) -> Unit,
-    private val bindView: (T) -> Unit
+    private val bindView: (T, Context) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
 
     private val card = binding.root as MaterialCardView
@@ -45,6 +46,6 @@ open class CrudHolder<T, VB : ViewBinding>(
     }
 
     fun bind(item: T) {
-        bindView(item)
+        bindView(item, binding.root.context)
     }
 }

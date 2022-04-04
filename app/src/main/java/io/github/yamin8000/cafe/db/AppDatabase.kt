@@ -17,6 +17,10 @@ import io.github.yamin8000.cafe.db.entities.subscriber.Subscriber
 import io.github.yamin8000.cafe.db.entities.subscriber.SubscriberDao
 import io.github.yamin8000.cafe.db.entities.worker.Worker
 import io.github.yamin8000.cafe.db.entities.worker.WorkerDao
+import io.github.yamin8000.cafe.db.entities.worker.payment.Payment
+import io.github.yamin8000.cafe.db.entities.worker.payment.PaymentDao
+import io.github.yamin8000.cafe.db.entities.worker.schedule.Schedule
+import io.github.yamin8000.cafe.db.entities.worker.schedule.ScheduleDao
 
 @Database(
     entities = [
@@ -27,7 +31,9 @@ import io.github.yamin8000.cafe.db.entities.worker.WorkerDao
         Category::class,
         Subscriber::class,
         Account::class,
-        Worker::class
+        Worker::class,
+        Payment::class,
+        Schedule::class
     ],
     version = 1
 )
@@ -42,4 +48,6 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun subscriberDao(): SubscriberDao
     abstract fun accountDao(): AccountDao
     abstract fun workerDao(): WorkerDao
+    abstract fun paymentDao(): PaymentDao
+    abstract fun scheduleDao(): ScheduleDao
 }

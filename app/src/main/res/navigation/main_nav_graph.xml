@@ -34,6 +34,9 @@
         <action
             android:id="@+id/action_homeFragment_to_worker_graph"
             app:destination="@id/worker_graph" />
+        <action
+            android:id="@+id/action_homeFragment_to_payment_graph"
+            app:destination="@id/payment_graph" />
     </fragment>
     <fragment
         android:id="@+id/splashFragment"
@@ -184,5 +187,17 @@
             android:name="io.github.yamin8000.cafe.worker.NewWorkerFragment"
             android:label="NewWorkerFragment"
             tools:layout="new_worker_fragment" />
+    </navigation>
+    <navigation
+        android:id="@+id/payment_graph"
+        app:startDestination="@id/paymentFragment">
+        <fragment
+            android:id="@+id/newPaymentFragment"
+            android:name="io.github.yamin8000.cafe.worker.payment.NewPaymentFragment"
+            android:label="NewPaymentFragment" />
+        <fragment
+            android:id="@+id/paymentFragment"
+            android:name="io.github.yamin8000.cafe.worker.payment.PaymentFragment"
+            android:label="PaymentFragment" />
     </navigation>
 </navigation>

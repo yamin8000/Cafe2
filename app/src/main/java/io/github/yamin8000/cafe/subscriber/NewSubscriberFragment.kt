@@ -63,14 +63,15 @@ class NewSubscriberFragment :
 
     private fun addSuccess() {
         snack(getString(R.string.item_add_success, getString(R.string.subscriber)))
-        clearViews()
+        clear()
     }
 
-    private fun clearViews() {
+    private fun clear() {
         hideKeyboard()
         binding.subscriberAddressEdit.text?.clear()
         binding.subscriberNameEdit.text?.clear()
         binding.subscriberPhoneEdit.text?.clear()
+        item = Subscriber()
     }
 
     private fun editSuccess() {

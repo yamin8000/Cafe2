@@ -15,7 +15,7 @@ class SubscriberHolder(
     binding,
     updateCallback,
     deleteCallback,
-    { subscriber ->
+    { subscriber, _ ->
         binding.subscriberId.text = subscriber.id.toString()
         binding.subscriberName.text = subscriber.name
         binding.subscriberAddress.text = subscriber.address

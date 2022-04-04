@@ -55,6 +55,7 @@ class NewWorkerFragment :
         binding.newWorkerJobEdit.text?.clear()
         binding.newWorkerNameEdit.text?.clear()
         binding.newWorkerAddressEdit.text?.clear()
+        item = Worker()
     }
 
     override suspend fun editItem() {

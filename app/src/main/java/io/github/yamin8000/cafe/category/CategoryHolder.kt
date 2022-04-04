@@ -15,7 +15,7 @@ class CategoryHolder(
     binding,
     updateCallback,
     deleteCallback,
-    { category ->
+    { category, _ ->
         binding.categoryItemText.text = category.name
         val drawableId = category.imageId
         binding.categoryItemImage.setImageResource(drawableId)

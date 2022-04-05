@@ -7,10 +7,13 @@ object Constants {
     const val LOG_TAG = "<-->"
     const val STACKTRACE = "stacktrace"
     const val SPLASH_DELAY = 1500L
-    var db: AppDatabase? = null
     const val PACK = "pack_"
     const val NO_ID = -1
     const val NO_ID_LONG = 0L
+
+    //singletons
+    var db: AppDatabase? = null
+    var sharedPrefs: SharedPrefs? = null
 
     //master user-pass
     @Suppress("SpellCheckingInspection")

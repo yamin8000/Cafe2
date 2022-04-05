@@ -1,5 +1,6 @@
 package io.github.yamin8000.cafe.util
 
+import android.content.Context
 import android.os.Bundle
 import android.os.Parcelable
 import android.view.View
@@ -16,8 +17,10 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.orhanobut.logger.Logger
 import io.github.yamin8000.cafe.R
+import io.github.yamin8000.cafe.db.entities.account.AccountPermission
 import io.github.yamin8000.cafe.util.Constants.IS_EDIT_MODE
 import io.github.yamin8000.cafe.util.Constants.STACKTRACE
+import io.github.yamin8000.cafe.util.Constants.sharedPrefs
 import java.math.BigInteger
 
 object Utility {
@@ -82,6 +85,13 @@ object Utility {
         } catch (e: Exception) {
             this
         }
+    }
+
+    fun Context.getCurrentPermission(): Int {
+        return sharedPrefs?.prefs?.getInt(
+            Constants.CURRENT_ACCOUNT_TYPE,
+            Constants.NO_ID
+        ) ?: AccountPermission.Guest.rank
     }
 
     object Views {

@@ -11,6 +11,7 @@ import com.orhanobut.logger.Logger
 import com.orhanobut.logger.PrettyFormatStrategy
 import io.github.yamin8000.cafe.db.AppDatabase
 import io.github.yamin8000.cafe.util.Constants.db
+import io.github.yamin8000.cafe.util.Constants.sharedPrefs
 
 class MyApp : Application() {
 
@@ -21,9 +22,14 @@ class MyApp : Application() {
         try {
             prepareLogger()
             prepareDb()
+            prepareSharedPrefs()
         } catch (e: Exception) {
             Log.d(Constants.LOG_TAG, e.stackTraceToString())
         }
+    }
+
+    private fun prepareSharedPrefs() {
+        sharedPrefs = SharedPrefs(this, this.packageName)
     }
 
     private fun prepareDb() {

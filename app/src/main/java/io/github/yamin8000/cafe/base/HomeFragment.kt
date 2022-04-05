@@ -1,6 +1,5 @@
 package io.github.yamin8000.cafe.base
 
-import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.activity.OnBackPressedCallback
@@ -13,15 +12,13 @@ import io.github.yamin8000.cafe.db.entities.account.Account
 import io.github.yamin8000.cafe.db.entities.account.AccountPermission
 import io.github.yamin8000.cafe.ui.util.BaseFragment
 import io.github.yamin8000.cafe.util.Constants.ACCOUNT
-import io.github.yamin8000.cafe.util.Constants.CURRENT_ACCOUNT_TYPE
 import io.github.yamin8000.cafe.util.Constants.LOGIN
-import io.github.yamin8000.cafe.util.Constants.NO_ID
 import io.github.yamin8000.cafe.util.Constants.PROMPT
 import io.github.yamin8000.cafe.util.Constants.PROMPT_RESULT
 import io.github.yamin8000.cafe.util.Constants.PROMPT_TEXT
 import io.github.yamin8000.cafe.util.Constants.db
-import io.github.yamin8000.cafe.util.SharedPrefs
 import io.github.yamin8000.cafe.util.Utility.Alerts.snack
+import io.github.yamin8000.cafe.util.Utility.getCurrentPermission
 import io.github.yamin8000.cafe.util.Utility.handleCrash
 import io.github.yamin8000.cafe.util.Utility.navigate
 import kotlinx.coroutines.CoroutineScope
@@ -43,13 +40,32 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>({ FragmentHomeBinding.inf
             binding.categoriesButton.setOnClickListener { navigate(R.id.action_homeFragment_to_categoryFragment) }
             binding.subscriberButton.setOnClickListener { navigate(R.id.action_homeFragment_to_subscriber_graph) }
             binding.accountLoginButton.setOnClickListener { loginHandler() }
-            binding.workersButton.setOnClickListener { navigate(R.id.action_homeFragment_to_worker_graph) }
-            binding.paymentsButton.setOnClickListener { navigate(R.id.action_homeFragment_to_payment_graph) }
+            workerButtonHandler()
+            paymentsButtonHandler()
             accountButtonHandler()
             reportsButtonHandler()
             backPressHandler()
         } catch (e: Exception) {
             handleCrash(e)
+        }
+    }
+
+    private fun paymentsButtonHandler() {
+        binding.paymentsButton.setOnClickListener {
+            navigateWithPermission(
+                R.id.action_homeFragment_to_payment_graph,
+                AccountPermission.Superuser,
+                AccountPermission.FinanceUser
+            )
+        }
+    }
+
+    private fun workerButtonHandler() {
+        binding.workersButton.setOnClickListener {
+            navigateWithPermission(
+                R.id.action_homeFragment_to_worker_graph,
+                AccountPermission.Superuser
+            )
         }
     }
 
@@ -81,13 +97,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>({ FragmentHomeBinding.inf
         }
     }
 
-    private fun getCurrentPermission(it: Context): Int {
-        return SharedPrefs(it, it.packageName).prefs.getInt(
-            CURRENT_ACCOUNT_TYPE,
-            NO_ID
-        )
-    }
-
     private fun backPressHandler() {
         val callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
@@ -102,10 +111,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>({ FragmentHomeBinding.inf
 
     private fun navigateWithPermission(
         destination: Int,
-        targetPermission: AccountPermission
+        vararg targetPermissions: AccountPermission
     ) {
         context?.let {
-            if (getCurrentPermission(it) == targetPermission.rank)
+            if (it.getCurrentPermission() in targetPermissions.map { permission -> permission.rank })
                 navigate(destination)
             else snack(getString(R.string.permission_denied))
         }

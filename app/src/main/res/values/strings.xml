@@ -91,4 +91,7 @@
     <string name="payment_value">مقدار پرداختی</string>
     <string name="no_worker_to_pay">نیروی کاری اضافه نشده که پرداختی ایجاد شود.</string>
     <string name="payment">پرداختی</string>
+    <string name="day">روز</string>
+    <string name="start_date">زمان شروع کار</string>
+    <string name="end_date">زمان پایان کار</string>
 </resources>

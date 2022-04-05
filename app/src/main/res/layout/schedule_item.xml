@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_margin="4dp"
+    android:checkable="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/schedule_start_holder"
+            style="@style/WideTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/start_date"
+            app:layout_constraintWidth_percent=".33"
+            tools:layout_editor_absoluteX="198dp"
+            tools:layout_editor_absoluteY="323dp" />
+
+        <TextView
+            android:id="@+id/schedule_end_holder"
+            style="@style/WideTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/end_date"
+            app:layout_constraintWidth_percent=".33"
+            tools:layout_editor_absoluteX="198dp"
+            tools:layout_editor_absoluteY="370dp" />
+
+        <TextView
+            android:id="@+id/schedule_worker_holder"
+            style="@style/WideTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/worker"
+            app:layout_constraintWidth_percent=".33"
+            tools:layout_editor_absoluteX="198dp"
+            tools:layout_editor_absoluteY="394dp" />
+
+        <TextView
+            android:id="@+id/schedule_day_holder"
+            style="@style/WideTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/day"
+            app:layout_constraintWidth_percent=".33"
+            tools:layout_editor_absoluteX="198dp"
+            tools:layout_editor_absoluteY="346dp" />
+
+        <TextView
+            android:id="@+id/schedule_description_holder"
+            style="@style/WideTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/description"
+            app:layout_constraintWidth_percent=".33"
+            tools:layout_editor_absoluteX="198dp"
+            tools:layout_editor_absoluteY="299dp" />
+
+        <TextView
+            android:id="@+id/schedule_description"
+            style="@style/WideTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="8dp"
+            tools:text="@tools:sample/lorem" />
+
+        <TextView
+            android:id="@+id/schedule_day"
+            style="@style/WideTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="79dp"
+            tools:text="@tools:sample/date/day_of_week" />
+
+        <TextView
+            android:id="@+id/schedule_worker"
+            style="@style/WideTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="32dp"
+            tools:text="@tools:sample/full_names" />
+
+        <TextView
+            android:id="@+id/schedule_end"
+            style="@style/WideTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="103dp"
+            tools:text="@tools:sample/date/ddmmyy" />
+
+        <TextView
+            android:id="@+id/schedule_start"
+            style="@style/WideTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="56dp"
+            tools:text="@tools:sample/date/ddmmyy" />
+
+        <androidx.constraintlayout.helper.widget.Flow
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:orientation="horizontal"
+            app:constraint_referenced_ids="schedule_worker,schedule_worker_holder,schedule_day,schedule_day_holder,schedule_start,schedule_start_holder,schedule_end,schedule_end_holder,schedule_description,schedule_description_holder"
+            app:flow_maxElementsWrap="2"
+            app:flow_wrapMode="aligned"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

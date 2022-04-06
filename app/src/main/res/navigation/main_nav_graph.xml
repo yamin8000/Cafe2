@@ -88,12 +88,6 @@
             <action
                 android:id="@+id/action_newCategoryFragment_to_iconPickerModal"
                 app:destination="@id/iconPickerModal" />
-            <argument
-                android:name="IS_EDIT_MODE"
-                app:argType="boolean" />
-            <argument
-                android:name="data"
-                app:argType="io.github.yamin8000.cafe.db.entities.category.Category" />
         </fragment>
     </navigation>
     <navigation
@@ -104,15 +98,9 @@
             android:name="io.github.yamin8000.cafe.product.NewProductFragment"
             android:label="NewProductFragment"
             tools:layout="@layout/fragment_new_product">
-            <argument
-                android:name="is_edit_mode"
-                app:argType="boolean" />
             <action
                 android:id="@+id/action_newProductFragment_to_iconPickerModal"
                 app:destination="@id/iconPickerModal" />
-            <argument
-                android:name="data"
-                app:argType="io.github.yamin8000.cafe.db.entities.relatives.ProductAndCategory" />
         </fragment>
         <fragment
             android:id="@+id/productFragment"

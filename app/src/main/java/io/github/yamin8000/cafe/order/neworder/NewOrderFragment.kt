@@ -16,6 +16,7 @@ import io.github.yamin8000.cafe.db.entities.order.OrderDetail
 import io.github.yamin8000.cafe.db.entities.product.Product
 import io.github.yamin8000.cafe.db.entities.subscriber.Subscriber
 import io.github.yamin8000.cafe.db.helpers.DbHelpers.getProducts
+import io.github.yamin8000.cafe.ui.recyclerview.EmptyAdapter
 import io.github.yamin8000.cafe.ui.util.BaseFragment
 import io.github.yamin8000.cafe.util.Constants.PROMPT
 import io.github.yamin8000.cafe.util.Constants.PROMPT_RESULT
@@ -171,6 +172,16 @@ class NewOrderFragment :
 
     private suspend fun listHandler() {
         products = ioScope.coroutineContext.getProducts()
+        if (products.isNotEmpty()) fillList()
+        else handleEmptyProducts()
+    }
+
+    private fun handleEmptyProducts() {
+        binding.orderDetailList.adapter = EmptyAdapter(getString(R.string.no_products))
+        binding.saveOrderButton.isEnabled = false
+    }
+
+    private fun fillList() {
         NewOrderDetailAdapter(this::itemChanged).let {
             it.asyncList.submitList(products)
             binding.orderDetailList.adapter = it

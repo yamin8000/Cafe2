@@ -27,6 +27,7 @@ object Constants {
     const val CURRENT_ACCOUNT_TYPE = "current_account_type"
     const val LOGIN = "login"
     const val ACCOUNT = "account"
+    const val CRUD_NAME = "crud_name"
 
     //prompt
     const val PROMPT = "prompt"

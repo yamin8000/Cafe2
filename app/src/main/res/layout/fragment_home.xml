@@ -26,6 +26,14 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
+            android:id="@+id/schedule_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/schedule"
+            tools:layout_editor_absoluteX="66dp"
+            tools:layout_editor_absoluteY="440dp" />
+
+        <Button
             android:id="@+id/payments_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -114,7 +122,7 @@
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="32dp"
             android:orientation="horizontal"
-            app:constraint_referenced_ids="new_order_button,list_order_button,products_button,categories_button,subscriber_button,account_button,account_login_button,reports_button,workers_button,payments_button"
+            app:constraint_referenced_ids="new_order_button,list_order_button,products_button,categories_button,subscriber_button,workers_button,reports_button,payments_button,schedule_button,account_button,account_login_button"
             app:flow_horizontalGap="16dp"
             app:flow_maxElementsWrap="2"
             app:flow_verticalGap="16dp"

@@ -12,6 +12,7 @@ import io.github.yamin8000.cafe.util.Utility.Alerts.snack
 import io.github.yamin8000.cafe.util.Utility.Bundles.data
 import io.github.yamin8000.cafe.util.Utility.Bundles.isEditMode
 import io.github.yamin8000.cafe.util.Utility.handleCrash
+import io.github.yamin8000.cafe.util.Utility.isSuperuser
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -59,8 +60,11 @@ abstract class CreateUpdateFragment<T : Parcelable, VB : ViewBinding>(
     fun confirmListener(validate: () -> Boolean) {
         if (validate()) {
             lifecycleScope.launch {
-                if (isEditMode) editItem()
-                else createItem()
+                when {
+                    !isEditMode -> createItem()
+                    isEditMode && isSuperuser() -> editItem()
+                    else -> snack(getString(R.string.crud_update_not_allowed))
+                }
             }
         } else snack(getString(R.string.enter_all_fields))
     }

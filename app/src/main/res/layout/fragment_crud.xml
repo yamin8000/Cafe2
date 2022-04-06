@@ -12,6 +12,14 @@
         android:orientation="vertical"
         android:padding="16dp">
 
+        <TextView
+            android:id="@+id/crud_name"
+            style="@style/WideTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            tools:text="@tools:sample/lorem" />
+
         <Button
             android:id="@+id/crud_list_add_button"
             android:layout_width="match_parent"

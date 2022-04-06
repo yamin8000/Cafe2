@@ -1,6 +1,5 @@
 package io.github.yamin8000.cafe.util
 
-import android.content.Context
 import android.os.Bundle
 import android.os.Parcelable
 import android.view.View
@@ -87,12 +86,14 @@ object Utility {
         }
     }
 
-    fun Context.getCurrentPermission(): Int {
+    fun getCurrentPermission(): Int {
         return sharedPrefs?.prefs?.getInt(
             Constants.CURRENT_ACCOUNT_TYPE,
             Constants.NO_ID
         ) ?: AccountPermission.Guest.rank
     }
+
+    fun isSuperuser() = getCurrentPermission() == AccountPermission.Superuser.rank
 
     object Views {
 

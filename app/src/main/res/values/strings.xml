@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Cafe</string>
     <string name="app_crashed">مشکلی در برنامه پیش آمده، برای خروج اینجا را لمس کنید.</string>
-    <string name="welcome">خوش آمدید!</string>
+    <string name="welcome">کاربر %s خوش آمدید!</string>
     <string name="orders">سفارش‌ها</string>
     <string name="new_order">سفارش‌جدید</string>
     <string name="db_null_error">خطای اتصال به پایگاه داده</string>
@@ -75,7 +75,7 @@
     <string name="report_user">کاربر گزارش</string>
     <string name="schedule_user">کاربر حضورغیاب</string>
     <string name="finance_user">کاربر مالی</string>
-    <string name="guest">کاربر مهمان</string>
+    <string name="guest_user">کاربر مهمان</string>
     <string name="permission_denied">شما به این قسمت دسترسی ندارید.</string>
     <string name="order_user">کاربر سفارش</string>
     <string name="login_success">کاربر %s با موفقیت وارد شد.</string>
@@ -94,4 +94,9 @@
     <string name="day">روز</string>
     <string name="start_date">زمان شروع کار</string>
     <string name="end_date">زمان پایان کار</string>
+    <string name="no_products">محصولی برای سفارش دادن وجود ندارد.</string>
+    <string name="crud_delete_not_allowed">شما اجازه پاک کردن ندارید.</string>
+    <string name="crud_update_not_allowed">شما اجازه ویرایش  ندارید.</string>
+    <string name="guest">مهمان</string>
+    <string name="schedule">حضورغیاب</string>
 </resources>

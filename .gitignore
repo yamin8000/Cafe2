@@ -16,3 +16,5 @@ local.properties
 /.idea/
 /.idea/inspectionProfiles/
 /app/release/
+/app/release/app-release.apk
+/app/release/output-metadata.json

@@ -14,6 +14,7 @@ import io.github.yamin8000.cafe.databinding.FragmentCrudBinding
 import io.github.yamin8000.cafe.ui.recyclerview.EmptyAdapter
 import io.github.yamin8000.cafe.ui.util.BaseFragment
 import io.github.yamin8000.cafe.util.Constants
+import io.github.yamin8000.cafe.util.Constants.CRUD_NAME
 import io.github.yamin8000.cafe.util.Constants.DATA
 import io.github.yamin8000.cafe.util.Constants.IS_EDIT_MODE
 import io.github.yamin8000.cafe.util.Constants.db
@@ -22,6 +23,7 @@ import io.github.yamin8000.cafe.util.Utility.Alerts.snack
 import io.github.yamin8000.cafe.util.Utility.Views.gone
 import io.github.yamin8000.cafe.util.Utility.Views.visible
 import io.github.yamin8000.cafe.util.Utility.handleCrash
+import io.github.yamin8000.cafe.util.Utility.isSuperuser
 import io.github.yamin8000.cafe.util.Utility.navigate
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -47,6 +49,9 @@ abstract class ReadDeleteFragment<T, VH : RecyclerView.ViewHolder>(
         try {
             if (db != null) prepareUi()
             else showNullDbError()
+            arguments?.getString(CRUD_NAME)?.let {
+                binding.crudName.text = it
+            }
         } catch (e: Exception) {
             handleCrash(e)
         }
@@ -70,8 +75,12 @@ abstract class ReadDeleteFragment<T, VH : RecyclerView.ViewHolder>(
     private fun deleteFabClickListener() {
         navigate(R.id.promptModal)
         setFragmentResultListener(Constants.PROMPT) { _, bundle ->
-            if (bundle.getBoolean(Constants.PROMPT_RESULT))
-                lifecycleScope.launch { itemsDeleteHandler() }
+            val isUserDeleting = bundle.getBoolean(Constants.PROMPT_RESULT)
+            val isDeleteAllowed = isSuperuser()
+            when {
+                !isDeleteAllowed -> snack(getString(R.string.crud_delete_not_allowed))
+                isUserDeleting && isDeleteAllowed -> lifecycleScope.launch { itemsDeleteHandler() }
+            }
         }
     }
 

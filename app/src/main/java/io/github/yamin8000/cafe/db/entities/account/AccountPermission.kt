@@ -19,7 +19,7 @@ enum class AccountPermission(val rank: Int) {
             ScheduleUser -> context.getString(R.string.schedule_user)
             FinanceUser -> context.getString(R.string.finance_user)
             OrderUser -> context.getString(R.string.order_user)
-            Guest -> context.getString(R.string.guest)
+            Guest -> context.getString(R.string.guest_user)
         }
     }
 

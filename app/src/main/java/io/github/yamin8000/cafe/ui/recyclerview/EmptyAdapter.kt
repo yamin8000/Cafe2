@@ -8,14 +8,14 @@ import androidx.recyclerview.widget.RecyclerView
 import io.github.yamin8000.cafe.R
 
 class EmptyAdapter(
-    private val message: String = ""
+    private val message: String? = null
 ) : RecyclerView.Adapter<EmptyAdapter.EmptyViewHolder>() {
 
     class EmptyViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EmptyViewHolder {
         val view = inflateView(parent)
-        if (message.isNotBlank())
+        if (!message.isNullOrBlank())
             setMessage(view.findViewById(R.id.empty_adapter_text))
         return EmptyViewHolder(view)
     }

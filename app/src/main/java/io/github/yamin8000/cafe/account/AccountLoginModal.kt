@@ -55,6 +55,7 @@ class AccountLoginModal : BottomSheetDialogFragment() {
 
     private fun loginSubmitClickListener() {
         binding.accountLoginSubmit.setOnClickListener {
+            binding.accountLoginSubmit.isEnabled = false
             val username = binding.accountUserLoginEdit.text.toString()
             val password = binding.accountPassLoginEdit.text.toString()
             if (MASTER isBCryptOf username && MASTER isBCryptOf password) {
@@ -64,8 +65,13 @@ class AccountLoginModal : BottomSheetDialogFragment() {
             }
             if (username.isNotEmpty() && password.isNotEmpty())
                 lifecycleScope.launch { handleUserPass(username, password) }
-            else snack(getString(R.string.enter_all_fields))
+            else handleEmptyFields()
         }
+    }
+
+    private fun handleEmptyFields() {
+        snack(getString(R.string.enter_all_fields))
+        binding.accountLoginSubmit.isEnabled = true
     }
 
     private fun unlockSecretMasterMode() {
@@ -84,7 +90,7 @@ class AccountLoginModal : BottomSheetDialogFragment() {
         password: String
     ) {
         val account = getAccount(username)
-        if (account == null) snack(getString(R.string.invalid_username_password))
+        if (account == null) handleInvalidUserPass()
         else foundAccountHandler(account, password)
     }
 
@@ -97,7 +103,12 @@ class AccountLoginModal : BottomSheetDialogFragment() {
         password: String
     ) {
         if (account.password isBCryptOf password) loginSuccessHandler(account)
-        else snack(getString(R.string.invalid_username_password))
+        else handleInvalidUserPass()
+    }
+
+    private fun handleInvalidUserPass() {
+        snack(getString(R.string.invalid_username_password))
+        binding.accountLoginSubmit.isEnabled = true
     }
 
     private fun loginSuccessHandler(account: Account) {

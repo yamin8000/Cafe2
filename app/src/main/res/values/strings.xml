@@ -99,4 +99,5 @@
     <string name="crud_update_not_allowed">شما اجازه ویرایش  ندارید.</string>
     <string name="guest">مهمان</string>
     <string name="schedule">حضورغیاب</string>
+    <string name="report_type">نوع گزارش</string>
 </resources>

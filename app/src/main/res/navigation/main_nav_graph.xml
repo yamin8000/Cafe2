@@ -59,7 +59,8 @@
         tools:layout="@layout/fragment_new_order">
         <action
             android:id="@+id/action_newOrderFragment_to_searchOrdersFragment"
-            app:destination="@id/searchOrdersFragment" />
+            app:destination="@id/searchOrdersFragment"
+            app:popUpTo="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchOrdersFragment"

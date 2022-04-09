@@ -197,4 +197,8 @@
         android:name="io.github.yamin8000.cafe.report.ReportFragment"
         android:label="ReportFragment"
         tools:layout="@layout/fragment_report" />
+    <fragment
+        android:id="@+id/newScheduleFragment"
+        android:name="io.github.yamin8000.cafe.worker.schedule.NewScheduleFragment"
+        android:label="NewScheduleFragment" />
 </navigation>

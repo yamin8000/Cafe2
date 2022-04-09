@@ -18,4 +18,12 @@ data class Worker(
     constructor() : this("", "", "", "")
 
     override fun toString() = this.name
+
+    fun describe() = buildString {
+        append(this@Worker.name)
+        append("\n")
+        append(this@Worker.job)
+        append("\n")
+        append(this@Worker.phone)
+    }
 }

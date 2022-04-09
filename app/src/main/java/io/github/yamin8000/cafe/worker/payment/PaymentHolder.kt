@@ -32,12 +32,6 @@ class PaymentHolder(
                 } else gone()
             }
         }
-        binding.paymentWorker.text = buildString {
-            append(workerAndPayment.worker.name)
-            append("\n")
-            append(workerAndPayment.worker.job)
-            append("\n")
-            append(workerAndPayment.worker.phone)
-        }
+        binding.paymentWorker.text = workerAndPayment.worker.describe()
     }
 )

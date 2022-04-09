@@ -5,12 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/report_text"
+        style="@style/WideTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="98dp"
+        tools:text="@tools:sample/lorem" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/report_list"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         tools:layout_editor_absoluteX="206dp"
-        tools:layout_editor_absoluteY="446dp" />
+        tools:layout_editor_absoluteY="446dp" >
+
+    </androidx.recyclerview.widget.RecyclerView>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/report_type_input"
@@ -36,7 +47,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:orientation="vertical"
-        app:constraint_referenced_ids="report_type_input,report_list"
+        app:constraint_referenced_ids="report_type_input,report_text,report_list"
         app:flow_verticalBias="0"
         app:flow_verticalGap="16dp"
         app:flow_verticalStyle="packed"

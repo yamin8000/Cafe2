@@ -5,6 +5,7 @@ import android.os.Parcelable
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
@@ -126,6 +127,13 @@ object Utility {
 
         fun View.invisible() {
             this.visibility = View.INVISIBLE
+        }
+
+        fun TextView.handleData(data: String?) {
+            if (!data.isNullOrBlank()) {
+                this.visible()
+                this.text = data
+            } else this.gone()
         }
     }
 

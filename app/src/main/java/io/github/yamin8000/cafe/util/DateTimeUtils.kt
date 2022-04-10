@@ -1,11 +1,9 @@
 package io.github.yamin8000.cafe.util
 
+import org.bardframework.time.LocalDateJalali
 import org.bardframework.time.LocalDateTimeJalali
 import org.bardframework.time.ZonedDateTimeJalali
-import java.time.LocalDateTime
-import java.time.ZoneId
-import java.time.ZoneOffset
-import java.time.ZonedDateTime
+import java.time.*
 import java.time.format.DateTimeFormatter
 
 object DateTimeUtils {
@@ -37,4 +35,6 @@ object DateTimeUtils {
     fun Long.toDateTime(): LocalDateTime {
         return LocalDateTime.ofEpochSecond(this, 0, ZoneOffset.UTC)
     }
+
+    fun LocalDate.toJalali() = LocalDateJalali.of(this).toString()
 }

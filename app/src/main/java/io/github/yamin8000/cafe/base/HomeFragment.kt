@@ -48,6 +48,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>({ FragmentHomeBinding.inf
             paymentsButtonHandler()
             accountButtonHandler()
             reportsButtonHandler()
+            scheduleButtonHandler()
             backPressHandler()
         } catch (e: Exception) {
             handleCrash(e)
@@ -85,6 +86,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>({ FragmentHomeBinding.inf
             navigate(
                 R.id.action_homeFragment_to_productFragment,
                 bundleOf(CRUD_NAME to binding.productsButton.text)
+            )
+        }
+    }
+
+    private fun scheduleButtonHandler() {
+        binding.scheduleButton.setOnClickListener {
+            navigateWithPermission(
+                R.id.action_homeFragment_to_schedule_graph,
+                AccountPermission.ScheduleUser,
+                AccountPermission.Superuser,
+                bundle = bundleOf(CRUD_NAME to binding.scheduleButton.text)
             )
         }
     }

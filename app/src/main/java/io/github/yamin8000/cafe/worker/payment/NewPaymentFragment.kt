@@ -59,6 +59,7 @@ class NewPaymentFragment :
     }
 
     override fun initViewForEditMode() {
+        binding.newPaymentConfirm.text = getString(R.string.edit)
         binding.paymentValueEdit.setText(item.payment.value.toString())
         item.payment.description?.let { binding.paymentDescriptionEdit.setText(it) }
         lifecycleScope.launch {
@@ -79,11 +80,11 @@ class NewPaymentFragment :
     private fun paymentAddSuccess() {
         snack(getString(R.string.item_add_success, getString(R.string.payment)))
         clearViews()
-        cleaValues()
+        clearValues()
         hideKeyboard()
     }
 
-    private fun cleaValues() {
+    private fun clearValues() {
         item = PaymentAndWorker(Payment(), Worker())
     }
 
@@ -114,8 +115,8 @@ class NewPaymentFragment :
         binding.newPaymentConfirm.setOnClickListener {
             item.payment.value = binding.paymentValueEdit.getNumber()
             item.payment.date = DateTimeUtils.zonedNow()
-            binding.paymentDescriptionEdit.text.toString().let { description ->
-                if (description.isNotBlank())
+            binding.paymentDescriptionEdit.text?.toString().let { description ->
+                if (!description.isNullOrBlank())
                     item.payment.description = description
             }
             //item.workerId, already set using auto complete click listener

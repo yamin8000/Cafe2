@@ -1,21 +1,37 @@
 package io.github.yamin8000.cafe.worker.schedule
 
+import androidx.recyclerview.widget.LinearLayoutManager
 import io.github.yamin8000.cafe.R
 import io.github.yamin8000.cafe.db.entities.relatives.ScheduleAndWorker
 import io.github.yamin8000.cafe.ui.crud.ReadDeleteFragment
+import io.github.yamin8000.cafe.util.Constants.db
+import io.github.yamin8000.cafe.util.Utility.Alerts.snack
+import kotlinx.coroutines.withContext
 
 class ScheduleFragment :
     ReadDeleteFragment<ScheduleAndWorker, ScheduleHolder>(R.id.newScheduleFragment) {
+
     override suspend fun getItems(): List<ScheduleAndWorker> {
-        TODO("Not yet implemented")
+        return withContext(ioScope.coroutineContext) {
+            db?.relativeDao()?.getSchedulesAndWorkers()
+        } ?: listOf()
     }
 
     override suspend fun dbDeleteAction() {
-        TODO("Not yet implemented")
+        withContext(ioScope.coroutineContext) {
+            db?.scheduleDao()?.deleteAll(items.map { it.schedule })
+        }.let { id ->
+            if (id != null) {
+                snack(getString(R.string.item_delete_success, getString(R.string.schedule)))
+            } else snack(getString(R.string.db_update_error))
+        }
     }
 
     override fun fillList() {
-        TODO("Not yet implemented")
+        ScheduleAdapter(this::updateCallback, this::deleteCallback).apply {
+            binding.crudList.adapter = this
+            context?.let { binding.crudList.layoutManager = LinearLayoutManager(it) }
+            this.asyncList.submitList(items)
+        }
     }
-
 }

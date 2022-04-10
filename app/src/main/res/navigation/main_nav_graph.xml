@@ -40,6 +40,9 @@
         <action
             android:id="@+id/action_homeFragment_to_reportFragment"
             app:destination="@id/reportFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_schedule_graph"
+            app:destination="@id/schedule_graph" />
     </fragment>
     <fragment
         android:id="@+id/splashFragment"
@@ -197,8 +200,15 @@
         android:name="io.github.yamin8000.cafe.report.ReportFragment"
         android:label="ReportFragment"
         tools:layout="@layout/fragment_report" />
-    <fragment
-        android:id="@+id/newScheduleFragment"
-        android:name="io.github.yamin8000.cafe.worker.schedule.NewScheduleFragment"
-        android:label="NewScheduleFragment" />
+    <navigation android:id="@+id/schedule_graph"
+        app:startDestination="@id/scheduleFragment">
+        <fragment
+            android:id="@+id/scheduleFragment"
+            android:name="io.github.yamin8000.cafe.worker.schedule.ScheduleFragment"
+            android:label="ScheduleFragment" />
+        <fragment
+            android:id="@+id/newScheduleFragment"
+            android:name="io.github.yamin8000.cafe.worker.schedule.NewScheduleFragment"
+            android:label="NewScheduleFragment" />
+    </navigation>
 </navigation>

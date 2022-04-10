@@ -100,4 +100,7 @@
     <string name="guest">مهمان</string>
     <string name="schedule">حضورغیاب</string>
     <string name="report_type">نوع گزارش</string>
+    <string name="schedule_end">زمان خروج</string>
+    <string name="schedule_start">زمان ورود</string>
+    <string name="no_workers_to_schedule">نیروی کاری اضافه نشده که حضور غیابی ایجاد شود.</string>
 </resources>

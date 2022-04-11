@@ -58,6 +58,7 @@ abstract class BaseDao<T>(tableName: String) {
     }
 
     suspend fun getByParams(vararg paramPairs: Pair<String, *>): List<T> {
+        if (paramPairs.isNullOrEmpty()) return getAll()
         val condition = buildString {
             paramPairs.forEachIndexed { index, pair ->
                 append("${pair.first} = '${pair.second}'")

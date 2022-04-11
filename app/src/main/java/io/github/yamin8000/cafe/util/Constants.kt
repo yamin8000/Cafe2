@@ -28,6 +28,10 @@ object Constants {
     const val LOGIN = "login"
     const val ACCOUNT = "account"
     const val CRUD_NAME = "crud_name"
+    const val FILTER = "filter"
+    const val NAME = "name"
+    const val CATEGORY = "category"
+    const val PRICE = "price"
 
     //prompt
     const val PROMPT = "prompt"

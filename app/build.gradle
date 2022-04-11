@@ -72,6 +72,6 @@ dependencies {
     implementation 'org.bardframework:jalali-date:0.5.1'
     //hash password
     implementation 'at.favre.lib:bcrypt:0.9.0'
-    //
-    implementation 'com.github.freva:ascii-table:1.1.0'
+    //csv
+    implementation("com.github.doyaaaaaken:kotlin-csv-jvm:1.2.0")
 }

@@ -103,16 +103,9 @@
     <string name="schedule_end">زمان خروج</string>
     <string name="schedule_start">زمان ورود</string>
     <string name="no_workers_to_schedule">نیروی کاری اضافه نشده که حضور غیابی ایجاد شود.</string>
-    <string-array name="report_keys">
-        <item>order</item>
-        <item>product</item>
-        <item>category</item>
-        <item>account</item>
-        <item>subscriber</item>
-        <item>worker</item>
-        <item>payment</item>
-        <item>schedule</item>
-    </string-array>
+    <string name="report_detail">جزییات گزارش</string>
+    <string name="max_product_price">حداکثر قیمت محصول</string>
+    <string name="sharing">اشتراک گذاری</string>
     <string-array name="report_values">
         <item>@string/orders</item>
         <item>@string/products</item>

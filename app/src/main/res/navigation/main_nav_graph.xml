@@ -211,4 +211,8 @@
             android:name="io.github.yamin8000.cafe.worker.schedule.NewScheduleFragment"
             android:label="NewScheduleFragment" />
     </navigation>
+    <dialog
+        android:id="@+id/productFilterModal"
+        android:name="io.github.yamin8000.cafe.report.ProductFilterModal"
+        android:label="ProductFilterModal" />
 </navigation>

@@ -5,6 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <Button
+        android:id="@+id/share_csv_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/sharing"
+        tools:layout_editor_absoluteX="157dp"
+        tools:layout_editor_absoluteY="98dp" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/report_list"
         android:layout_width="0dp"
@@ -39,7 +47,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:orientation="vertical"
-        app:constraint_referenced_ids="report_type_input,report_list"
+        app:constraint_referenced_ids="report_type_input,share_csv_button,report_list"
         app:flow_verticalBias="0"
         app:flow_verticalGap="16dp"
         app:flow_verticalStyle="packed"

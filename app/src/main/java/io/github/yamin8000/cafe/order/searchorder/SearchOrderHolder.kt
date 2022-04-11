@@ -5,9 +5,9 @@ import androidx.recyclerview.widget.RecyclerView
 import io.github.yamin8000.cafe.R
 import io.github.yamin8000.cafe.databinding.SearchOrderItemBinding
 import io.github.yamin8000.cafe.db.entities.order.OrderDetail
+import io.github.yamin8000.cafe.db.entities.order.OrderStatus
 import io.github.yamin8000.cafe.db.entities.relatives.OrderWithDetails
 import io.github.yamin8000.cafe.db.entities.subscriber.Subscriber
-import io.github.yamin8000.cafe.db.entities.order.OrderStatus
 import io.github.yamin8000.cafe.util.DateTimeUtils.toJalaliIso
 import io.github.yamin8000.cafe.util.Utility.Views.gone
 import io.github.yamin8000.cafe.util.Utility.Views.visible
@@ -17,14 +17,14 @@ import java.time.ZonedDateTime
 class SearchOrderHolder(
     private val binding: SearchOrderItemBinding,
     private val asyncList: AsyncListDiffer<OrderWithDetails>,
-    private val deliverListener: (Long) -> Unit
+    private val deliverListener: ((Long) -> Unit)? = null
 ) : RecyclerView.ViewHolder(binding.root) {
 
     private val context = binding.root.context
 
     init {
         deliverClickEnablerHandler()
-        deliverClickListener()
+        deliverClickListenerHandler()
     }
 
     private fun deliverClickEnablerHandler() {
@@ -36,10 +36,13 @@ class SearchOrderHolder(
         }
     }
 
-    private fun deliverClickListener() {
+    private fun deliverClickListenerHandler() {
+        if (deliverListener != null) binding.searchOrderDeliverButton.visible()
+        else binding.searchOrderDeliverButton.gone()
         binding.searchOrderDeliverButton.setOnClickListener {
             if (adapterPosition != RecyclerView.NO_POSITION) {
-                deliverListener(asyncList.currentList[adapterPosition].orderAndSubscriber.order.id)
+                binding.searchOrderDeliverButton.visible()
+                deliverListener?.invoke(asyncList.currentList[adapterPosition].orderAndSubscriber.order.id)
                 asyncList.currentList[adapterPosition].orderAndSubscriber.order.status =
                     OrderStatus.Delivered
                 setOrderStatus(OrderStatus.Delivered)

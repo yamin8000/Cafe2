@@ -1,7 +1,5 @@
 package io.github.yamin8000.cafe.account
 
-import android.os.Bundle
-import android.view.View
 import androidx.core.content.edit
 import androidx.recyclerview.widget.GridLayoutManager
 import io.github.yamin8000.cafe.R

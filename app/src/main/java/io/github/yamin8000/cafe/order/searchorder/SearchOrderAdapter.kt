@@ -8,7 +8,7 @@ import io.github.yamin8000.cafe.db.entities.relatives.OrderWithDetails
 import io.github.yamin8000.cafe.ui.recyclerview.AsyncDifferHelper.getAsyncDiffer
 
 class SearchOrderAdapter(
-    private val deliverListener: (Long) -> Unit
+    private val deliverListener: ((Long) -> Unit)? = null
 ) : RecyclerView.Adapter<SearchOrderHolder>() {
 
     val asyncList = this.getAsyncDiffer<OrderWithDetails, SearchOrderHolder>(

@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -15,6 +14,7 @@ import io.github.yamin8000.cafe.util.Constants.FILTER
 import io.github.yamin8000.cafe.util.Constants.NAME
 import io.github.yamin8000.cafe.util.Constants.PRICE
 import io.github.yamin8000.cafe.util.Constants.db
+import io.github.yamin8000.cafe.util.Utility.Views.autoCompleteAdapter
 import io.github.yamin8000.cafe.util.Utility.Views.gone
 import io.github.yamin8000.cafe.util.Utility.handleCrash
 import kotlinx.coroutines.CoroutineScope
@@ -52,15 +52,7 @@ class ProductFilterModal : BottomSheetDialogFragment() {
         val categories = withContext(ioScope.coroutineContext) {
             db?.categoryDao()?.getAll()
         } ?: listOf()
-        context?.let {
-            binding.productCategoryEdit.setAdapter(
-                ArrayAdapter(
-                    it,
-                    R.layout.dropdown_item,
-                    categories
-                )
-            )
-        }
+        context?.let { binding.productCategoryEdit.setAdapter(it.autoCompleteAdapter(categories)) }
     }
 
     private fun sendArguments() {

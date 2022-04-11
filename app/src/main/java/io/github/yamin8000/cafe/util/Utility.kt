@@ -1,9 +1,13 @@
+@file:Suppress("unused")
+
 package io.github.yamin8000.cafe.util
 
+import android.content.Context
 import android.os.Bundle
 import android.os.Parcelable
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -23,6 +27,7 @@ import io.github.yamin8000.cafe.util.Constants.STACKTRACE
 import io.github.yamin8000.cafe.util.Constants.sharedPrefs
 import java.math.BigInteger
 
+@Suppress("MemberVisibilityCanBePrivate")
 object Utility {
 
     /**
@@ -97,6 +102,10 @@ object Utility {
     fun isSuperuser() = getCurrentPermission() == AccountPermission.Superuser.rank
 
     object Views {
+
+        fun <T> Context.autoCompleteAdapter(items: List<T>): ArrayAdapter<T> {
+            return ArrayAdapter(this, R.layout.dropdown_item, items)
+        }
 
         fun TextInputEditText.getNumber(): Long {
             return try {

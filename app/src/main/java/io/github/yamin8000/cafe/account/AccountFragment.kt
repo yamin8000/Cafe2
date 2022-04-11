@@ -6,6 +6,7 @@ import io.github.yamin8000.cafe.R
 import io.github.yamin8000.cafe.db.entities.account.Account
 import io.github.yamin8000.cafe.ui.crud.ReadDeleteFragment
 import io.github.yamin8000.cafe.util.Constants.CURRENT_ACCOUNT_ID
+import io.github.yamin8000.cafe.util.Constants.CURRENT_ACCOUNT_TYPE
 import io.github.yamin8000.cafe.util.Constants.db
 import io.github.yamin8000.cafe.util.SharedPrefs
 import io.github.yamin8000.cafe.util.Utility.Alerts.snack
@@ -32,7 +33,12 @@ class AccountFragment : ReadDeleteFragment<Account, AccountHolder>(R.id.newAccou
             val prefs = SharedPrefs(it, it.packageName).prefs
             val savedId = prefs.getLong(CURRENT_ACCOUNT_ID, -1)
             val isDeletingCurrentUser = deleteCandidates.any { item -> item.id == savedId }
-            prefs.edit { remove(CURRENT_ACCOUNT_ID) }
+            if (isDeletingCurrentUser) {
+                prefs.edit {
+                    remove(CURRENT_ACCOUNT_ID)
+                    remove(CURRENT_ACCOUNT_TYPE)
+                }
+            }
         }
     }
 

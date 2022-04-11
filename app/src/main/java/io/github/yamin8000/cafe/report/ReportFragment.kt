@@ -2,7 +2,9 @@ package io.github.yamin8000.cafe.report
 
 import android.os.Bundle
 import android.view.View
+import android.widget.ArrayAdapter
 import androidx.lifecycle.lifecycleScope
+import io.github.yamin8000.cafe.R
 import io.github.yamin8000.cafe.databinding.FragmentReportBinding
 import io.github.yamin8000.cafe.db.entities.order.OrderStatus
 import io.github.yamin8000.cafe.order.searchorder.SearchOrderAdapter
@@ -26,7 +28,11 @@ class ReportFragment : BaseFragment<FragmentReportBinding>({ FragmentReportBindi
 
     private fun fillReportsAutoComplete() {
         context?.let {
-
+            val keys = it.resources.getStringArray(R.array.report_keys)
+            val values = it.resources.getStringArray(R.array.report_values)
+            ArrayAdapter(it, R.layout.dropdown_item, values).let { adapter ->
+                binding.reportTypeEdit.setAdapter(adapter)
+            }
         }
     }
 

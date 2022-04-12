@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/newest_orders"
+        android:title="@string/newest_orders"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/oldest_orders"
+        android:title="@string/oldest_orders"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/fattest_orders"
+        android:title="@string/fattest_orders"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/thinnest_orders"
+        android:title="@string/thinnest_orders"
+        app:showAsAction="ifRoom" />
+</menu>

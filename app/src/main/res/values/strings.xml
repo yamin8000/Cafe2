@@ -111,6 +111,10 @@
     <string name="select_date">تاریخ و زمان را انتخاب کنید</string>
     <string name="select_date_range">انتخاب دوره زمانی</string>
     <string name="search">جستجو</string>
+    <string name="newest_orders">جدیدترین سفارش ها</string>
+    <string name="oldest_orders">قدیمی ترین سفارش ها</string>
+    <string name="fattest_orders">سنگین ترین سفارش ها</string>
+    <string name="thinnest_orders">سبک ترین سفارش ها</string>
     <string-array name="report_values">
         <item>@string/orders</item>
         <item>@string/products</item>

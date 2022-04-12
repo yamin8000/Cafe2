@@ -46,12 +46,19 @@ object DateTimeUtils {
     }
 
     fun Long.zonedDateTimeOfMillis(): ZonedDateTime {
-        return ZonedDateTime.of(
-            LocalDateTime.ofInstant(
-                Instant.ofEpochMilli(this),
-                ZoneId.systemDefault()
-            ), ZoneId.systemDefault()
-        )
+        return this.toLocalDateTime().toZonedDateTime()
+    }
+
+    fun LocalDateTime.toZonedDateTime(): ZonedDateTime {
+        return ZonedDateTime.of(this, ZoneId.systemDefault())
+    }
+
+    fun Long.toLocalDateTime(): LocalDateTime {
+        return LocalDateTime.ofInstant(Instant.ofEpochMilli(this), ZoneId.systemDefault())
+    }
+
+    fun LocalDateTime.ignoreTime(): LocalDateTime {
+        return this.withHour(0).withMinute(0).withSecond(0).withNano(0)
     }
 
     fun LocalDate.toJalali() = LocalDateJalali.of(this).toString()

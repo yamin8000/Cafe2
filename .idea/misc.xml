@@ -32,7 +32,7 @@
         <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/fragment_new_schedule.xml" value="0.33" />
         <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/fragment_new_subscriber.xml" value="0.33" />
         <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/fragment_new_worker.xml" value="0.33" />
-        <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/fragment_order_report.xml" value="0.1" />
+        <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/fragment_order_report.xml" value="0.25" />
         <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/fragment_product.xml" value="0.22" />
         <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/fragment_products.xml" value="0.18" />
         <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/fragment_report.xml" value="0.25" />
@@ -54,6 +54,7 @@
         <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/test_item.xml" value="0.5" />
         <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/worker_item.xml" value="0.25" />
         <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/worker_payment_item.xml" value="0.22" />
+        <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/menu/order_report_menu.xml" value="0.25" />
         <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1825" />
       </map>
     </option>

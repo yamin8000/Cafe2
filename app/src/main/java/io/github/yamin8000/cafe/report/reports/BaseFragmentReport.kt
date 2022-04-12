@@ -1,7 +1,6 @@
 package io.github.yamin8000.cafe.report.reports
 
 import android.content.Intent
-import android.os.Bundle
 import androidx.viewbinding.ViewBinding
 import io.github.yamin8000.cafe.ui.recyclerview.EmptyAdapter
 import io.github.yamin8000.cafe.ui.util.BaseFragment
@@ -21,16 +20,13 @@ abstract class BaseFragmentReport<T, VB : ViewBinding>(inflater: Inflater<VB>) :
 
     protected abstract suspend fun getItems(): List<T>
 
-    protected abstract suspend fun filterItems(
-        items: List<T>,
-        arguments: Bundle?
-    ): List<T>
+    protected abstract suspend fun filterItems(items: List<T>): List<T>
 
     protected abstract fun createList(items: List<T>)
 
     protected suspend fun handleArguments() {
         items = withContext(ioScope.coroutineContext) { getItems() }
-        items = withContext(ioScope.coroutineContext) { filterItems(items, arguments) }
+        items = withContext(ioScope.coroutineContext) { filterItems(items) }
         createList(items)
     }
 

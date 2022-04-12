@@ -6,6 +6,7 @@ import org.bardframework.time.ZonedDateTimeJalali
 import java.time.*
 import java.time.format.DateTimeFormatter
 
+@Suppress("unused", "MemberVisibilityCanBePrivate")
 object DateTimeUtils {
 
     fun now(): String = LocalDateTime.now().toIso()
@@ -27,7 +28,7 @@ object DateTimeUtils {
         return temp
     }
 
-    private fun ZonedDateTime.toOriginalJalaliIso(): String {
+    fun ZonedDateTime.toOriginalJalaliIso(): String {
         return ZonedDateTimeJalali.of(
             LocalDateTimeJalali.of(this.toLocalDateTime()),
             ZoneId.systemDefault()
@@ -38,6 +39,19 @@ object DateTimeUtils {
 
     fun Long.toDateTime(): LocalDateTime {
         return LocalDateTime.ofEpochSecond(this, 0, ZoneOffset.UTC)
+    }
+
+    fun Long.toZonedDateTime(): ZonedDateTime {
+        return ZonedDateTime.of(this.toDateTime(), ZoneId.systemDefault())
+    }
+
+    fun Long.zonedDateTimeOfMillis(): ZonedDateTime {
+        return ZonedDateTime.of(
+            LocalDateTime.ofInstant(
+                Instant.ofEpochMilli(this),
+                ZoneId.systemDefault()
+            ), ZoneId.systemDefault()
+        )
     }
 
     fun LocalDate.toJalali() = LocalDateJalali.of(this).toString()

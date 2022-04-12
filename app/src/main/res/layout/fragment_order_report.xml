@@ -1,91 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/order_report_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="32dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="@string/search"
+        app:icon="@drawable/ic_search"
+        app:layout_anchor="@id/fragment_order_report_root"
+        app:layout_anchorGravity="bottom|start"
+        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/fragment_order_report_root"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/order_report_list"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:layout_editor_absoluteY="324dp"
-            tools:listitem="@layout/search_order_item" />
-
-        <com.google.android.material.switchmaterial.SwitchMaterial
-            android:id="@+id/delivered_switch"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/delivered"
-            tools:layout_editor_absoluteX="159dp"
-            tools:layout_editor_absoluteY="32dp" />
-
-        <Button
-            android:id="@+id/order_filter_confirm"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/confirm"
-            tools:layout_editor_absoluteX="32dp"
-            tools:layout_editor_absoluteY="80dp" />
-
-        <Button
-            android:id="@+id/order_report_csv"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/sharing"
-            tools:layout_editor_absoluteX="143dp"
-            tools:layout_editor_absoluteY="7369dp" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/order_max_price_input"
-            android:layout_width="0dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/order_max_price_edit"
-                android:layout_width="match_parent"
+            <Button
+                android:id="@+id/order_date_range_picker"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:hint="@string/max_price"
-                android:inputType="number"
-                android:singleLine="true" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:text="@string/select_date_range"
+                tools:layout_editor_absoluteX="157dp"
+                tools:layout_editor_absoluteY="7447dp" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/order_min_price_input"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/order_report_list"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:layout_editor_absoluteY="324dp"
+                tools:listitem="@layout/search_order_item" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/order_min_price_edit"
-                android:layout_width="match_parent"
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/delivered_switch"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:hint="@string/min_price"
-                android:inputType="number"
-                android:singleLine="true" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:text="@string/delivered"
+                tools:layout_editor_absoluteX="159dp"
+                tools:layout_editor_absoluteY="32dp" />
 
-        <androidx.constraintlayout.helper.widget.Flow
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:orientation="vertical"
-            app:constraint_referenced_ids="delivered_switch,order_max_price_input,order_min_price_input,order_filter_confirm,order_report_csv,order_report_list"
-            app:flow_maxElementsWrap="1"
-            app:flow_verticalGap="16dp"
-            app:flow_wrapMode="none"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <Button
+                android:id="@+id/order_report_csv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/sharing"
+                tools:layout_editor_absoluteX="143dp"
+                tools:layout_editor_absoluteY="7369dp" />
 
-</androidx.core.widget.NestedScrollView>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/order_max_price_input"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/order_max_price_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/max_price"
+                    android:inputType="number"
+                    android:singleLine="true" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/order_min_price_input"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/order_min_price_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/min_price"
+                    android:inputType="number"
+                    android:singleLine="true" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.constraintlayout.helper.widget.Flow
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:orientation="vertical"
+                app:constraint_referenced_ids="delivered_switch,order_max_price_input,order_min_price_input,order_date_range_picker,order_report_csv,order_report_list"
+                app:flow_maxElementsWrap="1"
+                app:flow_verticalGap="8dp"
+                app:flow_wrapMode="none"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

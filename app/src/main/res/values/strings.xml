@@ -60,9 +60,7 @@
     <string name="rial">ریال</string>
     <string name="rial_template">%s ریال</string>
     <string name="order">سفارش</string>
-    <string name="line_feed_data">%s\n%s</string>
     <string name="quantity">تعداد</string>
-    <string name="order_detail_summary">%s، %s عدد، برابر،%d</string>
     <string name="total_price_template">مجموع قیمت: %s</string>
     <string name="total_price">مجموع قیمت</string>
     <string name="account">اکانت</string>

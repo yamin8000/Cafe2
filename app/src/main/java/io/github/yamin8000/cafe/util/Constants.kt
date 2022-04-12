@@ -32,6 +32,7 @@ object Constants {
     const val NAME = "name"
     const val CATEGORY = "category"
     const val PRICE = "price"
+    const val IS_DELIVERED = "is_delivered"
 
     //prompt
     const val PROMPT = "prompt"

@@ -1,4 +1,4 @@
-package io.github.yamin8000.cafe.report
+package io.github.yamin8000.cafe.report.modal
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -38,7 +38,6 @@ class ProductFilterModal : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         try {
             prepareViewsForFilter()
             binding.addProductConfirm.setOnClickListener { sendArguments() }

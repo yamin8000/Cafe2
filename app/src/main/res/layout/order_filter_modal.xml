@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/delivered_switch"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/delivered"
+            tools:layout_editor_absoluteX="159dp"
+            tools:layout_editor_absoluteY="32dp" />
+
+        <Button
+            android:id="@+id/order_filter_confirm"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/confirm"
+            tools:layout_editor_absoluteX="32dp"
+            tools:layout_editor_absoluteY="80dp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/order_max_price_input"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/order_max_price_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="حداکثر قیمت" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/order_min_price_input"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/order_min_price_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="حداقل قیمت" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.constraintlayout.helper.widget.Flow
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="32dp"
+            android:orientation="vertical"
+            app:constraint_referenced_ids="delivered_switch,order_filter_confirm,order_max_price_input,order_min_price_input"
+            app:flow_maxElementsWrap="1"
+            app:flow_verticalGap="16dp"
+            app:flow_wrapMode="none"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

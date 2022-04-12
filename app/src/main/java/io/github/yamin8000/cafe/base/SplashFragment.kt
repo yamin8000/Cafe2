@@ -19,7 +19,8 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>({ FragmentSplashBindi
 
         try {
             Handler(Looper.getMainLooper()).postDelayed(SPLASH_DELAY) {
-                findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
+                if (!this.isDetached)
+                    findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
             }
         } catch (exception: Exception) {
             handleCrash(exception)

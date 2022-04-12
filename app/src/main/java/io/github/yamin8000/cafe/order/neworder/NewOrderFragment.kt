@@ -26,6 +26,7 @@ import io.github.yamin8000.cafe.util.DateTimeUtils.zonedNow
 import io.github.yamin8000.cafe.util.Utility.Alerts.snack
 import io.github.yamin8000.cafe.util.Utility.handleCrash
 import io.github.yamin8000.cafe.util.Utility.navigate
+import io.github.yamin8000.cafe.util.Utility.numFormat
 import kotlinx.coroutines.*
 import java.time.LocalDate
 import java.time.ZoneId
@@ -108,7 +109,12 @@ class NewOrderFragment :
                     append("\n")
                     append(getString(R.string.adad_template, detail.quantity.spell()))
                     append("\n")
-                    append(getString(R.string.rial_template, orderDetailPrice.toString()))
+                    append(
+                        getString(
+                            R.string.rial_template,
+                            orderDetailPrice.toString().numFormat()
+                        )
+                    )
                     append("\n\n")
                 }
                 summaries.putIfAbsent(detail, singleSummary)

@@ -101,6 +101,19 @@ object Utility {
 
     fun isSuperuser() = getCurrentPermission() == AccountPermission.Superuser.rank
 
+    fun <T> csvOf(
+        headers: List<String>,
+        data: List<T>,
+        itemBuilder: (T) -> List<String>
+    ) = buildString {
+        append(headers.joinToString(","))
+        append("\n")
+        data.forEach { item ->
+            append(itemBuilder(item).joinToString(","))
+            append("\n")
+        }
+    }
+
     object Views {
 
         fun <T> Context.autoCompleteAdapter(items: List<T>): ArrayAdapter<T> {

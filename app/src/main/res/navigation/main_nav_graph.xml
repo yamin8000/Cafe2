@@ -199,7 +199,11 @@
         android:id="@+id/reportFragment"
         android:name="io.github.yamin8000.cafe.report.ReportFragment"
         android:label="ReportFragment"
-        tools:layout="@layout/fragment_report" />
+        tools:layout="@layout/fragment_report">
+        <action
+            android:id="@+id/action_reportFragment_to_fragmentOrderReport"
+            app:destination="@id/fragmentOrderReport" />
+    </fragment>
     <navigation
         android:id="@+id/schedule_graph"
         app:startDestination="@id/scheduleFragment">
@@ -212,13 +216,9 @@
             android:name="io.github.yamin8000.cafe.worker.schedule.NewScheduleFragment"
             android:label="NewScheduleFragment" />
     </navigation>
-    <dialog
-        android:id="@+id/productFilterModal"
-        android:name="io.github.yamin8000.cafe.report.modal.ProductFilterModal"
-        android:label="ProductFilterModal" />
-    <dialog
-        android:id="@+id/orderFilterModal"
-        android:name="io.github.yamin8000.cafe.report.modal.OrderFilterModal"
-        android:label="OrderFilterModal"
-        tools:layout="@layout/order_filter_modal" />
+    <fragment
+        android:id="@+id/fragmentOrderReport"
+        android:name="io.github.yamin8000.cafe.report.reports.FragmentOrderReport"
+        android:label="FragmentOrderReport"
+        tools:layout="@layout/fragment_order_report" />
 </navigation>

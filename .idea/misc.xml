@@ -32,9 +32,10 @@
         <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/fragment_new_schedule.xml" value="0.33" />
         <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/fragment_new_subscriber.xml" value="0.33" />
         <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/fragment_new_worker.xml" value="0.33" />
+        <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/fragment_order_report.xml" value="0.15" />
         <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/fragment_product.xml" value="0.22" />
         <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/fragment_products.xml" value="0.18" />
-        <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/fragment_report.xml" value="0.33" />
+        <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/fragment_report.xml" value="0.25" />
         <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/fragment_search_orders.xml" value="0.25" />
         <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/fragment_splash.xml" value="0.17395833333333333" />
         <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/icon_picker_modal.xml" value="0.21" />
@@ -45,6 +46,7 @@
         <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/order_detail_item.xml" value="0.67" />
         <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/order_filter_modal.xml" value="0.33" />
         <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/product_item.xml" value="0.25" />
+        <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/report_item.xml" value="0.33" />
         <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/schedule_item.xml" value="0.22" />
         <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/search_order_item.xml" value="0.33" />
         <entry key="..\:/Users/YaMiN/AndroidStudioProjects/Cafe/app/src/main/res/layout/single_new_order_modal.xml" value="0.25" />

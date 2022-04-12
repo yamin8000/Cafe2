@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,6 +8,15 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/order_report_list"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:layout_editor_absoluteY="324dp"
+            tools:listitem="@layout/search_order_item" />
 
         <com.google.android.material.switchmaterial.SwitchMaterial
             android:id="@+id/delivered_switch"
@@ -25,6 +34,14 @@
             tools:layout_editor_absoluteX="32dp"
             tools:layout_editor_absoluteY="80dp" />
 
+        <Button
+            android:id="@+id/order_report_csv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/sharing"
+            tools:layout_editor_absoluteX="143dp"
+            tools:layout_editor_absoluteY="7369dp" />
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/order_max_price_input"
             android:layout_width="0dp"
@@ -34,7 +51,9 @@
                 android:id="@+id/order_max_price_edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="حداکثر قیمت" />
+                android:hint="@string/max_price"
+                android:inputType="number"
+                android:singleLine="true" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -46,18 +65,20 @@
                 android:id="@+id/order_min_price_edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="حداقل قیمت" />
+                android:hint="@string/min_price"
+                android:inputType="number"
+                android:singleLine="true" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.constraintlayout.helper.widget.Flow
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginBottom="32dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
             android:orientation="vertical"
-            app:constraint_referenced_ids="delivered_switch,order_filter_confirm,order_max_price_input,order_min_price_input"
+            app:constraint_referenced_ids="delivered_switch,order_max_price_input,order_min_price_input,order_filter_confirm,order_report_csv,order_report_list"
             app:flow_maxElementsWrap="1"
             app:flow_verticalGap="16dp"
             app:flow_wrapMode="none"
@@ -67,4 +88,4 @@
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</ScrollView>
+</androidx.core.widget.NestedScrollView>

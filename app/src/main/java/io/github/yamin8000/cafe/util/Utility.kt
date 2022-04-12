@@ -106,10 +106,10 @@ object Utility {
         data: List<T>,
         itemBuilder: (T) -> List<String>
     ) = buildString {
-        append(headers.joinToString(","))
+        append(headers.joinToString(",") { "\"$it\"" })
         append("\n")
         data.forEach { item ->
-            append(itemBuilder(item).joinToString(","))
+            append(itemBuilder(item).joinToString(",") { "\"$it\"" })
             append("\n")
         }
     }

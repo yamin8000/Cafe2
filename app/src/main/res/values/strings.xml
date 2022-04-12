@@ -104,6 +104,8 @@
     <string name="report_detail">جزییات گزارش</string>
     <string name="max_product_price">حداکثر قیمت محصول</string>
     <string name="sharing">اشتراک گذاری</string>
+    <string name="min_price">حداقل قیمت</string>
+    <string name="max_price">حداکثر قیمت</string>
     <string-array name="report_values">
         <item>@string/orders</item>
         <item>@string/products</item>

@@ -21,13 +21,17 @@ object DateTimeUtils {
     }
 
     fun ZonedDateTime.toJalaliIso(): String {
-        var temp = ZonedDateTimeJalali.of(
-            LocalDateTimeJalali.of(this.toLocalDateTime()),
-            ZoneId.systemDefault()
-        ).toString()
+        var temp = this.toOriginalJalaliIso()
         temp = temp.replace("T", "\n")
         temp = temp.split('+')[0]
         return temp
+    }
+
+    private fun ZonedDateTime.toOriginalJalaliIso(): String {
+        return ZonedDateTimeJalali.of(
+            LocalDateTimeJalali.of(this.toLocalDateTime()),
+            ZoneId.systemDefault()
+        ).toString()
     }
 
     fun Long.toIso() = this.toDateTime().toIso()

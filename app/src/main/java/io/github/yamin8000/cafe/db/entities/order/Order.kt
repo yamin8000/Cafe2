@@ -4,6 +4,8 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
+import io.github.yamin8000.cafe.db.entities.NotCreated
+import io.github.yamin8000.cafe.db.entities.NotCreatedDelegate
 import io.github.yamin8000.cafe.db.entities.subscriber.Subscriber
 import java.time.ZonedDateTime
 
@@ -24,4 +26,4 @@ data class Order(
     val description: String? = null,
     var status: OrderStatus = OrderStatus.Registered,
     @PrimaryKey(autoGenerate = true) val id: Long = 0
-)
+) : NotCreated by NotCreatedDelegate(id)

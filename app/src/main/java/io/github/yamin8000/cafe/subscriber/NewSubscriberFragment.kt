@@ -1,13 +1,12 @@
 package io.github.yamin8000.cafe.subscriber
 
+import android.os.Bundle
+import android.view.View
 import io.github.yamin8000.cafe.R
 import io.github.yamin8000.cafe.databinding.FragmentNewSubscriberBinding
 import io.github.yamin8000.cafe.db.entities.subscriber.Subscriber
 import io.github.yamin8000.cafe.ui.crud.CreateUpdateFragment
-import io.github.yamin8000.cafe.util.Constants.NO_ID_LONG
 import io.github.yamin8000.cafe.util.Constants.db
-import io.github.yamin8000.cafe.util.Utility.Alerts.snack
-import io.github.yamin8000.cafe.util.Utility.hideKeyboard
 import kotlinx.coroutines.withContext
 
 class NewSubscriberFragment :
@@ -16,8 +15,9 @@ class NewSubscriberFragment :
         { FragmentNewSubscriberBinding.inflate(it) }
     ) {
 
-    override fun init() {
-        //
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        init(binding.newSubscriberConfirm)
     }
 
     override fun initViewForCreateMode() {
@@ -25,8 +25,7 @@ class NewSubscriberFragment :
     }
 
     override fun initViewForEditMode() {
-        binding.newSubscriberConfirm.text = getString(R.string.edit)
-        if (item.id != NO_ID_LONG) {
+        if (item.isCreated()) {
             binding.subscriberNameEdit.setText(item.name)
             binding.subscriberAddressEdit.setText(item.address)
             binding.subscriberPhoneEdit.setText(item.phone)
@@ -34,16 +33,14 @@ class NewSubscriberFragment :
     }
 
     override suspend fun createItem() {
-        val id = db?.subscriberDao()?.insert(item)
-        if (id != null) addSuccess()
+        db.subscriberDao().insert(item)
+        addSuccess(getString(R.string.subscriber))
     }
 
     override suspend fun editItem() {
-        if (item.id != NO_ID_LONG) {
-            withContext(ioScope.coroutineContext) {
-                db?.subscriberDao()?.update(item)
-            }
-            editSuccess()
+        if (item.isCreated()) {
+            withContext(ioScope.coroutineContext) { db.subscriberDao().update(item) }
+            editSuccess(getString(R.string.subscriber))
         }
     }
 
@@ -57,25 +54,13 @@ class NewSubscriberFragment :
             item.name = binding.subscriberNameEdit.text.toString()
             item.address = binding.subscriberAddressEdit.text.toString()
             item.phone = binding.subscriberPhoneEdit.text.toString()
-            confirmListener(this::validator)
+            confirmItem()
         }
     }
 
-    private fun addSuccess() {
-        snack(getString(R.string.item_add_success, getString(R.string.subscriber)))
-        clear()
-    }
-
-    private fun clear() {
-        hideKeyboard()
+    override fun resetViews() {
         binding.subscriberAddressEdit.text?.clear()
         binding.subscriberNameEdit.text?.clear()
         binding.subscriberPhoneEdit.text?.clear()
-        item = Subscriber()
-    }
-
-    private fun editSuccess() {
-        snack(getString(R.string.item_edit_success, getString(R.string.subscriber)))
-        hideKeyboard()
     }
 }

@@ -10,10 +10,10 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class ProductAndCategory(
     @Embedded
-    val product: Product?,
+    var product: Product?,
     @Relation(
         parentColumn = "categoryId",
         entityColumn = "id"
     )
-    val category: Category
+    var category: Category
 ) : Parcelable

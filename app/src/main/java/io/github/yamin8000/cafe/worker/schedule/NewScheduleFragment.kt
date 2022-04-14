@@ -1,5 +1,7 @@
 package io.github.yamin8000.cafe.worker.schedule
 
+import android.os.Bundle
+import android.view.View
 import android.widget.ArrayAdapter
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
@@ -9,13 +11,12 @@ import io.github.yamin8000.cafe.db.entities.relatives.ScheduleAndWorker
 import io.github.yamin8000.cafe.db.entities.worker.Worker
 import io.github.yamin8000.cafe.db.entities.worker.schedule.Schedule
 import io.github.yamin8000.cafe.ui.crud.CreateUpdateFragment
-import io.github.yamin8000.cafe.util.Constants.NO_ID_LONG
+import io.github.yamin8000.cafe.util.Constants.NOT_CREATED_ID
 import io.github.yamin8000.cafe.util.Constants.db
 import io.github.yamin8000.cafe.util.DateTimeUtils
 import io.github.yamin8000.cafe.util.DateTimeUtils.toJalali
 import io.github.yamin8000.cafe.util.DateTimeUtils.toJalaliIso
 import io.github.yamin8000.cafe.util.Utility.Alerts.snack
-import io.github.yamin8000.cafe.util.Utility.hideKeyboard
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -25,7 +26,9 @@ class NewScheduleFragment :
         { FragmentNewScheduleBinding.inflate(it) }
     ) {
 
-    override fun init() {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        init(binding.scheduleConfirmButton)
         lifecycleScope.launch { handleWorkersAutoComplete() }
         timePickersHandler()
     }
@@ -54,9 +57,7 @@ class NewScheduleFragment :
     }
 
     private suspend fun handleWorkersAutoComplete() {
-        val workers = withContext(ioScope.coroutineContext) {
-            db?.workerDao()?.getAll() ?: listOf()
-        }
+        val workers = withContext(ioScope.coroutineContext) { db.workerDao().getAll() }
         if (workers.isNotEmpty())
             fillWorkersAutoComplete(workers)
         else handleEmptyWorkers()
@@ -95,7 +96,6 @@ class NewScheduleFragment :
     }
 
     override fun initViewForEditMode() {
-        binding.scheduleConfirmButton.text = getString(R.string.edit)
         binding.scheduleWorkerAuto.setText(item.worker.toString())
         item.schedule.description?.let { binding.scheduleDescriptionEdit.setText(it) }
         item.schedule.start?.let { binding.scheduleStartButton.text = it.toJalaliIso() }
@@ -104,26 +104,11 @@ class NewScheduleFragment :
     }
 
     override suspend fun createItem() {
-        withContext(ioScope.coroutineContext) {
-            db?.scheduleDao()?.insert(item.schedule)
-        }.let { id ->
-            if (id != null) scheduleAddSuccess()
-            else snack(getString(R.string.db_update_error))
-        }
+        withContext(ioScope.coroutineContext) { db.scheduleDao().insert(item.schedule) }
+        addSuccess(getString(R.string.schedule))
     }
 
-    private fun scheduleAddSuccess() {
-        snack(getString(R.string.item_add_success, getString(R.string.schedule)))
-        clearViews()
-        clearValues()
-        hideKeyboard()
-    }
-
-    private fun clearValues() {
-        item = ScheduleAndWorker(Schedule(), Worker())
-    }
-
-    private fun clearViews() {
+    override fun resetViews() {
         binding.scheduleStartButton.text = getString(R.string.schedule_start)
         binding.scheduleEndButton.text = getString(R.string.schedule_end)
         binding.scheduleDescriptionEdit.text?.clear()
@@ -131,24 +116,14 @@ class NewScheduleFragment :
     }
 
     override suspend fun editItem() {
-        if (item.schedule.id != NO_ID_LONG) {
-            withContext(ioScope.coroutineContext) {
-                db?.scheduleDao()?.update(item.schedule)
-            }.let { id ->
-                if (id != null) {
-                    snack(
-                        getString(
-                            R.string.item_edit_success,
-                            getString(R.string.schedule)
-                        )
-                    )
-                } else snack(getString(R.string.db_update_error))
-            }
+        if (item.schedule.isCreated()) {
+            withContext(ioScope.coroutineContext) { db.scheduleDao().update(item.schedule) }
+            editSuccess(getString(R.string.item_edit_success))
         }
     }
 
     override fun validator(): Boolean {
-        return item.schedule.workerId != NO_ID_LONG &&
+        return item.schedule.workerId != NOT_CREATED_ID &&
                 item.schedule.start != null
     }
 
@@ -158,7 +133,7 @@ class NewScheduleFragment :
                 if (!it.isNullOrBlank())
                     item.schedule.description = it.toString()
             }
-            confirmListener(this::validator)
+            confirmItem()
         }
     }
 }

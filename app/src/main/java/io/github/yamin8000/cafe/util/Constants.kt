@@ -8,11 +8,10 @@ object Constants {
     const val STACKTRACE = "stacktrace"
     const val SPLASH_DELAY = 1500L
     const val PACK = "pack_"
-    const val NO_ID = -1
-    const val NO_ID_LONG = 0L
+    const val NOT_CREATED_ID = 0L
 
     //singletons
-    var db: AppDatabase? = null
+    lateinit var db: AppDatabase
     var sharedPrefs: SharedPrefs? = null
 
     //master user-pass

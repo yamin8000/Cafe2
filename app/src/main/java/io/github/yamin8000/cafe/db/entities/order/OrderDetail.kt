@@ -5,6 +5,8 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
+import io.github.yamin8000.cafe.db.entities.NotCreated
+import io.github.yamin8000.cafe.db.entities.NotCreatedDelegate
 import io.github.yamin8000.cafe.db.entities.product.Product
 import kotlinx.parcelize.Parcelize
 
@@ -34,4 +36,4 @@ data class OrderDetail(
     var orderId: Long? = null,
     val description: String? = null,
     @PrimaryKey(autoGenerate = true) val id: Long = 0
-) : Parcelable
+) : Parcelable, NotCreated by NotCreatedDelegate(id)

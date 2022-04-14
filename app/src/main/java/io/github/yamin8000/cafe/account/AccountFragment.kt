@@ -16,14 +16,14 @@ class AccountFragment : ReadDeleteFragment<Account, AccountHolder>(R.id.newAccou
 
     override suspend fun getItems(): List<Account> {
         return withContext(ioScope.coroutineContext) {
-            db?.accountDao()?.getAll() ?: emptyList()
+            db.accountDao().getAll()
         }
     }
 
     override suspend fun dbDeleteAction() {
         deleteUserFromSharedPrefsIfNeeded()
         withContext(ioScope.coroutineContext) {
-            db?.accountDao()?.deleteAll(deleteCandidates)
+            db.accountDao().deleteAll(deleteCandidates)
         }
         snack(getString(R.string.item_delete_success, getString(R.string.account)))
     }

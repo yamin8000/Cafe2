@@ -115,6 +115,7 @@
     <string name="oldest_orders">قدیمی ترین سفارش ها</string>
     <string name="fattest_orders">سنگین ترین سفارش ها</string>
     <string name="thinnest_orders">سبک ترین سفارش ها</string>
+    <string name="db_general_error">خطا در ایجاد تغییرات در پایگاه داده</string>
     <string-array name="report_values">
         <item>@string/orders</item>
         <item>@string/products</item>

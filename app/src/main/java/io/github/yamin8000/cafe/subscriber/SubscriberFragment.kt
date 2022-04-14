@@ -9,11 +9,11 @@ import io.github.yamin8000.cafe.util.Constants.db
 class SubscriberFragment : ReadDeleteFragment<Subscriber, SubscriberHolder>(R.id.newSubscriberFragment) {
 
     override suspend fun getItems(): List<Subscriber> {
-        return db?.subscriberDao()?.getAll() ?: emptyList()
+        return db.subscriberDao().getAll()
     }
 
     override suspend fun dbDeleteAction() {
-        db?.subscriberDao()?.deleteAll(deleteCandidates)
+        db.subscriberDao().deleteAll(deleteCandidates)
     }
 
     override fun fillList() {

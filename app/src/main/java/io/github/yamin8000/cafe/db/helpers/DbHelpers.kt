@@ -19,10 +19,4 @@ object DbHelpers {
             Constants.db?.categoryDao()?.getAll() ?: listOf()
         }
     }
-
-    suspend fun CoroutineContext.newCategory(category: Category): Long {
-        return withContext(this) {
-            Constants.db?.categoryDao()?.insert(category) ?: -1
-        }
-    }
 }

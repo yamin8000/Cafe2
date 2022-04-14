@@ -132,7 +132,7 @@ class FragmentOrderReport :
     }
 
     override suspend fun getItems(): List<OrderWithDetails> {
-        return db?.relativeDao()?.getOrderWithDetails() ?: listOf()
+        return db.relativeDao().getOrderWithDetails()
     }
 
     override suspend fun filterItems(items: List<OrderWithDetails>): List<OrderWithDetails> {

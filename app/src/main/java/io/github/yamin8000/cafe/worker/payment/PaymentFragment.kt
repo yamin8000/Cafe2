@@ -13,23 +13,15 @@ class PaymentFragment :
 
     override suspend fun getItems(): List<PaymentAndWorker> {
         return withContext(ioScope.coroutineContext) {
-            db?.relativeDao()?.getPaymentsAndWorkers()
-        } ?: listOf()
+            db.relativeDao().getPaymentsAndWorkers()
+        }
     }
 
     override suspend fun dbDeleteAction() {
         withContext(ioScope.coroutineContext) {
-            db?.paymentDao()?.deleteAll(deleteCandidates.map { it.payment })
-        }.let { id ->
-            if (id != null) {
-                snack(
-                    getString(
-                        R.string.item_delete_success,
-                        getString(R.string.payment)
-                    )
-                )
-            } else snack(getString(R.string.db_update_error))
+            db.paymentDao().deleteAll(deleteCandidates.map { it.payment })
         }
+        snack(getString(R.string.item_delete_success, getString(R.string.payment)))
     }
 
     override fun fillList() {

@@ -5,6 +5,8 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
+import io.github.yamin8000.cafe.db.entities.NotCreated
+import io.github.yamin8000.cafe.db.entities.NotCreatedDelegate
 import io.github.yamin8000.cafe.db.entities.category.Category
 import kotlinx.parcelize.Parcelize
 
@@ -26,6 +28,6 @@ data class Product(
     var imageId: Int? = null,
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0,
-) : Parcelable {
+) : Parcelable, NotCreated by NotCreatedDelegate(id) {
     constructor() : this("", 0, -1, null)
 }

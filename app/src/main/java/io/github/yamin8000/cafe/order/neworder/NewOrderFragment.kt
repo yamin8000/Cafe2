@@ -62,7 +62,7 @@ class NewOrderFragment :
     }
 
     private suspend fun loadSubscribers() {
-        val subscribers = db?.subscriberDao()?.getAll() ?: listOf()
+        val subscribers = db.subscriberDao().getAll()
         if (subscribers.isNotEmpty()) fillAutoComplete(subscribers)
         else binding.subscriberInput.isEnabled = false
     }
@@ -128,8 +128,7 @@ class NewOrderFragment :
     private suspend fun beginInsertingOrder() {
         if (orderDetails.isNotEmpty()) {
             val orderId = createOrder()
-            if (orderId != null) orderAddSuccess(orderId)
-            else snack(getString(R.string.db_update_error))
+            orderAddSuccess(orderId)
         } else snack(getString(R.string.order_is_empty))
     }
 
@@ -146,29 +145,29 @@ class NewOrderFragment :
             if (orderDetail.quantity == 0) iterator.remove()
             else orderDetail.orderId = orderId
         }
-        return@withContext db?.orderDetailDao()?.insertAll(orderDetails) ?: listOf()
+        return@withContext db.orderDetailDao().insertAll(orderDetails)
     }
 
-    private suspend fun createOrder(): Long? {
+    private suspend fun createOrder(): Long {
         val today = LocalDate.now(ZoneId.systemDefault())
 
         val lastOrderId = ioScope.async {
-            val dayDao = db?.dayDao()
-            val day = dayDao?.getByParam("date", today.toEpochDay())?.firstOrNull()
+            val dayDao = db.dayDao()
+            val day = dayDao.getByParam("date", today.toEpochDay()).firstOrNull()
             if (day != null) {
                 day.lastOrderId++
                 dayDao.update(day)
                 return@async day.lastOrderId
             } else {
-                dayDao?.insert(Day(today))
+                dayDao.insert(Day(today))
                 return@async 1
             }
         }.await()
 
         val order = Order(lastOrderId, zonedNow(), totalPrice, subscriberId, getDescription())
 
-        val orderDao = db?.orderDao()
-        return withContext(ioScope.coroutineContext) { orderDao?.insert(order) }
+        val orderDao = db.orderDao()
+        return withContext(ioScope.coroutineContext) { orderDao.insert(order) }
     }
 
     private fun getDescription(): String? {

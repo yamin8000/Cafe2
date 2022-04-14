@@ -17,8 +17,6 @@ import io.github.yamin8000.cafe.util.Constants
 import io.github.yamin8000.cafe.util.Constants.CRUD_NAME
 import io.github.yamin8000.cafe.util.Constants.DATA
 import io.github.yamin8000.cafe.util.Constants.IS_EDIT_MODE
-import io.github.yamin8000.cafe.util.Constants.db
-import io.github.yamin8000.cafe.util.Utility.Alerts.showNullDbError
 import io.github.yamin8000.cafe.util.Utility.Alerts.snack
 import io.github.yamin8000.cafe.util.Utility.Views.gone
 import io.github.yamin8000.cafe.util.Utility.Views.visible
@@ -47,8 +45,7 @@ abstract class ReadDeleteFragment<T, VH : RecyclerView.ViewHolder>(
         super.onViewCreated(view, savedInstanceState)
 
         try {
-            if (db != null) prepareUi()
-            else showNullDbError()
+            prepareUi()
             arguments?.getString(CRUD_NAME)?.let {
                 binding.crudName.text = it
             }

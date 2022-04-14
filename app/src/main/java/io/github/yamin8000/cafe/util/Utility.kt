@@ -95,7 +95,7 @@ object Utility {
     fun getCurrentPermission(): Int {
         return sharedPrefs?.prefs?.getInt(
             Constants.CURRENT_ACCOUNT_TYPE,
-            Constants.NO_ID
+            AccountPermission.Guest.rank
         ) ?: AccountPermission.Guest.rank
     }
 
@@ -170,6 +170,10 @@ object Utility {
                 handleCrash(e)
                 null
             }
+        }
+
+        fun Fragment.showDbError() {
+            snack(getString(R.string.db_general_error))
         }
 
         fun Fragment.showNullDbError() {

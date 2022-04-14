@@ -1,5 +1,7 @@
 package io.github.yamin8000.cafe.product
 
+import android.os.Bundle
+import android.view.View
 import android.widget.ArrayAdapter
 import androidx.fragment.app.setFragmentResultListener
 import io.github.yamin8000.cafe.R
@@ -11,12 +13,11 @@ import io.github.yamin8000.cafe.db.helpers.DbHelpers.getCategories
 import io.github.yamin8000.cafe.ui.crud.CreateUpdateFragment
 import io.github.yamin8000.cafe.util.Constants.ICON_PICKER
 import io.github.yamin8000.cafe.util.Constants.ICON_PICKER_RESULT
-import io.github.yamin8000.cafe.util.Constants.NO_ID_LONG
+import io.github.yamin8000.cafe.util.Constants.NOT_CREATED_ID
 import io.github.yamin8000.cafe.util.Constants.db
 import io.github.yamin8000.cafe.util.Utility.Alerts.snack
 import io.github.yamin8000.cafe.util.Utility.Views.getNumber
 import io.github.yamin8000.cafe.util.Utility.Views.setImageFromResourceId
-import io.github.yamin8000.cafe.util.Utility.hideKeyboard
 import io.github.yamin8000.cafe.util.Utility.navigate
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -27,7 +28,9 @@ class NewProductFragment :
         { FragmentNewProductBinding.inflate(it) }
     ) {
 
-    override fun init() {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        init(binding.addProductConfirm)
         lifecycleScope.launch { handleCategoriesAutoComplete() }
         binding.productImageButton.setOnClickListener { showIconPicker() }
     }
@@ -37,8 +40,6 @@ class NewProductFragment :
     }
 
     override fun initViewForEditMode() {
-        binding.addProductConfirm.text = getString(R.string.edit)
-
         binding.productNameEdit.setText(item.product?.name)
         binding.productPriceEdit.setText(item.product?.price.toString())
         binding.productCategoryEdit.setText(item.category.name)
@@ -49,27 +50,16 @@ class NewProductFragment :
 
     override suspend fun createItem() {
         item.product?.let { product ->
-            ioScope.launch {
-                db?.productDao()?.insert(product)
-                withContext(lifecycleScope.coroutineContext) {
-                    snack(getString(R.string.item_add_success, getString(R.string.product)))
-                    clearProductValues()
-                    clearViews()
-                    hideKeyboard()
-                }
-            }
+            withContext(ioScope.coroutineContext) { db.productDao().insert(product) }
+            addSuccess(getString(R.string.product))
         }
     }
 
     override suspend fun editItem() {
         item.product?.let { product ->
-            if (item.product?.id != NO_ID_LONG) {
-                ioScope.launch {
-                    db?.productDao()?.update(product)
-                    withContext(lifecycleScope.coroutineContext) {
-                        snack(getString(R.string.item_edit_success, getString(R.string.product)))
-                    }
-                }
+            if (item.product?.isCreated() == true) {
+                db.productDao().update(product)
+                editSuccess(getString(R.string.product))
             }
         }
     }
@@ -77,7 +67,7 @@ class NewProductFragment :
     override fun validator(): Boolean {
         val isNameNotBlank = item.product?.name?.isNotBlank() ?: false
         val isPriceSet = item.product?.price != -1L
-        val isCategorySet = item.category.id != NO_ID_LONG
+        val isCategorySet = item.category.id != NOT_CREATED_ID
         return isNameNotBlank && isPriceSet && isCategorySet
     }
 
@@ -87,10 +77,9 @@ class NewProductFragment :
             item.product?.price = binding.productPriceEdit.getNumber()
             //item.categoryId, already set using auto complete click listener
             //item.imageId, already set using image picker click listener
-            confirmListener(this::validator)
+            confirmItem()
         }
     }
-
 
     private fun showIconPicker() {
         navigate(R.id.action_newProductFragment_to_iconPickerModal)
@@ -126,18 +115,16 @@ class NewProductFragment :
         }
     }
 
-    private fun clearViews() {
+    override fun resetViews() {
         binding.productCategoryEdit.text.clear()
         binding.productNameEdit.text?.clear()
         binding.productPriceEdit.text?.clear()
         binding.productImage.setImageDrawable(null)
     }
 
-    private fun clearProductValues() {
-        item.product?.name = ""
-        item.product?.price = -1
-        item.category.id = -1
-        item.product?.imageId = null
-        item.product?.id = NO_ID_LONG
+    override fun clear() {
+        super.clear()
+        item.product = Product()
+        item.category = Category()
     }
 }

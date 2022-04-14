@@ -12,7 +12,7 @@ class ProductsFragment :
     ReadDeleteFragment<ProductAndCategory, ProductsHolder>(R.id.newProductFragment) {
 
     override suspend fun getItems(): List<ProductAndCategory> {
-        return db?.relativeDao()?.getProductsAndCategories() ?: listOf()
+        return db.relativeDao().getProductsAndCategories() ?: listOf()
     }
 
     override suspend fun dbDeleteAction() {
@@ -24,7 +24,7 @@ class ProductsFragment :
     }
 
     private suspend fun deleteProduct(product: Product) {
-        db?.productDao()?.delete(product)
+        db.productDao().delete(product)
     }
 
     override fun fillList() {

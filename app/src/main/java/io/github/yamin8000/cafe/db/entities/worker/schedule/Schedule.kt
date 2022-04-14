@@ -3,6 +3,8 @@ package io.github.yamin8000.cafe.db.entities.worker.schedule
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import io.github.yamin8000.cafe.db.entities.NotCreated
+import io.github.yamin8000.cafe.db.entities.NotCreatedDelegate
 import kotlinx.parcelize.Parcelize
 import java.time.LocalDate
 import java.time.ZoneId
@@ -18,6 +20,6 @@ data class Schedule(
     var description: String? = null,
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0
-) : Parcelable {
+) : Parcelable, NotCreated by NotCreatedDelegate(id) {
     constructor() : this(0)
 }

@@ -15,7 +15,7 @@ class CategoryFragment : ReadDeleteFragment<Category, CategoryHolder>(R.id.newCa
     }
 
     override suspend fun dbDeleteAction() {
-        db?.categoryDao()?.deleteAll(deleteCandidates)
+        db.categoryDao().deleteAll(deleteCandidates)
         snack(getString(R.string.item_delete_success, getString(R.string.category)))
     }
 

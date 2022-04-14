@@ -8,9 +8,6 @@ import io.github.yamin8000.cafe.ui.recyclerview.EmptyAdapter
 import io.github.yamin8000.cafe.ui.util.BaseFragment
 import io.github.yamin8000.cafe.util.Utility.handleCrash
 import io.github.yamin8000.cafe.util.Utility.navigate
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-
 
 class ReportFragment : BaseFragment<FragmentReportBinding>({ FragmentReportBinding.inflate(it) }) {
 

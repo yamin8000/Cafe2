@@ -33,7 +33,7 @@ class SearchOrdersFragment :
     }
 
     private fun handleOrdersList() = lifecycleScope.launch {
-        val orders = db?.relativeDao()?.getOrderWithDetails() ?: emptyList()
+        val orders = db.relativeDao().getOrderWithDetails() ?: emptyList()
         if (orders.isNotEmpty()) showOrders(orders.asReversed())
         else showEmptyAdapter()
     }
@@ -51,9 +51,9 @@ class SearchOrdersFragment :
     }
 
     private fun deliverOrder(orderId: Long) = ioScope.launch {
-        db?.orderDao()?.getById(orderId)?.let { order ->
+        db.orderDao().getById(orderId)?.let { order ->
             order.status = OrderStatus.Delivered
-            db?.orderDao()?.update(order)
+            db.orderDao().update(order)
         }
     }
 }

@@ -13,18 +13,15 @@ class ScheduleFragment :
 
     override suspend fun getItems(): List<ScheduleAndWorker> {
         return withContext(ioScope.coroutineContext) {
-            db?.relativeDao()?.getSchedulesAndWorkers()
-        } ?: listOf()
+            db.relativeDao().getSchedulesAndWorkers()
+        }
     }
 
     override suspend fun dbDeleteAction() {
         withContext(ioScope.coroutineContext) {
-            db?.scheduleDao()?.deleteAll(items.map { it.schedule })
-        }.let { id ->
-            if (id != null) {
-                snack(getString(R.string.item_delete_success, getString(R.string.schedule)))
-            } else snack(getString(R.string.db_update_error))
+            db.scheduleDao().deleteAll(items.map { it.schedule })
         }
+        snack(getString(R.string.item_delete_success, getString(R.string.schedule)))
     }
 
     override fun fillList() {

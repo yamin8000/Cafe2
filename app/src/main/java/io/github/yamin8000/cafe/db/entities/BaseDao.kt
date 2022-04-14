@@ -13,6 +13,9 @@ abstract class BaseDao<T>(tableName: String) {
 
     private val baseWhereQuery = "$baseQuery where"
 
+    /**
+     * Inserts the given [entity] into the database and returns its id.
+     */
     @Insert
     abstract suspend fun insert(entity: T): Long
 

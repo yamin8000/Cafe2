@@ -12,16 +12,15 @@ class WorkerFragment : ReadDeleteFragment<Worker, WorkerHolder>(R.id.newWorkerFr
 
     override suspend fun getItems(): List<Worker> {
         return withContext(ioScope.coroutineContext) {
-            db?.workerDao()?.getAll()
-        } ?: listOf()
+            db.workerDao().getAll()
+        }
     }
 
     override suspend fun dbDeleteAction() {
-        val id = withContext(ioScope.coroutineContext) {
-            db?.workerDao()?.deleteAll(deleteCandidates)
+        withContext(ioScope.coroutineContext) {
+            db.workerDao().deleteAll(deleteCandidates)
         }
-        if (id != null) snack(getString(R.string.item_delete_success, getString(R.string.workers)))
-        else snack(getString(R.string.db_update_error))
+        snack(getString(R.string.item_delete_success, getString(R.string.workers)))
     }
 
     override fun fillList() {
@@ -31,5 +30,4 @@ class WorkerFragment : ReadDeleteFragment<Worker, WorkerHolder>(R.id.newWorkerFr
             this.asyncList.submitList(items)
         }
     }
-
 }

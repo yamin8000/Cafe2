@@ -29,89 +29,125 @@
             android:id="@+id/schedule_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:tag="@string/schedule"
             android:text="@string/schedule"
+            android:visibility="gone"
             tools:layout_editor_absoluteX="66dp"
-            tools:layout_editor_absoluteY="440dp" />
+            tools:layout_editor_absoluteY="440dp"
+            tools:visibility="visible" />
 
         <Button
             android:id="@+id/payments_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/payments"
+            android:tag="@string/payments"
+            android:visibility="gone"
             tools:layout_editor_absoluteX="248dp"
-            tools:layout_editor_absoluteY="344dp" />
+            tools:layout_editor_absoluteY="344dp"
+            tools:visibility="visible" />
 
         <Button
             android:id="@+id/products_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/products"
+            android:tag="@string/products"
+            android:visibility="gone"
             tools:layout_editor_absoluteX="157dp"
-            tools:layout_editor_absoluteY="184dp" />
+            tools:layout_editor_absoluteY="184dp"
+            tools:visibility="visible" />
 
         <Button
             android:id="@+id/list_order_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/orders"
+            android:tag="@string/orders"
+            android:visibility="gone"
             tools:layout_editor_absoluteX="158dp"
-            tools:layout_editor_absoluteY="27dp" />
+            tools:layout_editor_absoluteY="27dp"
+            tools:visibility="visible" />
 
         <Button
             android:id="@+id/new_order_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/new_order"
+            android:tag="@string/new_order"
+            android:visibility="gone"
             tools:layout_editor_absoluteX="158dp"
-            tools:layout_editor_absoluteY="34dp" />
+            tools:layout_editor_absoluteY="34dp"
+            tools:visibility="visible" />
 
         <Button
             android:id="@+id/categories_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/categories"
+            android:tag="@string/categories"
+            android:visibility="gone"
             tools:layout_editor_absoluteX="281dp"
-            tools:layout_editor_absoluteY="152dp" />
+            tools:layout_editor_absoluteY="152dp"
+            tools:visibility="visible" />
 
         <Button
             android:id="@+id/subscriber_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/subscribers"
+            android:tag="@string/subscribers"
+            android:visibility="gone"
             tools:layout_editor_absoluteX="66dp"
-            tools:layout_editor_absoluteY="216dp" />
+            tools:layout_editor_absoluteY="216dp"
+            tools:visibility="visible" />
 
         <Button
             android:id="@+id/account_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/accounts"
+            android:tag="@string/accounts"
+            android:visibility="gone"
             tools:layout_editor_absoluteX="248dp"
-            tools:layout_editor_absoluteY="216dp" />
+            tools:layout_editor_absoluteY="216dp"
+            tools:visibility="visible" />
 
         <Button
             android:id="@+id/account_login_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/login_account"
-            tools:layout_editor_absoluteX="32dp"
-            tools:layout_editor_absoluteY="280dp" />
+            android:layout_marginTop="128dp"
+            android:layout_marginBottom="32dp"
+            android:text="@string/login"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttons_flow"
+            app:layout_constraintWidth_percent=".5"
+            tools:visibility="visible" />
 
         <Button
             android:id="@+id/reports_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/reports"
+            android:visibility="gone"
             tools:layout_editor_absoluteX="214dp"
-            tools:layout_editor_absoluteY="280dp" />
+            tools:layout_editor_absoluteY="280dp"
+            tools:visibility="visible" />
 
         <Button
             android:id="@+id/workers_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/workers"
+            android:visibility="gone"
             tools:layout_editor_absoluteX="66dp"
-            tools:layout_editor_absoluteY="344dp" />
+            tools:layout_editor_absoluteY="344dp"
+            tools:visibility="visible" />
 
         <androidx.constraintlayout.helper.widget.Flow
             android:id="@+id/buttons_flow"
@@ -120,16 +156,16 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="32dp"
-            android:layout_marginBottom="32dp"
             android:orientation="horizontal"
-            app:constraint_referenced_ids="new_order_button,list_order_button,products_button,categories_button,subscriber_button,workers_button,reports_button,payments_button,schedule_button,account_button,account_login_button"
+            app:constraint_referenced_ids="new_order_button,list_order_button,products_button,categories_button,subscriber_button,workers_button,reports_button,payments_button,schedule_button,account_button"
             app:flow_horizontalGap="16dp"
             app:flow_maxElementsWrap="2"
             app:flow_verticalGap="16dp"
             app:flow_verticalStyle="packed"
             app:flow_wrapMode="aligned"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/account_login_button"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/welcome_text" />
     </androidx.constraintlayout.widget.ConstraintLayout>

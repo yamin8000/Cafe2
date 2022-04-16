@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.core.os.bundleOf
+import androidx.core.view.allViews
 import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.lifecycleScope
 import io.github.yamin8000.cafe.R
@@ -21,6 +22,8 @@ import io.github.yamin8000.cafe.util.Constants.PROMPT_TEXT
 import io.github.yamin8000.cafe.util.Constants.db
 import io.github.yamin8000.cafe.util.Constants.sharedPrefs
 import io.github.yamin8000.cafe.util.Utility.Alerts.snack
+import io.github.yamin8000.cafe.util.Utility.Views.gone
+import io.github.yamin8000.cafe.util.Utility.Views.visible
 import io.github.yamin8000.cafe.util.Utility.getCurrentPermission
 import io.github.yamin8000.cafe.util.Utility.handleCrash
 import io.github.yamin8000.cafe.util.Utility.navigate
@@ -37,6 +40,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>({ FragmentHomeBinding.inf
         super.onViewCreated(view, savedInstanceState)
 
         try {
+            showPermittedButtons()
             lifecycleScope.launch { initWelcomeText() }
             binding.listOrderButton.setOnClickListener { navigate(R.id.action_homeFragment_to_searchOrdersFragment) }
             binding.newOrderButton.setOnClickListener { navigate(R.id.action_homeFragment_to_newOrderFragment) }
@@ -55,12 +59,36 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>({ FragmentHomeBinding.inf
         }
     }
 
+    private fun showPermittedButtons() {
+        val buttons = binding.buttonsFlow.allViews
+        when (getCurrentPermission()) {
+            AccountPermission.Superuser.rank -> buttons.forEach { it.visible() }
+            AccountPermission.OrderUser.rank -> {
+                buttons.showPermittedButtons(
+                    getString(R.string.orders),
+                    getString(R.string.new_order),
+                    getString(R.string.products),
+                    getString(R.string.categories),
+                    getString(R.string.subscribers)
+                )
+            }
+            AccountPermission.ScheduleUser.rank -> buttons.showPermittedButtons(getString(R.string.schedule))
+            AccountPermission.ReportUser.rank -> buttons.showPermittedButtons(getString(R.string.reports))
+            AccountPermission.FinanceUser.rank -> buttons.showPermittedButtons(getString(R.string.payments))
+        }
+    }
+
     private suspend fun initWelcomeText() {
-        val userId = sharedPrefs?.prefs?.getLong(CURRENT_ACCOUNT_ID, 0) ?: 0
-        var user: Account? = null
-        if (userId != 0L) user = db?.accountDao()?.getById(userId)
-        val name = user?.username ?: getString(R.string.guest)
-        binding.welcomeText.text = getString(R.string.welcome, name)
+        val userId = getUserId()
+        val text = if (userId == 0L) getString(R.string.welcome, getString(R.string.guest))
+        else getString(R.string.welcome, getUserName(userId))
+        binding.welcomeText.text = text
+    }
+
+    private fun getUserId() = sharedPrefs?.prefs?.getLong(CURRENT_ACCOUNT_ID, 0) ?: 0
+
+    private suspend fun getUserName(userId: Long): String {
+        return db.accountDao().getById(userId)?.username ?: getString(R.string.guest)
     }
 
     private fun subscribersButtonHandler() {
@@ -144,12 +172,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>({ FragmentHomeBinding.inf
     private fun loginSuccess(username: String) {
         snack(getString(R.string.login_success, username))
         lifecycleScope.launch { initWelcomeText() }
+        showPermittedButtons()
     }
 
     private fun accountButtonHandler() {
         binding.accountButton.setOnClickListener {
             lifecycleScope.launch {
-                val accounts = withContext(ioScope.coroutineContext) { db?.accountDao()?.getAll() }
+                val accounts = withContext(ioScope.coroutineContext) { db.accountDao().getAll() }
                 if (accounts.isNullOrEmpty()) navigate(R.id.action_homeFragment_to_account_graph)
                 else {
                     navigateWithPermission(
@@ -183,6 +212,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>({ FragmentHomeBinding.inf
             if (getCurrentPermission() in targetPermissions.map { permission -> permission.rank })
                 navigate(destination, bundle)
             else snack(getString(R.string.permission_denied))
+        }
+    }
+
+    private fun <T : View> Sequence<T>.showPermittedButtons(
+        visibleTag: String,
+        vararg visibleTags: String
+    ) {
+        val tags = listOf(visibleTag, *visibleTags)
+        this.partition { it.tag in tags }.let { parted ->
+            parted.first.forEach { it.visible() }
+            parted.second.forEach { it.gone() }
         }
     }
 }

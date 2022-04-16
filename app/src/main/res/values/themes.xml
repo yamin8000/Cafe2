@@ -6,14 +6,13 @@
         <item name="colorPrimaryVariant">@color/primaryLightColor</item>
         <item name="colorOnPrimary">@color/primaryTextColor</item>
         <item name="colorPrimaryContainer">@color/secondaryLightColor</item>
-        <item name="colorOnPrimaryContainer">?colorOnSecondary</item>
+        <item name="colorOnPrimaryContainer">@color/colorOnLightSecondary</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/secondaryColor</item>
         <item name="colorSecondaryVariant">@color/secondaryLightColor</item>
         <item name="colorOnSecondary">@color/secondaryTextColor</item>
         <item name="colorSecondaryContainer">@color/primaryLightColor</item>
-        <item name="colorOnSecondaryContainer">?colorOnPrimary</item>
-        <!-- Tertiary color. -->
+        <item name="colorOnSecondaryContainer">@color/colorOnPrimaryLight</item>
         <!-- Inverse color. -->
         <item name="colorSurfaceInverse">?colorPrimaryDark</item>
         <item name="colorOnSurfaceInverse">?colorOnPrimary</item>
@@ -31,7 +30,7 @@
         <item name="fontFamily">@font/samimbold</item>
         <item name="android:fontFamily">@font/samimbold</item>
         <item name="android:colorBackground">@color/themeBackground</item>
-        <item name="android:textColor">@color/secondaryTextColor</item>
+        <item name="android:textColor">@color/colorOnLightSecondary</item>
         <item name="materialCardViewStyle">@style/Widget.App.CardView</item>
     </style>
 

@@ -1,5 +1,6 @@
 package io.github.yamin8000.cafe.account
 
+import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import androidx.core.content.edit
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.lifecycleScope
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import io.github.yamin8000.cafe.R
@@ -54,6 +56,15 @@ class AccountLoginModal : BottomSheetDialogFragment() {
         }
     }
 
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val safeContext = context
+        return if (safeContext != null) {
+            val dialog = BottomSheetDialog(safeContext, theme)
+            dialog.behavior.state = BottomSheetBehavior.STATE_EXPANDED
+            dialog
+        } else super.onCreateDialog(savedInstanceState)
+    }
+
     private fun loginSubmitClickListener() {
         binding.accountLoginSubmit.setOnClickListener {
             binding.accountLoginSubmit.isEnabled = false
@@ -96,7 +107,7 @@ class AccountLoginModal : BottomSheetDialogFragment() {
     }
 
     private suspend fun getAccount(username: String) = withContext(ioScope.coroutineContext) {
-        db?.accountDao()?.getByParams(USERNAME to username)?.firstOrNull()
+        db.accountDao().getByParams(USERNAME to username).firstOrNull()
     }
 
     private fun foundAccountHandler(

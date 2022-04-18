@@ -12,6 +12,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.helper.widget.Flow
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -156,6 +157,15 @@ object Utility {
                 this.visible()
                 this.text = data
             } else this.gone()
+        }
+
+        fun Flow.referencedViews(): List<View> {
+            val views = mutableListOf<View>()
+            for (id in this.referencedIds) {
+                val view = this.rootView.findViewById<View>(id)
+                if (view != null) views.add(view)
+            }
+            return views
         }
     }
 

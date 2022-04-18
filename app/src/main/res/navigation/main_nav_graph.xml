@@ -29,9 +29,6 @@
             android:id="@+id/action_homeFragment_to_accountLoginModal"
             app:destination="@id/accountLoginModal" />
         <action
-            android:id="@+id/action_homeFragment_to_account_graph"
-            app:destination="@id/account_graph" />
-        <action
             android:id="@+id/action_homeFragment_to_worker_graph"
             app:destination="@id/worker_graph" />
         <action
@@ -43,6 +40,12 @@
         <action
             android:id="@+id/action_homeFragment_to_schedule_graph"
             app:destination="@id/schedule_graph" />
+        <action
+            android:id="@+id/action_homeFragment_to_accountFragment"
+            app:destination="@id/accountFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_newAccountFragment"
+            app:destination="@id/newAccountFragment" />
     </fragment>
     <fragment
         android:id="@+id/splashFragment"
@@ -156,20 +159,16 @@
             android:name="stacktrace"
             app:argType="string" />
     </fragment>
-    <navigation
-        android:id="@+id/account_graph"
-        app:startDestination="@id/accountFragment">
-        <fragment
-            android:id="@+id/newAccountFragment"
-            android:name="io.github.yamin8000.cafe.account.NewAccountFragment"
-            android:label="NewAccountFragment"
-            tools:layout="@layout/new_account_fragment" />
-        <fragment
-            android:id="@+id/accountFragment"
-            android:name="io.github.yamin8000.cafe.account.AccountFragment"
-            android:label="AccountFragment"
-            tools:layout="@layout/fragment_crud" />
-    </navigation>
+    <fragment
+        android:id="@+id/newAccountFragment"
+        android:name="io.github.yamin8000.cafe.account.NewAccountFragment"
+        android:label="NewAccountFragment"
+        tools:layout="@layout/new_account_fragment" />
+    <fragment
+        android:id="@+id/accountFragment"
+        android:name="io.github.yamin8000.cafe.account.AccountFragment"
+        android:label="AccountFragment"
+        tools:layout="@layout/fragment_crud" />
     <navigation
         android:id="@+id/worker_graph"
         app:startDestination="@id/workerFragment">

@@ -106,5 +106,6 @@ class NewAccountFragment :
     override fun resetViews() {
         binding.accountUserLoginEdit.text?.clear()
         binding.accountPassLoginEdit.text?.clear()
+        binding.newAccountPermissionEdit.text?.clear()
     }
 }

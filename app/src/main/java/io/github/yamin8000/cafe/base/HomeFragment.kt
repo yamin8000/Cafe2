@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.core.os.bundleOf
-import androidx.core.view.allViews
 import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.lifecycleScope
 import io.github.yamin8000.cafe.R
@@ -23,6 +22,7 @@ import io.github.yamin8000.cafe.util.Constants.db
 import io.github.yamin8000.cafe.util.Constants.sharedPrefs
 import io.github.yamin8000.cafe.util.Utility.Alerts.snack
 import io.github.yamin8000.cafe.util.Utility.Views.gone
+import io.github.yamin8000.cafe.util.Utility.Views.referencedViews
 import io.github.yamin8000.cafe.util.Utility.Views.visible
 import io.github.yamin8000.cafe.util.Utility.getCurrentPermission
 import io.github.yamin8000.cafe.util.Utility.handleCrash
@@ -40,27 +40,43 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>({ FragmentHomeBinding.inf
         super.onViewCreated(view, savedInstanceState)
 
         try {
-            showPermittedButtons()
             lifecycleScope.launch { initWelcomeText() }
-            binding.listOrderButton.setOnClickListener { navigate(R.id.action_homeFragment_to_searchOrdersFragment) }
-            binding.newOrderButton.setOnClickListener { navigate(R.id.action_homeFragment_to_newOrderFragment) }
-            productsButtonHandler()
-            categoriesButtonHandler()
-            subscribersButtonHandler()
-            binding.accountLoginButton.setOnClickListener { loginHandler() }
-            workerButtonHandler()
-            paymentsButtonHandler()
-            accountButtonHandler()
-            reportsButtonHandler()
-            scheduleButtonHandler()
+            showPermittedButtons()
+            buttonsHandlers()
             backPressHandler()
         } catch (e: Exception) {
             handleCrash(e)
         }
     }
 
+    private fun buttonsHandlers() {
+        binding.listOrderButton.setOnClickListener { navigate(R.id.action_homeFragment_to_searchOrdersFragment) }
+        binding.newOrderButton.setOnClickListener { navigate(R.id.action_homeFragment_to_newOrderFragment) }
+        productsButtonHandler()
+        categoriesButtonHandler()
+        subscribersButtonHandler()
+        binding.accountLoginButton.setOnClickListener { loginHandler() }
+        workerButtonHandler()
+        paymentsButtonHandler()
+        binding.accountButton.setOnClickListener { lifecycleScope.launch { handleAccountsButton() } }
+        reportsButtonHandler()
+        scheduleButtonHandler()
+    }
+
+    private suspend fun handleAccountsButton() {
+        val accounts = withContext(ioScope.coroutineContext) { db.accountDao().getAll() }
+        if (accounts.isNullOrEmpty()) navigate(R.id.action_homeFragment_to_newAccountFragment)
+        else {
+            navigateWithPermission(
+                R.id.action_homeFragment_to_accountFragment,
+                AccountPermission.Superuser,
+                bundle = bundleOf(CRUD_NAME to binding.accountButton.text)
+            )
+        }
+    }
+
     private fun showPermittedButtons() {
-        val buttons = binding.buttonsFlow.allViews
+        val buttons = binding.buttonsFlow.referencedViews()
         when (getCurrentPermission()) {
             AccountPermission.Superuser.rank -> buttons.forEach { it.visible() }
             AccountPermission.OrderUser.rank -> {
@@ -80,9 +96,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>({ FragmentHomeBinding.inf
 
     private suspend fun initWelcomeText() {
         val userId = getUserId()
-        val text = if (userId == 0L) getString(R.string.welcome, getString(R.string.guest))
+        val welcomeText = if (userId == 0L) getString(R.string.welcome, getString(R.string.guest))
         else getString(R.string.welcome, getUserName(userId))
-        binding.welcomeText.text = text
+        binding.welcomeText.text = welcomeText
     }
 
     private fun getUserId() = sharedPrefs?.prefs?.getLong(CURRENT_ACCOUNT_ID, 0) ?: 0
@@ -161,6 +177,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>({ FragmentHomeBinding.inf
     }
 
     private fun loginHandler() {
+        if (getCurrentPermission() == AccountPermission.Guest.rank)
+            lifecycleScope.launch { handleFirstAccountCreation() }
+        else handleLoginForUsers()
+
+    }
+
+    private fun handleLoginForUsers() {
         navigate(R.id.action_homeFragment_to_accountLoginModal)
         setFragmentResultListener(LOGIN) { _, bundle ->
             val account = bundle.getParcelable<Account>(ACCOUNT)
@@ -175,20 +198,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>({ FragmentHomeBinding.inf
         showPermittedButtons()
     }
 
-    private fun accountButtonHandler() {
-        binding.accountButton.setOnClickListener {
-            lifecycleScope.launch {
-                val accounts = withContext(ioScope.coroutineContext) { db.accountDao().getAll() }
-                if (accounts.isNullOrEmpty()) navigate(R.id.action_homeFragment_to_account_graph)
-                else {
-                    navigateWithPermission(
-                        R.id.action_homeFragment_to_account_graph,
-                        AccountPermission.Superuser,
-                        bundle = bundleOf(CRUD_NAME to binding.accountButton.text)
-                    )
-                }
-            }
-        }
+    private suspend fun handleFirstAccountCreation() {
+        val accounts = withContext(ioScope.coroutineContext) { db.accountDao().getAll() }
+        if (accounts.isNullOrEmpty()) navigate(R.id.action_homeFragment_to_newAccountFragment)
+        else handleLoginForUsers()
     }
 
     private fun backPressHandler() {
@@ -215,14 +228,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>({ FragmentHomeBinding.inf
         }
     }
 
-    private fun <T : View> Sequence<T>.showPermittedButtons(
+    private fun <T : View> List<T>.showPermittedButtons(
         visibleTag: String,
         vararg visibleTags: String
     ) {
         val tags = listOf(visibleTag, *visibleTags)
-        this.partition { it.tag in tags }.let { parted ->
-            parted.first.forEach { it.visible() }
-            parted.second.forEach { it.gone() }
-        }
+        val (visibleViews, goneViews) = this.partition { it.tag in tags }
+        visibleViews.forEach { it.visible() }
+        goneViews.forEach { it.gone() }
     }
 }

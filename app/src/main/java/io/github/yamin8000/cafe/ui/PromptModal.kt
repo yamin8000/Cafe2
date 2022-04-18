@@ -1,11 +1,14 @@
 package io.github.yamin8000.cafe.ui
 
+import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import io.github.yamin8000.cafe.R
 import io.github.yamin8000.cafe.databinding.PromptModalBinding
@@ -37,6 +40,15 @@ class PromptModal : BottomSheetDialogFragment() {
         } catch (e: Exception) {
             handleCrash(e)
         }
+    }
+
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val safeContext = context
+        return if (safeContext != null) {
+            val dialog = BottomSheetDialog(safeContext, theme)
+            dialog.behavior.state = BottomSheetBehavior.STATE_EXPANDED
+            dialog
+        } else super.onCreateDialog(savedInstanceState)
     }
 
     private fun setListeners() {

@@ -202,6 +202,9 @@
         <action
             android:id="@+id/action_reportFragment_to_fragmentOrderReport"
             app:destination="@id/fragmentOrderReport" />
+        <action
+            android:id="@+id/action_reportFragment_to_fragmentProductReport"
+            app:destination="@id/fragmentProductReport" />
     </fragment>
     <navigation
         android:id="@+id/schedule_graph"
@@ -220,4 +223,8 @@
         android:name="io.github.yamin8000.cafe.report.reports.FragmentOrderReport"
         android:label="FragmentOrderReport"
         tools:layout="@layout/fragment_order_report" />
+    <fragment
+        android:id="@+id/fragmentProductReport"
+        android:name="io.github.yamin8000.cafe.report.reports.FragmentProductReport"
+        android:label="FragmentProductReport" />
 </navigation>

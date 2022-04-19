@@ -167,6 +167,14 @@ object Utility {
             }
             return views
         }
+
+        fun TextInputEditText.handlePrice(): Long? {
+            return try {
+                this.text.toString().let { if (it.isNotBlank()) it.toLong() else null }
+            } catch (e: NumberFormatException) {
+                return 0
+            }
+        }
     }
 
     object Alerts {

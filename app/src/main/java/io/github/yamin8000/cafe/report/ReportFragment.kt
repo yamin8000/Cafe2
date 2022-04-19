@@ -33,6 +33,7 @@ class ReportFragment : BaseFragment<FragmentReportBinding>({ FragmentReportBindi
     private fun reportClickListener(report: String) {
         val filterDestination = when (report) {
             getString(R.string.orders) -> R.id.action_reportFragment_to_fragmentOrderReport
+            getString(R.string.products) -> R.id.action_reportFragment_to_fragmentProductReport
             else -> return
         }
         navigate(filterDestination)

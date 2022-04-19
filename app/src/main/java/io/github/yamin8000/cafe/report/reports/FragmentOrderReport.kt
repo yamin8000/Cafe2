@@ -6,7 +6,6 @@ import android.widget.ArrayAdapter
 import androidx.core.util.Pair
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.datepicker.MaterialDatePicker
-import com.google.android.material.textfield.TextInputEditText
 import io.github.yamin8000.cafe.R
 import io.github.yamin8000.cafe.databinding.FragmentOrderReportBinding
 import io.github.yamin8000.cafe.db.entities.order.OrderStatus
@@ -18,6 +17,7 @@ import io.github.yamin8000.cafe.util.Constants.db
 import io.github.yamin8000.cafe.util.DateTimeUtils.toJalaliIso
 import io.github.yamin8000.cafe.util.DateTimeUtils.toLocalDateTime
 import io.github.yamin8000.cafe.util.DateTimeUtils.toZonedDateTime
+import io.github.yamin8000.cafe.util.Utility.Views.handlePrice
 import io.github.yamin8000.cafe.util.Utility.Views.visible
 import io.github.yamin8000.cafe.util.Utility.handleCrash
 import kotlinx.coroutines.launch
@@ -38,6 +38,7 @@ class FragmentOrderReport :
         super.onViewCreated(view, savedInstanceState)
 
         try {
+            lifecycleScope.launch { handleArguments() }
             lifecycleScope.launch { getSubscribers() }
             binding.orderReportSearch.setOnClickListener {
                 lifecycleScope.launch { handleArguments() }
@@ -187,14 +188,6 @@ class FragmentOrderReport :
                     subscriberId = subscriber.id
                 }
             }
-        }
-    }
-
-    private fun TextInputEditText.handlePrice(): Long? {
-        return try {
-            this.text.toString().let { if (it.isNotBlank()) it.toLong() else null }
-        } catch (e: NumberFormatException) {
-            return 0
         }
     }
 

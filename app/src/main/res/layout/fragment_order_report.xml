@@ -62,7 +62,8 @@
                     android:id="@+id/order_report_subscriber_auto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/subscriber" />
+                    android:hint="@string/subscriber"
+                    android:singleLine="true" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <androidx.constraintlayout.helper.widget.Flow

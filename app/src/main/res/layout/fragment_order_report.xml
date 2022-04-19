@@ -44,6 +44,60 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/order_report_subscriber_input"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintBottom_toTopOf="@+id/order_report_list"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/order_report_filters"
+                app:startIconDrawable="@drawable/ic_delete">
+
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                    android:id="@+id/order_report_subscriber_auto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/subscriber" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.constraintlayout.helper.widget.Flow
+                android:id="@+id/order_report_filters"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:orientation="horizontal"
+                app:constraint_referenced_ids="order_max_price_input,order_min_price_input,order_date_range_picker,order_report_csv,date_range_text,delivered_switch"
+                app:flow_horizontalGap="16dp"
+                app:flow_maxElementsWrap="2"
+                app:flow_verticalGap="8dp"
+                app:flow_wrapMode="aligned"
+                app:layout_constraintBottom_toTopOf="@+id/order_report_subscriber_input"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/order_report_list"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/order_report_subscriber_input"
+                tools:listitem="@layout/search_order_item" />
+
             <TextView
                 android:id="@+id/date_range_text"
                 style="@style/WideTextView"
@@ -63,20 +117,6 @@
                 android:text="@string/select_date_range"
                 tools:layout_editor_absoluteX="157dp"
                 tools:layout_editor_absoluteY="7447dp" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/order_report_list"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/flow"
-                tools:listitem="@layout/search_order_item" />
 
             <com.google.android.material.switchmaterial.SwitchMaterial
                 android:id="@+id/delivered_switch"
@@ -122,26 +162,6 @@
                     android:singleLine="true" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <androidx.constraintlayout.helper.widget.Flow
-                android:id="@+id/flow"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="8dp"
-                android:orientation="horizontal"
-                app:constraint_referenced_ids="order_max_price_input,order_min_price_input,order_date_range_picker,order_report_csv,date_range_text,delivered_switch"
-                app:flow_horizontalGap="16dp"
-                app:flow_maxElementsWrap="2"
-                app:flow_verticalGap="8dp"
-                app:flow_wrapMode="aligned"
-                app:layout_constraintBottom_toTopOf="@+id/order_report_list"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>

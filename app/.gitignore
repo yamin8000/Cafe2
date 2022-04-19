@@ -1,1 +1,4 @@
 /build
+/.idea
+/app/release/app-release.apk
+/app/release/output-metadata.json

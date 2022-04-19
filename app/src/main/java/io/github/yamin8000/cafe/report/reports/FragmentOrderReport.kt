@@ -2,6 +2,7 @@ package io.github.yamin8000.cafe.report.reports
 
 import android.os.Bundle
 import android.view.View
+import android.widget.ArrayAdapter
 import androidx.core.util.Pair
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.datepicker.MaterialDatePicker
@@ -10,6 +11,7 @@ import io.github.yamin8000.cafe.R
 import io.github.yamin8000.cafe.databinding.FragmentOrderReportBinding
 import io.github.yamin8000.cafe.db.entities.order.OrderStatus
 import io.github.yamin8000.cafe.db.entities.relatives.OrderWithDetails
+import io.github.yamin8000.cafe.db.entities.subscriber.Subscriber
 import io.github.yamin8000.cafe.order.searchorder.SearchOrderAdapter
 import io.github.yamin8000.cafe.report.ReportCSVs
 import io.github.yamin8000.cafe.util.Constants.db
@@ -26,6 +28,7 @@ class FragmentOrderReport :
         FragmentOrderReportBinding.inflate(it)
     }) {
 
+    private var subscriberId: Long? = null
     private val orderAdapter by lazy(LazyThreadSafetyMode.NONE) { SearchOrderAdapter() }
 
     private var startDateTime: ZonedDateTime? = null
@@ -35,6 +38,7 @@ class FragmentOrderReport :
         super.onViewCreated(view, savedInstanceState)
 
         try {
+            lifecycleScope.launch { getSubscribers() }
             binding.orderReportSearch.setOnClickListener {
                 lifecycleScope.launch { handleArguments() }
             }
@@ -43,8 +47,16 @@ class FragmentOrderReport :
             }
             datePickerListeners()
             menuHandler()
+            subscriberClearHandler()
         } catch (e: Exception) {
             handleCrash(e)
+        }
+    }
+
+    private fun subscriberClearHandler() {
+        binding.orderReportSubscriberInput.setStartIconOnClickListener {
+            subscriberId = null
+            binding.orderReportSubscriberAuto.text?.clear()
         }
     }
 
@@ -149,12 +161,33 @@ class FragmentOrderReport :
             orders = orders.filter { it.orderAndSubscriber.order.date.isAfter(startDateTime) }
         if (endDateTime != null)
             orders = orders.filter { it.orderAndSubscriber.order.date.isBefore(endDateTime) }
+        if (subscriberId != null)
+            orders = orders.filter { it.orderAndSubscriber.subscriber?.id == subscriberId }
         return orders
     }
 
     override fun createList(items: List<OrderWithDetails>) {
         if (items.isEmpty()) binding.orderReportList.adapter = emptyAdapter
         else binding.orderReportList.adapter = orderAdapter.apply { asyncList.submitList(items) }
+    }
+
+    private suspend fun getSubscribers() {
+        val subscribers = db.subscriberDao().getAll()
+        if (subscribers.isNotEmpty()) fillSubscribersAutocomplete(subscribers)
+        else binding.orderReportSubscriberInput.isEnabled = false
+    }
+
+    private fun fillSubscribersAutocomplete(subscribers: List<Subscriber>) {
+        context?.let {
+            val adapter = ArrayAdapter(it, R.layout.dropdown_item, subscribers)
+            binding.orderReportSubscriberAuto.apply {
+                setAdapter(adapter)
+                setOnItemClickListener { adapterView, _, position, _ ->
+                    val subscriber = adapterView.adapter.getItem(position) as Subscriber
+                    subscriberId = subscriber.id
+                }
+            }
+        }
     }
 
     private fun TextInputEditText.handlePrice(): Long? {

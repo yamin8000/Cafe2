@@ -139,6 +139,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="128dp"
             android:layout_marginBottom="32dp"
+            android:backgroundTint="?colorPrimaryVariant"
             android:text="@string/login"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"

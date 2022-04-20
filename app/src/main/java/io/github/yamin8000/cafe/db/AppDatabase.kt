@@ -9,7 +9,10 @@ import io.github.yamin8000.cafe.db.entities.category.Category
 import io.github.yamin8000.cafe.db.entities.category.CategoryDao
 import io.github.yamin8000.cafe.db.entities.day.Day
 import io.github.yamin8000.cafe.db.entities.day.DayDao
-import io.github.yamin8000.cafe.db.entities.order.*
+import io.github.yamin8000.cafe.db.entities.order.Order
+import io.github.yamin8000.cafe.db.entities.order.OrderDao
+import io.github.yamin8000.cafe.db.entities.order.OrderDetail
+import io.github.yamin8000.cafe.db.entities.order.OrderDetailDao
 import io.github.yamin8000.cafe.db.entities.product.Product
 import io.github.yamin8000.cafe.db.entities.product.ProductDao
 import io.github.yamin8000.cafe.db.entities.relatives.RelativeDao
@@ -37,7 +40,7 @@ import io.github.yamin8000.cafe.db.entities.worker.schedule.ScheduleDao
     ],
     version = 1
 )
-@TypeConverters(DateConverter::class, OrderDetailConverter::class)
+@TypeConverters(DateConverter::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun orderDao(): OrderDao
     abstract fun orderDetailDao(): OrderDetailDao

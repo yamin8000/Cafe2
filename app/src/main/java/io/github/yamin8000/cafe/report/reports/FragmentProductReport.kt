@@ -21,7 +21,9 @@ class FragmentProductReport :
         FragmentProductReportBinding.inflate(it)
     }) {
 
-    private val adapter by lazy(LazyThreadSafetyMode.NONE) { ProductsAdapter({}) { _, _ -> } }
+    private val adapter by lazy(LazyThreadSafetyMode.NONE) {
+        ProductsAdapter(false, {}) { _, _ -> }
+    }
 
     private var categoryId: Long? = null
 

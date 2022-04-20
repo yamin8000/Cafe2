@@ -6,6 +6,7 @@ import io.github.yamin8000.cafe.ui.crud.CrudAdapter
 import io.github.yamin8000.cafe.ui.recyclerview.AsyncDifferHelper.getAsyncDiffer
 
 class ProductsAdapter(
+    isCheckable: Boolean,
     private val updateCallback: (ProductAndCategory) -> Unit,
     private val deleteCallback: (ProductAndCategory, Boolean) -> Unit
 ) : CrudAdapter<ProductAndCategory, ProductsHolder>() {
@@ -18,7 +19,8 @@ class ProductsAdapter(
     init {
         initAdapter({ parent, inflater ->
             val binding = ProductItemBinding.inflate(inflater, parent, false)
-            ProductsHolder(asyncList, binding, updateCallback, deleteCallback)
+            binding.root.isCheckable = isCheckable
+            ProductsHolder(isCheckable, asyncList, binding, updateCallback, deleteCallback)
         }, { holder, position ->
             holder.bind(asyncList.currentList[position])
         }, { asyncList.currentList.size })

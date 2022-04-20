@@ -10,20 +10,72 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <Button
+            android:id="@+id/account_login_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="64dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="32dp"
+            android:backgroundTint="?colorPrimaryVariant"
+            android:text="@string/login"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttons_flow"
+            app:layout_constraintWidth_percent=".5"
+            tools:visibility="visible" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottieAnimationView"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toTopOf="@+id/welcome_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/coffee_maker" />
+
         <TextView
             android:id="@+id/welcome_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="32dp"
+            android:layout_marginTop="16dp"
             android:gravity="center"
             android:padding="16dp"
             android:text="@string/welcome"
             android:textIsSelectable="true"
+            app:layout_constraintBottom_toTopOf="@+id/buttons_flow"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/lottieAnimationView" />
+
+        <androidx.constraintlayout.helper.widget.Flow
+            android:id="@+id/buttons_flow"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="horizontal"
+            app:constraint_referenced_ids="new_order_button,list_order_button,products_button,categories_button,subscriber_button,workers_button,reports_button,payments_button,schedule_button,account_button"
+            app:flow_horizontalGap="16dp"
+            app:flow_maxElementsWrap="2"
+            app:flow_verticalGap="16dp"
+            app:flow_verticalStyle="packed"
+            app:flow_wrapMode="aligned"
+            app:layout_constraintBottom_toTopOf="@+id/account_login_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/welcome_text" />
 
         <Button
             android:id="@+id/schedule_button"
@@ -133,42 +185,6 @@
             tools:layout_editor_absoluteY="344dp"
             tools:visibility="visible" />
 
-        <Button
-            android:id="@+id/account_login_button"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="128dp"
-            android:layout_marginBottom="32dp"
-            android:backgroundTint="?colorPrimaryVariant"
-            android:text="@string/login"
-            android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/buttons_flow"
-            app:layout_constraintWidth_percent=".5"
-            tools:visibility="visible" />
-
-        <androidx.constraintlayout.helper.widget.Flow
-            android:id="@+id/buttons_flow"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="32dp"
-            android:orientation="horizontal"
-            app:constraint_referenced_ids="new_order_button,list_order_button,products_button,categories_button,subscriber_button,workers_button,reports_button,payments_button,schedule_button,account_button"
-            app:flow_horizontalGap="16dp"
-            app:flow_maxElementsWrap="2"
-            app:flow_verticalGap="16dp"
-            app:flow_verticalStyle="packed"
-            app:flow_wrapMode="aligned"
-            app:layout_constraintBottom_toTopOf="@+id/account_login_button"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/welcome_text" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>

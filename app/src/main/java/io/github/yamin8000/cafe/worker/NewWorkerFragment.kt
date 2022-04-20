@@ -2,8 +2,6 @@ package io.github.yamin8000.cafe.worker
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.view.children
-import com.google.android.material.textfield.TextInputEditText
 import io.github.yamin8000.cafe.R
 import io.github.yamin8000.cafe.databinding.FragmentNewWorkerBinding
 import io.github.yamin8000.cafe.db.entities.worker.Worker

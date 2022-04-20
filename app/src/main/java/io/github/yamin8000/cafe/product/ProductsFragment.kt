@@ -12,7 +12,7 @@ class ProductsFragment :
     ReadDeleteFragment<ProductAndCategory, ProductsHolder>(R.id.newProductFragment) {
 
     override suspend fun getItems(): List<ProductAndCategory> {
-        return db.relativeDao().getProductsAndCategories() ?: listOf()
+        return db.relativeDao().getProductsAndCategories()
     }
 
     override suspend fun dbDeleteAction() {
@@ -35,7 +35,7 @@ class ProductsFragment :
     }
 
     private fun prepareList() {
-        val adapter = ProductsAdapter(this::updateCallback, this::deleteCallback)
+        val adapter = ProductsAdapter(true, this::updateCallback, this::deleteCallback)
         binding.crudList.adapter = adapter
         adapter.asyncList.submitList(items)
     }

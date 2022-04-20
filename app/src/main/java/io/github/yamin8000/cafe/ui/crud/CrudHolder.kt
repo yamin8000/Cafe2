@@ -17,7 +17,6 @@ open class CrudHolder<T, VB : ViewBinding>(
     private val card = binding.root as MaterialCardView
 
     init {
-        requireCheckable()
         setClickListeners()
     }
 
@@ -38,11 +37,6 @@ open class CrudHolder<T, VB : ViewBinding>(
             deleteCallback(asyncList.currentList[adapterPosition], card.isChecked)
         }
         return true
-    }
-
-    private fun requireCheckable() {
-        if (!card.isCheckable)
-            card.isCheckable = true
     }
 
     fun bind(item: T) {

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="8dp">
+
+        <ImageView
+            android:id="@+id/basket_plus"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:background="@drawable/ripple_back"
+            android:backgroundTint="?colorOnPrimarySurface"
+            android:contentDescription="@string/add_to_basket"
+            app:srcCompat="@drawable/ic_add_plus"
+            app:tint="#81C784"
+            tools:layout_editor_absoluteX="116dp"
+            tools:layout_editor_absoluteY="191dp" />
+
+        <ImageView
+            android:id="@+id/basket_minus"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:background="@drawable/ripple_back"
+            android:backgroundTint="?colorOnPrimarySurface"
+            android:contentDescription="@string/remove_from_basket"
+            app:srcCompat="@drawable/ic_remove_minus"
+            app:tint="#E57373"
+            tools:layout_editor_absoluteX="263dp"
+            tools:layout_editor_absoluteY="191dp" />
+
+        <TextView
+            android:id="@+id/basket_product_name"
+            style="@style/WideTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            tools:layout_editor_absoluteX="95dp"
+            tools:layout_editor_absoluteY="55dp"
+            tools:text="@tools:sample/lorem" />
+
+        <TextView
+            android:id="@+id/basket_quantity"
+            style="@style/WideTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            tools:layout_editor_absoluteX="95dp"
+            tools:layout_editor_absoluteY="31dp"
+            tools:text="@tools:sample/us_zipcodes" />
+
+        <androidx.constraintlayout.helper.widget.Flow
+            android:id="@+id/basket_detail_flow"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:orientation="vertical"
+            app:constraint_referenced_ids="basket_product_name,basket_quantity"
+            app:flow_horizontalGap="4dp"
+            app:flow_maxElementsWrap="2"
+            app:flow_verticalGap="4dp"
+            app:flow_wrapMode="none"
+            app:layout_constraintBottom_toTopOf="@+id/basket_quantity_flow"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.helper.widget.Flow
+            android:id="@+id/basket_quantity_flow"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:constraint_referenced_ids="basket_minus,basket_plus"
+            app:flow_horizontalGap="16dp"
+            app:flow_verticalGap="16dp"
+            app:flow_wrapMode="none"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/basket_detail_flow"
+            app:layout_constraintStart_toStartOf="@+id/basket_detail_flow"
+            app:layout_constraintTop_toBottomOf="@+id/basket_detail_flow" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

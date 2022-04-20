@@ -4,11 +4,11 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.RecyclerView
 import com.github.yamin8000.ppn.Digits.Companion.spell
 import io.github.yamin8000.cafe.R
-import io.github.yamin8000.cafe.databinding.NewOrderDetailItemBinding
+import io.github.yamin8000.cafe.databinding.NewOrderBasketItemBinding
 import io.github.yamin8000.cafe.db.entities.product.Product
 
 class NewOrderDetailHolder(
-    private val binding: NewOrderDetailItemBinding,
+    private val binding: NewOrderBasketItemBinding,
     private val asyncList: AsyncListDiffer<Product>,
     private val itemChanged: (Pair<Product, Int>) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
@@ -23,14 +23,14 @@ class NewOrderDetailHolder(
     }
 
     private fun orderQuantityClickListeners() {
-        binding.newOrderPlusButton.setOnClickListener {
+        binding.basketPlus.setOnClickListener {
             if (adapterPosition != RecyclerView.NO_POSITION) {
                 quantity++
                 itemChanged(asyncList.currentList[adapterPosition] to quantity)
                 updateQuantity()
             }
         }
-        binding.newOrderMinusButton.setOnClickListener {
+        binding.basketMinus.setOnClickListener {
             if (adapterPosition != RecyclerView.NO_POSITION) {
                 if (quantity != 0) {
                     quantity--
@@ -43,24 +43,15 @@ class NewOrderDetailHolder(
 
     private fun updateQuantity() {
         quantity.let {
-            binding.newOrderMinusButton.isEnabled = it != 0
-            binding.newOrderQuantity.text = context.getString(
+            binding.basketMinus.isEnabled = it != 0
+            binding.basketQuantity.text = context.getString(
                 R.string.adad_template,
                 it.spell()
             )
         }
     }
 
-    fun setDetailText(value: String) {
-        binding.newOrderDetailText.text = value
-    }
-
-    fun setPrice(price: Long) {
-        context?.let {
-            binding.newOrderItemPrice.text = it.getString(
-                R.string.rial_template,
-                price.spell()
-            )
-        }
+    fun setName(value: String) {
+        binding.basketProductName.text = value
     }
 }

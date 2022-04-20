@@ -10,6 +10,7 @@ import io.github.yamin8000.cafe.util.Utility.Views.setImageFromResourceId
 import io.github.yamin8000.cafe.util.Utility.numFormat
 
 class ProductsHolder(
+    isCheckable: Boolean,
     asyncList: AsyncListDiffer<ProductAndCategory>,
     binding: ProductItemBinding,
     updateCallback: (ProductAndCategory) -> Unit,

@@ -3,15 +3,17 @@ package io.github.yamin8000.cafe.category
 import androidx.recyclerview.widget.GridLayoutManager
 import io.github.yamin8000.cafe.R
 import io.github.yamin8000.cafe.db.entities.category.Category
-import io.github.yamin8000.cafe.db.helpers.DbHelpers.getCategories
 import io.github.yamin8000.cafe.ui.crud.ReadDeleteFragment
 import io.github.yamin8000.cafe.util.Constants.db
 import io.github.yamin8000.cafe.util.Utility.Alerts.snack
+import kotlinx.coroutines.withContext
 
 class CategoryFragment : ReadDeleteFragment<Category, CategoryHolder>(R.id.newCategoryFragment) {
 
     override suspend fun getItems(): List<Category> {
-        return ioScope.coroutineContext.getCategories()
+        return withContext(ioScope.coroutineContext) {
+            db.categoryDao().getAll()
+        }
     }
 
     override suspend fun dbDeleteAction() {

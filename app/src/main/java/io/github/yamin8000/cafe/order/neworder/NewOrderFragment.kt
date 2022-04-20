@@ -1,5 +1,6 @@
 package io.github.yamin8000.cafe.order.neworder
 
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
@@ -14,10 +15,10 @@ import io.github.yamin8000.cafe.db.entities.day.Day
 import io.github.yamin8000.cafe.db.entities.order.Order
 import io.github.yamin8000.cafe.db.entities.order.OrderDetail
 import io.github.yamin8000.cafe.db.entities.product.Product
+import io.github.yamin8000.cafe.db.entities.relatives.ProductAndCategory
 import io.github.yamin8000.cafe.db.entities.subscriber.Subscriber
-import io.github.yamin8000.cafe.db.helpers.DbHelpers.getProducts
-import io.github.yamin8000.cafe.ui.recyclerview.EmptyAdapter
 import io.github.yamin8000.cafe.ui.util.BaseFragment
+import io.github.yamin8000.cafe.util.Constants.DATA
 import io.github.yamin8000.cafe.util.Constants.PROMPT
 import io.github.yamin8000.cafe.util.Constants.PROMPT_RESULT
 import io.github.yamin8000.cafe.util.Constants.PROMPT_TEXT
@@ -37,7 +38,7 @@ class NewOrderFragment :
     private val ioScope by lazy(LazyThreadSafetyMode.NONE) { CoroutineScope(Dispatchers.IO) }
     private val lifecycleScope by lazy(LazyThreadSafetyMode.NONE) { lifecycle.coroutineScope }
 
-    private var products = listOf<Product>()
+    private var products = mutableSetOf<Product>()
 
     private var orderDetails = mutableListOf<OrderDetail>()
 
@@ -47,17 +48,34 @@ class NewOrderFragment :
 
     private var detailSummaries = mutableMapOf<OrderDetail, String>()
 
+    private val listAdapter = NewOrderDetailAdapter(this::itemChanged)
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         try {
-            lifecycleScope.launch {
-                listHandler()
-                loadSubscribers()
-            }
+            initList()
+            lifecycleScope.launch { loadSubscribers() }
             orderSavingHandler()
+            binding.newOrderAddProduct.setOnClickListener { handleNewProducts() }
+            fillList()
         } catch (e: Exception) {
             handleCrash(e)
+        }
+    }
+
+    private fun initList() {
+        binding.orderDetailList.adapter = listAdapter
+        fillList()
+    }
+
+    private fun handleNewProducts() {
+        navigate(R.id.action_newOrderFragment_to_newOrderNewProductModal)
+        setFragmentResultListener(DATA) { _, bundle ->
+            val newProducts = bundle.getParcelableArrayList<ProductAndCategory>(DATA)
+            if (newProducts != null)
+                products.addAll(newProducts.mapNotNull { it.product })
+            fillList()
         }
     }
 
@@ -136,6 +154,11 @@ class NewOrderFragment :
         insertOrderDetails(orderId)
         snack(getString(R.string.item_add_success, getString(R.string.order)))
         findNavController().navigate(R.id.action_newOrderFragment_to_searchOrdersFragment)
+        try {
+            MediaPlayer.create(context, R.raw.bell).start()
+        } catch (e: Exception) {
+            //ignored
+        }
     }
 
     private suspend fun insertOrderDetails(orderId: Long) = withContext(ioScope.coroutineContext) {
@@ -175,22 +198,8 @@ class NewOrderFragment :
         return if (text.isNullOrEmpty()) null else text
     }
 
-    private suspend fun listHandler() {
-        products = ioScope.coroutineContext.getProducts()
-        if (products.isNotEmpty()) fillList()
-        else handleEmptyProducts()
-    }
-
-    private fun handleEmptyProducts() {
-        binding.orderDetailList.adapter = EmptyAdapter(getString(R.string.no_products))
-        binding.saveOrderButton.isEnabled = false
-    }
-
     private fun fillList() {
-        NewOrderDetailAdapter(this::itemChanged).let {
-            it.asyncList.submitList(products)
-            binding.orderDetailList.adapter = it
-        }
+        listAdapter.asyncList.submitList(products.toList())
     }
 
     private fun itemChanged(pair: Pair<Product, Int>) {

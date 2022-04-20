@@ -30,6 +30,7 @@
     <string name="remove">حذف</string>
     <string name="product_category">دسته محصول</string>
     <string name="product_price">قیمت محصول</string>
+    <string name="price">قیمت</string>
     <string name="confirm">تایید</string>
     <string name="category_icon">نماد دسته</string>
     <string name="choose_image_optional">انتخاب عکس (اختیاری)</string>
@@ -116,6 +117,12 @@
     <string name="fattest_orders">سنگین ترین سفارش ها</string>
     <string name="thinnest_orders">سبک ترین سفارش ها</string>
     <string name="db_general_error">خطا در ایجاد تغییرات در پایگاه داده</string>
+    <string name="order_basket">سبد خرید سفارش</string>
+    <string name="remove_from_basket">کم کردن از سبد</string>
+    <string name="add_to_basket">اضافه کردن به سبد</string>
+    <string name="plus_sign">+</string>
+    <string name="minus_sign">-</string>
+    <string name="chosen_products">محصولات انتخاب شده</string>
     <string-array name="report_values">
         <item>@string/orders</item>
         <item>@string/products</item>

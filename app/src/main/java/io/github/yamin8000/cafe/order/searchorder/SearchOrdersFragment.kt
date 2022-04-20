@@ -1,13 +1,14 @@
 package io.github.yamin8000.cafe.order.searchorder
 
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.coroutineScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.github.yamin8000.cafe.R
 import io.github.yamin8000.cafe.databinding.FragmentSearchOrdersBinding
-import io.github.yamin8000.cafe.db.entities.relatives.OrderWithDetails
 import io.github.yamin8000.cafe.db.entities.order.OrderStatus
+import io.github.yamin8000.cafe.db.entities.relatives.OrderWithDetails
 import io.github.yamin8000.cafe.ui.recyclerview.EmptyAdapter
 import io.github.yamin8000.cafe.ui.util.BaseFragment
 import io.github.yamin8000.cafe.util.Constants.db
@@ -33,7 +34,7 @@ class SearchOrdersFragment :
     }
 
     private fun handleOrdersList() = lifecycleScope.launch {
-        val orders = db.relativeDao().getOrderWithDetails() ?: emptyList()
+        val orders = db.relativeDao().getOrderWithDetails()
         if (orders.isNotEmpty()) showOrders(orders.asReversed())
         else showEmptyAdapter()
     }
@@ -54,6 +55,11 @@ class SearchOrdersFragment :
         db.orderDao().getById(orderId)?.let { order ->
             order.status = OrderStatus.Delivered
             db.orderDao().update(order)
+            try {
+                MediaPlayer.create(context, R.raw.bell).start()
+            } catch (e: Exception) {
+                //ignored
+            }
         }
     }
 }

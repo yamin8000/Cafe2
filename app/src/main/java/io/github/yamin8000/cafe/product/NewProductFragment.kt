@@ -9,7 +9,6 @@ import io.github.yamin8000.cafe.databinding.FragmentNewProductBinding
 import io.github.yamin8000.cafe.db.entities.category.Category
 import io.github.yamin8000.cafe.db.entities.product.Product
 import io.github.yamin8000.cafe.db.entities.relatives.ProductAndCategory
-import io.github.yamin8000.cafe.db.helpers.DbHelpers.getCategories
 import io.github.yamin8000.cafe.ui.crud.CreateUpdateFragment
 import io.github.yamin8000.cafe.util.Constants.ICON_PICKER
 import io.github.yamin8000.cafe.util.Constants.ICON_PICKER_RESULT
@@ -90,7 +89,9 @@ class NewProductFragment :
     }
 
     private suspend fun handleCategoriesAutoComplete() {
-        val categories = ioScope.coroutineContext.getCategories()
+        val categories = withContext(ioScope.coroutineContext) {
+            db.categoryDao().getAll()
+        }
         if (categories.isNotEmpty())
             fillCategoriesAutoComplete(categories)
         else handleEmptyCategories()

@@ -10,6 +10,7 @@ import androidx.core.content.edit
  * @param context context
  * @param name shared prefs name
  */
+@Suppress("unused")
 class SharedPrefs(context: Context, name: String) {
 
     val prefs: SharedPreferences = context.getSharedPreferences(name, Context.MODE_PRIVATE)

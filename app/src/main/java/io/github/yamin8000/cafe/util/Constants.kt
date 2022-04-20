@@ -6,7 +6,7 @@ object Constants {
 
     const val LOG_TAG = "<-->"
     const val STACKTRACE = "stacktrace"
-    const val SPLASH_DELAY = 1500L
+    const val SPLASH_DELAY = 2500L
     const val PACK = "pack_"
     const val NOT_CREATED_ID = 0L
 

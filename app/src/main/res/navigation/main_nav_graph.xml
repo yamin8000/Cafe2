@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav_graph"
     app:startDestination="@id/splashFragment">
 
     <fragment
         android:id="@+id/homeFragment"
         android:name="io.github.yamin8000.cafe.base.HomeFragment"
-        android:label="HomeFragment"
-        tools:layout="@layout/fragment_home">
+        android:label="HomeFragment">
         <action
             android:id="@+id/action_homeFragment_to_newOrderFragment"
             app:destination="@id/newOrderFragment" />
@@ -50,8 +48,7 @@
     <fragment
         android:id="@+id/splashFragment"
         android:name="io.github.yamin8000.cafe.base.SplashFragment"
-        android:label="SplashFragment"
-        tools:layout="@layout/fragment_splash">
+        android:label="SplashFragment">
         <action
             android:id="@+id/action_splashFragment_to_homeFragment"
             app:destination="@id/homeFragment"
@@ -61,31 +58,30 @@
     <fragment
         android:id="@+id/newOrderFragment"
         android:name="io.github.yamin8000.cafe.order.neworder.NewOrderFragment"
-        android:label="NewOrderFragment"
-        tools:layout="@layout/fragment_new_order">
+        android:label="NewOrderFragment">
         <action
             android:id="@+id/action_newOrderFragment_to_searchOrdersFragment"
             app:destination="@id/searchOrdersFragment"
             app:popUpTo="@id/homeFragment" />
+        <action
+            android:id="@+id/action_newOrderFragment_to_newOrderNewProductModal"
+            app:destination="@id/newOrderNewProductModal" />
     </fragment>
     <fragment
         android:id="@+id/searchOrdersFragment"
         android:name="io.github.yamin8000.cafe.order.searchorder.SearchOrdersFragment"
-        android:label="SearchOrdersFragment"
-        tools:layout="@layout/fragment_search_orders" />
+        android:label="SearchOrdersFragment" />
     <dialog
         android:id="@+id/iconPickerModal"
         android:name="io.github.yamin8000.cafe.ui.iconpicker.IconPickerModal"
-        android:label="IconPickerModal"
-        tools:layout="@layout/icon_picker_modal" />
+        android:label="IconPickerModal" />
     <navigation
         android:id="@+id/category_graph"
         app:startDestination="@id/categoryFragment">
         <fragment
             android:id="@+id/categoryFragment"
             android:name="io.github.yamin8000.cafe.category.CategoryFragment"
-            android:label="CategoryFragment"
-            tools:layout="@layout/fragment_crud">
+            android:label="CategoryFragment">
             <action
                 android:id="@+id/action_categoryFragment_to_newCategoryFragment"
                 app:destination="@id/newCategoryFragment" />
@@ -93,8 +89,7 @@
         <fragment
             android:id="@+id/newCategoryFragment"
             android:name="io.github.yamin8000.cafe.category.NewCategoryFragment"
-            android:label="NewCategoryFragment"
-            tools:layout="@layout/fragment_new_category">
+            android:label="NewCategoryFragment">
             <action
                 android:id="@+id/action_newCategoryFragment_to_iconPickerModal"
                 app:destination="@id/iconPickerModal" />
@@ -106,8 +101,7 @@
         <fragment
             android:id="@+id/newProductFragment"
             android:name="io.github.yamin8000.cafe.product.NewProductFragment"
-            android:label="NewProductFragment"
-            tools:layout="@layout/fragment_new_product">
+            android:label="NewProductFragment">
             <action
                 android:id="@+id/action_newProductFragment_to_iconPickerModal"
                 app:destination="@id/iconPickerModal" />
@@ -115,8 +109,7 @@
         <fragment
             android:id="@+id/productFragment"
             android:name="io.github.yamin8000.cafe.product.ProductsFragment"
-            android:label="ProductFragment"
-            tools:layout="@layout/fragment_crud">
+            android:label="ProductFragment">
             <action
                 android:id="@+id/action_productFragment_to_newProductFragment"
                 app:destination="@id/newProductFragment" />
@@ -128,24 +121,20 @@
         <fragment
             android:id="@+id/newSubscriberFragment"
             android:name="io.github.yamin8000.cafe.subscriber.NewSubscriberFragment"
-            android:label="NewSubscriberFragment"
-            tools:layout="@layout/fragment_new_subscriber" />
+            android:label="NewSubscriberFragment" />
         <fragment
             android:id="@+id/subscriberFragment"
             android:name="io.github.yamin8000.cafe.subscriber.SubscriberFragment"
-            android:label="SubscriberFragment"
-            tools:layout="@layout/fragment_crud" />
+            android:label="SubscriberFragment" />
     </navigation>
     <dialog
         android:id="@+id/accountLoginModal"
         android:name="io.github.yamin8000.cafe.account.AccountLoginModal"
-        android:label="AccountLoginModal"
-        tools:layout="@layout/account_login" />
+        android:label="AccountLoginModal" />
     <dialog
         android:id="@+id/promptModal"
         android:name="io.github.yamin8000.cafe.ui.PromptModal"
-        android:label="PromptModal"
-        tools:layout="@layout/prompt_modal">
+        android:label="PromptModal">
         <argument
             android:name="prompt_text"
             app:argType="string" />
@@ -153,8 +142,7 @@
     <fragment
         android:id="@+id/crashFragment"
         android:name="io.github.yamin8000.cafe.base.CrashFragment"
-        android:label="CrashFragment"
-        tools:layout="@layout/fragment_crash">
+        android:label="CrashFragment">
         <argument
             android:name="stacktrace"
             app:argType="string" />
@@ -162,13 +150,11 @@
     <fragment
         android:id="@+id/newAccountFragment"
         android:name="io.github.yamin8000.cafe.account.NewAccountFragment"
-        android:label="NewAccountFragment"
-        tools:layout="@layout/new_account_fragment" />
+        android:label="NewAccountFragment" />
     <fragment
         android:id="@+id/accountFragment"
         android:name="io.github.yamin8000.cafe.account.AccountFragment"
-        android:label="AccountFragment"
-        tools:layout="@layout/fragment_crud" />
+        android:label="AccountFragment" />
     <navigation
         android:id="@+id/worker_graph"
         app:startDestination="@id/workerFragment">
@@ -179,8 +165,7 @@
         <fragment
             android:id="@+id/newWorkerFragment"
             android:name="io.github.yamin8000.cafe.worker.NewWorkerFragment"
-            android:label="NewWorkerFragment"
-            tools:layout="new_worker_fragment" />
+            android:label="NewWorkerFragment" />
     </navigation>
     <navigation
         android:id="@+id/payment_graph"
@@ -197,8 +182,7 @@
     <fragment
         android:id="@+id/reportFragment"
         android:name="io.github.yamin8000.cafe.report.ReportFragment"
-        android:label="ReportFragment"
-        tools:layout="@layout/fragment_report">
+        android:label="ReportFragment">
         <action
             android:id="@+id/action_reportFragment_to_fragmentOrderReport"
             app:destination="@id/fragmentOrderReport" />
@@ -221,10 +205,13 @@
     <fragment
         android:id="@+id/fragmentOrderReport"
         android:name="io.github.yamin8000.cafe.report.reports.FragmentOrderReport"
-        android:label="FragmentOrderReport"
-        tools:layout="@layout/fragment_order_report" />
+        android:label="FragmentOrderReport" />
     <fragment
         android:id="@+id/fragmentProductReport"
         android:name="io.github.yamin8000.cafe.report.reports.FragmentProductReport"
         android:label="FragmentProductReport" />
+    <dialog
+        android:id="@+id/newOrderNewProductModal"
+        android:name="io.github.yamin8000.cafe.order.neworder.NewOrderNewProductModal"
+        android:label="NewOrderNewProductModal" />
 </navigation>

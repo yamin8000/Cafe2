@@ -43,9 +43,7 @@ class FragmentOrderReport :
             binding.orderReportSearch.setOnClickListener {
                 lifecycleScope.launch { handleArguments() }
             }
-            binding.orderReportCsv.setOnClickListener {
-                shareCsv(ReportCSVs.orderWithDetails(items))
-            }
+            binding.orderReportCsv.setOnClickListener { shareCsv(ReportCSVs.orderWithDetails(items)) }
             datePickerListeners()
             menuHandler()
             subscriberClearHandler()

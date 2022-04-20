@@ -14,16 +14,25 @@ import io.github.yamin8000.cafe.util.Utility.handleCrash
 
 class SplashFragment : BaseFragment<FragmentSplashBinding>({ FragmentSplashBinding.inflate(it) }) {
 
+    private lateinit var handler: Handler
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         try {
-            Handler(Looper.getMainLooper()).postDelayed(SPLASH_DELAY) {
+            handler = Handler(Looper.getMainLooper())
+            handler.postDelayed(SPLASH_DELAY) {
                 if (!this.isDetached)
                     findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
             }
         } catch (exception: Exception) {
             handleCrash(exception)
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        if (this::handler.isInitialized)
+            handler.removeCallbacksAndMessages(null)
     }
 }

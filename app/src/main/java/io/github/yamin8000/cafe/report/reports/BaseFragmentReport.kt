@@ -25,9 +25,10 @@ abstract class BaseFragmentReport<T, VB : ViewBinding>(inflater: Inflater<VB>) :
     protected abstract fun createList(items: List<T>)
 
     protected suspend fun handleArguments() {
-        items = withContext(ioScope.coroutineContext) { getItems() }
-        items = withContext(ioScope.coroutineContext) { filterItems(items) }
-        createList(items)
+        if (items.isEmpty())
+            items = withContext(ioScope.coroutineContext) { getItems() }
+        val filteredItems = withContext(ioScope.coroutineContext) { filterItems(items) }
+        createList(filteredItems)
     }
 
     protected fun shareCsv(csv: String) {

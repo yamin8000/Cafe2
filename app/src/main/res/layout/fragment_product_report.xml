@@ -31,6 +31,18 @@
             android:layout_height="match_parent"
             android:layout_margin="16dp">
 
+            <Button
+                android:id="@+id/product_report_share"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/sharing"
+                app:layout_constraintBottom_toTopOf="@+id/product_report_filters"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                app:layout_constraintVertical_chainStyle="packed" />
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/product_report_max_price_input"
                 android:layout_width="0dp"
@@ -94,6 +106,8 @@
                 android:id="@+id/product_report_filters"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 android:orientation="horizontal"
                 app:constraint_referenced_ids="product_report_name_input,product_report_category_input,product_report_max_price_input,product_report_min_price_input"
                 app:flow_horizontalGap="8dp"
@@ -103,15 +117,12 @@
                 app:layout_constraintBottom_toTopOf="@+id/product_report_list"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0"
-                app:layout_constraintVertical_chainStyle="packed" />
+                app:layout_constraintTop_toBottomOf="@+id/product_report_share" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/product_report_list"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

@@ -102,7 +102,7 @@ object Utility {
 
     fun isSuperuser() = getCurrentPermission() == AccountPermission.Superuser.rank
 
-    fun <T> csvOf(
+    inline fun <T> csvOf(
         headers: List<String>,
         data: List<T>,
         itemBuilder: (T) -> List<String>

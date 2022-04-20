@@ -10,6 +10,8 @@ object Constants {
     const val PACK = "pack_"
     const val NOT_CREATED_ID = 0L
 
+    const val TEXT_WATCHER_DELAY = 500L
+
     //singletons
     lateinit var db: AppDatabase
     var sharedPrefs: SharedPrefs? = null
@@ -27,13 +29,6 @@ object Constants {
     const val LOGIN = "login"
     const val ACCOUNT = "account"
     const val CRUD_NAME = "crud_name"
-    const val FILTER = "filter"
-    const val NAME = "name"
-    const val CATEGORY = "category"
-    const val PRICE = "price"
-    const val IS_DELIVERED = "is_delivered"
-    const val MIN_PRICE = "min_price"
-    const val MAX_PRICE = "max_price"
 
     //prompt
     const val PROMPT = "prompt"

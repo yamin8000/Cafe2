@@ -1,5 +1,7 @@
 package io.github.yamin8000.cafe.order.searchorder
 
+import android.text.TextUtils
+import android.widget.TextView
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.RecyclerView
 import io.github.yamin8000.cafe.R
@@ -20,11 +22,27 @@ class SearchOrderHolder(
     private val deliverListener: ((Long) -> Unit)? = null
 ) : RecyclerView.ViewHolder(binding.root) {
 
+    private val textMaxLines = 3
     private val context = binding.root.context
 
     init {
         deliverClickEnablerHandler()
         deliverClickListenerHandler()
+        detailExpandShrinkListener()
+    }
+
+    private fun detailExpandShrinkListener() {
+        binding.searchOrderDetails.setOnClickListener {
+            (it as TextView).let { text ->
+                if (text.ellipsize == null) {
+                    text.ellipsize = TextUtils.TruncateAt.END
+                    text.maxLines = textMaxLines
+                } else {
+                    text.ellipsize = null
+                    text.maxLines = Int.MAX_VALUE
+                }
+            }
+        }
     }
 
     private fun deliverClickEnablerHandler() {

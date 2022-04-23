@@ -6,169 +6,176 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="8dp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+
+    <com.google.android.flexbox.FlexboxLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="8dp">
-
-        <Button
-            android:id="@+id/search_order_deliver_button"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/deliver" />
-
-        <TextView
-            android:id="@+id/search_order_price_holder"
-            style="@style/WideTextView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/total_price"
-            app:layout_constraintWidth_percent=".3"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="8dp" />
-
-        <TextView
-            android:id="@+id/search_order_description_holder"
-            style="@style/WideTextView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/description"
-            app:layout_constraintWidth_percent=".3"
-            tools:layout_editor_absoluteX="279dp"
-            tools:layout_editor_absoluteY="273dp" />
-
-        <TextView
-            android:id="@+id/search_order_day_id_holder"
-            style="@style/WideTextView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/order_day_id"
-            app:layout_constraintWidth_percent=".3"
-            tools:layout_editor_absoluteX="279dp"
-            tools:layout_editor_absoluteY="8dp" />
-
-        <TextView
-            android:id="@+id/search_order_date_holder"
-            style="@style/WideTextView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/order_date"
-            app:layout_constraintWidth_percent=".3"
-            tools:layout_editor_absoluteX="279dp"
-            tools:layout_editor_absoluteY="74dp" />
-
-        <TextView
-            android:id="@+id/search_order_status_holder"
-            style="@style/WideTextView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/order_status"
-            app:layout_constraintWidth_percent=".3"
-            tools:layout_editor_absoluteX="279dp"
-            tools:layout_editor_absoluteY="207dp" />
-
-        <TextView
-            android:id="@+id/search_order_details_holder"
-            style="@style/WideTextView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/order_details"
-            app:layout_constraintWidth_percent=".3"
-            tools:layout_editor_absoluteX="279dp"
-            tools:layout_editor_absoluteY="140dp" />
-
-        <TextView
-            android:id="@+id/search_order_subscriber_holder"
-            style="@style/WideTextView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/subscriber"
-            app:layout_constraintWidth_percent=".3"
-            tools:layout_editor_absoluteX="306dp"
-            tools:layout_editor_absoluteY="339dp" />
-
-        <TextView
-            android:id="@+id/search_order_price"
-            style="@style/WideTextView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="423dp"
-            tools:text="@tools:sample/us_zipcodes" />
-
-        <TextView
-            android:id="@+id/search_order_subscriber"
-            style="@style/WideTextView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            tools:layout_editor_absoluteX="110dp"
-            tools:layout_editor_absoluteY="339dp"
-            tools:text="@tools:sample/full_names" />
-
-        <TextView
-            android:id="@+id/search_order_description"
-            style="@style/WideTextView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="273dp"
-            tools:text="@tools:sample/lorem" />
-
-        <TextView
-            android:id="@+id/search_order_details"
-            style="@style/WideTextView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="140dp"
-            tools:text="@tools:sample/lorem" />
-
-        <TextView
-            android:id="@+id/search_order_status"
-            style="@style/WideTextView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="207dp"
-            tools:text="@tools:sample/lorem" />
-
-        <TextView
-            android:id="@+id/search_order_date"
-            style="@style/WideTextView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="74dp"
-            tools:text="@tools:sample/date/ddmmyy" />
+        android:padding="8dp"
+        app:alignContent="center"
+        app:alignItems="flex_end"
+        app:dividerDrawable="@drawable/divider"
+        app:flexWrap="wrap"
+        app:justifyContent="center"
+        app:showDivider="middle">
 
         <TextView
             android:id="@+id/search_order_day_id"
             style="@style/WideTextView"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="8dp"
+            app:layout_flexGrow="3"
             tools:text="@tools:sample/us_zipcodes" />
 
-        <androidx.constraintlayout.helper.widget.Flow
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:orientation="horizontal"
-            app:constraint_referenced_ids="search_order_day_id,search_order_day_id_holder,search_order_date,search_order_date_holder,search_order_details,search_order_details_holder,search_order_status,search_order_status_holder,search_order_description,search_order_description_holder,search_order_subscriber,search_order_subscriber_holder,search_order_price,search_order_price_holder,search_order_deliver_button"
-            app:flow_horizontalGap="4dp"
-            app:flow_maxElementsWrap="2"
-            app:flow_verticalGap="8dp"
-            app:flow_wrapMode="chain"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/search_order_day_id_holder"
+            style="@style/WideTextView"
+            android:layout_width="125dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/order_day_id" />
+
+        <TextView
+            android:id="@+id/search_order_date"
+            style="@style/WideTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            app:layout_flexGrow="3"
+            app:layout_wrapBefore="true"
+            tools:text="@tools:sample/date/ddmmyy" />
+
+        <TextView
+            android:id="@+id/search_order_date_holder"
+            style="@style/WideTextView"
+            android:layout_width="125dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/order_date" />
+
+
+        <TextView
+            android:id="@+id/search_order_details"
+            style="@style/WideTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="3"
+            app:layout_flexGrow="3"
+            app:layout_wrapBefore="true"
+            tools:text="@tools:sample/lorem" />
+
+        <TextView
+            android:id="@+id/search_order_details_holder"
+            style="@style/WideTextView"
+            android:layout_width="125dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/order_details" />
+
+
+        <TextView
+            android:id="@+id/search_order_status"
+            style="@style/WideTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            app:layout_flexGrow="3"
+            app:layout_wrapBefore="true"
+            tools:text="@tools:sample/lorem" />
+
+        <TextView
+            android:id="@+id/search_order_status_holder"
+            style="@style/WideTextView"
+            android:layout_width="125dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/order_status" />
+
+        <TextView
+            android:id="@+id/search_order_price"
+            style="@style/WideTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            app:layout_flexGrow="3"
+            app:layout_wrapBefore="true"
+            tools:text="@tools:sample/us_zipcodes" />
+
+        <TextView
+            android:id="@+id/search_order_price_holder"
+            style="@style/WideTextView"
+            android:layout_width="125dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/total_price" />
+
+        <TextView
+            android:id="@+id/search_order_subscriber"
+            style="@style/WideTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            app:layout_flexGrow="3"
+            app:layout_wrapBefore="true"
+            tools:text="@tools:sample/full_names" />
+
+        <TextView
+            android:id="@+id/search_order_subscriber_holder"
+            style="@style/WideTextView"
+            android:layout_width="125dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/subscriber" />
+
+        <TextView
+            android:id="@+id/search_order_description"
+            style="@style/WideTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            app:layout_flexGrow="3"
+            app:layout_wrapBefore="true"
+            tools:text="@tools:sample/lorem" />
+
+        <TextView
+            android:id="@+id/search_order_description_holder"
+            style="@style/WideTextView"
+            android:layout_width="125dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/description" />
+
+
+        <Button
+            android:id="@+id/search_order_deliver_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/deliver"
+            app:layout_wrapBefore="true" />
+
+
+    </com.google.android.flexbox.FlexboxLayout>
+
+    <!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:padding="8dp">-->
+
+
+    <!--        <androidx.constraintlayout.helper.widget.Flow-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_height="0dp"-->
+    <!--            android:orientation="horizontal"-->
+    <!--            app:constraint_referenced_ids="search_order_day_id,search_order_day_id_holder,search_order_date,search_order_date_holder,search_order_details,search_order_details_holder,search_order_status,search_order_status_holder,search_order_description,search_order_description_holder,search_order_subscriber,search_order_subscriber_holder,search_order_price,search_order_price_holder,search_order_deliver_button"-->
+    <!--            app:flow_horizontalGap="4dp"-->
+    <!--            app:flow_maxElementsWrap="2"-->
+    <!--            app:flow_verticalGap="4dp"-->
+    <!--            app:flow_wrapMode="chain"-->
+    <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--            app:layout_constraintEnd_toEndOf="parent"-->
+    <!--            app:layout_constraintStart_toStartOf="parent"-->
+    <!--            app:layout_constraintTop_toTopOf="parent" />-->
+    <!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
 </com.google.android.material.card.MaterialCardView>

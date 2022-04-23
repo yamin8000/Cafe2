@@ -6,21 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/product_order_search"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="32dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:text="@string/search"
-        app:icon="@drawable/ic_search"
-        app:layout_anchor="@id/fragment_product_order_root"
-        app:layout_anchorGravity="bottom|start"
-        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior" />
-
     <androidx.core.widget.NestedScrollView
-        android:id="@+id/fragment_product_order_root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"

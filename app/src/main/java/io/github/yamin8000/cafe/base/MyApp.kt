@@ -1,6 +1,6 @@
 @file:Suppress("unused")
 
-package io.github.yamin8000.cafe.util
+package io.github.yamin8000.cafe.base
 
 import android.annotation.SuppressLint
 import android.app.Application
@@ -10,8 +10,11 @@ import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 import com.orhanobut.logger.PrettyFormatStrategy
 import io.github.yamin8000.cafe.db.AppDatabase
+import io.github.yamin8000.cafe.util.Constants
 import io.github.yamin8000.cafe.util.Constants.db
 import io.github.yamin8000.cafe.util.Constants.sharedPrefs
+import io.github.yamin8000.cafe.util.SharedPrefs
+import java.io.File
 
 class MyApp : Application() {
 

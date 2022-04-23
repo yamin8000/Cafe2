@@ -2,7 +2,6 @@ package io.github.yamin8000.cafe.report.reports
 
 import android.os.Bundle
 import android.view.View
-import android.widget.ArrayAdapter
 import androidx.core.util.Pair
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.datepicker.MaterialDatePicker
@@ -13,6 +12,7 @@ import io.github.yamin8000.cafe.db.entities.relatives.OrderWithDetails
 import io.github.yamin8000.cafe.db.entities.subscriber.Subscriber
 import io.github.yamin8000.cafe.order.searchorder.SearchOrderAdapter
 import io.github.yamin8000.cafe.report.ReportCSVs
+import io.github.yamin8000.cafe.ui.AutoArrayAdapter
 import io.github.yamin8000.cafe.util.Constants.db
 import io.github.yamin8000.cafe.util.DateTimeUtils.toJalaliIso
 import io.github.yamin8000.cafe.util.DateTimeUtils.toLocalDateTime
@@ -39,14 +39,12 @@ class FragmentOrderReport :
 
         try {
             lifecycleScope.launch { handleArguments() }
-            lifecycleScope.launch { getSubscribers() }
-            binding.orderReportSearch.setOnClickListener {
-                lifecycleScope.launch { handleArguments() }
-            }
+            lifecycleScope.launch { handleSubscribers() }
             binding.orderReportCsv.setOnClickListener { shareCsv(ReportCSVs.orderWithDetails(items)) }
             datePickerListeners()
             menuHandler()
             subscriberClearHandler()
+            binding.deliveredSwitch.setOnCheckedChangeListener { _, _ -> lifecycleScope.launch { handleArguments() } }
         } catch (e: Exception) {
             handleCrash(e)
         }
@@ -56,6 +54,7 @@ class FragmentOrderReport :
         binding.orderReportSubscriberInput.setStartIconOnClickListener {
             subscriberId = null
             binding.orderReportSubscriberAuto.text?.clear()
+            lifecycleScope.launch { handleArguments() }
         }
     }
 
@@ -92,7 +91,11 @@ class FragmentOrderReport :
     }
 
     private fun datePickerListeners() {
-        binding.orderDateRangePicker.setOnLongClickListener { clearDateRange() }
+        binding.orderDateRangePicker.setOnLongClickListener {
+            clearDateRange()
+            lifecycleScope.launch { handleArguments() }
+            return@setOnLongClickListener true
+        }
         binding.orderDateRangePicker.setOnClickListener {
             val picker = MaterialDatePicker.Builder.dateRangePicker()
                 .setTitleText(getString(R.string.select_date))
@@ -107,10 +110,10 @@ class FragmentOrderReport :
         }
     }
 
-    private fun clearDateRange(): Boolean {
+    private fun clearDateRange() {
         startDateTime = null
         endDateTime = null
-        return false
+        binding.dateRangeText.text = ""
     }
 
     private fun handleDateTime(dateRange: Pair<Long, Long>) {
@@ -121,7 +124,8 @@ class FragmentOrderReport :
             append(startDateTime?.toJalaliIso() ?: "")
             append("\n")
             append(endDateTime?.toJalaliIso() ?: "")
-        }
+        }.trim()
+        lifecycleScope.launch { handleArguments() }
     }
 
     private fun handleStartDate(start: Long): ZonedDateTime {
@@ -170,21 +174,16 @@ class FragmentOrderReport :
         else binding.orderReportList.adapter = orderAdapter.apply { asyncList.submitList(items) }
     }
 
-    private suspend fun getSubscribers() {
+    private suspend fun handleSubscribers() {
         val subscribers = db.subscriberDao().getAll()
-        if (subscribers.isNotEmpty()) fillSubscribersAutocomplete(subscribers)
-        else binding.orderReportSubscriberInput.isEnabled = false
+        fillSubscribersAutocomplete(subscribers)
     }
 
     private fun fillSubscribersAutocomplete(subscribers: List<Subscriber>) {
         context?.let {
-            val adapter = ArrayAdapter(it, R.layout.dropdown_item, subscribers)
-            binding.orderReportSubscriberAuto.apply {
-                setAdapter(adapter)
-                setOnItemClickListener { adapterView, _, position, _ ->
-                    val subscriber = adapterView.adapter.getItem(position) as Subscriber
-                    subscriberId = subscriber.id
-                }
+            AutoArrayAdapter(it, subscribers, binding.orderReportSubscriberAuto) { subscriber, _ ->
+                subscriberId = subscriber.id
+                lifecycleScope.launch { handleArguments() }
             }
         }
     }

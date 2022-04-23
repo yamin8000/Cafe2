@@ -32,9 +32,6 @@ class FragmentProductReport :
 
         try {
             lifecycleScope.launch { handleArguments() }
-            binding.productOrderSearch.setOnClickListener {
-                lifecycleScope.launch { handleArguments() }
-            }
             lifecycleScope.launch { handleCategoriesAutocomplete() }
             handleCategoriesAutoCompleteClearButton()
             handleTextWatchers()

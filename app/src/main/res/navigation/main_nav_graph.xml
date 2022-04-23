@@ -214,4 +214,8 @@
         android:id="@+id/newOrderNewProductModal"
         android:name="io.github.yamin8000.cafe.order.neworder.NewOrderNewProductModal"
         android:label="NewOrderNewProductModal" />
+    <dialog
+        android:id="@+id/simpleListModal"
+        android:name="io.github.yamin8000.cafe.ui.simplelist.SimpleListModal"
+        android:label="SimpleListModal" />
 </navigation>

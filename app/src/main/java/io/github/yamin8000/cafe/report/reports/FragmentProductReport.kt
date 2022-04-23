@@ -2,7 +2,9 @@ package io.github.yamin8000.cafe.report.reports
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.lifecycle.lifecycleScope
+import io.github.yamin8000.cafe.R
 import io.github.yamin8000.cafe.databinding.FragmentProductReportBinding
 import io.github.yamin8000.cafe.db.entities.category.Category
 import io.github.yamin8000.cafe.db.entities.relatives.ProductAndCategory
@@ -10,11 +12,14 @@ import io.github.yamin8000.cafe.product.ProductsAdapter
 import io.github.yamin8000.cafe.report.ReportCSVs
 import io.github.yamin8000.cafe.ui.AutoArrayAdapter
 import io.github.yamin8000.cafe.ui.SimpleDelayedTextWatcher
+import io.github.yamin8000.cafe.util.Constants.DATA
 import io.github.yamin8000.cafe.util.Constants.TEXT_WATCHER_DELAY
 import io.github.yamin8000.cafe.util.Constants.db
 import io.github.yamin8000.cafe.util.Utility.Views.handlePrice
 import io.github.yamin8000.cafe.util.Utility.handleCrash
+import io.github.yamin8000.cafe.util.Utility.navigate
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class FragmentProductReport :
     BaseFragmentReport<ProductAndCategory, FragmentProductReportBinding>({
@@ -38,8 +43,47 @@ class FragmentProductReport :
             binding.productReportShare.setOnClickListener {
                 shareCsv(ReportCSVs.productAndCategory(items))
             }
+            binding.reportProductToolbar.setOnMenuItemClickListener {
+                when (it.itemId) {
+                    R.id.best_selling -> lifecycleScope.launch { showBestSellers() }
+                }
+                true
+            }
         } catch (e: Exception) {
             handleCrash(e)
+        }
+    }
+
+    private suspend fun showBestSellers() {
+        val bestSellers = withContext(ioScope.coroutineContext) {
+            db.orderDetailDao().getBestSelling()
+        }
+        navigate(R.id.simpleListModal, bundleOf(DATA to bestSellers.map { detail ->
+            buildString {
+                append(items.find { detail.productId == it.product?.id }?.product?.name ?: "")
+                append("\n")
+                append(getString(R.string.sell_quantity))
+                append("\n")
+                append(detail.quantity)
+            }
+        }.toTypedArray()))
+    }
+
+    private fun sortByBestSelling() {
+        lifecycleScope.launch {
+            withContext(ioScope.coroutineContext) { sortToBestSelling() }
+            createList(items)
+        }
+    }
+
+    private suspend fun sortToBestSelling() {
+        val bestSellers = db.orderDetailDao().getBestSelling()
+        val iterator = items.iterator()
+        while (iterator.hasNext()) {
+            val item = iterator.next()
+            val bestSellerItem = bestSellers.find { it.productId == item.product?.id }
+            if (bestSellerItem != null)
+                item.product?.name = "${bestSellerItem.quantity}"
         }
     }
 

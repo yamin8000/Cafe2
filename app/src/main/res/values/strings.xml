@@ -123,6 +123,7 @@
     <string name="plus_sign">+</string>
     <string name="minus_sign">-</string>
     <string name="chosen_products">محصولات انتخاب شده</string>
+    <string name="sell_quantity">تعداد فروش</string>
     <string-array name="report_values">
         <item>@string/orders</item>
         <item>@string/products</item>

@@ -39,7 +39,7 @@ class FragmentOrderReport :
 
         try {
             lifecycleScope.launch { handleArguments() }
-            lifecycleScope.launch { handleSubscribers() }
+            lifecycleScope.launch { fillSubscribersAutocomplete(db.subscriberDao().getAll()) }
             binding.orderReportCsv.setOnClickListener { shareCsv(ReportCSVs.orderWithDetails(items)) }
             datePickerListeners()
             menuHandler()
@@ -172,11 +172,6 @@ class FragmentOrderReport :
     override fun createList(items: List<OrderWithDetails>) {
         if (items.isEmpty()) binding.orderReportList.adapter = emptyAdapter
         else binding.orderReportList.adapter = orderAdapter.apply { asyncList.submitList(items) }
-    }
-
-    private suspend fun handleSubscribers() {
-        val subscribers = db.subscriberDao().getAll()
-        fillSubscribersAutocomplete(subscribers)
     }
 
     private fun fillSubscribersAutocomplete(subscribers: List<Subscriber>) {

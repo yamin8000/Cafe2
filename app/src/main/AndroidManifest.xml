@@ -13,6 +13,7 @@
         <activity
             android:name="io.github.yamin8000.cafe.base.MainActivity"
             android:exported="true"
+            android:configChanges="orientation|screenSize|keyboardHidden|keyboard|locale|screenLayout|screenSize"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

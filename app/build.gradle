@@ -6,14 +6,14 @@ plugins {
 }
 
 android {
-    compileSdk 31
+    compileSdk 33
 
     defaultConfig {
-        applicationId "io.github.yamin8000.cafe"
+        applicationId "io.github.yamin8000.cafe2"
         minSdk 21
-        targetSdk 32
+        targetSdk 33
         versionCode 1
-        versionName "2.2"
+        versionName "1.0.0"
     }
 
     buildFeatures {
@@ -42,6 +42,7 @@ android {
     kotlinOptions {
         jvmTarget = '11'
     }
+    namespace 'io.github.yamin8000.cafe2'
 
     defaultConfig {
         javaCompileOptions {
@@ -54,19 +55,17 @@ android {
 
 dependencies {
     //main android/kotlin
-    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
-    implementation 'androidx.core:core-ktx:1.8.0'
-    implementation 'androidx.appcompat:appcompat:1.4.2'
-    implementation 'com.google.android.material:material:1.6.1'
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.2.2")
+    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'com.google.android.material:material:1.7.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     //navigation
-    def nav_version = "2.5.0"
+    def nav_version = "2.5.3"
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
-    //log/crash library
-    implementation 'com.orhanobut:logger:2.2.0'
     //room/db
-    def roomVersion = "2.4.2"
+    def roomVersion = "2.4.3"
     kapt "androidx.room:room-compiler:$roomVersion"
     implementation("androidx.room:room-ktx:$roomVersion")
     implementation("androidx.room:room-runtime:$roomVersion")

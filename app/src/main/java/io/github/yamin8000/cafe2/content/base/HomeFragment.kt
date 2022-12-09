@@ -46,7 +46,6 @@ import io.github.yamin8000.cafe2.util.Utility.Views.gone
 import io.github.yamin8000.cafe2.util.Utility.Views.referencedViews
 import io.github.yamin8000.cafe2.util.Utility.Views.visible
 import io.github.yamin8000.cafe2.util.Utility.getCurrentPermission
-import io.github.yamin8000.cafe2.util.Utility.handleCrash
 import io.github.yamin8000.cafe2.util.Utility.navigate
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -66,7 +65,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>({ FragmentHomeBinding.inf
             buttonsHandlers()
             backPressHandler()
         } catch (e: Exception) {
-            handleCrash(e)
+            //handleCrash(e)
         }
     }
 

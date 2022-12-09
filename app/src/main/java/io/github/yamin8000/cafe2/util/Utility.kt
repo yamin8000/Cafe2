@@ -24,6 +24,7 @@
 package io.github.yamin8000.cafe2.util
 
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.os.Parcelable
 import android.view.View
@@ -47,9 +48,21 @@ import io.github.yamin8000.cafe2.util.Constants.IS_EDIT_MODE
 import io.github.yamin8000.cafe2.util.Constants.STACKTRACE
 import io.github.yamin8000.cafe2.util.Constants.sharedPrefs
 import java.math.BigInteger
+import java.util.*
 
 @Suppress("MemberVisibilityCanBePrivate")
 object Utility {
+
+    @Suppress("DEPRECATION")
+    fun getCurrentLocale(
+        context: Context
+    ): Locale {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            context.resources.configuration.locales.get(0)
+        } else context.resources.configuration.locale
+    }
+
+    operator fun String.div(that: String) = "$this/$that"
 
     /**
      * Handle soft crashes, that are suppressed using try-catch
@@ -60,7 +73,7 @@ object Utility {
         val stackTraceToString = throwable.stackTraceToString()
         //navigate user to a special crash screen
         val bundle = bundleOf(STACKTRACE to stackTraceToString)
-        this.navigate(R.id.crashFragment, bundle)
+        //this.navigate(R.id.crashFragment, bundle)
     }
 
     /**
@@ -84,7 +97,7 @@ object Utility {
                 imm.hideSoftInputFromWindow(view.windowToken, 0)
             }
         } catch (exception: Exception) {
-            handleCrash(exception)
+            //handleCrash(exception)
         }
     }
 
@@ -92,7 +105,7 @@ object Utility {
         try {
             this.findNavController().navigate(destination, args)
         } catch (exception: Exception) {
-            handleCrash(exception)
+            //handleCrash(exception)
         }
     }
 
@@ -203,7 +216,7 @@ object Utility {
                 toast.show()
                 toast
             } catch (e: Exception) {
-                handleCrash(e)
+                //handleCrash(e)
                 null
             }
         }

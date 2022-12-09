@@ -47,7 +47,6 @@ import io.github.yamin8000.cafe2.util.Constants.db
 import io.github.yamin8000.cafe2.util.SharedPrefs
 import io.github.yamin8000.cafe2.util.Utility.Alerts.snack
 import io.github.yamin8000.cafe2.util.Utility.Hashes.isBCryptOf
-import io.github.yamin8000.cafe2.util.Utility.handleCrash
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -73,7 +72,7 @@ class AccountLoginModal : BottomSheetDialogFragment() {
         try {
             loginSubmitClickListener()
         } catch (e: Exception) {
-            handleCrash(e)
+            //handleCrash(e)
         }
     }
 

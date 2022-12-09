@@ -46,7 +46,6 @@ import io.github.yamin8000.cafe2.util.Constants.PROMPT_TEXT
 import io.github.yamin8000.cafe2.util.Constants.db
 import io.github.yamin8000.cafe2.util.DateTimeUtils.zonedNow
 import io.github.yamin8000.cafe2.util.Utility.Alerts.snack
-import io.github.yamin8000.cafe2.util.Utility.handleCrash
 import io.github.yamin8000.cafe2.util.Utility.navigate
 import io.github.yamin8000.cafe2.util.Utility.numFormat
 import kotlinx.coroutines.*
@@ -81,7 +80,7 @@ class NewOrderFragment :
             binding.newOrderAddProduct.setOnClickListener { handleNewProducts() }
             fillList()
         } catch (e: Exception) {
-            handleCrash(e)
+            //handleCrash(e)
         }
     }
 

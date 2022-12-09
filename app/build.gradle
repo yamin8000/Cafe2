@@ -99,7 +99,7 @@ dependencies {
     //
     implementation 'com.github.yamin8000:PrettyPersianNumbers:1.1.1'
     //lottie
-    implementation 'com.airbnb.android:lottie:5.2.0'
+    implementation 'com.airbnb.android:lottie-compose:5.2.0'
     //shimmer
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
     //jalali

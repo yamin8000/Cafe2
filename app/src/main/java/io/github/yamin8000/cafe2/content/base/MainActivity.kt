@@ -25,11 +25,16 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.material3.Button
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import io.github.yamin8000.cafe2.content.HomeContent
+import io.github.yamin8000.cafe2.content.SplashContent
+import io.github.yamin8000.cafe2.ui.navigation.Nav
 import io.github.yamin8000.cafe2.ui.theme.CafeTheme
 
 class MainActivity : ComponentActivity() {
@@ -45,11 +50,18 @@ class MainActivity : ComponentActivity() {
 @Composable
 private fun MainContent() {
     CafeTheme(
+        isDarkTheme = isSystemInDarkTheme(),
         isDynamicColor = false
     ) {
-        Button(
-            content = { Text("Hello There!") },
-            onClick = {}
-        )
+        val navController = rememberNavController()
+
+        NavHost(
+            navController = navController,
+            startDestination = Nav.Routes.Splash
+        ) {
+            composable(Nav.Routes.Splash) { SplashContent { navController.navigate(Nav.Routes.Home) } }
+
+            composable(Nav.Routes.Home) { HomeContent {} }
+        }
     }
 }

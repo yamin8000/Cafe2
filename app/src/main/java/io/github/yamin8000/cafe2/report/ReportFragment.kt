@@ -61,6 +61,6 @@ class ReportFragment : BaseFragment<FragmentReportBinding>({ FragmentReportBindi
     }
 
     private fun fetchReports(): List<String> {
-        return context?.resources?.getStringArray(R.array.report_values)?.toList() ?: listOf()
+        return context?.resources?.getStringArray(R.array.main_menu_buttons)?.toList() ?: listOf()
     }
 }

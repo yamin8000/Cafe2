@@ -27,7 +27,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="io.github.yamin8000.cafe2.base.HomeFragment"
+        android:name="io.github.yamin8000.cafe2.content.base.HomeFragment"
         android:label="HomeFragment">
         <action
             android:id="@+id/action_homeFragment_to_newOrderFragment"
@@ -68,7 +68,7 @@
     </fragment>
     <fragment
         android:id="@+id/splashFragment"
-        android:name="io.github.yamin8000.cafe2.base.SplashFragment"
+        android:name="io.github.yamin8000.cafe2.content.base.SplashFragment"
         android:label="SplashFragment">
         <action
             android:id="@+id/action_splashFragment_to_homeFragment"
@@ -162,7 +162,7 @@
     </dialog>
     <fragment
         android:id="@+id/crashFragment"
-        android:name="io.github.yamin8000.cafe2.base.CrashFragment"
+        android:name="io.github.yamin8000.cafe2.content.base.CrashFragment"
         android:label="CrashFragment">
         <argument
             android:name="stacktrace"

@@ -19,16 +19,28 @@
  *     along with Cafe.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.github.yamin8000.cafe2.base
+package io.github.yamin8000.cafe2.content.base
 
+import android.annotation.SuppressLint
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import io.github.yamin8000.cafe2.R
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : ComponentActivity() {
 
+    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+    @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContent { Scaffold { MainContent() } }
     }
+}
+
+@Composable
+private fun MainContent() {
+    Text("Hello There!")
 }

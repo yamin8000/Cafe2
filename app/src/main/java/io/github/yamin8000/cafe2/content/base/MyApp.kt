@@ -21,7 +21,7 @@
 
 @file:Suppress("unused")
 
-package io.github.yamin8000.cafe2.base
+package io.github.yamin8000.cafe2.content.base
 
 import android.annotation.SuppressLint
 import android.app.Application

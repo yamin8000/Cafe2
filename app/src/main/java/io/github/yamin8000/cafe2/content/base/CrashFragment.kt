@@ -19,7 +19,7 @@
  *     along with Cafe.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.github.yamin8000.cafe2.base
+package io.github.yamin8000.cafe2.content.base
 
 import android.os.Bundle
 import android.view.View
